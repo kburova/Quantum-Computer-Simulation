@@ -1,0 +1,24 @@
+.root {-fx-background-image: url("background.png");}
+
+.label {
+}
+
+.button {
+}
+
+#menuBar {
+    -fx-background-color: lightgray;
+    -fx-border-color: dimgrey;
+}
+
+.menu:hover {
+    -fx-background-color: #bc784e;
+}
+
+
+.menu-item:hover{
+    -fx-background-color: #bc784e;
+}
+
+.menu-item:focused {
+}
