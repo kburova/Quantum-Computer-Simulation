@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable{
 
@@ -27,6 +28,12 @@ public class Controller implements Initializable{
     @FXML
     private void handleButtonAction(ActionEvent event) {
 
+    }
+
+    @FXML
+    private void open() {
+        Quantum_IO qio = new Quantum_IO();
+        qio.load(new Stage());
     }
 
     @Override
