@@ -9,16 +9,15 @@ package qcs;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable{
+    private QIO qio = new QIO();
 
     @FXML
     private Label label;
@@ -33,7 +32,7 @@ public class Controller implements Initializable{
 
     @FXML
     private void open() {
-        new Quantum_IO()
+        new QIO()
         .load(new Stage());
     }
 
@@ -41,8 +40,13 @@ public class Controller implements Initializable{
     private void save_as() {
         //when there is a stage for the visualization to be loaded
         //from (first q function) expects an arraylist
-        new Quantum_IO()
+        qio
         .save_as(new Stage(), new ArrayList<>());
+    }
+
+    @FXML
+    private void save() {
+        qio.save(new ArrayList<>());
     }
 
     @Override

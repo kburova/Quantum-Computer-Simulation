@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -20,21 +21,20 @@ import javafx.stage.Stage;
  * All use JavaFX for native OS integration (excluding mobile OS)
  * Conversion from json to java classes and opposite direction done with gson library
  */
-public class Quantum_IO {
+public class QIO {
+    private File last_file_saved = null;
 
-    public void save(final Stage mainStage, List<Class<?>> quantum_fun_stuff) {
-
+    public void save(List<Class<?>> quantum_fun_stuff) {
+        if(last_file_saved != null)
+            save(last_file_saved, quantum_fun_stuff);
+        else
+            save_as(new Stage(), quantum_fun_stuff);
     }
 
-    public void save_as(final Stage mainStage, List<Class<?>> quantum_fun_stuff) {
-        String content = new Gson()
-                .toJson(quantum_fun_stuff);
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save As");
-        File file = fileChooser.showSaveDialog(mainStage);
+    public void save(File file, List<Class<?>> quantum_fun_stuff) {
         try {
-            //json
+            String content = new Gson()
+                    .toJson(quantum_fun_stuff);
             new PrintWriter(file)
                     .print(content);
         } catch (FileNotFoundException e) {
@@ -42,6 +42,14 @@ public class Quantum_IO {
         } catch(NullPointerException e) {
             e.printStackTrace();
         }
+    }
+
+    public void save_as(final Stage mainStage, List<Class<?>> quantum_fun_stuff) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save As");
+        File file = fileChooser.showSaveDialog(mainStage);
+        last_file_saved = file;
+        save(file, quantum_fun_stuff);
     }
 
     public String file_read(File file) {
