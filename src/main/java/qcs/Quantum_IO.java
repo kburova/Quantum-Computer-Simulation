@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -76,7 +77,11 @@ public class Quantum_IO {
         //reads content of file with filescanner and string builder
         String json_string = file_read(fileChooser.showOpenDialog(mainStage));
 
+        //keep for debugging purposes remove once viz is done
         System.out.print(json_string);
-        return json_string;
+
+        //anticipate this chunk of code causing errors, I suspect
+        //it will produce a list of strings rather than a list of quantum classes as expected
+        return new Gson().fromJson(json_string, new TypeToken<List<?>>(){}.getType());
     }
 }
