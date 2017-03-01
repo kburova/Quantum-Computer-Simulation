@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -83,7 +82,10 @@ public class QIO {
                 new FileChooser.ExtensionFilter("Json", "*.json"));
 
         //reads content of file with filescanner and string builder
-        String json_string = file_read(fileChooser.showOpenDialog(mainStage));
+        File file = fileChooser.showOpenDialog(mainStage);
+        last_file_saved = file;
+
+        String json_string = file_read(file);
 
         //keep for debugging purposes remove once viz is done
         System.out.print(json_string);
