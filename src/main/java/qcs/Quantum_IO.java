@@ -1,11 +1,12 @@
 package qcs;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.List;
 import java.io.File;
 import java.util.Scanner;
 
+import com.google.gson.Gson;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -20,12 +21,26 @@ import javafx.stage.Stage;
  */
 public class Quantum_IO {
 
-    public void save(List<Class<?>> quantum_fun_stuff) {
+    public void save(final Stage mainStage, List<Class<?>> quantum_fun_stuff) {
 
     }
 
-    public void save_as(List<Class<?>> quantum_fun_stuff) {
+    public void save_as(final Stage mainStage, List<Class<?>> quantum_fun_stuff) {
+        String content = new Gson()
+                .toJson(quantum_fun_stuff);
 
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save As");
+        File file = fileChooser.showSaveDialog(mainStage);
+        try {
+            //json
+            new PrintWriter(file)
+                    .print(content);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     public String file_read(File file) {
@@ -54,7 +69,7 @@ public class Quantum_IO {
     public String load(final Stage mainStage) {
         //javaFX to choose file natively
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Import Quantum File from json");
+        fileChooser.setTitle("Load Circuit");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Json", "*.json"));
 
