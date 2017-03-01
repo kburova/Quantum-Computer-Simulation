@@ -8,6 +8,7 @@ It has all the methods to manipulate model
 package qcs;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -32,8 +33,16 @@ public class Controller implements Initializable{
 
     @FXML
     private void open() {
-        Quantum_IO qio = new Quantum_IO();
-        qio.load(new Stage());
+        new Quantum_IO()
+        .load(new Stage());
+    }
+
+    @FXML
+    private void save_as() {
+        //when there is a stage for the visualization to be loaded
+        //from (first q function) expects an arraylist
+        new Quantum_IO()
+        .save_as(new Stage(), new ArrayList<>());
     }
 
     @Override
