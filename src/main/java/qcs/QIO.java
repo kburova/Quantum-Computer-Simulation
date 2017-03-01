@@ -92,6 +92,7 @@ public class QIO {
 
         //anticipate this chunk of code causing errors, I suspect
         //it will produce a list of strings rather than a list of quantum classes as expected
+        //this code is going to be the source of numerous bugs must be tested and validated
         return new Gson().fromJson(json_string, new TypeToken<List<?>>(){}.getType());
     }
 }
