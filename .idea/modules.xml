@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Quantum-Computer-Simulation.iml" filepath="$PROJECT_DIR$/.idea/Quantum-Computer-Simulation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/main/main1.iml" filepath="$PROJECT_DIR$/src/main/main1.iml" />
     </modules>
   </component>
 </project>
