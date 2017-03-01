@@ -1,39 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TreeItem?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.MenuBar?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
-   <left>
-      <VBox prefHeight="360.0" prefWidth="110.0" BorderPane.alignment="CENTER" />
+    <top>
+        <ToolBar>
+            <Button fx:id="b1" text="New" />
+            <Button fx:id="b2" text="Save"/>
+            <Button fx:id="b3" text="???"/>
+            <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
+            <Button fx:id="b4" text="Compile"/>
+            <Button fx:id="b5" text="Back"/>
+            <Button fx:id="b6" text="Run"/>
+            <Button fx:id="b7" text="Next"/>
+            <Pane prefWidth="200" HBox.hgrow="SOMETIMES" />
+
+        </ToolBar>
+    </top>
+    <left>
+       <VBox prefHeight="360.0" prefWidth="210.0" BorderPane.alignment="CENTER">
+           <children>
+                <TreeView fx:id="operationsTree" prefWidth="135.0" showRoot="false">
+                    <root>
+                        <TreeItem fx:id="root" expanded="false">
+                            <children>
+                                <TreeItem fx:id="unaryLeaf" expanded="false" value="Unary Operators">
+                                    <children>
+                                        <TreeItem expanded="true" value="1" />
+                                        <TreeItem expanded="true" value="2" />
+                                    </children>
+                                </TreeItem>
+                                <TreeItem fx:id="zLeaf" expanded="false" value=" Z ">
+                                    <children>
+                                        <TreeItem expanded="true" value="1" />
+                                        <TreeItem expanded="true" value="2" />
+                                    </children>
+                                </TreeItem>
+                                <TreeItem fx:id="binaryLeaf" expanded="false" value="Binary Operators">
+                                    <children>
+                                        <TreeItem expanded="true" value="1" />
+                                        <TreeItem expanded="true" value="2" />
+                                    </children>
+                                </TreeItem>
+                                <TreeItem fx:id="ternaryLeaf" expanded="false" value="Ternary Operators">
+                                    <children>
+                                        <TreeItem expanded="true" value="1" />
+                                        <TreeItem expanded="true" value="2" />
+                                    </children>
+                                </TreeItem>
+                                <TreeItem fx:id="varLeaf" expanded="false" value="Variable-qbit Operators">
+                                    <children>
+                                        <TreeItem expanded="true" value="1" />
+                                        <TreeItem expanded="true" value="2" />
+                                    </children>
+                                </TreeItem>
+                                <TreeItem fx:id="errorLeaf" expanded="false" value="Error Operators">
+                                    <children>
+                                        <TreeItem expanded="true" value="1" />
+                                        <TreeItem expanded="true" value="2" />
+                                    </children>
+                                </TreeItem>
+                                <TreeItem fx:id="measureLeaf" expanded="false" value="Measurements Operators">
+                                    <children>
+                                        <TreeItem expanded="true" value="1" />
+                                        <TreeItem expanded="true" value="2" />
+                                    </children>
+                                </TreeItem>
+                            </children>
+                        </TreeItem>
+                    </root>
+               <VBox.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+                </TreeView>
+           </children>
+       </VBox>
    </left>
    <center>
-      <SplitPane dividerPositions="0.4664429530201342" orientation="VERTICAL" prefHeight="333.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.5778894472361809" orientation="VERTICAL" prefHeight="333.0" prefWidth="500.0" BorderPane.alignment="CENTER">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
+            <ScrollPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <Canvas height="179.0" layoutX="3.0" layoutY="4.0" width="481.0" />
+            </ScrollPane>
+          <ScrollPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                   <Canvas height="179.0" layoutX="3.0" layoutY="4.0" width="481.0" />
-               </children>
-            </AnchorPane>
+            </ScrollPane>
         </items>
       </SplitPane>
    </center>
-   <top>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="209.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="159.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-   </top>
 </BorderPane>
