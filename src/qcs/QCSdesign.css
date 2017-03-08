@@ -2,21 +2,50 @@
 }
 
 .button {
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+    -fx-background-radius: 6px;
+    -fx-background-color: cadetblue;
+    -fx-background-size: 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+.button:hover {
+    -fx-background-color: #5Fcfcf;
 }
 
-#menuBar {
+#new {
+    -fx-background-image: url('images/new.png');
+}
+#save {
+    -fx-background-image: url('images/save.png');
+}
+#load {
+    -fx-background-image: url('images/load.png');
+}
+#ss {
+    -fx-background-image: url('images/screenshot.png');
+}
+#next {
+    -fx-background-image: url('images/next.png');
+}
+#back {
+    -fx-background-image: url('images/back.png');
+}
+#rep {
+    -fx-background-image: url('images/complete.png');
+}
+#run {
+    -fx-background-image: url('images/play.png');
+}
+#add{
+    -fx-background-image: url('images/add.png');
+}
+#remove{
+    -fx-background-image: url('images/remove.png');
+}
+
+#toolBar {
     -fx-background-color: lightgray;
-    -fx-border-color: dimgrey;
 }
 
-.menu:hover {
-    -fx-background-color: #bc784e;
-}
-
-
-.menu-item:hover{
-    -fx-background-color: #bc784e;
-}
-
-.menu-item:focused {
-}

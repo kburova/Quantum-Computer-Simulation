@@ -16,19 +16,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.MenuBar?>
+
+<?import java.net.URL?>
+<?import javafx.scene.image.ImageView?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <ToolBar>
-            <Button fx:id="b1" text="New" />
-            <Button fx:id="b2" text="Save"/>
-            <Button fx:id="b3" text="???"/>
+        <ToolBar fx:id="toolBar">
+            <Button fx:id="new" />
+            <Button fx:id="save" />
+            <Button fx:id="load" />
+            <Button fx:id="ss" />
             <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
-            <Button fx:id="b4" text="Compile"/>
-            <Button fx:id="b5" text="Back"/>
-            <Button fx:id="b6" text="Run"/>
-            <Button fx:id="b7" text="Next"/>
+            <Button fx:id="rep" />
+            <Button fx:id="back" />
+            <Button fx:id="run" />
+            <Button fx:id="next" />
             <Pane prefWidth="200" HBox.hgrow="SOMETIMES" />
-
+            <Button fx:id="add" />
+            <Button fx:id="remove" />
         </ToolBar>
     </top>
     <left>
@@ -46,8 +51,7 @@
                                 </TreeItem>
                                 <TreeItem fx:id="zLeaf" expanded="false" value=" Z ">
                                     <children>
-                                        <TreeItem expanded="true" value="1" />
-                                        <TreeItem expanded="true" value="2" />
+                                        <TreeItem expanded="true" value="Z" />
                                     </children>
                                 </TreeItem>
                                 <TreeItem fx:id="binaryLeaf" expanded="false" value="Binary Operators">
@@ -92,8 +96,9 @@
                 </TreeView>
            </children>
        </VBox>
-   </left>
-   <center>
+    </left>
+
+    <center>
       <SplitPane dividerPositions="0.5778894472361809" orientation="VERTICAL" prefHeight="333.0" prefWidth="500.0" BorderPane.alignment="CENTER">
         <items>
             <ScrollPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -104,5 +109,8 @@
             </ScrollPane>
         </items>
       </SplitPane>
-   </center>
+    </center>
+    <stylesheets>
+        <URL value = "@QCSdesign.css" />
+    </stylesheets>
 </BorderPane>
