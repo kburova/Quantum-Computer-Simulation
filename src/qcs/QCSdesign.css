@@ -11,9 +11,14 @@
     -fx-background-position: center;
 }
 .button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
     -fx-background-color: #5Fcfcf;
 }
 
+.tooltip {
+    -fx-pref-width: inherit;
+    -fx-background-radius: 6px;
+}
 #new {
     -fx-background-image: url('images/new.png');
 }
@@ -23,7 +28,7 @@
 #load {
     -fx-background-image: url('images/load.png');
 }
-#ss {
+#screenshot {
     -fx-background-image: url('images/screenshot.png');
 }
 #next {
@@ -32,7 +37,7 @@
 #back {
     -fx-background-image: url('images/back.png');
 }
-#rep {
+#repeat {
     -fx-background-image: url('images/complete.png');
 }
 #run {

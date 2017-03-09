@@ -3,31 +3,36 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TreeItem?>
 <?import javafx.scene.control.TreeView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.MenuBar?>
-
 <?import java.net.URL?>
-<?import javafx.scene.image.ImageView?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.text.TextFlow?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.Controller">
     <top>
         <ToolBar fx:id="toolBar">
-            <Button fx:id="new" />
-            <Button fx:id="save" />
+            <Button fx:id="new" >
+                <tooltip>
+                    <Tooltip text="New file"/>
+                </tooltip>
+            </Button>
+            <Button fx:id="save" >
+                <tooltip>
+                    <Tooltip text="Save file" />
+                </tooltip>
+            </Button>
             <Button fx:id="load" />
-            <Button fx:id="ss" />
+            <Button fx:id="screenshot"/>
             <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
-            <Button fx:id="rep" />
+            <Button fx:id="repeat"/>
             <Button fx:id="back" />
             <Button fx:id="run" />
             <Button fx:id="next" />
