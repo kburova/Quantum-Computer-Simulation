@@ -29,16 +29,48 @@
                     <Tooltip text="Save file" />
                 </tooltip>
             </Button>
-            <Button fx:id="load" />
-            <Button fx:id="screenshot"/>
+            <Button fx:id="load">
+                <tooltip>
+                    <Tooltip text="Open file" />
+                </tooltip>
+            </Button>
+            <Button fx:id="screenshot">
+                <tooltip>
+                    <Tooltip text="Screen Shot" />
+                </tooltip>
+            </Button>
             <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
-            <Button fx:id="repeat"/>
-            <Button fx:id="back" />
-            <Button fx:id="run" />
-            <Button fx:id="next" />
+            <Button fx:id="repeat">
+                <tooltip>
+                    <Tooltip text="Repeat" />
+                </tooltip>
+            </Button>
+            <Button fx:id="back" >
+                <tooltip>
+                    <Tooltip text="Step Back" />
+                </tooltip>
+            </Button>
+            <Button fx:id="run" >
+                <tooltip>
+                    <Tooltip text="Complete Run" />
+                </tooltip>
+            </Button>
+            <Button fx:id="next" >
+                <tooltip>
+                    <Tooltip text="Step Forward" />
+                </tooltip>
+            </Button>
             <Pane prefWidth="200" HBox.hgrow="SOMETIMES" />
-            <Button fx:id="add" />
-            <Button fx:id="remove" />
+            <Button fx:id="add" >
+                <tooltip>
+                    <Tooltip text="Add Gate" />
+                </tooltip>
+            </Button>
+            <Button fx:id="remove" >
+                <tooltip>
+                    <Tooltip text="Remove Gate" />
+                </tooltip>
+            </Button>
         </ToolBar>
     </top>
     <left>

@@ -17,8 +17,7 @@
 
 .tooltip {
     -fx-pref-width: inherit;
-    -fx-pref-height: 15;
-    -fx-background-radius:      6px;
+    -fx-background-radius: 6px;
 }
 #new {
     -fx-background-image: url('images/new.png');
@@ -52,6 +51,6 @@
 }
 
 #toolBar {
-    -fx-background-color: lightgray;
+    -fx-background-color: lightgrey;
 }
 
