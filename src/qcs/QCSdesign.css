@@ -5,14 +5,14 @@
     -fx-pref-width: 30;
     -fx-pref-height: 30;
     -fx-background-radius: 6px;
-    -fx-background-color: cadetblue;
+    -fx-background-color: #4E9DB2;
     -fx-background-size: 80%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
 .button:hover {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
-    -fx-background-color: #5Fcfcf;
+    -fx-background-color:  #4E9DB2;
 }
 
 .tooltip {
@@ -52,5 +52,14 @@
 
 #toolBar {
     -fx-background-color: lightgrey;
+}
+
+.tree-cell {
+    -fx-background-color: lightgrey ;
+    -fx-padding: 0.75em 0em 0.75em 0em ;
+}
+
+.tree-cell > .tree-disclosure-node > .arrow {
+    -fx-background-color: #4E9DB2;
 }
 
