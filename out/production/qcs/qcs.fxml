@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import com.sun.javafx.scene.control.skin.CustomColorDialog.ColorRectPane?>
+<?import javafx.scene.layout.GridPane?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.Controller">
     <top>
         <ToolBar fx:id="toolBar">
@@ -59,7 +59,17 @@
                     <Tooltip text="Step Forward" />
                 </tooltip>
             </Button>
-            <Pane prefWidth="200" HBox.hgrow="SOMETIMES" />
+            <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
+            <Button fx:id="registers">
+                <tooltip>
+                    <Tooltip text="Set Registers" />
+                </tooltip>
+            </Button>
+            <Button fx:id="values">
+                <tooltip>
+                    <Tooltip text="Set Qubits" />
+                </tooltip>
+            </Button>
             <Button fx:id="add">
                 <tooltip>
                     <Tooltip text="Add Gate" />
@@ -81,43 +91,54 @@
                             <children>
                                 <TreeItem fx:id="unaryLeaf" expanded="false" value="Unary Operators">
                                     <children>
-                                        <TreeItem expanded="true" value="1" />
-                                        <TreeItem expanded="true" value="2" />
+                                        <TreeItem expanded="true" value="H (Hadamard)" >
+                                        </TreeItem>
+                                        <TreeItem expanded="true" value="I (identity)" />
+                                        <TreeItem expanded="true" value="S (phase gate)" />
+                                        <TreeItem expanded="true" value="S† (inverse S) " />
+                                        <TreeItem expanded="true" value="T (Pi/8)" />
+                                        <TreeItem expanded="true" value="Pauli-X (NOT)" />
+                                        <TreeItem expanded="true" value="√X (Squareroot of NOT)" />
+                                        <TreeItem expanded="true" value="Pauli-Y (real or/and imaginary)" />
                                     </children>
                                 </TreeItem>
-                                <TreeItem fx:id="zLeaf" expanded="false" value=" Z ">
+                                <TreeItem fx:id="zLeaf" expanded="false" value="Pauli-Z ">
                                     <children>
-                                        <TreeItem expanded="true" value="Z" />
+                                        <TreeItem expanded="true" value="Pauli-Z" />
                                     </children>
                                 </TreeItem>
                                 <TreeItem fx:id="binaryLeaf" expanded="false" value="Binary Operators">
                                     <children>
-                                        <TreeItem expanded="true" value="1" />
-                                        <TreeItem expanded="true" value="2" />
+                                        <TreeItem expanded="true" value="CNOT" />
+                                        <TreeItem expanded="true" value="R_x (Rotate)" />
+                                        <TreeItem expanded="true" value="SWAP" />
                                     </children>
                                 </TreeItem>
                                 <TreeItem fx:id="ternaryLeaf" expanded="false" value="Ternary Operators">
                                     <children>
-                                        <TreeItem expanded="true" value="1" />
-                                        <TreeItem expanded="true" value="2" />
+                                        <TreeItem expanded="true" value="CCNOT (Toffoli)" />
                                     </children>
                                 </TreeItem>
                                 <TreeItem fx:id="varLeaf" expanded="false" value="Variable-qbit Operators">
                                     <children>
-                                        <TreeItem expanded="true" value="1" />
-                                        <TreeItem expanded="true" value="2" />
+                                        <TreeItem expanded="true" value="G (Grover Operation)" />
+                                        <TreeItem expanded="true" value="W_n (Walsh-Hadamard)" />
+                                        <TreeItem expanded="true" value="QFT (Quantum Fourier Transform)" />
+                                        <TreeItem expanded="true" value="Inverse QFT" />
+                                        <TreeItem expanded="true" value="General Controlled Operation" />
+                                        <TreeItem expanded="true" value="Function Evaluation" />
                                     </children>
                                 </TreeItem>
                                 <TreeItem fx:id="errorLeaf" expanded="false" value="Error Operators">
                                     <children>
-                                        <TreeItem expanded="true" value="1" />
-                                        <TreeItem expanded="true" value="2" />
+                                        <TreeItem expanded="true" value="Error" />
                                     </children>
                                 </TreeItem>
                                 <TreeItem fx:id="measureLeaf" expanded="false" value="Measurements Operators">
                                     <children>
-                                        <TreeItem expanded="true" value="1" />
-                                        <TreeItem expanded="true" value="2" />
+                                        <TreeItem expanded="true" value="Computational Basis" />
+                                        <TreeItem expanded="true" value="Sign Basis" />
+                                        <TreeItem expanded="true" value="Trash" />
                                     </children>
                                 </TreeItem>
                             </children>
