@@ -6,17 +6,22 @@
  ***************************************************/
 package qcs;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Circuit {
 
     private Register x;
     private Register y;
-    private int numberOfGates; // equals to number of steps
+    private int numberOfOperators; // equals to number of steps
+    private List <Operator> operators;
 
     //init both registers and start with 0 gates
     public Circuit(int qubitsInX, int qubitsInY){
          x = new Register("X", qubitsInX);
          y = new Register("Y", qubitsInY);
-         numberOfGates = 0;
+         numberOfOperators = 0;
+         operators = new LinkedList<>();
     }
 
     //Implement 1 step forward through "music" cord
@@ -39,24 +44,30 @@ public class Circuit {
 
     }
 
-    //add gate
-    public void addGate(Register name, int targetQubit, int ControlQubit ){
+    //add gate/measurement
+    public void addOperator( Operator operator ){
 
     }
 
-    //remove gate
-    public void removeGate(){
+    //remove gate/measurement
+    public void removeOperator(Operator o) {
 
+        //TODO: recalculate after deletion if nessacary, or restart circuit
+        if (operators.remove(o)) {
+            numberOfOperators--;
+        } else{
+            //operator wasn't found - error
+        }
     }
 
     //TODO: think if possible, to be able to delete from the middle
-    //select gate
-    public void selectGate(){
+    //select gate/measurement
+    public void selectOperator(){
 
     }
 
-    final public int getNumberOfOperations(){
-        return numberOfGates;
+    final public int getNumberOfOperators(){
+        return numberOfOperators;
     }
-    
+
 }

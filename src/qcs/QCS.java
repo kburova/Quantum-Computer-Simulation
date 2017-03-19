@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 
 public class QCS extends Application {
 
+    Circuit circuit;
+
     @Override
     public void start(Stage stage) throws Exception{
 
