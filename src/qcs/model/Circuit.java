@@ -18,16 +18,17 @@ public class Circuit {
     private int numberOfOperators; // equals to number of steps
     private List <Operator> operators;
 
-    //init both registers and start with 0 gates
+    // don't need constructor ....
     public Circuit(){
-         numberOfOperators = 0;
-         operators = new LinkedList<>();
     }
 
-    // init each register with number of qubits n each
+    // init each register with number of qubits n each, and restart
+    // operations (circuit)
     public void initilizeRegisters(int qubitsInX, int qubitsInY){
         x = new Register("X", qubitsInX);
         y = new Register("Y", qubitsInY);
+        numberOfOperators = 0;
+        operators = new LinkedList<>();
     }
 
     final public Register getX(){ return x; }

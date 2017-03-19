@@ -16,8 +16,10 @@ package qcs;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 
@@ -26,12 +28,13 @@ public class MainApp extends Application {
 
     private Stage PrimaryStage;
     private BorderPane root;
-
     private Circuit circuit;
 
-    public MainApp(){
-        circuit = new Circuit();
-    }
+
+//    //create new circuit
+//    public MainApp(){
+//        circuit = new Circuit();
+//    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -66,6 +69,30 @@ public class MainApp extends Application {
         }catch (Exception e){
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
+        }
+    }
+
+    public boolean showAddRegistersDialog(){
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/InitRegistersWindow.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+
+            RegistersController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setRegisters(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isAdd();
+
+        }catch(Exception e){
+            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
+            return false;
         }
     }
 

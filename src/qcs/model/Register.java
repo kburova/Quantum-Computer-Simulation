@@ -22,7 +22,7 @@ public class Register {
 
         //initialize qubits
         for (int i = 0; i < numberOfQubits; i++){
-            qubits.set(i, new Qubit(i , name)) ;
+            qubits.add(new Qubit(i , name));
         }
     }
 

@@ -39,9 +39,16 @@ public class MainAppController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO: init canvas here?? Probably. Bind its view to data
+        // TODO:set up listener if we want to select qubits and delete - changed() method
     }
 
     public void setMainApp(MainApp mainApp){
         this.mainApp = mainApp;
+    }
+
+    @FXML
+    private void handleInitRegisters() {
+        boolean addClicked = mainApp.showAddRegistersDialog();
+
     }
 }
