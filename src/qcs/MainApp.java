@@ -6,7 +6,7 @@ MainApp.java
 
  Created by: Ksenia Burova
              Parker Diamond
-             Nick Kelly
+             Nick Kelley
              Chris Martin
 
  Date: 02/12/2017

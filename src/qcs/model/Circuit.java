@@ -6,6 +6,8 @@
  ***************************************************/
 package qcs.model;
 
+import qcs.model.operator.Operator;
+
 import java.util.LinkedList;
 import java.util.List;
 

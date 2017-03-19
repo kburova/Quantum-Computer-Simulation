@@ -1,9 +1,16 @@
-/* Controller.java
+/**************************************************
+ Controller.java
 
-This file is a control part of the MVC model.
-It has all the methods to manipulate model
+ This file is a control part of the MVC model.
+ It has all the methods to manipulate model
 
- */
+ Created by: Ksenia Burova
+             Parker Diamond
+             Nick Kelley
+             Chris Martin
+
+ Date: 02/12/2017
+ ****************************************************/
 package qcs;
 
 import java.net.URL;
