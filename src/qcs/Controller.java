@@ -25,7 +25,7 @@ public class Controller implements Initializable{
     private Label label1;
 
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void initializeRegisters(ActionEvent event) {
 
     }
 
