@@ -37,7 +37,7 @@
                     <Tooltip text="Screen Shot" />
                 </tooltip>
             </Button>
-            <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
+            <Pane prefWidth="30" HBox.hgrow="SOMETIMES" />
             <Button fx:id="repeat">
                 <tooltip>
                     <Tooltip text="Repeat" />
@@ -58,7 +58,7 @@
                     <Tooltip text="Step Forward" />
                 </tooltip>
             </Button>
-            <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
+            <Pane prefWidth="30" HBox.hgrow="SOMETIMES" />
             <Button fx:id="registers">
                 <tooltip>
                     <Tooltip text="Set Registers" />

@@ -8,25 +8,20 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.MainAppController">
 
     <top>
         <HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" BorderPane.alignment="TOP_LEFT">
-            <children>
             <MenuBar maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="1000.0" HBox.hgrow="SOMETIMES">
-
                 <menus>
-                <Menu mnemonicParsing="false" text="Information">
-                   <items>
-                       <MenuItem mnemonicParsing="false" text="About Project" />
-                       <MenuItem mnemonicParsing="false" text="Help with App" />
-                   </items>
-                </Menu>
+                    <Menu fx:id="info" mnemonicParsing="false" text="Information" >
+                       <items>
+                           <MenuItem mnemonicParsing="false" text="About Project" />
+                           <MenuItem mnemonicParsing="false" text="Help with App" />
+                       </items>
+                    </Menu>
             </menus>
             </MenuBar>
-            </children>
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
