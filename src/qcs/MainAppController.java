@@ -22,6 +22,9 @@ import javafx.scene.control.Label;
 
 public class MainAppController implements Initializable{
 
+    //reference to main application
+    private MainApp mainApp;
+
     @FXML
     private Label label;
 
@@ -35,6 +38,10 @@ public class MainAppController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TODO: init canvas here?? Probably. Bind its view to data
+    }
+
+    public void setMainApp(MainApp mainApp){
+        this.mainApp = mainApp;
     }
 }

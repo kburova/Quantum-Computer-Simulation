@@ -19,12 +19,20 @@ public class Circuit {
     private List <Operator> operators;
 
     //init both registers and start with 0 gates
-    public Circuit(int qubitsInX, int qubitsInY){
-         x = new Register("X", qubitsInX);
-         y = new Register("Y", qubitsInY);
+    public Circuit(){
          numberOfOperators = 0;
          operators = new LinkedList<>();
     }
+
+    // init each register with number of qubits n each
+    public void initilizeRegisters(int qubitsInX, int qubitsInY){
+        x = new Register("X", qubitsInX);
+        y = new Register("Y", qubitsInY);
+    }
+
+    final public Register getX(){ return x; }
+
+    final public Register getY(){ return y; }
 
     //Implement 1 step forward through "music" cord
     public void stepForward(){

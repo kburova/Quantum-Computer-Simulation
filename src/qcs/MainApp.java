@@ -19,12 +19,19 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import qcs.model.Circuit;
 
 
 public class MainApp extends Application {
 
     private Stage PrimaryStage;
     private BorderPane root;
+
+    private Circuit circuit;
+
+    public MainApp(){
+        circuit = new Circuit();
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -34,7 +41,7 @@ public class MainApp extends Application {
 
         try {
             //load main app layout here
-            root = (BorderPane) FXMLLoader.load(getClass().getResource("view/RootMenu.fxml"));
+            root = FXMLLoader.load(getClass().getResource("view/RootMenu.fxml"));
             Scene scene = new Scene(root);
             PrimaryStage.setScene(scene);
             PrimaryStage.show();
@@ -46,24 +53,25 @@ public class MainApp extends Application {
         showMainAppLayout();
     }
 
-    public Stage getPrimaryStae(){
-        return PrimaryStage;
-    }
-
-    //TODO: add another layout for menu item with "About" dropdown menu"
-    // Should be function that has similar functionality as above, and gets called
-    // after catch statement above
+    // add The main app layout into frame with drop down menu
     public void showMainAppLayout(){
-
         try {
-            BorderPane mainApp = (BorderPane) FXMLLoader.load(getClass().getResource("view/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/MainView.fxml"));
+            BorderPane mainApp = loader.load();
             root.setCenter(mainApp);
+
+            //controller access to main app
+            MainAppController controller = loader.getController();
+            controller.setMainApp(this);
         }catch (Exception e){
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
         }
     }
 
+    public Stage getPrimaryStage(){
+        return PrimaryStage;
+    }
 
     public static void main(String[] args) {
         launch(args);
