@@ -13,8 +13,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -24,12 +22,15 @@ public class QCS extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("qcs.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/qcs.fxml"));
+        Parent root = loader.load();
+
         Scene scene = new Scene(root, 1000,550);
         stage.setTitle("Quantum Computer Simulator");
 
         //CSS file may be used here for design features
-        scene.getStylesheets().add(QCS.class.getResource("QCSdesign.css").toExternalForm());
+        scene.getStylesheets().add(QCS.class.getResource("/QCSdesign.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
