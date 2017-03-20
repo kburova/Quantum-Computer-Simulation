@@ -15,6 +15,7 @@ MainApp.java
 package qcs;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -44,7 +45,10 @@ public class MainApp extends Application {
 
         try {
             //load main app layout here
-            root = FXMLLoader.load(getClass().getResource("view/RootMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/RootMenu.fxml"));
+            root = loader.load();
+
             Scene scene = new Scene(root);
             PrimaryStage.setScene(scene);
             PrimaryStage.show();
@@ -59,7 +63,8 @@ public class MainApp extends Application {
     // add The main app layout into frame with drop down menu
     public void showMainAppLayout(){
         try {
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/MainView.fxml"));
             BorderPane mainApp = loader.load();
             root.setCenter(mainApp);
 
@@ -74,7 +79,9 @@ public class MainApp extends Application {
 
     public boolean showAddRegistersDialog(){
         try {
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("view/InitRegistersWindow.fxml"));
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/InitRegistersWindow.fxml"));
             AnchorPane dialog = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
