@@ -3,6 +3,12 @@
 
  Consists of maximum of 2 registers so far, X and/or Y
 
+ Created by: Ksenia Burova
+            Parker Diamond
+            Nick Kelley
+            Chris Martin
+
+ Date: 03/18/2017
  ***************************************************/
 package qcs.model;
 

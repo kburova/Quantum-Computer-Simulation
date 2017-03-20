@@ -50,5 +50,6 @@ public class MainAppController implements Initializable{
     private void handleInitRegisters() {
         boolean addClicked = mainApp.showAddRegistersDialog();
 
+        //if clicked draw registers...
     }
 }

@@ -3,6 +3,12 @@
 
  Register may contain up to n qubits
 
+ Created by: Ksenia Burova
+             Parker Diamond
+             Nick Kelley
+             Chris Martin
+
+ Date: 03/18/2017
  ***************************************************/
 
 package qcs.model;

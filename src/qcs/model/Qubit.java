@@ -5,6 +5,12 @@
  where α and β are some values such that
  |α|^2+|β|^2 = 1
 
+ Created by: Ksenia Burova
+            Parker Diamond
+            Nick Kelley
+            Chris Martin
+
+ Date: 03/18/2017
  ***************************************************/
 
 package qcs.model;
