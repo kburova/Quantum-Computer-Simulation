@@ -19,17 +19,18 @@
             fx:controller="qcs.MainAppController">
     <top>
         <ToolBar fx:id="toolBar">
-            <Button fx:id="new">
+            <Button fx:id="new" >
                 <tooltip>
                     <Tooltip text="New file" />
                 </tooltip>
             </Button>
-            <Button fx:id="save">
+
+            <Button fx:id="save" onAction="#save" >
                 <tooltip>
                     <Tooltip text="Save file" />
                 </tooltip>
             </Button>
-            <Button fx:id="load">
+            <Button fx:id="load" onAction="#open">
                 <tooltip>
                     <Tooltip text="Open file" />
                 </tooltip>
