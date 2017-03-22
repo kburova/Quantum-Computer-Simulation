@@ -17,6 +17,7 @@ package qcs;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
@@ -77,9 +78,8 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showAddRegistersDialog(){
+    public Circuit showAddRegistersDialog(){
         try {
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/InitRegistersWindow.fxml"));
             AnchorPane dialog = loader.load();
@@ -90,16 +90,19 @@ public class MainApp extends Application {
 
             RegistersController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setRegisters(circuit);
-
             dialogStage.showAndWait();
 
-            return controller.isAdd();
+            circuit = controller.getCircuit();
+
+            if(controller.isAdd())
+              return circuit;
+            else
+              return null;
 
         }catch(Exception e){
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
