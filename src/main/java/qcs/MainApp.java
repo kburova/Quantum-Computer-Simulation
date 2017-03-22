@@ -15,11 +15,11 @@ MainApp.java
 package qcs;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
@@ -81,8 +81,10 @@ public class MainApp extends Application {
         try {
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/InitRegistersWindow.fxml"));
+            loader.setLocation(getClass().getResource("/view/InitCircuitDialog.fxml"));
             AnchorPane dialog = loader.load();
+
+            //GridPane grid = dialog.getChildren();
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(PrimaryStage);
@@ -106,13 +108,19 @@ public class MainApp extends Application {
     public boolean showAddQubitValuesDialog(){
 
         try{
-            AnchorPane dialog = new AnchorPane();
-
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/InitQubitsDialog.fxml"));
+            AnchorPane dialog = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(PrimaryStage);
             dialogStage.setScene(new Scene(dialog));
-            
+
+            // add controller here
+
+            dialogStage.showAndWait();
+
+            return true;
         }catch(Exception e){
             e.printStackTrace();
             return false;

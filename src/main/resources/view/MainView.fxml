@@ -62,12 +62,12 @@
                 </tooltip>
             </Button>
             <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
-            <Button fx:id="registers" onAction="#handleInitRegisters">
+            <Button fx:id="registers" onAction="#handleInitCircuitDialog">
                 <tooltip>
                     <Tooltip text="Set Registers" />
                 </tooltip>
             </Button>
-            <Button fx:id="values">
+            <Button fx:id="values" onAction="#handleInitQubitsDialog">
                 <tooltip>
                     <Tooltip text="Set Qubits" />
                 </tooltip>

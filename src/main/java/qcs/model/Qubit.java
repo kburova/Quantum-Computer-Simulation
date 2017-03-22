@@ -14,6 +14,7 @@
  ***************************************************/
 
 package qcs.model;
+
 public class Qubit {
 
     private int id;

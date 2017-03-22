@@ -13,7 +13,7 @@
 package qcs.model;
 
 import qcs.model.operator.Operator;
-
+import qcs.model.Register;
 import java.util.LinkedList;
 import java.util.List;
 

@@ -12,6 +12,8 @@
  ***************************************************/
 
 package qcs.model;
+
+import qcs.model.Qubit;
 import java.util.ArrayList;
 
 public class Register {

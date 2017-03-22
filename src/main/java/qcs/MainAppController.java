@@ -69,9 +69,14 @@ public class MainAppController implements Initializable{
     }
 
     @FXML
-    private void handleInitRegisters() {
+    private void handleInitCircuitDialog() {
         boolean addClicked = mainApp.showAddRegistersDialog();
 
         //if clicked draw registers...
+    }
+
+    @FXML
+    private void handleInitQubitsDialog(){
+        boolean saveClicked = mainApp.showAddQubitValuesDialog();
     }
 }
