@@ -13,7 +13,6 @@
  ****************************************************/
 package qcs;
 
-import com.sun.xml.internal.ws.util.StreamUtils;
 import javafx.scene.canvas.Canvas;
 
 import java.awt.*;
