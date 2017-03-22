@@ -15,9 +15,7 @@ MainApp.java
 package qcs;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
@@ -30,13 +28,7 @@ public class MainApp extends Application {
 
     private Stage PrimaryStage;
     private BorderPane root;
-    private Circuit circuit;
-
-
-//    //create new circuit
-//    public MainApp(){
-//        circuit = new Circuit();
-//    }
+    private CircuitsController circuit_controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -78,7 +70,7 @@ public class MainApp extends Application {
         }
     }
 
-    public CircuitsController showAddRegistersDialog(){
+    public void showAddRegistersDialog(){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/InitRegistersWindow.fxml"));
@@ -88,28 +80,22 @@ public class MainApp extends Application {
             dialogStage.initOwner(PrimaryStage);
             dialogStage.setScene(new Scene(dialog));
 
-            RegistersController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
+            NewCircuitDialog dialogHandler = loader.getController();
+            dialogHandler.setDialogStage(dialogStage);
             dialogStage.showAndWait();
 
-            circuit = controller.getCircuit();
-            CircuitsController circuits_controller = new CircuitsController(circuit);
+            //right now new action is handled by dialog not controller, TODO fix that
+            CircuitsController controller = dialogHandler.getController();
 
-            if(controller.isAdd())
-              return circuits_controller;
-            else
-              return null;
-
+            if(dialogHandler.isAdd())
+              circuit_controller = controller;
         }catch(Exception e){
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
-            return null;
         }
     }
 
-    public Stage getPrimaryStage(){
-        return PrimaryStage;
-    }
+    public CircuitsController getCircuitController(){ return circuit_controller; }
 
     public static void main(String[] args) {
         launch(args);

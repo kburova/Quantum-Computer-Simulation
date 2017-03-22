@@ -1,5 +1,5 @@
 /**************************************************
- RegistersController.java
+ NewCircuitDialog.java
 
  This file controls the output from dialog window
  that asks for number of qubits for each register
@@ -14,19 +14,16 @@
 package qcs;
 
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import qcs.model.Circuit;
 
-public class RegistersController {
+public class NewCircuitDialog {
 
     private Stage dialogStage;
     private  boolean addClicked = false;
-    private Circuit circuit;
+    private CircuitsController controller;
     int rX;
     int rY;
 
@@ -36,9 +33,8 @@ public class RegistersController {
     @FXML
     private TextField registerY;
 
-    @FXML
-    private void initialize(){
-
+    public CircuitsController getController(){
+        return controller;
     }
 
     //bind stage with controller
@@ -93,18 +89,13 @@ public class RegistersController {
         }
     }
 
-    public Circuit getCircuit() {
-        return circuit;
-    }
-
     @FXML
     private void handleAdd(){
 
         if ( isInputValid() ){
             // set registers in circuit
             //System.out.println("Register x: " + rX);
-            circuit = new Circuit();
-            circuit.initilizeRegisters(rX,rY);
+            controller = new CircuitsController(new Circuit(rX, rY));
 
             addClicked = true;
             dialogStage.close();

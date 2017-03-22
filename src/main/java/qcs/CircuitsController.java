@@ -1,12 +1,14 @@
 package qcs;
 
+import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 import qcs.model.Circuit;
 import qcs.model.Qubit;
-
 import java.util.List;
 import java.util.stream.Stream;
-
 import static com.codepoetics.protonpack.StreamUtils.zipWithIndex;
 
 /**
@@ -15,33 +17,12 @@ import static com.codepoetics.protonpack.StreamUtils.zipWithIndex;
 public class CircuitsController {
   private final Circuit circuit;
 
+  //essentially the new action is accomplished by the constructor
   CircuitsController(Circuit circuit) {
-    this.circuit = circuit;
+      this.circuit = circuit;
   }
 
-  private void write_qbits_to_canvas(List<Qubit> qbits, Canvas canvas, Integer size
-    , Integer margin, Integer line_spacing, Integer padding_top) {
-    final Stream<String> qbit_stream = qbits.stream()
-      .map(qbit -> "|" + Integer.toString((int) Math.round(qbit.getState())) + ">");
-
-    zipWithIndex(qbit_stream)
-      .forEach(qbit -> {
-        final Integer y = Math.round(margin + padding_top + qbit.getIndex() * size * line_spacing);
-        final Integer x = 0 + margin;
-
-        //draw qbit
-        canvas.getGraphicsContext2D()
-          .fillText(qbit.getValue(), x, y);
-
-        final Integer font_width = size * 3;
-
-        //draw line
-        canvas.getGraphicsContext2D()
-          .strokeLine(x + font_width, y - size / 2, canvas.getWidth(), y - size / 2);
-      });
-  }
-
-  public void draw(Canvas canvas, Integer parent_width) {
+  public void show(Canvas canvas, Integer parent_width) {
     //loads of precomputing to figure out the size of this new canvas
     final Integer font_size = (int) 13.0;
     final Integer x_count = circuit.getX().getNumberOfQubits();
@@ -82,5 +63,27 @@ public class CircuitsController {
     //write y's
     write_qbits_to_canvas(circuit.getY().getQubits(), canvas, font_size
       , padding_top, line_spacing, line_y + font_size * 2);
+  }
+
+  private void write_qbits_to_canvas(List<Qubit> qbits, Canvas canvas, Integer size
+    , Integer margin, Integer line_spacing, Integer padding_top) {
+    final Stream<String> qbit_stream = qbits.stream()
+      .map(qbit -> "|" + Integer.toString((int) Math.round(qbit.getState())) + ">");
+
+    zipWithIndex(qbit_stream)
+      .forEach(qbit -> {
+        final Integer y = Math.round(margin + padding_top + qbit.getIndex() * size * line_spacing);
+        final Integer x = 0 + margin;
+
+        //draw qbit
+        canvas.getGraphicsContext2D()
+          .fillText(qbit.getValue(), x, y);
+
+        final Integer font_width = size * 3;
+
+        //draw line
+        canvas.getGraphicsContext2D()
+          .strokeLine(x + font_width, y - size / 2, canvas.getWidth(), y - size / 2);
+      });
   }
 }

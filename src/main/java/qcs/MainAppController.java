@@ -93,9 +93,12 @@ public class MainAppController implements Initializable{
 
     @FXML
     private void handleInitRegisters() {
-        CircuitsController circuit = mainApp.showAddRegistersDialog();
+        //lets dialog replace the circuit model etc...
+        mainApp.showAddRegistersDialog();
+
+        CircuitsController circuit = mainApp.getCircuitController();
 
         if(circuit != null)
-            circuit.draw(displayed_circuit, (int) circuit_parent.getWidth());
+            circuit.show(displayed_circuit, (int) circuit_parent.getWidth());
     }
 }

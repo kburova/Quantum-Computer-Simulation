@@ -24,18 +24,15 @@ public class Circuit {
     private int numberOfOperators; // equals to number of steps
     private List <Operator> operators;
 
-    // don't need constructor ....
-    public Circuit(){
-    }
-
     // init each register with number of qubits n each, and restart
     // operations (circuit)
-    public void initilizeRegisters(int qubitsInX, int qubitsInY){
-        x = new Register("X", qubitsInX);
-        y = new Register("Y", qubitsInY);
+    public Circuit(Integer x, Integer y){
+        this.x = new Register("X", x);
+        this.y = new Register("Y", y);
         numberOfOperators = 0;
         operators = new LinkedList<>();
     }
+
 
     final public Register getX(){ return x; }
 
