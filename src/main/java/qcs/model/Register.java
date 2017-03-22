@@ -13,39 +13,42 @@
 
 package qcs.model;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Register {
 
     private String name;
    //private double coefficient;
-    private ArrayList < Qubit > qubits;
-    int numberOfQubits;
+    private List< Qubit > qubits;
 
-    public Register (String n, int numOfQubits){
+    public Register (String n, int count){
         name = n;
-        numberOfQubits = numOfQubits;
-        qubits = new ArrayList<>(numOfQubits);
+        qubits = new ArrayList<>(count);
 
         //initialize qubits
-        for (int i = 0; i < numberOfQubits; i++){
+        for (int i = 0; i < count; i++){
             qubits.add(new Qubit(i , name));
         }
+    }
+
+    //this is used by our mainapp controller to draw the grid
+    final public List<Qubit> getQubits() {
+        return qubits;
     }
 
     final public String getName(){
         return name;
     }
 
-    final public int getNUmberOfQubits(){
-        return numberOfQubits;
+    final public int getNumberOfQubits() {
+        return qubits.size();
     }
 
-    public void resetNumberOfQubits(int n){
-        numberOfQubits = n;
-        qubits = new ArrayList<>(n);
+    public void resetNumberOfQubits(int count){
+        qubits = new ArrayList<>(count);
 
         //initialize qubits
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < count; i++){
             qubits.set(i, new Qubit(i , name)) ;
         }
     }

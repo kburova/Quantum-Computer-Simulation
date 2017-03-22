@@ -14,6 +14,8 @@
 package qcs;
 
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Dialog;
 import javafx.stage.Stage;
@@ -91,8 +93,8 @@ public class RegistersController {
         }
     }
 
-    public void setRegisters(Circuit circuit){
-        this.circuit = circuit;
+    public Circuit getCircuit() {
+        return circuit;
     }
 
     @FXML
@@ -103,6 +105,7 @@ public class RegistersController {
             //System.out.println("Register x: " + rX);
             circuit = new Circuit();
             circuit.initilizeRegisters(rX,rY);
+
             addClicked = true;
             dialogStage.close();
         }
