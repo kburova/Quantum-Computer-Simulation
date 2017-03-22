@@ -50,9 +50,10 @@ public class CircuitsController {
     final Integer line_spacing = 2;
     final Integer line_y = x_count * font_size * line_spacing + font_size + padding_top;
 
-    //when quantum functions are added this will need to be adjusted to choose whichever is
-    //greater parent width of internal width
-    final Integer width = (parent_width > 0) ? (parent_width) : (0);
+    //when functions are in change function_size to appropriate
+    final Integer function_size = 45;
+    final Integer circuit_width = circuit.getNumberOfOperators() * function_size;
+    final Integer width = (parent_width > circuit_width) ? (parent_width) : (circuit_width);
 
     //the 3 accounts for the line between x and y
     final Integer height = (x_count + y_count + 3) * font_size * line_spacing + padding_top;
