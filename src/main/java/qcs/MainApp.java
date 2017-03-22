@@ -103,6 +103,22 @@ public class MainApp extends Application {
         }
     }
 
+    public boolean showAddQubitValuesDialog(){
+
+        try{
+            AnchorPane dialog = new AnchorPane();
+
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public Stage getPrimaryStage(){
         return PrimaryStage;
     }
