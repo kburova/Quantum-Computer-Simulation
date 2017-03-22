@@ -78,7 +78,7 @@ public class MainApp extends Application {
         }
     }
 
-    public Circuit showAddRegistersDialog(){
+    public CircuitsController showAddRegistersDialog(){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/InitRegistersWindow.fxml"));
@@ -93,9 +93,10 @@ public class MainApp extends Application {
             dialogStage.showAndWait();
 
             circuit = controller.getCircuit();
+            CircuitsController circuits_controller = new CircuitsController(circuit);
 
             if(controller.isAdd())
-              return circuit;
+              return circuits_controller;
             else
               return null;
 
