@@ -20,10 +20,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
@@ -38,15 +35,16 @@ public class InitQubitsDialogController implements Initializable{
     @FXML
     private GridPane gridPane;
 
+    @FXML
+    private AnchorPane anchorPane;
+
     Circuit circuit;
     Stage dialogStage;
 
     InitQubitsDialogController (Circuit c){
         circuit = c;
     }
-//    public void setCircuit (Circuit c){
-//        circuit = c;
-//    }
+
     public void setDialogStage (Stage s){
         dialogStage = s;
         s.setResizable(false);
@@ -56,56 +54,63 @@ public class InitQubitsDialogController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
 
         int xCols = 0, yCols = 0, maxCols;
-
         xCols = circuit.getX().getNUmberOfQubits();
 
+        /** add TextFields for Register X**/
         for (int i = 1; i <= xCols; i++){
             TextField text = new TextField();
             text.setId("X"+ (i-1));
-            text.prefWidth(45);
+            text.prefWidth(50);
+            text.setText(Integer.toString( circuit.getX().getQubits().get(i-1).getValue() ));
             gridPane.add(text, i ,2);
         }
 
-        //add second label for Y, and its qubits if Y exists
+        /** add second label for Y, and its Text Fields for qubits if Y exists **/
         if (circuit.getY() != null){
             yCols = circuit.getY().getNUmberOfQubits();
             if (yCols != 0) {
-                Label labelX = new Label("Register Y:");
-                labelX.prefHeight(16.0);
-                gridPane.add(labelX, 0, 3);
+                Label labelY = new Label("Register Y:");
+                labelY.prefHeight(16.0);
+                labelY.prefWidth(85);
+                gridPane.add(labelY, 0, 3);
 
                 for (int i = 1; i <= yCols; i++) {
                     TextField text = new TextField();
                     text.setId("Y"+ (i-1));
-                    text.prefWidth(45);
+                    text.prefWidth(50);
+                    text.setText(Integer.toString( circuit.getY().getQubits().get(i-1).getValue() ));
                     gridPane.add(text, i, 3);
                 }
             }
         }
-        //need max number of qubits to decide on width
+        /** need max number of qubits to decide on width **/
         maxCols = (xCols > yCols) ? xCols : yCols;
 
-        // set indexes for qubits
+        /** set indexes for qubits that are displayed at the top of input fields **/
         for (int i = 1; i <= maxCols; i++){
             Label l = new Label(Integer.toString(i-1));
+            l.setPrefWidth(50);
             l.setTextAlignment(TextAlignment.CENTER);
-
             gridPane.add(l, i ,1);
         }
 
-        //set width of the window depending on max number of qubits
-        gridPane.setPrefWidth(maxCols*45 + 85);
-        gridPane.setMinWidth(maxCols*45 + 85);
-        gridPane.setMaxWidth(maxCols*45 + 85);
         ObservableList columnConstraints = gridPane.getColumnConstraints();
+        ObservableList rowConstraints = gridPane.getRowConstraints();
 
-        columnConstraints.add(new ColumnConstraints(80,80,80,Priority.SOMETIMES, HPos.CENTER,false)) ;
-        for (int i = 1; i < gridPane.getChildren().size(); i++){
-            columnConstraints.add(new ColumnConstraints(45,45,45,Priority.SOMETIMES, HPos.CENTER,false));
+        /** Add constraints that resize and stabilize dialog window **/
+        ColumnConstraints cc = new ColumnConstraints();
+        cc.setHgrow(Priority.ALWAYS);
+        RowConstraints rc = new RowConstraints();
+        rc.setVgrow(Priority.ALWAYS);
+;
+        for (int i = 0; i < gridPane.getChildren().size(); i++){
+            columnConstraints.add(cc);
+        }
+        for (int i = 0; i < 5; i++) {
+            rowConstraints.add(rc);
         }
 
-        ObservableList rowConstraints = gridPane.getRowConstraints();
-        rowConstraints.add(new RowConstraints(15,15,15));
+        anchorPane.setPrefWidth(maxCols*45 );
     }
 
     public boolean handleSave(){

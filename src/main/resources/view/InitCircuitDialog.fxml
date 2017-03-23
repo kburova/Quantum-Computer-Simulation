@@ -9,20 +9,25 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="120.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.InitCircuitDialogController">
+<AnchorPane prefHeight="121.0" prefWidth="171.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.InitCircuitDialogController">
             <children>
-                <GridPane id="g" layoutY="11.0" prefHeight="65.0" prefWidth="140.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                <GridPane prefHeight="71.0" prefWidth="151.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="10.0">
                     <children>
-                        <Label prefHeight="16.0"  text="Enter number of qubits" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
-                        <Label prefHeight="16.0"  text="Register X:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <Label prefHeight="16.0"  text="Register Y:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <Label prefHeight="16.0" text="Enter number of qubits" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+                        <Label prefHeight="16.0" text="Register X:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label prefHeight="16.0" text="Register Y:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                         <TextField fx:id="registerX" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="registerY" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     </children>
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="95.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="45.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.0" minWidth="-Infinity" prefWidth="106.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="41.0" minWidth="-Infinity" prefWidth="34.0" />
                     </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
                 </GridPane>
                 <HBox alignment="CENTER" minWidth="-1.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
                     <children>

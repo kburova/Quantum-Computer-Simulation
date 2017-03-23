@@ -52,6 +52,9 @@ public class Register {
         }
     }
 
+    final public ArrayList<Qubit> getQubits(){
+        return qubits;
+    }
     public void calculateValue(){
         // TODO: ??? Do we need to calculate anything here
     }
