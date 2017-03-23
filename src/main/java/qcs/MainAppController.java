@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -77,6 +78,14 @@ public class MainAppController implements Initializable{
 
     @FXML
     private void handleInitQubitsDialog(){
-        boolean saveClicked = mainApp.showAddQubitValuesDialog();
+
+        if (mainApp.getCircuit().getX() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Circuit was not initialized with registers!!!");
+            alert.showAndWait();
+        }else {
+            boolean OkClicked = mainApp.showAddQubitValuesDialog();
+        }
     }
 }

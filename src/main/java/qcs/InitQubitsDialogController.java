@@ -16,8 +16,6 @@ package qcs;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
@@ -26,7 +24,6 @@ import javafx.stage.Stage;
 import qcs.model.Circuit;
 
 import java.net.URL;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 
@@ -110,14 +107,13 @@ public class InitQubitsDialogController implements Initializable{
             rowConstraints.add(rc);
         }
 
-        anchorPane.setPrefWidth(maxCols*45 );
+        anchorPane.setPrefWidth(maxCols*45);
     }
 
-    public boolean handleSave(){
-        return false;
+    /** Close dialog when click OK in dialog window **/
+    public boolean handleOk(){
+        dialogStage.close();
+        return true;
     }
 
-    public void handleCancel(){
-
-    }
 }

@@ -22,8 +22,7 @@
         </GridPane>
         <HBox alignment="BOTTOM_CENTER"  spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <children>
-                <Button fx:id="add" mnemonicParsing="false"  prefWidth="70.0" text="Save" />
-                <Button fx:id="cancel" mnemonicParsing="false"  prefWidth="70.0" text="Cancel" />
+                <Button fx:id="ok" mnemonicParsing="false"  prefWidth="70.0" text="Ok" />
             </children>
         </HBox>
     </children>
