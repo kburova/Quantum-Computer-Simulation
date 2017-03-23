@@ -17,8 +17,6 @@ package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.linear.Array2DRowFieldMatrix;
-import org.apache.commons.math3.linear.ArrayFieldVector;
-import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.FieldMatrix;
 
 public class Qubit {
@@ -58,8 +56,8 @@ public class Qubit {
         Complex[][] transform = { {a,a},{a,b} };
         FieldMatrix<Complex> transformMatrix = new Array2DRowFieldMatrix<Complex>(transform, true);
 
-        qubitVector.preMultiply(transformMatrix);
-        qubitVector.scalarMultiply(normalizer);
+        qubitVector = qubitVector.preMultiply(transformMatrix);
+        qubitVector = qubitVector.scalarMultiply(normalizer);
     }
 
     public void Identity()
@@ -103,8 +101,8 @@ public class Qubit {
         sqrtXArray = new Complex[][] {{a,b},{b,a}};
         sqrtXMatrix = new Array2DRowFieldMatrix<Complex>(sqrtXArray, true);
 
-        qubitVector.preMultiply(sqrtXMatrix);
-        qubitVector.scalarMultiply(new Complex(.5,0));
+        qubitVector = qubitVector.preMultiply(sqrtXMatrix);
+        qubitVector = qubitVector.scalarMultiply(new Complex(.5,0));
     }
 
     public void Y()
@@ -119,22 +117,31 @@ public class Qubit {
         qubitVector.setEntry(1,0,qubitVector.getEntry(1,0).negate());
     }
 
-    public void setAlpha(Complex a){
+    public void setAlpha(Complex a)
+    {
         alpha = a;
+        qubitVector.setEntry(0,0,a);
     }
 
-    public void setBetta(Complex b){
+    public void setBeta(Complex b)
+    {
         beta = b;
+        qubitVector.setEntry(1,0,b);
     }
 
     final public int getId(){
         return id;
     }
 
-    final public Complex getAlpha(){
+    final public Complex getAlpha()
+    {
+        alpha = qubitVector.getEntry(0,0);
         return alpha;
     }
-    final public Complex getBeta(){
+
+    final public Complex getBeta()
+    {
+        beta = qubitVector.getEntry(1,0);
         return beta;
     }
 
