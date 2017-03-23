@@ -48,7 +48,7 @@ public class MainAppController implements Initializable{
 
     @FXML
     private void save_as() {
-        //when there is a stage for the visualization to be loaded
+        //when there is a dialogStage for the visualization to be loaded
         //from (first q function) expects an arraylist
         qio.save_as(new Stage(), new ArrayList<>());
     }
