@@ -69,7 +69,10 @@ public class Qubit {
         //TODO: claculations here
     }
 
-    public int getValue(){
+    final public int getValue(){
         return value;
+    }
+    public void setValue(int v) {
+        value = v;
     }
 }
