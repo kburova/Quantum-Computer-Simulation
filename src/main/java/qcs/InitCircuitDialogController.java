@@ -59,7 +59,7 @@ public class InitCircuitDialogController {
     private void handleAdd(){
 
         if ( isInputValid() ){
-            circuit.initilizeRegisters(rX,rY);
+            circuit.initializeRegisters(rX,rY);
             addClicked = true;
             dialogStage.close();
         }

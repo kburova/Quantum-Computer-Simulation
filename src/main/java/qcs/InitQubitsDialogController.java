@@ -54,7 +54,7 @@ public class InitQubitsDialogController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
 
         int xCols = 0, yCols = 0, maxCols;
-        xCols = circuit.getX().getNUmberOfQubits();
+        xCols = circuit.getX().getNumberOfQubits();
 
         /** add TextFields for Register X**/
         for (int i = 1; i <= xCols; i++){
@@ -77,7 +77,7 @@ public class InitQubitsDialogController implements Initializable{
 
         /** add second label for Y, and its Text Fields for qubits if Y exists **/
         if (circuit.getY() != null){
-            yCols = circuit.getY().getNUmberOfQubits();
+            yCols = circuit.getY().getNumberOfQubits();
             if (yCols != 0) {
                 Label labelY = new Label("Register Y:");
                 labelY.prefHeight(16.0);

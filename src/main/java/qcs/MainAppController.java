@@ -125,7 +125,7 @@ public class MainAppController implements Initializable{
     private void writeQbitsToCanvas(List<Qubit> qbits, Canvas canvas, Integer size
             , Integer margin, Integer line_spacing, Integer padding_top) {
         final Stream<String> qbit_stream = qbits.stream()
-                .map(qbit -> "|" + Integer.toString((int) Math.round(qbit.getState())) + ">");
+                .map(qbit -> "|" + Integer.toString((int) Math.round(qbit.getValue())) + ">");
 
         zipWithIndex(qbit_stream)
                 .forEach(qbit -> {
