@@ -27,7 +27,7 @@ public class Register {
     public Register (String n, int numOfQubits){
         name = n;
         qubits = new ArrayList<>(numOfQubits);
-
+        numberOfQubits = numOfQubits;
         //initialize qubits
         for (int i = 0; i < numOfQubits; i++){
             qubits.add(new Qubit(i , name));
