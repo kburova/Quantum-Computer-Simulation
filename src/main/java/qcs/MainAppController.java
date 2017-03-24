@@ -30,18 +30,7 @@ public class MainAppController implements Initializable{
 
     //reference used by save / load to remember where to save to
     private QIO qio = new QIO();
-
-    @FXML
-    private Label label;
-
-    @FXML
-    private Label label1;
-
-    @FXML
-    private void initializeRegisters(ActionEvent event) {
-
-    }
-
+    
     @FXML
     private void open() {
         new QIO().load(new Stage());

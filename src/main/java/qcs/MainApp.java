@@ -87,8 +87,6 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/InitCircuitDialog.fxml"));
             AnchorPane dialog = loader.load();
-
-            //GridPane grid = dialog.getChildren();
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(PrimaryStage);
