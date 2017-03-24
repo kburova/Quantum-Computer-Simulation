@@ -73,7 +73,6 @@ public class MainAppController implements Initializable{
     @FXML
     private void handleInitCircuitDialog() {
         boolean registersInitialized = mainApp.showAddRegistersDialog();
-        System.out.println(mainApp.getCircuit().getX().getNumberOfQubits());
         if (registersInitialized){
             initCircuitCanvas(circuitCanvas, (int) splitPane.getWidth());
         }
