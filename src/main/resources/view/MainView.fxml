@@ -71,7 +71,7 @@
                     <Tooltip text="Set Registers" />
                 </tooltip>
             </Button>
-            <Button fx:id="values">
+            <Button fx:id="values" onAction="#handleInitQubitsDialog">
                 <tooltip>
                     <Tooltip text="Set Qubits" />
                 </tooltip>

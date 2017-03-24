@@ -14,16 +14,14 @@
 package qcs;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import qcs.model.Circuit;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class InitCircuitDialogController implements Initializable{
+public class InitCircuitDialogController {
 
     private Stage dialogStage;
     private  boolean addClicked = false;
@@ -37,25 +35,31 @@ public class InitCircuitDialogController implements Initializable{
     @FXML
     private TextField registerY;
 
+    @FXML
+    private void initialize(){
+
+    }
     //bind stage with controller
     public void setDialogStage(Stage dialogStage){
         this.dialogStage = dialogStage;
         this.dialogStage.setResizable(false);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    //set registers here???
 
+    public boolean isAdd(){
+        return addClicked;
     }
 
-    public boolean isAdd(){ return addClicked; }
-
-    public  void setCircuit(Circuit circuit) { this.circuit = circuit; }
+    public void setCircuit(Circuit circuit){
+        this.circuit = circuit;
+    }
 
     @FXML
     private void handleAdd(){
+
         if ( isInputValid() ){
-            circuit.initializeRegisters(rX,rY);
+            circuit.initilizeRegisters(rX,rY);
             addClicked = true;
             dialogStage.close();
         }
@@ -98,7 +102,6 @@ public class InitCircuitDialogController implements Initializable{
         if ( errorMessage.length() == 0 ){
             return true;
         }else{
-
             //alert if information was entered wrong
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");

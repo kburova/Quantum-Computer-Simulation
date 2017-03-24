@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="370a2fea-2269-42f1-94cb-07f5f3440581" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_codepoetics_protonpack_1_13.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/qcs/CircuitsController.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/qcs/NewCircuitDialog.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/view/InitRegistersWindow.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Quantum-Computer-Simulation.iml" afterPath="$PROJECT_DIR$/.idea/Quantum-Computer-Simulation.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/view/MainView.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/MainView.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,8 +25,21 @@
       <file leaf-file-name="MainApp.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1185">
-              <caret line="92" column="38" lean-forward="false" selection-start-line="92" selection-start-column="38" selection-end-line="92" selection-end-column="38" />
+            <state relative-caret-position="-372">
+              <caret line="88" column="46" lean-forward="false" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Circuit.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-249">
+              <caret line="39" column="26" lean-forward="false" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InitCircuitDialog.fxml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml">
+      <file leaf-file-name="InitQubitsDialog.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="216">
+              <caret line="24" column="106" lean-forward="false" selection-start-line="24" selection-start-column="106" selection-end-line="24" selection-end-column="106" />
               <folding />
             </state>
           </provider>
@@ -56,13 +60,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainAppController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainAppController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-347">
-              <caret line="75" column="36" lean-forward="true" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
+            <state relative-caret-position="96">
+              <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitCircuitDialogController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="810">
+              <caret line="108" column="32" lean-forward="false" selection-start-line="105" selection-start-column="12" selection-end-line="108" selection-end-column="32" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,12 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/qcs/Main.java" />
-        <option value="$PROJECT_DIR$/out/production/qcs/qcs/qcs.fxml" />
-        <option value="$PROJECT_DIR$/out/production/qcs/qcs.fxml" />
-        <option value="$PROJECT_DIR$/src/qcs/QCSdesign.css" />
-        <option value="$PROJECT_DIR$/src/circuit/Circuit.java" />
-        <option value="$PROJECT_DIR$/src/qcs/Register.java" />
         <option value="$PROJECT_DIR$/src/qcs/Qubit.java" />
         <option value="$PROJECT_DIR$/src/qcs/Circuit.java" />
         <option value="$PROJECT_DIR$/src/qcs/Operator.java" />
@@ -138,12 +146,19 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/InitQubitsDilog.fxml" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/MainView.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/RegistersController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/QubitValuesDialogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/qcs/CanvasController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/model/Qubit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/InitQubitsDialogController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" />
       </list>
     </option>
   </component>
@@ -182,10 +197,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1147" />
+    <option name="x" value="35" />
     <option name="y" value="23" />
-    <option name="width" value="1351" />
-    <option name="height" value="1337" />
+    <option name="width" value="1280" />
+    <option name="height" value="709" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -202,6 +217,42 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Production">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Quantum-Computer-Simulation">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="qcs">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Quantum-Computer-Simulation">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -320,44 +371,130 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Production">
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Quantum-Computer-Simulation">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="qcs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qcs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qcs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Quantum-Computer-Simulation">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -372,7 +509,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/kseniaburova/Documents/school/spring2017/cs402/Quantum-Computer-Simulation/src/qcs/QCS.java" />
+    <property name="SearchEverywhereHistoryKey" value="mav&#9;ACTION&#9;ActivateMavenProjectsToolWindow" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -725,9 +862,6 @@
       </MavenSettings>
       <method />
     </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -786,19 +920,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <working-directory />
-      <pass-parent-env>true</pass-parent-env>
-      <envs />
-      <ui />
-      <extra-mocha-options />
-      <test-kind>DIRECTORY</test-kind>
-      <test-directory />
-      <recursive>false</recursive>
-      <method />
-    </configuration>
     <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
       <method />
     </configuration>
@@ -854,12 +975,19 @@
       <workItem from="1489035680998" duration="849000" />
       <workItem from="1489852712394" duration="57862000" />
       <workItem from="1489973483509" duration="1025000" />
-      <workItem from="1490320781050" duration="5459000" />
+      <workItem from="1490061367766" duration="1437000" />
+      <workItem from="1490210033678" duration="179000" />
+      <workItem from="1490212466012" duration="2128000" />
+      <workItem from="1490227238205" duration="12236000" />
+      <workItem from="1490276041173" duration="5939000" />
+      <workItem from="1490289071619" duration="1235000" />
+      <workItem from="1490315443195" duration="2705000" />
+      <workItem from="1490321158952" duration="3920000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113756000" />
+    <option name="totallyTimeSpent" value="138076000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -871,27 +999,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1147" y="23" width="1351" height="1337" extended-state="0" />
+    <frame x="35" y="23" width="1280" height="709" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32895815" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32895815" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32731748" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925898" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28219852" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.01875" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23605806" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23828125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32895815" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24939074" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -904,6 +1031,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981315" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32895815" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1029,101 +1157,23 @@
     <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PhaseShiftGate.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/SqRootOfNOTGate.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/view/MainView.fxml" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/EventHandlerManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="190" column="0" lean-forward="false" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/BasicEventDispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/EventUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/CompositeEventHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="17" column="43" lean-forward="false" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/sun/reflect/DelegatingMethodAccessorImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="11" column="171" lean-forward="false" selection-start-line="11" selection-start-column="171" selection-end-line="11" selection-end-column="171" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/glass/ui/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="554" column="0" lean-forward="false" selection-start-line="554" selection-start-column="0" selection-end-line="554" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/scene/control/behavior/ButtonBehavior.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/scene/control/skin/BehaviorSkinBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="95" column="0" lean-forward="false" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="386" column="0" lean-forward="false" selection-start-line="386" selection-start-column="0" selection-end-line="386" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/QuantumToolkit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4000">
-          <caret line="1772" column="0" lean-forward="false" selection-start-line="1772" selection-start-column="0" selection-end-line="1772" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/EventHandlerManager.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/BasicEventDispatcher.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/EventUtil.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/CompositeEventHandler.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/sun/reflect/DelegatingMethodAccessorImpl.class" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/glass/ui/View.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/scene/control/behavior/ButtonBehavior.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/scene/control/skin/BehaviorSkinBase.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/QuantumToolkit.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/FXMLLoader.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/model/Circuit.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/model/Register.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/model/Qubit.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/MainApp.java" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/stage/Stage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="474" column="0" lean-forward="false" selection-start-line="474" selection-start-column="0" selection-end-line="474" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/stage/Stage.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/RegistersController.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/MainAppController.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/view/InitRegistersWindow.fxml" />
@@ -1131,7 +1181,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1142,13 +1191,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/qcs.iml">
+    <entry file="file://$PROJECT_DIR$/qcs.iml" />
+    <entry file="file://$PROJECT_DIR$/src/main/main.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/main1.iml" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -1157,37 +1208,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Qubit.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/QIO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        <state relative-caret-position="-615">
+          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Register.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/Initializable.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="50" column="5" lean-forward="false" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
-          <folding>
-            <element signature="e#1281#1282#0" expanded="false" />
-            <element signature="e#1310#1311#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="27" column="44" lean-forward="false" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/view/RootMenu.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="21" column="39" lean-forward="false" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1197,8 +1230,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/view/MainView.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1547">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-925">
+          <caret line="64" column="72" lean-forward="false" selection-start-line="64" selection-start-column="72" selection-end-line="64" selection-end-column="72" />
           <folding />
         </state>
       </provider>
@@ -1206,46 +1239,86 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitQubitsDialogController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-347">
-          <caret line="75" column="36" lean-forward="true" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
+        <state relative-caret-position="230">
+          <caret line="137" column="27" lean-forward="true" selection-start-line="137" selection-start-column="19" selection-end-line="137" selection-end-column="27" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="24" column="106" lean-forward="false" selection-start-line="24" selection-start-column="106" selection-end-line="24" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Qubit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="55" column="22" lean-forward="false" selection-start-line="55" selection-start-column="22" selection-end-line="55" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1232#1233#0" expanded="false" />
+            <element signature="e#1261#1262#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-249">
+          <caret line="39" column="26" lean-forward="false" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="810">
+          <caret line="108" column="32" lean-forward="false" selection-start-line="105" selection-start-column="12" selection-end-line="108" selection-end-column="32" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="92" column="38" lean-forward="false" selection-start-line="92" selection-start-column="38" selection-end-line="92" selection-end-column="38" />
+        <state relative-caret-position="-372">
+          <caret line="88" column="46" lean-forward="false" selection-start-line="88" selection-start-column="46" selection-end-line="88" selection-end-column="46" />
           <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/CanvasController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1140">
-          <caret line="87" column="5" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="87" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="96">
+          <caret line="32" column="4" lean-forward="false" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="4" />
           <folding />
         </state>
       </provider>

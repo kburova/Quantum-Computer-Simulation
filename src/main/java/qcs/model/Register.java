@@ -12,6 +12,8 @@
  ***************************************************/
 
 package qcs.model;
+
+import qcs.model.Qubit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +56,9 @@ public class Register {
         return qubits;
     }
 
+    final public ArrayList<Qubit> getQubits(){
+        return qubits;
+    }
     public void calculateValue(){
         // TODO: ??? Do we need to calculate anything here??
     }

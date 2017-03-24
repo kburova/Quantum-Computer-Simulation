@@ -23,6 +23,8 @@ import java.util.stream.Stream;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import qcs.model.Qubit;
@@ -37,21 +39,18 @@ public class MainAppController implements Initializable{
 
     //reference used by save / load to remember where to save to
     private QIO qio = new QIO();
-
     @FXML
     private Canvas circuitCanvas;
-
     @FXML
     private SplitPane splitPane;
-
     @FXML
     private void open() {
         new QIO().load(new Stage());
     }
 
     @FXML
-    private void saveAs() {
-        //when there is a stage for the visualization to be loaded
+    private void save_as() {
+        //when there is a dialogStage for the visualization to be loaded
         //from (first q function) expects an arraylist
         qio.save_as(new Stage(), new ArrayList<>());
     }
@@ -143,5 +142,18 @@ public class MainAppController implements Initializable{
                     canvas.getGraphicsContext2D()
                             .strokeLine(x + font_width, y - size / 2, canvas.getWidth(), y - size / 2);
                 });
+    }
+
+    @FXML
+    private void handleInitQubitsDialog(){
+
+        if (mainApp.getCircuit().getX() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Circuit was not initialized with registers!!!");
+            alert.showAndWait();
+        }else {
+            boolean OkClicked = mainApp.showAddQubitValuesDialog();
+        }
     }
 }
