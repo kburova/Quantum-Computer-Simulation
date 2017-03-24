@@ -16,6 +16,7 @@ package qcs;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Dialog;
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import qcs.model.Circuit;
@@ -38,8 +39,7 @@ public class InitCircuitDialogController {
     private void initialize(){
 
     }
-
-    //bind dialogStage with controller
+    //bind stage with controller
     public void setDialogStage(Stage dialogStage){
         this.dialogStage = dialogStage;
         this.dialogStage.setResizable(false);

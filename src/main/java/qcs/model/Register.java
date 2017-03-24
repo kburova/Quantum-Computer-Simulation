@@ -15,21 +15,21 @@ package qcs.model;
 
 import qcs.model.Qubit;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Register {
 
     private String name;
    //private double coefficient;
-    private ArrayList < Qubit > qubits;
+    private List< Qubit > qubits;
     int numberOfQubits;
 
     public Register (String n, int numOfQubits){
         name = n;
-        numberOfQubits = numOfQubits;
         qubits = new ArrayList<>(numOfQubits);
 
         //initialize qubits
-        for (int i = 0; i < numberOfQubits; i++){
+        for (int i = 0; i < numOfQubits; i++){
             qubits.add(new Qubit(i , name));
         }
     }
@@ -38,24 +38,28 @@ public class Register {
         return name;
     }
 
-    final public int getNUmberOfQubits(){
+    final public int getNumberOfQubits() {
         return numberOfQubits;
     }
 
-    public void resetNumberOfQubits(int n){
-        numberOfQubits = n;
-        qubits = new ArrayList<>(n);
+    public void resetNumberOfQubits(int numOfQubits){
+        numberOfQubits = numOfQubits;
+        qubits = new ArrayList<>(numOfQubits);
 
         //initialize qubits
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < numOfQubits; i++){
             qubits.set(i, new Qubit(i , name)) ;
         }
+    }
+    //this is used by our mainapp controller to draw the grid
+    final public List<Qubit> getQubits() {
+        return qubits;
     }
 
     final public ArrayList<Qubit> getQubits(){
         return qubits;
     }
     public void calculateValue(){
-        // TODO: ??? Do we need to calculate anything here
+        // TODO: ??? Do we need to calculate anything here??
     }
 }

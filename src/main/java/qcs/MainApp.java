@@ -32,9 +32,7 @@ public class MainApp extends Application {
 
 
     //create new circuit
-    public MainApp(){
-        circuit = new Circuit();
-    }
+    public MainApp() { circuit = new Circuit(); }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -83,7 +81,6 @@ public class MainApp extends Application {
      ***/
     public boolean showAddRegistersDialog(){
         try {
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/InitCircuitDialog.fxml"));
             AnchorPane dialog = loader.load();
@@ -100,7 +97,6 @@ public class MainApp extends Application {
             dialogStage.showAndWait();
 
             return controller.isAdd();
-
         }catch(Exception e){
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
