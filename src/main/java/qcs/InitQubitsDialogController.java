@@ -134,6 +134,7 @@ public class InitQubitsDialogController implements Initializable{
     }
 
     /** Close dialog when click OK in dialog window **/
+    @FXML
     public boolean handleOk(){
         dialogStage.close();
         return true;
