@@ -14,13 +14,14 @@
  ***************************************************/
 
 package qcs.model;
+
 public class Qubit {
 
     private int id;
     private String register;
     private double alpha;
     private double betta;
-    private double state;
+    private int value;
 
     // initialize qubit to 0 when register is created
     // superposition = 0, if α = 1 and β = 0
@@ -29,6 +30,7 @@ public class Qubit {
         betta = 0;
         id = newId;
         register = registerName;
+        value = 0;
     }
 
 //    public void setId(int newId){
@@ -67,7 +69,10 @@ public class Qubit {
         //TODO: claculations here
     }
 
-    public double getState(){
-        return state;
+    final public int getValue(){
+        return value;
+    }
+    public void setValue(int v) {
+        value = v;
     }
 }

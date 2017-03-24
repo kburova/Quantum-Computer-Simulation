@@ -14,6 +14,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.GridPane?>
+<?import com.sun.javafx.scene.control.skin.CustomColorDialog.ColorRectPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0"
             xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="qcs.MainAppController">
@@ -62,12 +66,12 @@
                 </tooltip>
             </Button>
             <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
-            <Button fx:id="registers" onAction="#handleInitRegisters">
+            <Button fx:id="registers" onAction="#handleInitCircuitDialog">
                 <tooltip>
                     <Tooltip text="Set Registers" />
                 </tooltip>
             </Button>
-            <Button fx:id="values">
+            <Button fx:id="values" onAction="#handleInitQubitsDialog">
                 <tooltip>
                     <Tooltip text="Set Qubits" />
                 </tooltip>
@@ -151,13 +155,14 @@
        </VBox>
     </left>
     <center>
-      <SplitPane dividerPositions="0.5778894472361809" orientation="VERTICAL" prefHeight="333.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <SplitPane fx:id="splitPane" dividerPositions="0.5778894472361809" orientation="VERTICAL" prefHeight="333.0" prefWidth="500.0" BorderPane.alignment="CENTER">
         <items>
-            <ScrollPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                <Canvas height="179.0" layoutX="3.0" layoutY="4.0" width="481.0" />
+            <ScrollPane>
+                <Canvas fx:id="circuitCanvas">
+                </Canvas>
             </ScrollPane>
           <ScrollPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                  <Canvas height="179.0" layoutX="3.0" layoutY="4.0" width="481.0" />
+                  <Canvas fx:id="output_canvas" height="179.0" layoutX="3.0" layoutY="4.0" width="481.0" />
             </ScrollPane>
         </items>
       </SplitPane>

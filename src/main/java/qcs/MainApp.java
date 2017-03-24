@@ -15,7 +15,6 @@ MainApp.java
 package qcs;
 
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -32,10 +31,8 @@ public class MainApp extends Application {
     private Circuit circuit;
 
 
-//    //create new circuit
-//    public MainApp(){
-//        circuit = new Circuit();
-//    }
+    //create new circuit
+    public MainApp() { circuit = new Circuit(); }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -60,7 +57,9 @@ public class MainApp extends Application {
         showMainAppLayout();
     }
 
-    // add The main app layout into frame with drop down menu
+    /*** The main app layout that is loaded from fxml. It is loaded into main
+         frame with drop down menu
+     ***/
     public void showMainAppLayout(){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -77,25 +76,27 @@ public class MainApp extends Application {
         }
     }
 
+    /*** This method loads Stage and View for Dialog window that initializes circuit
+     and number of registers in a circuit
+     ***/
     public boolean showAddRegistersDialog(){
         try {
-
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/InitRegistersWindow.fxml"));
+            loader.setLocation(getClass().getResource("/view/InitCircuitDialog.fxml"));
             AnchorPane dialog = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(PrimaryStage);
             dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Circuit Data");
 
-            RegistersController controller = loader.getController();
+            InitCircuitDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setRegisters(circuit);
+            controller.setCircuit(circuit);
 
             dialogStage.showAndWait();
 
             return controller.isAdd();
-
         }catch(Exception e){
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
@@ -103,9 +104,41 @@ public class MainApp extends Application {
         }
     }
 
-    public Stage getPrimaryStage(){
+    /*** This method loads Stage and View for Dialog window that initializes Qubit values
+         We call constructor first, because we need to pass circuit data to it before
+         controller initializes fxml(we need data to initialize number of TextFields)***/
+    public boolean showAddQubitValuesDialog(){
+
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            InitQubitsDialogController controller = new InitQubitsDialogController(circuit);
+            loader.setController(controller);
+
+            loader.setLocation(getClass().getResource("/view/InitQubitsDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+
+            dialogStage.setTitle("Q-bit Values");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+
+            //pass dialog stage to controller
+            controller.setDialogStage(dialogStage);
+
+            dialogStage.showAndWait();
+            return true;
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    final public Stage getPrimaryStage(){
         return PrimaryStage;
     }
+    final public Circuit getCircuit() { return circuit; }
 
     public static void main(String[] args) {
         launch(args);

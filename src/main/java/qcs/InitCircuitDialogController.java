@@ -1,5 +1,5 @@
 /**************************************************
- RegistersController.java
+ InitCircuitDialogController.java
 
  This file controls the output from dialog window
  that asks for number of qubits for each register
@@ -16,11 +16,12 @@ package qcs;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Dialog;
+import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import qcs.model.Circuit;
 
-public class RegistersController {
+public class InitCircuitDialogController {
 
     private Stage dialogStage;
     private  boolean addClicked = false;
@@ -38,15 +39,36 @@ public class RegistersController {
     private void initialize(){
 
     }
-
     //bind stage with controller
     public void setDialogStage(Stage dialogStage){
         this.dialogStage = dialogStage;
+        this.dialogStage.setResizable(false);
     }
 
     //set registers here???
 
-    public boolean isAdd(){ return addClicked; }
+    public boolean isAdd(){
+        return addClicked;
+    }
+
+    public void setCircuit(Circuit circuit){
+        this.circuit = circuit;
+    }
+
+    @FXML
+    private void handleAdd(){
+
+        if ( isInputValid() ){
+            circuit.initilizeRegisters(rX,rY);
+            addClicked = true;
+            dialogStage.close();
+        }
+    }
+
+    @FXML
+    private void handleCancel() {
+        dialogStage.close();
+    }
 
     private boolean isInputValid(){
 
@@ -80,7 +102,6 @@ public class RegistersController {
         if ( errorMessage.length() == 0 ){
             return true;
         }else{
-
             //alert if information was entered wrong
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error Dialog");
@@ -89,27 +110,5 @@ public class RegistersController {
 
             return false;
         }
-    }
-
-    public void setRegisters(Circuit circuit){
-        this.circuit = circuit;
-    }
-
-    @FXML
-    private void handleAdd(){
-
-        if ( isInputValid() ){
-            // set registers in circuit
-            //System.out.println("Register x: " + rX);
-            circuit = new Circuit();
-            circuit.initilizeRegisters(rX,rY);
-            addClicked = true;
-            dialogStage.close();
-        }
-    }
-
-    @FXML
-    private void handleCancel() {
-        dialogStage.close();
     }
 }
