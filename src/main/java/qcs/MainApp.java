@@ -28,7 +28,11 @@ public class MainApp extends Application {
 
     private Stage PrimaryStage;
     private BorderPane root;
-    private CircuitsController circuit_controller;
+    private Circuit circuit;
+
+
+    //create new circuit
+    public MainApp() { circuit = new Circuit(); }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -70,33 +74,32 @@ public class MainApp extends Application {
         }
     }
 
-    public void showAddRegistersDialog(){
+    public boolean showAddRegistersDialog(){
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/view/InitRegistersWindow.fxml"));
+            loader.setLocation(getClass().getResource("/view/InitCircuitDialog.fxml"));
             AnchorPane dialog = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(PrimaryStage);
             dialogStage.setScene(new Scene(dialog));
 
-            NewCircuitDialog dialogHandler = loader.getController();
-            dialogHandler.setDialogStage(dialogStage);
+            InitCircuitDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCircuit(circuit);
+
             dialogStage.showAndWait();
 
-            //right now new action is handled by dialog not controller, TODO fix that
-            CircuitsController controller = dialogHandler.getController();
-
-            if(dialogHandler.isAdd())
-              circuit_controller = controller;
+            return controller.isAdd();
         }catch(Exception e){
             // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
+            return false;
         }
     }
 
-    public CircuitsController getCircuitController(){ return circuit_controller; }
-
+    //public CanvasController getCircuitController(){ return circuit_controller; }
+    final public Circuit getCircuit() { return circuit; }
     public static void main(String[] args) {
         launch(args);
     }

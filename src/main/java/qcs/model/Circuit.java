@@ -24,15 +24,19 @@ public class Circuit {
     private int numberOfOperators; // equals to number of steps
     private List <Operator> operators;
 
+    // don't need constructor .... we have to re-init circuit using function if
+    // button is clicked over and over again
+    public Circuit(){
+    }
+
     // init each register with number of qubits n each, and restart
     // operations (circuit)
-    public Circuit(Integer x, Integer y){
+    public void initializeRegisters(Integer x, Integer y){
         this.x = new Register("X", x);
         this.y = new Register("Y", y);
         numberOfOperators = 0;
         operators = new LinkedList<>();
     }
-
 
     final public Register getX(){ return x; }
 

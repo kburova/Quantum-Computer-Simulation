@@ -2,46 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="370a2fea-2269-42f1-94cb-07f5f3440581" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/MainApp.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/MainAppController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/RegistersController.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/design/MainAppTheme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/design/RootMenuTheme.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/add.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/back.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/complete.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/delete.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/load.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/menu.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/new.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/next.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/play.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/qubit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/register.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/remove.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/save.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/screenshot.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/images/values.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/Circuit.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/Qubit.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/Register.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/CNOTGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/HadamardGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/IdentityGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/InversePhaseGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/Operator.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/PauliXGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/PauliYGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/PauliZGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/PhaseGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/PhaseShiftGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/model/operator/SqRootOfNOTGate.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/view/InitRegistersWindow.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/view/MainView.fxml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/qcs/view/RootMenu.fxml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_codepoetics_protonpack_1_13.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/qcs/CircuitsController.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/qcs/NewCircuitDialog.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/view/InitRegistersWindow.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Quantum-Computer-Simulation.iml" afterPath="$PROJECT_DIR$/.idea/Quantum-Computer-Simulation.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/view/MainView.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/MainView.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,12 +31,39 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="MainApp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+            <state relative-caret-position="1185">
+              <caret line="92" column="38" lean-forward="false" selection-start-line="92" selection-start-column="38" selection-end-line="92" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InitCircuitDialog.fxml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainAppController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-347">
+              <caret line="75" column="36" lean-forward="true" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -140,6 +138,12 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/CanvasController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" />
       </list>
     </option>
   </component>
@@ -150,10 +154,35 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="MavenProjectNavigator">
-    <treeState />
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Quantum-Computer-Simulation" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Quantum-Computer-Simulation" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1100" />
+    <option name="x" value="1147" />
     <option name="y" value="23" />
     <option name="width" value="1351" />
     <option name="height" value="1337" />
@@ -182,6 +211,98 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Quantum-Computer-Simulation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qcs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -733,11 +854,12 @@
       <workItem from="1489035680998" duration="849000" />
       <workItem from="1489852712394" duration="57862000" />
       <workItem from="1489973483509" duration="1025000" />
+      <workItem from="1490320781050" duration="5459000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108297000" />
+    <option name="totallyTimeSpent" value="113756000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -749,8 +871,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1100" y="23" width="1351" height="1337" extended-state="0" />
-    <editor active="false" />
+    <frame x="1147" y="23" width="1351" height="1337" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32895815" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -760,14 +882,14 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978058" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925898" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28219852" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23300229" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23605806" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32895815" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -842,124 +964,12 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/qcs/images/register.ico" />
-    <entry file="file://$PROJECT_DIR$/src/qcs/images/save.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/images/register.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/images/values.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/images/screenshot.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/images/play.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/images/remove.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/circuit/Circuit.java" />
-    <entry file="uml://JAVA/qcs">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>qcs</OriginalElement>
-          <nodes>
-            <node x="" y="">qcs.CNOTGate</node>
-            <node x="" y="">qcs.InversePhaseGate</node>
-            <node x="" y="">qcs.PauliXGate</node>
-            <node x="" y="">qcs.PhaseGate</node>
-            <node x="" y="">qcs.images</node>
-            <node x="" y="">qcs.PauliYGate</node>
-            <node x="" y="">qcs.IdentityGate</node>
-            <node x="" y="">qcs.Register</node>
-            <node x="" y="">qcs.Circuit</node>
-            <node x="" y="">qcs.QCS</node>
-            <node x="" y="">qcs.Controller</node>
-            <node x="" y="">qcs.SqRootOfNOTGate</node>
-            <node x="" y="">qcs.PauliZGate</node>
-            <node x="" y="">qcs.Operator</node>
-            <node x="" y="">qcs.HadamardGate</node>
-            <node x="" y="">qcs.PhaseShiftGate</node>
-            <node x="" y="">qcs.Qubit</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="0.7545045045045045" x="977.0" y="143.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Methods</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/design/MainAppTheme.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="68" column="33" lean-forward="false" selection-start-line="68" selection-start-column="33" selection-end-line="68" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/images/qubit.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/view/RootMenu.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="37" lean-forward="false" selection-start-line="16" selection-start-column="37" selection-end-line="16" selection-end-column="37" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/design/RootMenuTheme.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/CNOTGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/HadamardGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/IdentityGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qcs/images/qubit.png" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/view/RootMenu.fxml" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/design/RootMenuTheme.css" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/CNOTGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/HadamardGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/IdentityGate.java" />
     <entry file="uml://JAVA/qcs.MainApp">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -1010,72 +1020,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/Operator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/InversePhaseGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PauliXGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PauliYGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PauliZGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PhaseGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PhaseShiftGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/SqRootOfNOTGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/view/MainView.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="63" column="68" lean-forward="false" selection-start-line="63" selection-start-column="68" selection-end-line="63" selection-end-column="68" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/Operator.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/InversePhaseGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PauliXGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PauliYGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PauliZGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PhaseGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/PhaseShiftGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/operator/SqRootOfNOTGate.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/view/MainView.fxml" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/EventHandlerManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -1160,43 +1113,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/Circuit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/model/Qubit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="6" selection-start-column="1" selection-end-line="11" selection-end-column="17" />
-          <folding>
-            <element signature="e#2927#2928#0" expanded="false" />
-            <element signature="e#2962#2963#0" expanded="false" />
-            <element signature="e#3008#3009#0" expanded="false" />
-            <element signature="e#3036#3037#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/Circuit.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/Register.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/model/Qubit.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/MainApp.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/stage/Stage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -1204,41 +1124,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/RegistersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="104" column="30" lean-forward="false" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
-          <folding>
-            <element signature="e#944#945#0" expanded="false" />
-            <element signature="e#990#991#0" expanded="false" />
-            <element signature="e#2770#2771#0" expanded="false" />
-            <element signature="e#2805#2806#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/MainAppController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="52" column="38" lean-forward="false" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
-          <folding>
-            <element signature="e#1090#1091#0" expanded="false" />
-            <element signature="e#1128#1129#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/qcs/view/InitRegistersWindow.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="116" lean-forward="false" selection-start-line="22" selection-start-column="116" selection-end-line="22" selection-end-column="116" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qcs/RegistersController.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/MainAppController.java" />
+    <entry file="file://$PROJECT_DIR$/src/qcs/view/InitRegistersWindow.fxml" />
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1251,7 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="7" lean-forward="false" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1259,16 +1146,111 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+          <caret line="11" column="10" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Qubit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="50" column="5" lean-forward="false" selection-start-line="50" selection-start-column="5" selection-end-line="50" selection-end-column="5" />
+          <folding>
+            <element signature="e#1281#1282#0" expanded="false" />
+            <element signature="e#1310#1311#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="27" column="44" lean-forward="false" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/RootMenu.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/MainView.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1547">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-347">
+          <caret line="75" column="36" lean-forward="true" selection-start-line="75" selection-start-column="36" selection-end-line="75" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="92" column="38" lean-forward="false" selection-start-line="92" selection-start-column="38" selection-end-line="92" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/CanvasController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="87" column="5" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="87" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
   </component>

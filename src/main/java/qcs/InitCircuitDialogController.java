@@ -1,5 +1,5 @@
 /**************************************************
- NewCircuitDialog.java
+ InitCircuitDialogController.java
 
  This file controls the output from dialog window
  that asks for number of qubits for each register
@@ -14,16 +14,20 @@
 package qcs;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import qcs.model.Circuit;
 
-public class NewCircuitDialog {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class InitCircuitDialogController implements Initializable{
 
     private Stage dialogStage;
     private  boolean addClicked = false;
-    private CircuitsController controller;
+    private Circuit circuit;
     int rX;
     int rY;
 
@@ -33,18 +37,34 @@ public class NewCircuitDialog {
     @FXML
     private TextField registerY;
 
-    public CircuitsController getController(){
-        return controller;
-    }
-
     //bind stage with controller
     public void setDialogStage(Stage dialogStage){
         this.dialogStage = dialogStage;
+        this.dialogStage.setResizable(false);
     }
 
-    //set registers here???
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
 
     public boolean isAdd(){ return addClicked; }
+
+    public  void setCircuit(Circuit circuit) { this.circuit = circuit; }
+
+    @FXML
+    private void handleAdd(){
+        if ( isInputValid() ){
+            circuit.initializeRegisters(rX,rY);
+            addClicked = true;
+            dialogStage.close();
+        }
+    }
+
+    @FXML
+    private void handleCancel() {
+        dialogStage.close();
+    }
 
     private boolean isInputValid(){
 
@@ -87,23 +107,5 @@ public class NewCircuitDialog {
 
             return false;
         }
-    }
-
-    @FXML
-    private void handleAdd(){
-
-        if ( isInputValid() ){
-            // set registers in circuit
-            //System.out.println("Register x: " + rX);
-            controller = new CircuitsController(new Circuit(rX, rY));
-
-            addClicked = true;
-            dialogStage.close();
-        }
-    }
-
-    @FXML
-    private void handleCancel() {
-        dialogStage.close();
     }
 }

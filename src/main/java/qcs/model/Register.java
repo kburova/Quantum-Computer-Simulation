@@ -20,20 +20,16 @@ public class Register {
     private String name;
    //private double coefficient;
     private List< Qubit > qubits;
+    int numberOfQubits;
 
-    public Register (String n, int count){
+    public Register (String n, int numOfQubits){
         name = n;
-        qubits = new ArrayList<>(count);
+        qubits = new ArrayList<>(numOfQubits);
 
         //initialize qubits
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < numOfQubits; i++){
             qubits.add(new Qubit(i , name));
         }
-    }
-
-    //this is used by our mainapp controller to draw the grid
-    final public List<Qubit> getQubits() {
-        return qubits;
     }
 
     final public String getName(){
@@ -41,19 +37,24 @@ public class Register {
     }
 
     final public int getNumberOfQubits() {
-        return qubits.size();
+        return numberOfQubits;
     }
 
-    public void resetNumberOfQubits(int count){
-        qubits = new ArrayList<>(count);
+    public void resetNumberOfQubits(int numOfQubits){
+        numberOfQubits = numOfQubits;
+        qubits = new ArrayList<>(numOfQubits);
 
         //initialize qubits
-        for (int i = 0; i < count; i++){
+        for (int i = 0; i < numOfQubits; i++){
             qubits.set(i, new Qubit(i , name)) ;
         }
     }
+    //this is used by our mainapp controller to draw the grid
+    final public List<Qubit> getQubits() {
+        return qubits;
+    }
 
     public void calculateValue(){
-        // TODO: ??? Do we need to calculate anything here
+        // TODO: ??? Do we need to calculate anything here??
     }
 }
