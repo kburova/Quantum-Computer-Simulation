@@ -13,21 +13,28 @@
 
 package qcs.model;
 
+import org.apache.commons.math3.complex.Complex;
 import qcs.model.Qubit;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Register {
 
+    private int numberOfQubits, numberOfBases;
     private String name;
-   //private double coefficient;
     private List< Qubit > qubits;
-    int numberOfQubits;
+    private Complex[] amplitudes;
 
     public Register (String n, int numOfQubits){
         name = n;
         qubits = new ArrayList<>(numOfQubits);
         numberOfQubits = numOfQubits;
+        numberOfBases = (int) Math.pow(2.0, (double) numOfQubits);
+        amplitudes = new Complex[numberOfBases];
+
+        for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
+
         //initialize qubits
         for (int i = 0; i < numOfQubits; i++){
             qubits.add(new Qubit(i , name));
@@ -80,20 +87,20 @@ public class Register {
 //        Phase(targetQubit, Math.PI/4.0);
 //    }
 //
-//    public void Not(int targetQubit)
-//    {
-//        Complex swapVar;
-//
-//        for (int i = 0; i < numBases; i++)
-//        {
-//            if((i & (1<<targetQubit)) == 0)
-//            {
-//                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-//                amplitudes[i] = amplitudes[i^(1<<targetQubit)];
-//                amplitudes[i^(1<<targetQubit)] = swapVar;
-//            }
-//        }
-//    }
+    public void Not(int targetQubit)
+    {
+        Complex swapVar;
+
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if((i & (1<<targetQubit)) == 0)
+            {
+                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                amplitudes[i] = amplitudes[i^(1<<targetQubit)];
+                amplitudes[i^(1<<targetQubit)] = swapVar;
+            }
+        }
+    }
 //
 //    public void SquareRootNot(int targetQubit)
 //    {

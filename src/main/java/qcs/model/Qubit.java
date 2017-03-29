@@ -13,7 +13,10 @@
  Date: 03/18/2017
  ***************************************************/
 
+
 package qcs.model;
+
+import org.apache.commons.math3.complex.Complex;
 
 public class Qubit {
 
