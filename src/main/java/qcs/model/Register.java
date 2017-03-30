@@ -37,52 +37,52 @@ public class Register {
 
     }
 
-//    public void Hadamard(int targetQubit)
-//    {
-//        Complex alpha, beta;
-//
-//        for (int i = 0; i < numBases; i++)
-//        {
-//            if( (i & (1<<targetQubit)) == 0)
-//            {
-//                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-//                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
-//
-//                amplitudes[i] = alpha.add(beta).divide(Math.sqrt(2.0));
-//                amplitudes[i^(1<<targetQubit)] = alpha.subtract(beta).divide(Math.sqrt(2.0));
-//            }
-//        }
-//    }
-//
-//    public void Identity()
-//    {
-//        return;
-//    }
-//
-//    public void Phase(int targetQubit, double phase)
-//    {
-//        for (int i = 0; i < numBases; i++)
-//        {
-//            if( (i & (1<<targetQubit)) != 0)
-//                amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
-//        }
-//    }
-//
-//    public void InversePhase(int targetQubit, double phase)
-//    {
-//        for (int i = 0; i < numBases; i++)
-//        {
-//            if( (i & (1<<targetQubit)) != 0)
-//                amplitudes[i] = amplitudes[i].divide(Complex.I.multiply(phase).exp());
-//        }
-//    }
-//
-//    public void T(int targetQubit)
-//    {
-//        //Phase shit by Pi/4.
-//        Phase(targetQubit, Math.PI/4.0);
-//    }
-//
+    public void Hadamard(int targetQubit)
+    {
+        Complex alpha, beta;
+
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if( (i & (1<<targetQubit)) == 0)
+            {
+                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+                amplitudes[i] = alpha.add(beta).divide(Math.sqrt(2.0));
+                amplitudes[i^(1<<targetQubit)] = alpha.subtract(beta).divide(Math.sqrt(2.0));
+            }
+        }
+    }
+
+    public void Identity()
+    {
+        return;
+    }
+
+    public void Phase(int targetQubit, double phase)
+    {
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if( (i & (1<<targetQubit)) != 0)
+                amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+        }
+    }
+
+    public void InversePhase(int targetQubit, double phase)
+    {
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if( (i & (1<<targetQubit)) != 0)
+                amplitudes[i] = amplitudes[i].divide(Complex.I.multiply(phase).exp());
+        }
+    }
+
+    public void T(int targetQubit)
+    {
+        //Phase shit by Pi/4.
+        Phase(targetQubit, Math.PI/4.0);
+    }
+
     public void Not(int targetQubit)
     {
         Complex swapVar;
@@ -97,37 +97,37 @@ public class Register {
             }
         }
     }
-//
-//    public void SquareRootNot(int targetQubit)
-//    {
-//
-//    }
-//
-//    public void Y(int targetQubit)
-//    {
-//        Complex alpha, beta;
-//
-//        for (int i = 0; i < numBases; i++)
-//        {
-//            if( (i & (1<<targetQubit)) == 0)
-//            {
-//                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-//                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
-//
-//                amplitudes[i] = beta.multiply(Complex.I);
-//                amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate());
-//            }
-//        }
-//    }
-//
-//    public void Z(int targetQubit)
-//    {
-//        for (int i = 0; i < numBases; i++)
-//        {
-//            if((i ^ (1<<targetQubit)) != 0 )
-//                amplitudes[i] = amplitudes[i].negate();
-//        }
-//    }
+
+    public void SquareRootNot(int targetQubit)
+    {
+
+    }
+
+    public void Y(int targetQubit)
+    {
+        Complex alpha, beta;
+
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if( (i & (1<<targetQubit)) == 0)
+            {
+                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+                amplitudes[i] = beta.multiply(Complex.I);
+                amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate());
+            }
+        }
+    }
+
+    public void Z(int targetQubit)
+    {
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if((i ^ (1<<targetQubit)) != 0 )
+                amplitudes[i] = amplitudes[i].negate();
+        }
+    }
 
 
     final public String getName(){
