@@ -106,10 +106,6 @@
                                         <TreeItem expanded="true" value="Pauli-X (NOT)" />
                                         <TreeItem expanded="true" value="√X (Squareroot of NOT)" />
                                         <TreeItem expanded="true" value="Pauli-Y (real or/and imaginary)" />
-                                    </children>
-                                </TreeItem>
-                                <TreeItem fx:id="zLeaf" expanded="false" value="Pauli-Z ">
-                                    <children>
                                         <TreeItem expanded="true" value="Pauli-Z" />
                                     </children>
                                 </TreeItem>
