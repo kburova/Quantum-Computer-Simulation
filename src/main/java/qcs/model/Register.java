@@ -14,7 +14,6 @@
 package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
-import qcs.model.Qubit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,22 +22,19 @@ public class Register {
 
     private int numberOfQubits, numberOfBases;
     private String name;
-    private List< Qubit > qubits;
+    private int initialState;
     private Complex[] amplitudes;
 
     public Register (String n, int numOfQubits){
+        initialState = 0;
         name = n;
-        qubits = new ArrayList<>(numOfQubits);
         numberOfQubits = numOfQubits;
         numberOfBases = (int) Math.pow(2.0, (double) numOfQubits);
         amplitudes = new Complex[numberOfBases];
 
         for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
 
-        //initialize qubits
-        for (int i = 0; i < numOfQubits; i++){
-            qubits.add(new Qubit(i , name));
-        }
+
     }
 
 //    public void Hadamard(int targetQubit)
@@ -142,21 +138,15 @@ public class Register {
         return numberOfQubits;
     }
 
-    public void resetNumberOfQubits(int numOfQubits){
-        numberOfQubits = numOfQubits;
-        qubits = new ArrayList<>(numOfQubits);
-
-        //initialize qubits
-        for (int i = 0; i < numOfQubits; i++){
-            qubits.set(i, new Qubit(i , name)) ;
+    final public int getQubit(int index){
+        if ( (initialState & (1 << index)) == 0 ) return 0;
+        else return 1;
+    }
+    final public void setQubit(int index, int value){
+        if (value == 1){
+            initialState |= (1 << index);
+        }else{
+            initialState &= ~(1 << index);
         }
-    }
-    //this is used by our mainapp controller to draw the grid
-    final public List<Qubit> getQubits() {
-        return qubits;
-    }
-
-    public void calculateValue(){
-        // TODO: ??? Do we need to calculate anything here??
     }
 }

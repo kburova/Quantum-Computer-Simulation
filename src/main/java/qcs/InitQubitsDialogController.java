@@ -5,9 +5,9 @@
  that initializes qubits
 
  Created by: Ksenia Burova
- Parker Diamond
- Nick Kelley
- Chris Martin
+             Parker Diamond
+             Nick Kelley
+             Chris Martin
 
  Date: 03/22/2017
  ****************************************************/
@@ -24,7 +24,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
-import qcs.model.Qubit;
+import qcs.model.Register;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -57,22 +57,24 @@ public class InitQubitsDialogController implements Initializable{
         xCols = circuit.getX().getNumberOfQubits();
 
         /** add TextFields for Register X**/
-        for (int i = 1; i <= xCols; i++){
-            Qubit q = circuit.getX().getQubits().get(i-1);
+        for (int i = 0; i < xCols; i++){
+            Register x = circuit.getX();
+            final int index = i;
+            int q = x.getQubit(i);
             Button qbitVal = new Button();
-            qbitVal.setId("X"+ (i-1));
+            qbitVal.setId("X"+ i);
             qbitVal.prefWidth(50);
-            qbitVal.setText(Integer.toString( q.getValue() ));
+            qbitVal.setText(Integer.toString( q ));
             qbitVal.setOnAction(event -> {
-                if (q.getValue() == 1) {
+                if (q == 1) {
                     qbitVal.setText("0");
-                    q.setValue(0);
+                    x.setQubit( index, 0);
                 }else{
                     qbitVal.setText("1");
-                    q.setValue(1);
+                    x.setQubit( index, 1);
                 }
             });
-            gridPane.add(qbitVal, i ,2);
+            gridPane.add(qbitVal, i + 1  ,2);
         }
 
         /** add second label for Y, and its Text Fields for qubits if Y exists **/
@@ -84,22 +86,24 @@ public class InitQubitsDialogController implements Initializable{
                 labelY.prefWidth(85);
                 gridPane.add(labelY, 0, 3);
 
-                for (int i = 1; i <= yCols; i++) {
-                    Qubit q = circuit.getY().getQubits().get(i-1);
+                for (int i = 0; i < yCols; i++) {
+                    Register y = circuit.getY();
+                    final int index = i;
+                    int q = y.getQubit(i);
                     Button qbitVal = new Button();
-                    qbitVal.setId("Y"+ (i-1));
+                    qbitVal.setId("X"+ i);
                     qbitVal.prefWidth(50);
-                    qbitVal.setText(Integer.toString( q.getValue() ));
+                    qbitVal.setText(Integer.toString( q ));
                     qbitVal.setOnAction(event -> {
-                        if (q.getValue() == 1) {
+                        if (q == 1) {
                             qbitVal.setText("0");
-                            q.setValue(0);
+                            y.setQubit( index, 0);
                         }else{
                             qbitVal.setText("1");
-                            q.setValue(1);
+                            y.setQubit( index, 1);
                         }
                     });
-                    gridPane.add(qbitVal, i, 3);
+                    gridPane.add(qbitVal, i + 1, 3);
                 }
             }
         }
@@ -139,5 +143,4 @@ public class InitQubitsDialogController implements Initializable{
         dialogStage.close();
         return true;
     }
-
 }
