@@ -4,12 +4,11 @@
  **************************************/
 package qcs.model.operator;
 
-import qcs.model.Qubit;
 import qcs.model.Register;
 
 public class IdentityGate extends Operator {
 
-    public IdentityGate(Register r, Qubit q, String n){
+    public IdentityGate(Register r, int q, String n){
         super(r,q,n);
     }
 

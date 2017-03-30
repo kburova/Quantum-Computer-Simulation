@@ -4,14 +4,13 @@
  **************************************/
 package qcs.model.operator;
 
-import qcs.model.Qubit;
 import qcs.model.Register;
 
 public class CNOTGate extends Operator {
 
-    Qubit control;
+    int control;
 
-    public CNOTGate(Register r, Qubit q, String n, Qubit c){
+    public CNOTGate(Register r, int q, String n, int c){
         super(r,q,n);
         control = c;
     }

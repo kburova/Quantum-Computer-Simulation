@@ -4,12 +4,11 @@
  **************************************/
 package qcs.model.operator;
 
-import qcs.model.Qubit;
 import qcs.model.Register;
 
 public class PauliZGate extends Operator {
 
-    public PauliZGate(Register r, Qubit q, String n){
+    public PauliZGate(Register r, int q, String n){
         super(r,q,n);
 
     }
