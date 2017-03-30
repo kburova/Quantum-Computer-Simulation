@@ -31,9 +31,9 @@ public class Circuit {
 
     // init each register with number of qubits n each, and restart
     // operations (circuit)
-    public void initializeRegisters(Integer x, Integer y){
-        this.x = new Register("X", x);
-        this.y = new Register("Y", y);
+    public void initializeRegisters(int qubitsX, int qubitsY){
+        x = new Register("X", qubitsX);
+        y = new Register("Y", qubitsY);
         numberOfOperators = 0;
         operators = new LinkedList<>();
     }

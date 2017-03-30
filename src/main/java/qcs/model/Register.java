@@ -13,26 +13,122 @@
 
 package qcs.model;
 
-import qcs.model.Qubit;
+import org.apache.commons.math3.complex.Complex;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Register {
 
+    private int numberOfQubits, numberOfBases;
     private String name;
-   //private double coefficient;
-    private List< Qubit > qubits;
-    int numberOfQubits;
+    private int initialState;
+    private Complex[] amplitudes;
 
     public Register (String n, int numOfQubits){
+        initialState = 0;
         name = n;
-        qubits = new ArrayList<>(numOfQubits);
+        numberOfQubits = numOfQubits;
+        numberOfBases = (int) Math.pow(2.0, (double) numOfQubits);
+        amplitudes = new Complex[numberOfBases];
 
-        //initialize qubits
-        for (int i = 0; i < numOfQubits; i++){
-            qubits.add(new Qubit(i , name));
+        for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
+
+
+    }
+
+    public void Hadamard(int targetQubit)
+    {
+        Complex alpha, beta;
+
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if( (i & (1<<targetQubit)) == 0)
+            {
+                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+                amplitudes[i] = alpha.add(beta).divide(Math.sqrt(2.0));
+                amplitudes[i^(1<<targetQubit)] = alpha.subtract(beta).divide(Math.sqrt(2.0));
+            }
         }
     }
+
+    public void Identity()
+    {
+        return;
+    }
+
+    public void Phase(int targetQubit, double phase)
+    {
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if( (i & (1<<targetQubit)) != 0)
+                amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+        }
+    }
+
+    public void InversePhase(int targetQubit, double phase)
+    {
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if( (i & (1<<targetQubit)) != 0)
+                amplitudes[i] = amplitudes[i].divide(Complex.I.multiply(phase).exp());
+        }
+    }
+
+    public void T(int targetQubit)
+    {
+        //Phase shit by Pi/4.
+        Phase(targetQubit, Math.PI/4.0);
+    }
+
+    public void Not(int targetQubit)
+    {
+        Complex swapVar;
+
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if((i & (1<<targetQubit)) == 0)
+            {
+                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                amplitudes[i] = amplitudes[i^(1<<targetQubit)];
+                amplitudes[i^(1<<targetQubit)] = swapVar;
+            }
+        }
+    }
+
+    public void SquareRootNot(int targetQubit)
+    {
+
+    }
+
+    public void Y(int targetQubit)
+    {
+        Complex alpha, beta;
+
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if( (i & (1<<targetQubit)) == 0)
+            {
+                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+                amplitudes[i] = beta.multiply(Complex.I);
+                amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate());
+            }
+        }
+    }
+
+    public void Z(int targetQubit)
+    {
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if((i ^ (1<<targetQubit)) != 0 )
+                amplitudes[i] = amplitudes[i].negate();
+        }
+    }
+
 
     final public String getName(){
         return name;
@@ -42,24 +138,15 @@ public class Register {
         return numberOfQubits;
     }
 
-    public void resetNumberOfQubits(int numOfQubits){
-        numberOfQubits = numOfQubits;
-        qubits = new ArrayList<>(numOfQubits);
-
-        //initialize qubits
-        for (int i = 0; i < numOfQubits; i++){
-            qubits.set(i, new Qubit(i , name)) ;
+    final public int getQubit(int index){
+        if ( (initialState & (1 << index)) == 0 ) return 0;
+        else return 1;
+    }
+    final public void setQubit(int index, int value){
+        if (value == 1){
+            initialState |= (1 << index);
+        }else{
+            initialState &= ~(1 << index);
         }
-    }
-    //this is used by our mainapp controller to draw the grid
-    final public List<Qubit> getQubits() {
-        return qubits;
-    }
-
-    final public ArrayList<Qubit> getQubits(){
-        return qubits;
-    }
-    public void calculateValue(){
-        // TODO: ??? Do we need to calculate anything here??
     }
 }

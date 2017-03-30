@@ -5,17 +5,15 @@
 
  */
 package qcs.model.operator;
-
-import qcs.model.Qubit;
 import qcs.model.Register;
 
 public abstract class Operator {
 
     Register register;
-    Qubit target;
+    int target;
     String name;
 
-    public Operator (Register r, Qubit q, String n){
+    public Operator (Register r, int q, String n){
         register = r;
         target = q;
         name = n;

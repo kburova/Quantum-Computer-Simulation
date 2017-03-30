@@ -27,7 +27,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import qcs.model.Qubit;
+import qcs.model.Register;
 
 import static com.codepoetics.protonpack.StreamUtils.windowed;
 import static com.codepoetics.protonpack.StreamUtils.zipWithIndex;
@@ -105,7 +105,7 @@ public class MainAppController implements Initializable{
 
 
         //write x's
-        writeQbitsToCanvas(mainApp.getCircuit().getX().getQubits(), canvas, font_size
+        writeQbitsToCanvas(mainApp.getCircuit().getX(), canvas, font_size
                 , padding_top, line_spacing, font_size);
 
         //write horizontal line divide and labels
@@ -118,30 +118,28 @@ public class MainAppController implements Initializable{
         canvas.getGraphicsContext2D().fillText("y", x_axis, bottom_y_axis);
 
         //write y's
-        writeQbitsToCanvas(mainApp.getCircuit().getY().getQubits(), canvas, font_size
+        writeQbitsToCanvas(mainApp.getCircuit().getY(), canvas, font_size
                 , padding_top, line_spacing, line_y + font_size * 2);
     }
 
-    private void writeQbitsToCanvas(List<Qubit> qbits, Canvas canvas, Integer size
-            , Integer margin, Integer line_spacing, Integer padding_top) {
-        final Stream<String> qbit_stream = qbits.stream()
-                .map(qbit -> "|" + Integer.toString((int) Math.round(qbit.getState())) + ">");
+    private void writeQbitsToCanvas(Register r,
+                                    Canvas canvas,
+                                    Integer size,
+                                    Integer margin,
+                                    Integer line_spacing,
+                                    Integer padding_top) {
 
-        zipWithIndex(qbit_stream)
-                .forEach(qbit -> {
-                    final Integer y = Math.round(margin + padding_top + qbit.getIndex() * size * line_spacing);
-                    final Integer x = 0 + margin;
 
-                    //draw qbit
-                    canvas.getGraphicsContext2D()
-                            .fillText(qbit.getValue(), x, y);
+        for (int i = 0; i < r.getNumberOfQubits(); i++){
+            Integer y = Math.round(margin + padding_top + i * size * line_spacing);
+            Integer x = 0 + margin;
+            Integer font_width = size * 3;
 
-                    final Integer font_width = size * 3;
-
-                    //draw line
-                    canvas.getGraphicsContext2D()
-                            .strokeLine(x + font_width, y - size / 2, canvas.getWidth(), y - size / 2);
-                });
+            //draw qbit
+            canvas.getGraphicsContext2D().fillText("|"+Integer.toString(r.getQubit(i))+">", x, y);
+            //draw line
+            canvas.getGraphicsContext2D().strokeLine(x + font_width, y - size / 2, canvas.getWidth(), y - size / 2);
+        }
     }
 
     @FXML
@@ -154,6 +152,7 @@ public class MainAppController implements Initializable{
             alert.showAndWait();
         }else {
             boolean OkClicked = mainApp.showAddQubitValuesDialog();
+            initCircuitCanvas(circuitCanvas, (int) splitPane.getWidth());
         }
     }
 }
