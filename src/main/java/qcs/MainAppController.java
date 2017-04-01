@@ -178,4 +178,16 @@ public class MainAppController implements Initializable{
             show_circuit(circuitCanvas, (int) splitPane.getWidth());
         }
     }
+
+    @FXML
+    private void addUnaryGateDialog(){
+        if (mainApp.getCircuit().getX() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Circuit was not initialized with registers!!!");
+            alert.showAndWait();
+        }else {
+            boolean OkClicked = mainApp.showUnaryGateDialog();
+        }
+    }
 }

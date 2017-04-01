@@ -33,8 +33,7 @@ public class Register {
         amplitudes = new Complex[numberOfBases];
 
         for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
-
-
+        //set 0s to red color here
     }
 
     public void Hadamard(int targetQubit)
@@ -142,11 +141,18 @@ public class Register {
         if ( (initialState & (1 << index)) == 0 ) return 0;
         else return 1;
     }
-    final public void setQubit(int index, int value){
+    public void setQubit(int index, int value){
         if (value == 1){
             initialState |= (1 << index);
         }else{
             initialState &= ~(1 << index);
         }
     }
+
+    //update amplitudes according to newState
+    public void updateNewState(){
+        for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
+        amplitudes[initialState] = new Complex(1,0); //???
+    }
+
 }
