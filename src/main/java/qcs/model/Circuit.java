@@ -12,6 +12,7 @@
  ***************************************************/
 package qcs.model;
 
+import qcs.MainAppController;
 import qcs.model.operator.Operator;
 import qcs.model.Register;
 import java.util.LinkedList;
@@ -23,6 +24,7 @@ public class Circuit {
     private Register y;
     private int numberOfOperators; // equals to number of steps
     private List <Operator> operators;
+    private Integer canvas_line_index;
 
     // don't need constructor .... we have to re-init circuit using function if
     // button is clicked over and over again
@@ -36,6 +38,7 @@ public class Circuit {
         y = new Register("Y", qubitsY);
         numberOfOperators = 0;
         operators = new LinkedList<>();
+        canvas_line_index = 0;
     }
 
     final public Register getX(){ return x; }
@@ -44,41 +47,55 @@ public class Circuit {
 
     //Implement 1 step forward through "music" cord
     public void stepForward(){
-
+      if(canvas_line_index >= operators.size() - 1){
+          return;
+      } else {
+          canvas_line_index += 1;
+      }
     }
 
     //Implement 1 step back through "music" cord
     public void stepBack(){
+        if(canvas_line_index <= 0){
+            return;
+        } else {
+            canvas_line_index -= 1;
+        }
+    }
 
+    public Integer getCurrentFunctionIndex() {
+        return canvas_line_index;
     }
 
     //Return to the beginning of circuit, restart computation
     public void restart(){
-
+      canvas_line_index = 0;
     }
 
     //run through all steps
     public void runAll(){
-
+        if(operators.size() == 0)
+            canvas_line_index = 0;
+        else
+            canvas_line_index = operators.size() - 1;
     }
 
     //add gate/measurement
-    public void addOperator( Operator operator ){
-
+    public void insertOperator( Operator operator, Integer index){
+      operators.add(index, operator);
     }
 
     //remove gate/measurement
-    public void removeOperator(Operator o) {
-
+    public void removeOperator(Integer index) {
         //TODO: recalculate after deletion if nessacary, or restart circuit
-        if (operators.remove(o)) {
-            numberOfOperators--;
-        } else{
-            //operator wasn't found - error
-        }
+      try {
+          operators.remove(index);
+          numberOfOperators -= 1;
+      } catch(IndexOutOfBoundsException e) {
+          System.out.println("invalid attempt to delete out of index operator");
+      }
     }
 
-    //TODO: think if possible, to be able to delete from the middle
     //select gate/measurement
     public void selectOperator(){
 

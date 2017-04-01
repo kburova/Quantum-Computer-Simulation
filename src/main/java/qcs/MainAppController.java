@@ -17,20 +17,16 @@ import javafx.scene.canvas.Canvas;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import qcs.model.Register;
 
 import static com.codepoetics.protonpack.StreamUtils.windowed;
-import static com.codepoetics.protonpack.StreamUtils.zipWithIndex;
 
 public class MainAppController implements Initializable{
 
@@ -74,12 +70,38 @@ public class MainAppController implements Initializable{
     private void handleInitCircuitDialog() {
         boolean registersInitialized = mainApp.showAddRegistersDialog();
         if (registersInitialized){
-            initCircuitCanvas(circuitCanvas, (int) splitPane.getWidth());
+            show_circuit(circuitCanvas, (int) splitPane.getWidth());
         }
     }
 
-    /** Method initializes Canvas with lines for qubit operators **/
-    public void initCircuitCanvas(Canvas canvas, Integer parent_width) {
+
+    @FXML
+    private void stepForward() {
+        mainApp.getCircuit().stepForward();
+        show_circuit(circuitCanvas, (int) splitPane.getWidth());
+    }
+    @FXML
+    private void stepBack()
+    {
+        mainApp.getCircuit().stepBack();
+        show_circuit(circuitCanvas, (int) splitPane.getWidth());
+    }
+    @FXML
+    private void restart()
+    {
+        mainApp.getCircuit().restart();
+        show_circuit(circuitCanvas, (int) splitPane.getWidth());
+    }
+    @FXML
+    private void runAll()
+    {
+        mainApp.getCircuit().runAll();
+        show_circuit(circuitCanvas, (int) splitPane.getWidth());
+    }
+
+    //shows content of circuit to canvas
+    //not entirely sure why this is now in main should be owned by circuit controller
+    public void show_circuit(Canvas canvas, Integer parent_width) {
         //loads of precomputing to figure out the size of this new canvas
         final Integer font_size = (int) 13.0;
         final Integer x_count = mainApp.getCircuit().getX().getNumberOfQubits();
@@ -103,7 +125,6 @@ public class MainAppController implements Initializable{
         canvas.setWidth(width);
         canvas.setHeight(height);
 
-
         //write x's
         writeQbitsToCanvas(mainApp.getCircuit().getX(), canvas, font_size
                 , padding_top, line_spacing, font_size);
@@ -120,23 +141,25 @@ public class MainAppController implements Initializable{
         //write y's
         writeQbitsToCanvas(mainApp.getCircuit().getY(), canvas, font_size
                 , padding_top, line_spacing, line_y + font_size * 2);
+
+        //write vertical line representing which function is executing
+        Integer column_offset = font_size * 3 + padding_top;
+        final Integer column_position = column_offset + mainApp.getCircuit().getCurrentFunctionIndex() * function_size;
+        canvas.getGraphicsContext2D().strokeLine(column_position,0,column_position,height);
     }
 
     private void writeQbitsToCanvas(Register r,
-                                    Canvas canvas,
-                                    Integer size,
-                                    Integer margin,
-                                    Integer line_spacing,
-                                    Integer padding_top) {
-
+      Canvas canvas, Integer size, Integer margin,
+      Integer line_spacing, Integer padding_top) {
 
         for (int i = 0; i < r.getNumberOfQubits(); i++){
             Integer y = Math.round(margin + padding_top + i * size * line_spacing);
             Integer x = 0 + margin;
             Integer font_width = size * 3;
+            String qbit = Integer.toString(r.getQubit(i));
 
             //draw qbit
-            canvas.getGraphicsContext2D().fillText("|"+Integer.toString(r.getQubit(i))+">", x, y);
+            canvas.getGraphicsContext2D().fillText("|" + qbit + ">", x, y);
             //draw line
             canvas.getGraphicsContext2D().strokeLine(x + font_width, y - size / 2, canvas.getWidth(), y - size / 2);
         }
@@ -152,7 +175,7 @@ public class MainAppController implements Initializable{
             alert.showAndWait();
         }else {
             boolean OkClicked = mainApp.showAddQubitValuesDialog();
-            initCircuitCanvas(circuitCanvas, (int) splitPane.getWidth());
+            show_circuit(circuitCanvas, (int) splitPane.getWidth());
         }
     }
 }

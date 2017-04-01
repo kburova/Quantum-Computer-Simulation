@@ -45,22 +45,23 @@
                 </tooltip>
             </Button>
             <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
-            <Button fx:id="repeat">
+            <Button fx:id="repeat" onAction="#restart">
                 <tooltip>
                     <Tooltip text="Repeat" />
                 </tooltip>
             </Button>
-            <Button fx:id="back">
+            <Button fx:id="back" onAction="#stepBack">
                 <tooltip>
                     <Tooltip text="Step Back" />
                 </tooltip>
             </Button>
-            <Button fx:id="run">
+            <Button fx:id="run" onAction="#runAll">
                 <tooltip>
                     <Tooltip text="Complete Run" />
                 </tooltip>
             </Button>
-            <Button fx:id="next">
+
+            <Button fx:id="next" onAction="#stepForward">
                 <tooltip>
                     <Tooltip text="Step Forward" />
                 </tooltip>
