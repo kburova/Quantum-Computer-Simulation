@@ -14,9 +14,6 @@
 package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Register {
 
@@ -100,7 +97,20 @@ public class Register {
 
     public void SquareRootNot(int targetQubit)
     {
+        Complex alpha, beta;
 
+        for(int i=0;i<numberOfBases;i++)
+        {
+            if( (i & (1<<targetQubit)) == 0)
+            {
+                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+                amplitudes[i] = alpha.add(beta).add(alpha.multiply(Complex.I)).subtract(beta.multiply(Complex.I)).multiply(.5);
+                amplitudes[i^(1<<targetQubit)] = alpha.add(beta).add(beta.multiply(Complex.I)).subtract(alpha.multiply(Complex.I)).multiply(.5);
+            }
+
+        }
     }
 
     public void Y(int targetQubit)
