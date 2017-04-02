@@ -24,6 +24,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
+import qcs.model.operator.IdentityGate;
 
 public class UnaryGateController {
 
@@ -38,6 +39,13 @@ public class UnaryGateController {
 
     @FXML
     private TextField registerY;
+
+    //Nick added these when getting canvas fully implimented feel free to change
+    //you understand this class best
+    @FXML
+    private TextField qbit;
+    @FXML
+    private TextField insertionStep;
 
     @FXML
     private void initialize(){
@@ -64,6 +72,13 @@ public class UnaryGateController {
 
         if ( isInputValid() ){
             addClicked = true;
+
+            //Move this where you would like this is just minimalistic enough to test function drawing
+            Integer qbit_index = Integer.parseInt(qbit.getText());
+            Integer operator_index = Integer.parseInt(insertionStep.getText());
+            //when you finish add dialog new ... will need to be the operator
+            circuit.insertOperator(new IdentityGate(circuit.getX(),qbit_index,""), operator_index);
+
             dialogStage.close();
         }
     }

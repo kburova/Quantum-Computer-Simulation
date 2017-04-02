@@ -25,6 +25,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import qcs.model.Register;
+import qcs.model.operator.Operator;
 
 import static com.codepoetics.protonpack.StreamUtils.windowed;
 
@@ -100,7 +101,6 @@ public class MainAppController implements Initializable{
     }
 
     //shows content of circuit to canvas
-    //not entirely sure why this is now in main should be owned by circuit controller
     public void show_circuit(Canvas canvas, Integer parent_width) {
         //loads of precomputing to figure out the size of this new canvas
         final Integer font_size = (int) 13.0;
@@ -110,9 +110,12 @@ public class MainAppController implements Initializable{
         final Integer line_spacing = 2;
         final Integer line_y = x_count * font_size * line_spacing + font_size + padding_top;
 
+        //offset is location of first function to be written to
+        final Integer function_offset = font_size * 3 + padding_top * 2;
+
         //when functions are in change function_size to appropriate
         final Integer function_size = 45;
-        final Integer circuit_width = mainApp.getCircuit().getNumberOfOperators() * function_size;
+        final Integer circuit_width = function_offset + mainApp.getCircuit().getNumberOfOperators() * function_size;
         final Integer width = (parent_width > circuit_width) ? (parent_width) : (circuit_width);
 
         //the 3 accounts for the line between x and y
@@ -142,9 +145,10 @@ public class MainAppController implements Initializable{
         writeQbitsToCanvas(mainApp.getCircuit().getY(), canvas, font_size
                 , padding_top, line_spacing, line_y + font_size * 2);
 
+        //write operators to canvas
+
         //write vertical line representing which function is executing
-        Integer column_offset = font_size * 3 + padding_top;
-        final Integer column_position = column_offset + mainApp.getCircuit().getCurrentFunctionIndex() * function_size;
+        final Integer column_position = function_offset + mainApp.getCircuit().getCurrentFunctionIndex() * function_size;
         canvas.getGraphicsContext2D().strokeLine(column_position,0,column_position,height);
     }
 
@@ -188,6 +192,7 @@ public class MainAppController implements Initializable{
             alert.showAndWait();
         }else {
             boolean OkClicked = mainApp.showUnaryGateDialog();
+            show_circuit(circuitCanvas, (int) splitPane.getWidth());
         }
     }
 }

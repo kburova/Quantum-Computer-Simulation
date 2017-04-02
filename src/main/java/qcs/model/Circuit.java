@@ -12,19 +12,18 @@
  ***************************************************/
 package qcs.model;
 
-import qcs.MainAppController;
 import qcs.model.operator.Operator;
-import qcs.model.Register;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Circuit {
-
     private Register x;
     private Register y;
-    private int numberOfOperators; // equals to number of steps
-    private List <Operator> operators;
-    private Integer canvas_line_index;
+    private LinkedList<Operator> operators;
+
+    //right now just ties into visible line of execution
+    //will be integral for optimal quantum function running
+    //as to not redo unnecessary calculations
+    private Integer executing_operator_index;
 
     // don't need constructor .... we have to re-init circuit using function if
     // button is clicked over and over again
@@ -36,9 +35,8 @@ public class Circuit {
     public void initializeRegisters(int qubitsX, int qubitsY){
         x = new Register("X", qubitsX);
         y = new Register("Y", qubitsY);
-        numberOfOperators = 0;
         operators = new LinkedList<>();
-        canvas_line_index = 0;
+        executing_operator_index = 0;
     }
 
     final public Register getX(){ return x; }
@@ -46,53 +44,100 @@ public class Circuit {
     final public Register getY(){ return y; }
 
     //Implement 1 step forward through "music" cord
-    public void stepForward(){
-      if(canvas_line_index >= operators.size() - 1){
-          return;
-      } else {
-          canvas_line_index += 1;
-      }
+    public Integer stepForward()
+    {
+      //within step logic is where we will be running quantum ops
+      if(executing_operator_index != operators.size() - 1) executing_operator_index++;
+      return executing_operator_index;
     }
 
     //Implement 1 step back through "music" cord
-    public void stepBack(){
-        if(canvas_line_index <= 0){
-            return;
-        } else {
-            canvas_line_index -= 1;
-        }
+    public Integer stepBack()
+    {
+        if(executing_operator_index != 0) executing_operator_index--;
+        return executing_operator_index;
     }
 
     public Integer getCurrentFunctionIndex() {
-        return canvas_line_index;
+        return executing_operator_index;
     }
 
     //Return to the beginning of circuit, restart computation
     public void restart(){
-      canvas_line_index = 0;
+      executing_operator_index = 0;
     }
 
     //run through all steps
-    public void runAll(){
-        if(operators.size() == 0)
-            canvas_line_index = 0;
-        else
-            canvas_line_index = operators.size() - 1;
+    public Integer runAll()
+    {
+      //perhaps as an added bonus we could animate the stepping forward process
+      while(executing_operator_index != this.stepForward()){}
+      return executing_operator_index;
     }
 
     //add gate/measurement
-    public void insertOperator( Operator operator, Integer index){
-      operators.add(index, operator);
+    //TODO implement cache dump, save on recalculations if memory efficient
+    //it will be (we already hold a cache for displaying step by step output)
+    public void insertOperator(Operator operator, Integer index)
+    {
+      //appending to tail of list or insertion operation
+      if(index > operators.size() - 1)
+      {
+        operators.addLast(operator);
+      } else
+      {
+        //determines if cache flush necessary and currently executing operation
+        //needs to be rolled back
+        if(index <= executing_operator_index)
+        {
+          operators.add(index, operator);
+          executing_operator_index = index;
+          //flush cache to executing_operator_index - 1
+          //start calculating executing_operator_index
+        }
+        else
+        {
+          operators.add(index, operator);
+        }
+      }
     }
 
     //remove gate/measurement
+    //similar to insertOperation
+    //only difference is remove may push line of execution off list
+    //if that is the case sets it to 1 before the removal
     public void removeOperator(Integer index) {
-        //TODO: recalculate after deletion if nessacary, or restart circuit
-      try {
+      //pop from tail of list or delete from middle operation
+      if(index > operators.size() - 1)
+      {
+        operators.remove(operators.size() - 1);
+      }
+      else
+      {
+        //determines if cache flush necessary and currently executing operation
+        //needs to be rolled back
+        if(index <= executing_operator_index)
+        {
+          //super tricky because mutation
+          //the size check returns a different value  because remove
           operators.remove(index);
-          numberOfOperators -= 1;
-      } catch(IndexOutOfBoundsException e) {
-          System.out.println("invalid attempt to delete out of index operator");
+          if(index > operators.size() - 1)
+          {
+            executing_operator_index = index - 1;
+            //flush cache to executing_operator_index - 1
+            //done
+          }
+          else
+          {
+            executing_operator_index = index;
+            //flush cache to executing_operator_index - 1
+            //start calculating executing_operator_index
+          }
+        }
+        else
+        {
+          operators.remove(index);
+        }
       }
     }
 
@@ -102,7 +147,8 @@ public class Circuit {
     }
 
     final public int getNumberOfOperators(){
-        return numberOfOperators;
+        return operators.size();
     }
 
+    final public Integer getExecutingOperatorIndex() { return executing_operator_index; }
 }
