@@ -88,7 +88,7 @@ public class Register {
             if((i & (1<<targetQubit)) == 0)
             {
                 swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                amplitudes[i] = amplitudes[i^(1<<targetQubit)];
+                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
                 amplitudes[i^(1<<targetQubit)] = swapVar;
             }
         }
@@ -133,10 +133,48 @@ public class Register {
     {
         for (int i = 0; i < numberOfBases; i++)
         {
-            if((i ^ (1<<targetQubit)) != 0 )
+            if((i & (1<<targetQubit)) != 0 )
                 amplitudes[i] = amplitudes[i].negate();
         }
     }
+
+    // Binary Operators
+    public void CNOT(int controlQubit, int targetQubit)
+    {
+        Complex swapVar;
+
+        for(int i=0;i<numberOfBases;i++)
+        {
+            if((i & (1<<controlQubit)) != 0 && (i & (1<<targetQubit)) != 0)
+            {
+                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
+                amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
+            }
+        }
+    }
+
+    public void Rotate()
+    {
+        //Need to ask Dr. Maclennan about this one
+    }
+
+    public void Swap(int qubit1, int qubit2)
+    {
+        Complex swapVar;
+
+        for(int i=0;i<numberOfBases;i++)
+        {
+            if( ((i & (1<<qubit1))) != 0 && ((i & (1<<qubit2))) == 0)
+            {
+                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                amplitudes[i] = amplitudes[i^(1<<qubit1)^(1<<qubit2)].multiply(1);
+                amplitudes[i^(1<<qubit1)^(1<<qubit2)] = swapVar.multiply(1);
+            }
+        }
+    }
+
+    //Ternary Operators
 
 
     final public String getName(){
