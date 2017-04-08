@@ -146,10 +146,23 @@ public class MainAppController implements Initializable{
                 , padding_top, line_spacing, line_y + font_size * 2);
 
         //write operators to canvas
+        for (Operator operator : mainApp.getCircuit().getOperators())
+        {
+          if(operator.getRegister() == mainApp.getCircuit().getX())
+            writeOperatorToCanvas(canvas, operator, "x");
+          else
+            writeOperatorToCanvas(canvas, operator, "y");
+        }
 
         //write vertical line representing which function is executing
         final Integer column_position = function_offset + mainApp.getCircuit().getCurrentFunctionIndex() * function_size;
         canvas.getGraphicsContext2D().strokeLine(column_position,0,column_position,height);
+    }
+
+
+    private void writeOperatorToCanvas(Canvas canvas, Operator operator, String register_name)
+    {
+      //find way to infer operator and handle drawing
     }
 
     private void writeQbitsToCanvas(Register r,

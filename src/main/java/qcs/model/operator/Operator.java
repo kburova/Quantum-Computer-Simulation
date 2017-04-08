@@ -8,15 +8,21 @@ package qcs.model.operator;
 import qcs.model.Register;
 
 public abstract class Operator {
+    private Integer qbitIndexInRegister;
+    private String name;
+    private Register register;
 
-    Register register;
-    int target;
-    String name;
+    public Integer getQbitIndexInRegister() { return qbitIndexInRegister; }
+    public String getName() { return name; }
+    public Register getRegister() { return register; }
 
-    public Operator (Register r, int q, String n){
-        register = r;
-        target = q;
-        name = n;
+    //I am leaving the register passed here to prevent this change from causing issues
+    //in parker's branch
+    public Operator(Register r, Integer qbitIndexInRegister, String name)
+    {
+        this.register = r;
+        this.qbitIndexInRegister = qbitIndexInRegister;
+        this.name = name;
     }
 
     //operation specific to each gate/measurement

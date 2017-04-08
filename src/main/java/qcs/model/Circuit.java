@@ -13,6 +13,8 @@
 package qcs.model;
 
 import qcs.model.operator.Operator;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Circuit {
@@ -150,5 +152,5 @@ public class Circuit {
         return operators.size();
     }
 
-    final public Integer getExecutingOperatorIndex() { return executing_operator_index; }
+    final public LinkedList<Operator> getOperators() { return operators; }
 }
