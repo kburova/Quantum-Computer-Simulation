@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import com.sun.javafx.scene.control.skin.CustomColorDialog.ColorRectPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import com.sun.javafx.scene.control.skin.TabPaneSkin.TabControlButtons?>
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0"
             xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="qcs.MainAppController">
@@ -76,7 +77,7 @@
                     <Tooltip text="Set Qubits" />
                 </tooltip>
             </Button>
-            <Button fx:id="add">
+            <Button fx:id="add" onAction="#addUnaryGateDialog">
                 <tooltip>
                     <Tooltip text="Add Gate" />
                 </tooltip>
@@ -97,7 +98,7 @@
                             <children>
                                 <TreeItem fx:id="unaryLeaf" expanded="false" value="Unary Operators">
                                     <children>
-                                        <TreeItem expanded="true" value="H (Hadamard)">
+                                        <TreeItem expanded="true" value="H (Hadamard)" >
                                         </TreeItem>
                                         <TreeItem expanded="true" value="I (identity)" />
                                         <TreeItem expanded="true" value="S (phase gate)" />
@@ -121,7 +122,7 @@
                                         <TreeItem expanded="true" value="CCNOT (Toffoli)" />
                                     </children>
                                 </TreeItem>
-                                <TreeItem fx:id="varLeaf" expanded="false" value="Variable-qbit Operators">
+                                <TreeItem fx:id="varLeaf" expanded="false" value="Variable-qbit Operators" >
                                     <children>
                                         <TreeItem expanded="true" value="G (Grover Operation)" />
                                         <TreeItem expanded="true" value="W_n (Walsh-Hadamard)" />

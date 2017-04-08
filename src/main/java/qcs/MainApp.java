@@ -135,6 +135,32 @@ public class MainApp extends Application {
         }
     }
 
+    public boolean showUnaryGateDialog(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/UnaryGateDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Add Gate");
+
+            UnaryGateController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCircuit(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isAdd();
+
+        }catch(Exception e){
+            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     final public Stage getPrimaryStage(){
         return PrimaryStage;
     }
