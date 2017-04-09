@@ -1,6 +1,3 @@
-.label {
-}
-
 .button {
     -fx-pref-width: 30;
     -fx-pref-height: 30;
@@ -15,6 +12,11 @@
     -fx-background-color:  #5FB7BB;
 }
 
+#UnaryLabel, #BinaryLabel, #TernaryLabel, #VarLabel, #ErrorLabel, #MesLabel {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
 .tooltip {
     -fx-pref-width: inherit;
     -fx-background-radius: 6px;
@@ -55,8 +57,75 @@
 #values{
     -fx-background-image: url('../images/values.png');
 }
+/* Unary Buttons */
+#X{
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/NOT@2x.png');
+}
+#Y{
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/Y@2.png');
+}
+#Z{
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/Z@2x.png');
+}
+#Hadamard{
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/Hadimard@2x.png');
+}
+#Phase{
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/PhaseGate@2x.png');
+}
+#Identity{
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/Identity.png');
+}
+#Inverse{
+    -fx-background-color: darkseagreen;
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/InverseS@2x.png');
+}
+#SqRoot{
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/SqNOT@2x.png');
+}
+#Shift{
+    -fx-background-color: darkseagreen;
+    -fx-background-image: url('../images/transform-icons/unary-operators/T(Pi-div-8)@2x.png');
+}
+/* Binary Buttons*/
+#Swap{
+    -fx-background-color: lightsalmon;
+}
+#CNOT{
+    -fx-background-color: lightsalmon;
+}
+#Rotate{
+    -fx-background-color: lightsalmon;
+}
+/* Ternary */
 
+#Toffoli{
+    -fx-background-color: plum;
+}
+
+/** Variable Gates **/
+
+#Grover, #WalshHadamard, #QFT, #InvQFT, #General, #FunctionEval{
+    -fx-background-color: #ffd480;
+}
+
+#Error{
+    -fx-background-color: #ff4d4d;
+}
+
+#CompB, #SignB, #Trash {
+    -fx-background-color: deepskyblue;
+}
 #toolBar {
+
     -fx-background-color: lightgrey;
 }
 

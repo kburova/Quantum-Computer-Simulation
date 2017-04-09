@@ -167,5 +167,21 @@ public class MainAppController implements Initializable{
         }
     }
 
+    @FXML
+    public void addBinaryGateDialog(ActionEvent actionEvent) {
+    }
 
+    @FXML
+    public void addTernaryGateDialog(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void addVarGateDialog(ActionEvent actionEvent) {
+    }
+    @FXML
+    public void addErroDialog(ActionEvent actionEvent) {
+    }
+    @FXML
+    public void addMeasureDialog(ActionEvent actionEvent) {
+    }
 }
