@@ -2,13 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="370a2fea-2269-42f1-94cb-07f5f3440581" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/qcs/UnaryGateController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/view/UnaryGateDialog.fxml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/qcs/CanvasManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/UnaryGateController.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/UnaryGateController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/qcs/model/operator/Operator.java" afterPath="$PROJECT_DIR$/src/main/java/qcs/model/operator/Operator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/view/MainView.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/MainView.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/view/RootMenu.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/RootMenu.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/view/UnaryGateDialog.fxml" afterPath="$PROJECT_DIR$/src/main/resources/view/UnaryGateDialog.fxml" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,39 +32,25 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainAppController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainAppController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2220">
-              <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+            <state relative-caret-position="540">
+              <caret line="98" column="48" lean-forward="false" selection-start-line="98" selection-start-column="48" selection-end-line="98" selection-end-column="48" />
               <folding>
-                <element signature="n#!!doc" expanded="false" />
-                <element signature="e#1219#1220#0" expanded="false" />
-                <element signature="e#1262#1263#0" expanded="false" />
-                <element signature="e#1526#1527#0" expanded="false" />
-                <element signature="e#1569#1570#0" expanded="false" />
-                <element signature="e#1851#1852#0" expanded="false" />
-                <element signature="e#1889#1890#0" expanded="false" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#3348#3349#0" expanded="true" />
+                <element signature="e#3386#3387#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Register.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Register.java">
+      <file leaf-file-name="CanvasManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/qcs/CanvasManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2010">
-              <caret line="154" column="58" lean-forward="false" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainApp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainApp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="140" column="76" lean-forward="false" selection-start-line="140" selection-start-column="76" selection-end-line="140" selection-end-column="76" />
+            <state relative-caret-position="607">
+              <caret line="66" column="36" lean-forward="false" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,194 +58,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="View.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/glass/ui/View.java">
+      <file leaf-file-name="UnaryGateController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/qcs/UnaryGateController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7785">
-              <caret line="554" column="0" lean-forward="false" selection-start-line="554" selection-start-column="0" selection-end-line="554" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#45949#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#4371#4372#0" expanded="false" />
-                <element signature="e#4406#4407#0" expanded="false" />
-                <element signature="e#16770#16771#0" expanded="false" />
-                <element signature="e#16805#16806#0" expanded="false" />
-                <element signature="e#21892#21893#0" expanded="false" />
-                <element signature="e#21932#21933#0" expanded="false" />
-                <element signature="e#31609#31610#0" expanded="false" />
-                <element signature="e#31663#31664#0" expanded="false" />
-                <element signature="e#35679#35680#0" expanded="false" />
-                <element signature="e#35724#35725#0" expanded="false" />
-                <element signature="e#42664#42665#0" expanded="false" />
-                <element signature="e#42724#42725#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="645">
+              <caret line="83" column="13" lean-forward="true" selection-start-line="65" selection-start-column="11" selection-end-line="83" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GlassViewEventHandler.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3255">
-              <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#50890#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasicEventDispatcher.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/BasicEventDispatcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#2530#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#1849#1850#0" expanded="false" />
-                <element signature="e#1877#1878#0" expanded="false" />
-                <element signature="e#1932#1933#0" expanded="false" />
-                <element signature="e#1960#1961#0" expanded="false" />
-                <element signature="e#2025#2026#0" expanded="false" />
-                <element signature="e#2066#2067#0" expanded="false" />
-                <element signature="e#2127#2128#0" expanded="false" />
-                <element signature="e#2164#2165#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AccessController.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/java/security/AccessController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5175">
-              <caret line="370" column="31" lean-forward="false" selection-start-line="370" selection-start-column="31" selection-end-line="370" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#35954#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#24085#24248#0" expanded="false" />
-                <element signature="e#24247#24248#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QuantumToolkit.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/QuantumToolkit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3840">
-              <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#57980#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#9167#9168#0" expanded="false" />
-                <element signature="e#9208#9209#0" expanded="false" />
-                <element signature="e#10914#10915#0" expanded="false" />
-                <element signature="e#10952#10953#0" expanded="false" />
-                <element signature="e#15854#15855#0" expanded="false" />
-                <element signature="e#15894#15895#0" expanded="false" />
-                <element signature="e#16203#16204#0" expanded="false" />
-                <element signature="e#16251#16252#0" expanded="false" />
-                <element signature="e#17938#17939#0" expanded="false" />
-                <element signature="e#17991#17992#0" expanded="false" />
-                <element signature="e#18198#18199#0" expanded="false" />
-                <element signature="e#18225#18226#0" expanded="false" />
-                <element signature="e#20410#20411#0" expanded="false" />
-                <element signature="e#20445#20446#0" expanded="false" />
-                <element signature="e#22946#22947#0" expanded="false" />
-                <element signature="e#23004#23005#0" expanded="false" />
-                <element signature="e#23059#23060#0" expanded="false" />
-                <element signature="e#23118#23119#0" expanded="false" />
-                <element signature="e#23174#23175#0" expanded="false" />
-                <element signature="e#23237#23238#0" expanded="false" />
-                <element signature="e#23294#23295#0" expanded="false" />
-                <element signature="e#23358#23359#0" expanded="false" />
-                <element signature="e#23419#23420#0" expanded="false" />
-                <element signature="e#23485#23486#0" expanded="false" />
-                <element signature="e#23546#23547#0" expanded="false" />
-                <element signature="e#23612#23613#0" expanded="false" />
-                <element signature="e#23674#23675#0" expanded="false" />
-                <element signature="e#23744#23745#0" expanded="false" />
-                <element signature="e#23807#23808#0" expanded="false" />
-                <element signature="e#23878#23879#0" expanded="false" />
-                <element signature="e#23934#23935#0" expanded="false" />
-                <element signature="e#24003#24004#0" expanded="false" />
-                <element signature="e#24063#24064#0" expanded="false" />
-                <element signature="e#24128#24129#0" expanded="false" />
-                <element signature="e#24192#24193#0" expanded="false" />
-                <element signature="e#24261#24262#0" expanded="false" />
-                <element signature="e#24454#24613#0" expanded="false" />
-                <element signature="e#24612#24613#0" expanded="false" />
-                <element signature="e#25136#25137#0" expanded="false" />
-                <element signature="e#25181#25182#0" expanded="false" />
-                <element signature="e#25226#25227#0" expanded="false" />
-                <element signature="e#25268#25269#0" expanded="false" />
-                <element signature="e#25357#25358#0" expanded="false" />
-                <element signature="e#25394#25395#0" expanded="false" />
-                <element signature="e#25465#25466#0" expanded="false" />
-                <element signature="e#25499#25500#0" expanded="false" />
-                <element signature="e#25573#25574#0" expanded="false" />
-                <element signature="e#25624#25625#0" expanded="false" />
-                <element signature="e#29099#29100#0" expanded="false" />
-                <element signature="e#29132#29133#0" expanded="false" />
-                <element signature="e#29621#29622#0" expanded="false" />
-                <element signature="e#29665#29666#0" expanded="false" />
-                <element signature="e#36525#36526#0" expanded="false" />
-                <element signature="e#36549#36550#0" expanded="false" />
-                <element signature="e#39537#39538#0" expanded="false" />
-                <element signature="e#39585#39586#0" expanded="false" />
-                <element signature="e#39636#39637#0" expanded="false" />
-                <element signature="e#39708#39709#0" expanded="false" />
-                <element signature="e#42098#42099#0" expanded="false" />
-                <element signature="e#42154#42155#0" expanded="false" />
-                <element signature="e#43481#43482#0" expanded="false" />
-                <element signature="e#43553#43554#0" expanded="false" />
-                <element signature="e#44792#44793#0" expanded="false" />
-                <element signature="e#44825#44826#0" expanded="false" />
-                <element signature="e#44892#44893#0" expanded="false" />
-                <element signature="e#44919#44920#0" expanded="false" />
-                <element signature="e#46496#46497#0" expanded="false" />
-                <element signature="e#46538#46539#0" expanded="false" />
-                <element signature="e#47587#47588#0" expanded="false" />
-                <element signature="e#47622#47623#0" expanded="false" />
-                <element signature="e#57607#57608#0" expanded="false" />
-                <element signature="e#57654#57655#0" expanded="false" />
-                <element signature="e#57706#57707#0" expanded="false" />
-                <element signature="e#57753#57754#0" expanded="false" />
-                <element signature="e#57805#57806#0" expanded="false" />
-                <element signature="e#57852#57853#0" expanded="false" />
-                <element signature="e#57902#57903#0" expanded="false" />
-                <element signature="e#57976#57977#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainView.fxml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainView.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/view/MainView.fxml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="755">
-              <caret line="154" column="162" lean-forward="false" selection-start-line="154" selection-start-column="162" selection-end-line="154" selection-end-column="162" />
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="JavaFX-Scene-Builder">
             <state />
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UnaryGateDialog.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/view/UnaryGateDialog.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+            <state relative-caret-position="645">
+              <caret line="43" column="53" lean-forward="false" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
           </provider>
         </entry>
       </file>
@@ -289,8 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/qcs/CNOTGate.java" />
-        <option value="$PROJECT_DIR$/src/qcs/QCS.java" />
         <option value="$PROJECT_DIR$/src/qcs/qcs.fxml" />
         <option value="$PROJECT_DIR$/src/qcs/Controller.java" />
         <option value="$PROJECT_DIR$/src/qcs/model/PauliXGate.java" />
@@ -317,13 +138,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/view/InitQubitsDilog.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/RegistersController.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/QubitValuesDialogController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/model/Qubit.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/InitQubitsDialogController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/qcs/model/operator/Operator.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/model/operator/CNOTGate.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/model/operator/HadamardGate.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/model/operator/IdentityGate.java" />
@@ -335,11 +152,17 @@
         <option value="$PROJECT_DIR$/src/main/java/qcs/model/operator/PhaseShiftGate.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/model/operator/SqRootOfNOTGate.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/model/Register.java" />
-        <option value="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/qcs/UnaryGateController.java" />
         <option value="$PROJECT_DIR$/src/main/java/qcs/MainApp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/UnaryGateController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/RootMenu.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/view/UnaryGateDialog.fxml" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/model/operator/Operator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java" />
         <option value="$PROJECT_DIR$/src/main/resources/view/MainView.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/CanvasManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/qcs/MainAppController.java" />
       </list>
     </option>
   </component>
@@ -385,10 +208,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="148" />
-    <option name="y" value="34" />
-    <option name="width" value="2093" />
-    <option name="height" value="1296" />
+    <option name="x" value="1175" />
+    <option name="y" value="23" />
+    <option name="width" value="1351" />
+    <option name="height" value="1294" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -405,6 +228,40 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Production">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Quantum-Computer-Simulation">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="qcs">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="Quantum-Computer-Simulation">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -519,78 +376,14 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qcs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Quantum-Computer-Simulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Quantum-Computer-Simulation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope">
-        <subPane subId="Production">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Quantum-Computer-Simulation">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="qcs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="Quantum-Computer-Simulation">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -601,22 +394,22 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="SearchEverywhereHistoryKey" value="mave&#9;ACTION&#9;ActivateMavenProjectsToolWindow&#10;mav&#9;ACTION&#9;ActivateMavenProjectsToolWindow" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/target/classes/qcs" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/qcs/view" />
       <recent name="$PROJECT_DIR$/src/qcs/design" />
       <recent name="$PROJECT_DIR$/src/qcs/images" />
       <recent name="$PROJECT_DIR$/src/qcs" />
       <recent name="$PROJECT_DIR$/Background" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/target/classes/qcs" />
     </key>
   </component>
   <component name="RunManager" selected="Application.QCS">
@@ -1101,11 +894,12 @@
       <workItem from="1490840061931" duration="1026000" />
       <workItem from="1490841305561" duration="4440000" />
       <workItem from="1490846329186" duration="1125000" />
+      <workItem from="1491678010428" duration="43032000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="151709000" />
+    <option name="totallyTimeSpent" value="194741000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1117,32 +911,32 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="148" y="34" width="2093" height="1296" extended-state="0" />
+    <frame x="1175" y="23" width="1351" height="1294" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32895815" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3265625" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3256803" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890624" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.010186757" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21003401" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15943442" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21543163" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24939074" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34719864" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3469388" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1227,16 +1021,22 @@
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java</url>
-          <line>166</line>
-          <properties />
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/qcs/MainApp.java</url>
           <line>139</line>
           <properties />
           <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/qcs/CanvasManager.java</url>
+          <line>30</line>
+          <properties />
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/qcs/CanvasManager.java</url>
+          <line>44</line>
+          <properties />
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/qcs/model/Circuit.java</url>
@@ -1245,7 +1045,7 @@
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="27" />
+      <option name="time" value="35" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1254,12 +1054,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/event/CompositeEventHandler.java" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/sun/reflect/DelegatingMethodAccessorImpl.class" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/scene/control/behavior/ButtonBehavior.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/scene/control/skin/BehaviorSkinBase.java" />
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/FXMLLoader.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/model/Circuit.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/model/Register.java" />
     <entry file="file://$PROJECT_DIR$/src/qcs/model/Qubit.java" />
@@ -1286,37 +1081,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/main1.iml" />
     <entry file="file://$PROJECT_DIR$/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/QIO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-615">
-          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/Initializable.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/javafx-src.zip!/javafx/event/EventHandler.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="24" column="106" lean-forward="false" selection-start-line="24" selection-start-column="106" selection-end-line="24" selection-end-column="106" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="34" column="21" lean-forward="false" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Qubit.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/operator/CNOTGate.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1347,17 +1113,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/operator/PhaseGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="36" lean-forward="false" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
-          <folding>
-            <element signature="e#256#257#0" expanded="false" />
-            <element signature="e#284#285#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/operator/PauliZGate.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1372,27 +1127,6 @@
           <folding>
             <element signature="e#261#262#0" expanded="false" />
             <element signature="e#289#290#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/operator/PauliXGate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="10" column="37" lean-forward="false" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding>
-            <element signature="e#266#267#0" expanded="false" />
-            <element signature="e#294#295#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/operator/Operator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1430,59 +1164,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitQubitsDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="5" lean-forward="true" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/glass/ui/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7785">
           <caret line="554" column="0" lean-forward="false" selection-start-line="554" selection-start-column="0" selection-end-line="554" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#45949#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#4371#4372#0" expanded="false" />
-            <element signature="e#4406#4407#0" expanded="false" />
-            <element signature="e#16770#16771#0" expanded="false" />
-            <element signature="e#16805#16806#0" expanded="false" />
-            <element signature="e#21892#21893#0" expanded="false" />
-            <element signature="e#21932#21933#0" expanded="false" />
-            <element signature="e#31609#31610#0" expanded="false" />
-            <element signature="e#31663#31664#0" expanded="false" />
-            <element signature="e#35679#35680#0" expanded="false" />
-            <element signature="e#35724#35725#0" expanded="false" />
-            <element signature="e#42664#42665#0" expanded="false" />
-            <element signature="e#42724#42725#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1490,112 +1176,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3840">
           <caret line="388" column="0" lean-forward="false" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#57980#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#9167#9168#0" expanded="false" />
-            <element signature="e#9208#9209#0" expanded="false" />
-            <element signature="e#10914#10915#0" expanded="false" />
-            <element signature="e#10952#10953#0" expanded="false" />
-            <element signature="e#15854#15855#0" expanded="false" />
-            <element signature="e#15894#15895#0" expanded="false" />
-            <element signature="e#16203#16204#0" expanded="false" />
-            <element signature="e#16251#16252#0" expanded="false" />
-            <element signature="e#17938#17939#0" expanded="false" />
-            <element signature="e#17991#17992#0" expanded="false" />
-            <element signature="e#18198#18199#0" expanded="false" />
-            <element signature="e#18225#18226#0" expanded="false" />
-            <element signature="e#20410#20411#0" expanded="false" />
-            <element signature="e#20445#20446#0" expanded="false" />
-            <element signature="e#22946#22947#0" expanded="false" />
-            <element signature="e#23004#23005#0" expanded="false" />
-            <element signature="e#23059#23060#0" expanded="false" />
-            <element signature="e#23118#23119#0" expanded="false" />
-            <element signature="e#23174#23175#0" expanded="false" />
-            <element signature="e#23237#23238#0" expanded="false" />
-            <element signature="e#23294#23295#0" expanded="false" />
-            <element signature="e#23358#23359#0" expanded="false" />
-            <element signature="e#23419#23420#0" expanded="false" />
-            <element signature="e#23485#23486#0" expanded="false" />
-            <element signature="e#23546#23547#0" expanded="false" />
-            <element signature="e#23612#23613#0" expanded="false" />
-            <element signature="e#23674#23675#0" expanded="false" />
-            <element signature="e#23744#23745#0" expanded="false" />
-            <element signature="e#23807#23808#0" expanded="false" />
-            <element signature="e#23878#23879#0" expanded="false" />
-            <element signature="e#23934#23935#0" expanded="false" />
-            <element signature="e#24003#24004#0" expanded="false" />
-            <element signature="e#24063#24064#0" expanded="false" />
-            <element signature="e#24128#24129#0" expanded="false" />
-            <element signature="e#24192#24193#0" expanded="false" />
-            <element signature="e#24261#24262#0" expanded="false" />
-            <element signature="e#24454#24613#0" expanded="false" />
-            <element signature="e#24612#24613#0" expanded="false" />
-            <element signature="e#25136#25137#0" expanded="false" />
-            <element signature="e#25181#25182#0" expanded="false" />
-            <element signature="e#25226#25227#0" expanded="false" />
-            <element signature="e#25268#25269#0" expanded="false" />
-            <element signature="e#25357#25358#0" expanded="false" />
-            <element signature="e#25394#25395#0" expanded="false" />
-            <element signature="e#25465#25466#0" expanded="false" />
-            <element signature="e#25499#25500#0" expanded="false" />
-            <element signature="e#25573#25574#0" expanded="false" />
-            <element signature="e#25624#25625#0" expanded="false" />
-            <element signature="e#29099#29100#0" expanded="false" />
-            <element signature="e#29132#29133#0" expanded="false" />
-            <element signature="e#29621#29622#0" expanded="false" />
-            <element signature="e#29665#29666#0" expanded="false" />
-            <element signature="e#36525#36526#0" expanded="false" />
-            <element signature="e#36549#36550#0" expanded="false" />
-            <element signature="e#39537#39538#0" expanded="false" />
-            <element signature="e#39585#39586#0" expanded="false" />
-            <element signature="e#39636#39637#0" expanded="false" />
-            <element signature="e#39708#39709#0" expanded="false" />
-            <element signature="e#42098#42099#0" expanded="false" />
-            <element signature="e#42154#42155#0" expanded="false" />
-            <element signature="e#43481#43482#0" expanded="false" />
-            <element signature="e#43553#43554#0" expanded="false" />
-            <element signature="e#44792#44793#0" expanded="false" />
-            <element signature="e#44825#44826#0" expanded="false" />
-            <element signature="e#44892#44893#0" expanded="false" />
-            <element signature="e#44919#44920#0" expanded="false" />
-            <element signature="e#46496#46497#0" expanded="false" />
-            <element signature="e#46538#46539#0" expanded="false" />
-            <element signature="e#47587#47588#0" expanded="false" />
-            <element signature="e#47622#47623#0" expanded="false" />
-            <element signature="e#57607#57608#0" expanded="false" />
-            <element signature="e#57654#57655#0" expanded="false" />
-            <element signature="e#57706#57707#0" expanded="false" />
-            <element signature="e#57753#57754#0" expanded="false" />
-            <element signature="e#57805#57806#0" expanded="false" />
-            <element signature="e#57852#57853#0" expanded="false" />
-            <element signature="e#57902#57903#0" expanded="false" />
-            <element signature="e#57976#57977#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/java/security/AccessController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5175">
+        <state relative-caret-position="1095">
           <caret line="370" column="31" lean-forward="false" selection-start-line="370" selection-start-column="31" selection-end-line="370" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#35954#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#24085#24248#0" expanded="false" />
-            <element signature="e#24247#24248#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3255">
-          <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#50890#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1603,91 +1192,226 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/tk/quantum/GlassViewEventHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1095">
+          <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1095">
+          <caret line="154" column="24" lean-forward="false" selection-start-line="154" selection-start-column="24" selection-end-line="154" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/java/awt/event/ActionEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="59" column="13" lean-forward="false" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/operator/PauliXGate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="8" column="37" lean-forward="false" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
           <folding>
-            <element signature="e#0#2530#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1849#1850#0" expanded="false" />
-            <element signature="e#1877#1878#0" expanded="false" />
-            <element signature="e#1932#1933#0" expanded="false" />
-            <element signature="e#1960#1961#0" expanded="false" />
-            <element signature="e#2025#2026#0" expanded="false" />
-            <element signature="e#2066#2067#0" expanded="false" />
-            <element signature="e#2127#2128#0" expanded="false" />
-            <element signature="e#2164#2165#0" expanded="false" />
+            <element signature="e#266#267#0" expanded="false" />
+            <element signature="e#294#295#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/operator/PhaseGate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="166" column="0" lean-forward="false" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+        <state relative-caret-position="105">
+          <caret line="10" column="36" lean-forward="false" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
           <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#1219#1220#0" expanded="false" />
-            <element signature="e#1262#1263#0" expanded="false" />
-            <element signature="e#1526#1527#0" expanded="false" />
-            <element signature="e#1569#1570#0" expanded="false" />
-            <element signature="e#1851#1852#0" expanded="false" />
-            <element signature="e#1889#1890#0" expanded="false" />
+            <element signature="e#256#257#0" expanded="false" />
+            <element signature="e#284#285#0" expanded="false" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/QIO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitCircuitDialog.fxml">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="87" lean-forward="false" selection-start-line="12" selection-start-column="87" selection-end-line="12" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/InitQubitsDialog.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="89" lean-forward="false" selection-start-line="9" selection-start-column="89" selection-end-line="9" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/UnaryGateDialog.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="87" lean-forward="false" selection-start-line="13" selection-start-column="87" selection-end-line="13" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/RootMenu.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="174" lean-forward="false" selection-start-line="10" selection-start-column="174" selection-end-line="10" selection-end-column="174" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitQubitsDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/qcs/UnaryGateController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="844">
-          <caret line="65" column="12" lean-forward="false" selection-start-line="65" selection-start-column="12" selection-end-line="65" selection-end-column="12" />
+        <state relative-caret-position="645">
+          <caret line="83" column="13" lean-forward="true" selection-start-line="65" selection-start-column="11" selection-end-line="83" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/operator/Operator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="14" />
           <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1545#1546#0" expanded="false" />
-            <element signature="e#1572#1573#0" expanded="false" />
+            <element signature="e#564#565#0" expanded="true" />
+            <element signature="e#593#594#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Circuit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+          <folding>
+            <element signature="e#1800#1801#0" expanded="true" />
+            <element signature="e#1843#1844#0" expanded="true" />
+            <element signature="e#1883#1884#0" expanded="true" />
+            <element signature="e#1939#1940#0" expanded="true" />
+            <element signature="e#1973#1974#0" expanded="true" />
+            <element signature="e#2007#2008#0" expanded="true" />
+            <element signature="e#2050#2051#0" expanded="true" />
+            <element signature="e#2084#2085#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/MainView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="43" column="53" lean-forward="false" selection-start-line="43" selection-start-column="53" selection-end-line="43" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="2234" column="17" lean-forward="false" selection-start-line="2234" selection-start-column="17" selection-end-line="2234" selection-end-column="17" />
+          <folding>
+            <element signature="e#83892#83893#0" expanded="true" />
+            <element signature="e#83928#83929#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/InitCircuitDialogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="140" column="76" lean-forward="false" selection-start-line="140" selection-start-column="76" selection-end-line="140" selection-end-column="76" />
+        <state relative-caret-position="457">
+          <caret line="92" column="31" lean-forward="false" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/CanvasManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="607">
+          <caret line="66" column="36" lean-forward="false" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/view/UnaryGateDialog.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/MainAppController.java">
       <provider editor-type-id="JavaFX-Scene-Builder">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/qcs/model/Register.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2010">
-          <caret line="154" column="58" lean-forward="false" selection-start-line="154" selection-start-column="58" selection-end-line="154" selection-end-column="58" />
-          <folding />
+        <state relative-caret-position="540">
+          <caret line="98" column="48" lean-forward="false" selection-start-line="98" selection-start-column="48" selection-end-line="98" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3348#3349#0" expanded="true" />
+            <element signature="e#3386#3387#0" expanded="true" />
+          </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/view/MainView.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="755">
-          <caret line="154" column="162" lean-forward="false" selection-start-line="154" selection-start-column="162" selection-end-line="154" selection-end-column="162" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
       </provider>
     </entry>
   </component>
@@ -1699,7 +1423,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.27701148" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -1711,7 +1435,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.27701148" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -1722,7 +1446,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.27701148" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -1734,7 +1458,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.27701148" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -1747,6 +1471,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1754,6 +1479,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>Maven: com.codepoetics:protonpack:1.13</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

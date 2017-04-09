@@ -15,38 +15,37 @@
 package qcs;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
+import qcs.model.operator.*;
 
 public class UnaryGateController {
 
     private Stage dialogStage;
     private  boolean addClicked = false;
     private Circuit circuit;
-    int rX;
-    int rY;
+    String id;
+    Register targetRegister;
+    int qubit;
 
     @FXML
-    private TextField registerX;
+    private TextField target;
 
     @FXML
-    private TextField registerY;
+    private RadioButton x;
 
     @FXML
-    private void initialize(){
+    private RadioButton y;
 
-    }
     //bind stage with controller
-    public void setDialogStage(Stage dialogStage){
+    public void setDialogStage(Stage dialogStage, String id){
         this.dialogStage = dialogStage;
         this.dialogStage.setResizable(false);
+        this.id = id;
     }
 
     //set registers here???
@@ -61,9 +60,28 @@ public class UnaryGateController {
 
     @FXML
     private void handleAdd(){
-
         if ( isInputValid() ){
+            System.out.println(id);
             addClicked = true;
+            if (id.equals("X")){
+                circuit.addOperator(new PauliXGate(targetRegister,qubit, id));
+            }else if (id.equals("Y")){
+                circuit.addOperator(new PauliYGate(targetRegister,qubit, id));
+            }else  if (id.equals("Z")){
+                circuit.addOperator(new PauliZGate(targetRegister,qubit, id));
+            }else if (id.equals("SqRoot")){
+                circuit.addOperator(new SqRootOfNOTGate( targetRegister,qubit, id));
+            }else if (id.equals("Hadamard")){
+                circuit.addOperator(new HadamardGate( targetRegister,qubit, id));
+            }else if (id.equals("Identity")){
+                circuit.addOperator(new IdentityGate(targetRegister,qubit, id));
+            }else if (id.equals("Inverse")){
+                circuit.addOperator(new InversePhaseGate(targetRegister,qubit, id));
+            }else if (id.equals("Phase")){
+                circuit.addOperator(new PhaseGate(targetRegister,qubit, id));
+            }else if (id.equals("Shift")) {
+                circuit.addOperator(new PhaseShiftGate(targetRegister, qubit, id));
+            }
             dialogStage.close();
         }
     }
@@ -74,6 +92,37 @@ public class UnaryGateController {
     }
 
     private boolean isInputValid(){
-        return true;
+        String errorMessage = "";
+
+        if ( x.isSelected() )
+            targetRegister = circuit.getX();
+        else if (y.isSelected()){
+            targetRegister = circuit.getY();
+        }
+
+        String value = target.getText();
+        System.out.println(value);
+
+        try{
+            qubit = Integer.parseInt(value);
+        }
+        catch(Exception e){
+            errorMessage = "Enter an Integer value ";
+        }
+
+        if (qubit < 0 || qubit >= targetRegister.getNumberOfQubits()){
+            errorMessage = "Enter valid qubit index";
+        }
+
+        if (errorMessage.length() == 0){
+            return true;
+        }else{
+            //alert if information was entered wrong
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(errorMessage);
+            alert.setTitle("Error Dialog");
+            alert.showAndWait();
+            return false;
+        }
     }
 }

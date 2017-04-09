@@ -22,4 +22,11 @@ public abstract class Operator {
     //operation specific to each gate/measurement
     public abstract void doOperation();
 
+    public String getName() {
+        return name;
+    }
+
+    public int getTarget() {
+        return target;
+    }
 }

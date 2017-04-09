@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="140.0"  xmlns="http://javafx.com/javafx/8.0.112"
+<AnchorPane fx:id="anchorPane" prefHeight="140.0"  xmlns="http://javafx.com/javafx/8.0.66"
             xmlns:fx="http://javafx.com/fxml/1"
             >
     <children>

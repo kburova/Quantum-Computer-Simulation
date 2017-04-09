@@ -21,8 +21,8 @@ public class Circuit {
 
     private Register x;
     private Register y;
-    private int numberOfOperators; // equals to number of steps
     private List <Operator> operators;
+    int currentStep = 0;
 
     // don't need constructor .... we have to re-init circuit using function if
     // button is clicked over and over again
@@ -34,7 +34,7 @@ public class Circuit {
     public void initializeRegisters(int qubitsX, int qubitsY){
         x = new Register("X", qubitsX);
         y = new Register("Y", qubitsY);
-        numberOfOperators = 0;
+        currentStep = 0;
         operators = new LinkedList<>();
     }
 
@@ -42,37 +42,17 @@ public class Circuit {
 
     final public Register getY(){ return y; }
 
-    //Implement 1 step forward through "music" cord
-    public void stepForward(){
-
-    }
-
-    //Implement 1 step back through "music" cord
-    public void stepBack(){
-
-    }
-
-    //Return to the beginning of circuit, restart computation
-    public void restart(){
-
-    }
-
-    //run through all steps
-    public void runAll(){
-
-    }
 
     //add gate/measurement
     public void addOperator( Operator operator ){
-
+        operators.add(operator);
     }
 
     //remove gate/measurement
-    public void removeOperator(Operator o) {
+    public void removeOperator(Operator operator) {
 
         //TODO: recalculate after deletion if nessacary, or restart circuit
-        if (operators.remove(o)) {
-            numberOfOperators--;
+        if ( operators.remove(operator) ) {
         } else{
             //operator wasn't found - error
         }
@@ -85,7 +65,22 @@ public class Circuit {
     }
 
     final public int getNumberOfOperators(){
-        return numberOfOperators;
+        return operators.size();
     }
 
+    public Operator getOperator(int index) {
+        return operators.get(index);
+    }
+
+    public Operator getLastOperator(){
+        return operators.get(operators.size()-1);
+    }
+
+    public int getCurrentStep(){
+        return currentStep;
+    }
+
+    public void setCurrentStep(int step){
+        currentStep = step;
+    }
 }

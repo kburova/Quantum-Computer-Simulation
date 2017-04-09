@@ -135,7 +135,7 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showUnaryGateDialog(){
+    public boolean showUnaryGateDialog(String id){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/UnaryGateDialog.fxml"));
@@ -147,7 +147,7 @@ public class MainApp extends Application {
             dialogStage.setTitle("Add Gate");
 
             UnaryGateController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
+            controller.setDialogStage(dialogStage, id);
             controller.setCircuit(circuit);
 
             dialogStage.showAndWait();
