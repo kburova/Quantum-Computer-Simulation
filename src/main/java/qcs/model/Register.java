@@ -33,7 +33,12 @@ public class Register {
         //set 0s to red color here
     }
 
-    public void Hadamard(int targetQubit)
+    public Complex getQbitValue(int qbit)
+    {
+        return amplitudes[qbit];
+    }
+
+    public Complex[] Hadamard(int targetQubit)
     {
         Complex alpha, beta;
 
@@ -48,6 +53,8 @@ public class Register {
                 amplitudes[i^(1<<targetQubit)] = alpha.subtract(beta).divide(Math.sqrt(2.0));
             }
         }
+
+        return amplitudes;
     }
 
     public void Identity()
@@ -81,15 +88,40 @@ public class Register {
 
     public void Not(int targetQubit)
     {
+        amplitudes = Not_Qubit(amplitudes, numberOfBases, targetQubit);
+    }
+
+    private Complex[] Not_Qubit(Complex[] amplitudes, int numberOfBases
+      , int targetQubit)
+    {
+        for (int i = 0; i < numberOfBases; i++)
+            amplitudes = notHelpful(amplitudes, targetQubit, i);
+
+        return amplitudes;
+    }
+
+    private Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
+    {
+        if((i & (1<<targetQubit)) == 0)
+        {
+            Complex swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+            amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
+            amplitudes[i^(1<<targetQubit)] = swapVar;
+        }
+
+        return amplitudes;
+    }
+
+    // Binary Operators
+    public void CNOT(int controlQubit, int targetQubit)
+    {
         Complex swapVar;
 
-        for (int i = 0; i < numberOfBases; i++)
+        for(int i=0;i<numberOfBases;i++)
         {
-            if((i & (1<<targetQubit)) == 0)
+            if((i & (1<<controlQubit)) != 0)
             {
-                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
-                amplitudes[i^(1<<targetQubit)] = swapVar;
+              amplitudes = notHelpful(amplitudes, targetQubit, i);
             }
         }
     }
@@ -135,22 +167,6 @@ public class Register {
         {
             if((i & (1<<targetQubit)) != 0 )
                 amplitudes[i] = amplitudes[i].negate();
-        }
-    }
-
-    // Binary Operators
-    public void CNOT(int controlQubit, int targetQubit)
-    {
-        Complex swapVar;
-
-        for(int i=0;i<numberOfBases;i++)
-        {
-            if((i & (1<<controlQubit)) != 0 && (i & (1<<targetQubit)) != 0)
-            {
-                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
-                amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
-            }
         }
     }
 
