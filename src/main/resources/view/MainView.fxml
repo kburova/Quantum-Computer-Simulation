@@ -207,7 +207,7 @@
                   </tooltip>
               </Button>
               <Label fx:id="ErrorLabel" text="Error Operators" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-              <Button fx:id="Error" onAction="#addErroDialog" userData="err" GridPane.columnIndex="0" GridPane.rowIndex="12">
+              <Button fx:id="Error" onAction="#addErrorDialog" userData="err" GridPane.columnIndex="0" GridPane.rowIndex="12">
                   <tooltip>
                       <Tooltip text="Error" />
                   </tooltip>

@@ -186,6 +186,31 @@ public class MainApp extends Application {
             return false;
         }
     }
+    public boolean showTernaryGateDialog(String id){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/TernaryGateDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Add Gate");
+
+            TernaryGateController controller = loader.getController();
+            controller.setDialogStage(dialogStage, id);
+            controller.setCircuit(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isAdd();
+
+        }catch(Exception e){
+            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     final public Stage getPrimaryStage(){
         return PrimaryStage;

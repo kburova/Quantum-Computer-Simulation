@@ -255,6 +255,7 @@ public class CanvasManager {
 
         Line connect = new Line( startX + 15, gateSize*targetQ + beginLineY, startX + 15,gateSize*controlQ + beginLineY );
         connect.setStroke(Color.LIGHTSALMON);
+        connect.setStrokeWidth(3);
         g.getChildren().add(connect);
 
         if (name.equals("Swap")) {
@@ -270,7 +271,7 @@ public class CanvasManager {
             g.getChildren().addAll(tt,tc);
         }else{
             /** set circle/square **/
-            Circle c = new Circle(startX + 15, gateSize*controlQ + beginLineY , 5);
+            Circle c = new Circle(startX + 15, gateSize*controlQ + beginLineY , 6);
             c.setFill(Color.LIGHTSALMON);
             g.getChildren().add(c);
 
@@ -278,8 +279,12 @@ public class CanvasManager {
                 //tag = "X";
                 Circle r = new Circle(startX + 15, gateSize*targetQ + beginLineY , 13);
                 r.setFill(Color.LIGHTSALMON);
-                Line h = new Line(startX + 4, gateSize*targetQ + beginLineY , startX+30 - 4 , gateSize*targetQ + beginLineY);
-                Line v = new Line(startX + 15 , gateSize*targetQ + beginLineY - 15 + 4, startX+15 , gateSize*targetQ + beginLineY + 15 - 4);
+                Line h = new Line(startX + 6, gateSize*targetQ + beginLineY , startX+30 - 6 , gateSize*targetQ + beginLineY);
+                h.setStroke(Color.WHITE);
+                h.setStrokeWidth(2);
+                Line v = new Line(startX + 15 , gateSize*targetQ + beginLineY - 15 + 6, startX+15 , gateSize*targetQ + beginLineY + 15 - 6);
+                v.setStroke(Color.WHITE);
+                v.setStrokeWidth(2);
                 g.getChildren().addAll(r,h,v);
             }else if (name.equals("Rotate")){
                 tag = "Rx";
@@ -292,6 +297,73 @@ public class CanvasManager {
             }
         }
 
+
+        circuitCanvas.getChildren().add(g);
+    }
+
+    public void drawTernaryOperator(int index, Operator operator) {
+        String name = operator.getName();
+        int targetQ = operator.getTarget();
+        int controlQ = operator.getControl();
+        int controlQ2 = operator.getControl2();
+        String register = operator.getRegisterName();
+        if (register.equals("Y")){
+            targetQ += xLines;
+            controlQ += xLines;
+            controlQ2 += yLines;
+        }
+        String tag = "";
+        Group g = new Group();
+        int startX = beginQubitX + index * gateSize;
+        int i;
+
+        /** add index of the operator at the top**/
+        Text ind = new Text(startX, 13 , Integer.toString(index));
+        ind.setWrappingWidth(30);
+        ind.setFill(Color.TEAL);
+        ind.setTextAlignment(TextAlignment.CENTER);
+        g.getChildren().add(ind);
+
+        /** draw chunks of lines **/
+        for (i = 0; i < xLines; i++){
+            Line l = new Line(startX, beginLineY +gateSize*i, startX + gateSize, beginLineY +gateSize*i);
+            g.getChildren().add(l);
+        }
+
+        if (yLines != 0) {
+            Line split = new Line(startX, beginLineY + gateSize * xLines - gateSize / 2, startX + gateSize, beginLineY + gateSize * xLines - gateSize / 2);
+            split.setStroke(Color.TEAL);
+            g.getChildren().add(split);
+            for (i = xLines; i < xLines + yLines; i++) {
+                Line l = new Line(startX, beginLineY + gateSize * i, startX + gateSize, beginLineY + gateSize * i);
+                g.getChildren().add(l);
+            }
+        }
+
+        /** set controls **/
+        Line connect = new Line( startX + 15, gateSize*targetQ + beginLineY, startX + 15,gateSize*controlQ + beginLineY );
+        connect.setStroke(Color.PLUM);
+        connect.setStrokeWidth(3);
+        Line connect2 = new Line( startX + 15, gateSize*targetQ + beginLineY, startX + 15,gateSize*controlQ2 + beginLineY );
+        connect2.setStroke(Color.PLUM);
+        connect2.setStrokeWidth(3);
+        Circle c = new Circle(startX + 15, gateSize*controlQ + beginLineY , 6);
+        c.setFill(Color.PLUM);
+        Circle c2 = new Circle(startX + 15, gateSize*controlQ2 + beginLineY , 6);
+        c2.setFill(Color.PLUM);
+        g.getChildren().addAll(connect,connect2,c,c2);
+
+        if (name.equals("Toffoli")) {
+            Circle r = new Circle(startX + 15, gateSize * targetQ + beginLineY, 13);
+            r.setFill(Color.PLUM);
+            Line h = new Line(startX + 6, gateSize * targetQ + beginLineY, startX + 30 - 6, gateSize * targetQ + beginLineY);
+            h.setStroke(Color.WHITE);
+            h.setStrokeWidth(2);
+            Line v = new Line(startX + 15, gateSize * targetQ + beginLineY - 15 + 6, startX + 15, gateSize * targetQ + beginLineY + 15 - 6);
+            v.setStroke(Color.WHITE);
+            v.setStrokeWidth(2);
+            g.getChildren().addAll(r, h, v);
+        }
 
         circuitCanvas.getChildren().add(g);
     }

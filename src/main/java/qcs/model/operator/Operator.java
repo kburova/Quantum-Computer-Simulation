@@ -35,4 +35,5 @@ public abstract class Operator {
     }
 
     public int getControl(){ return 0;}
+    public int getControl2(){ return 0;}
 }

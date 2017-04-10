@@ -196,14 +196,28 @@ public class MainAppController implements Initializable{
     }
 
     @FXML
-    public void addTernaryGateDialog(ActionEvent actionEvent) {
+    public void addTernaryGateDialog(ActionEvent event) {
+        if (mainApp.getCircuit().getX() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Circuit was not initialized with registers!!!");
+            alert.showAndWait();
+        }else {
+            //pass to function what operator we add
+            Node node = (Node) event.getSource();
+            String data = (String) node.getUserData();
+            boolean OkClicked = mainApp.showTernaryGateDialog(data);
+            if (OkClicked) {
+                canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+            }
+        }
     }
 
     @FXML
     public void addVarGateDialog(ActionEvent actionEvent) {
     }
     @FXML
-    public void addErroDialog(ActionEvent actionEvent) {
+    public void addErrorDialog(ActionEvent actionEvent) {
     }
     @FXML
     public void addMeasureDialog(ActionEvent actionEvent) {
