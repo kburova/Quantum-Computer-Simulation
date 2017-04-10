@@ -129,13 +129,14 @@ public class MainAppController implements Initializable{
             if (circuitCanvas.getChildren().size() != 0) {
                 circuitCanvas.getChildren().clear();
                 xCanvas.getChildren().clear();
-                yCanvas.getChildren().clear();
+                if (yCanvas.getChildren().size() != 0)
+                    yCanvas.getChildren().clear();
             }
 
             canvasManager = new CanvasManager(mainApp.getCircuit(), circuitCanvas, xCanvas, yCanvas);
             canvasManager.drawInitState();
             canvasManager.drawXGrid(mainApp.getCircuit().getX().getState());
-            if (mainApp.getCircuit().getY() != null) {
+            if (mainApp.getCircuit().getY().getNumberOfQubits() != 0) {
                 canvasManager.drawYGrid(mainApp.getCircuit().getY().getState());
             }
         }

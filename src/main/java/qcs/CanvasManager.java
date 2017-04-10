@@ -22,7 +22,7 @@ import javax.swing.*;
 public class CanvasManager {
 
     private Circuit circuit;
-    private int xLines, yLines = 0;
+    private int xLines, yLines;
     private Pane circuitCanvas;
     private Pane xCanvas;
     private Pane yCanvas;
@@ -41,13 +41,11 @@ public class CanvasManager {
 
     public CanvasManager(Circuit circuit, Pane canvas, Pane xCanvas, Pane yCanvas){
         this.circuit = circuit;
+        circuitCanvas = canvas;
         xLines = circuit.getX().getNumberOfQubits();
         this.xCanvas = xCanvas;
-        if (circuit.getY() != null){
-            yLines = circuit.getY().getNumberOfQubits();
-            this.yCanvas = yCanvas;
-        }
-        this.circuitCanvas = canvas;
+        yLines = circuit.getY().getNumberOfQubits();
+        this.yCanvas = yCanvas;
     }
 
     public void drawInitState(){
@@ -117,8 +115,9 @@ public class CanvasManager {
     public void drawXGrid(int stateX){
         drawGrid(xCanvas,xLines,stateX);
     }
-    public void drawYGrid(int stateY){
-        drawGrid(yCanvas,yLines,stateY);
+    public void drawYGrid(int stateY) {
+        if (yLines != 0)
+            drawGrid(yCanvas,yLines,stateY);
     }
 
     private void drawGrid(Pane canvas, int qubits, int initState){

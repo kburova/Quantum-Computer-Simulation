@@ -95,7 +95,6 @@ public class MainApp extends Application {
             controller.setCircuit(circuit);
 
             dialogStage.showAndWait();
-
             return controller.isAdd();
         }catch(Exception e){
             // Exception gets thrown if the fxml file could not be loaded
