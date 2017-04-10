@@ -1,16 +1,16 @@
 /*************************************
-CNOT Gate implementation
+Swap Gate implementation
 
  **************************************/
 package qcs.model.operator;
 
 import qcs.model.Register;
 
-public class CNOTGate extends Operator {
+public class SwapGate extends Operator {
 
     int control;
 
-    public CNOTGate(Register r, int q, int c, String n){
+    public SwapGate(Register r, int q, int c, String n){
         super(r,q,n);
         control = c;
     }

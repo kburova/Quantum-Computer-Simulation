@@ -1,16 +1,16 @@
 /*************************************
-CNOT Gate implementation
+Rotate Gate implementation
 
  **************************************/
 package qcs.model.operator;
 
 import qcs.model.Register;
 
-public class CNOTGate extends Operator {
+public class RotateGate extends Operator {
 
     int control;
 
-    public CNOTGate(Register r, int q, int c, String n){
+    public RotateGate(Register r, int q, int c, String n){
         super(r,q,n);
         control = c;
     }

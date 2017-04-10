@@ -2,7 +2,6 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -72,11 +71,6 @@
                     <Tooltip text="Set Qubits" />
                 </tooltip>
             </Button>
-            <Button fx:id="add" onAction="#addUnaryGateDialog" userData="X">
-                <tooltip>
-                    <Tooltip text="Add Gate" />
-                </tooltip>
-            </Button>
             <Button fx:id="remove">
                 <tooltip>
                     <Tooltip text="Remove Gate" />
@@ -85,14 +79,19 @@
         </ToolBar>
     </top>
     <center>
-      <SplitPane fx:id="splitPane" dividerPositions="0.5778894472361809" orientation="VERTICAL" prefHeight="333.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <SplitPane fx:id="splitPane" dividerPositions="0.5770750988142292, 0.7509881422924901" orientation="VERTICAL" prefHeight="333.0" prefWidth="500.0" BorderPane.alignment="CENTER">
         <items>
             <ScrollPane fx:id="circuitPane">
                 <Pane fx:id="circuitCanvas">
                 </Pane>
             </ScrollPane>
-          <ScrollPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <Canvas fx:id="registerCanvas" height="179.0" layoutX="3.0" layoutY="4.0" width="481.0" />
+            <ScrollPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <Pane fx:id="xCanvas">
+                </Pane>
+            </ScrollPane>
+            <ScrollPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <Pane fx:id="yCanvas">
+                </Pane>
             </ScrollPane>
         </items>
       </SplitPane>
@@ -101,9 +100,9 @@
         <URL value="@../design/MainAppTheme.css" />
     </stylesheets>
    <left>
-      <GridPane alignment="TOP_CENTER"  hgap="10" BorderPane.alignment="CENTER" >
+      <GridPane alignment="TOP_CENTER" hgap="10" BorderPane.alignment="CENTER">
           <children>
-              <Label fx:id="UnaryLabel" text="Unary Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0" GridPane.halignment="CENTER" />
+              <Label fx:id="UnaryLabel" text="Unary Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
               <Button fx:id="X" onAction="#addUnaryGateDialog" userData="X" GridPane.columnIndex="0" GridPane.rowIndex="1">
                   <tooltip>
                       <Tooltip text="Pauli X (NOT)" />
@@ -150,82 +149,82 @@
                   </tooltip>
               </Button>
 
-              <Label fx:id="BinaryLabel" text="Binary Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="4" GridPane.halignment="CENTER"/>
+              <Label fx:id="BinaryLabel" text="Binary Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
 
-              <Button fx:id="CNOT" onAction="#addBinaryGateDialog" userData="CNOT" GridPane.columnIndex="0" GridPane.rowIndex="5" >
+              <Button fx:id="CNOT" onAction="#addBinaryGateDialog" userData="CNOT" GridPane.columnIndex="0" GridPane.rowIndex="5">
                   <tooltip>
                       <Tooltip text="CNOT" />
                   </tooltip>
               </Button>
-              <Button fx:id="Rotate" onAction="#addBinaryGateDialog" userData="Rotate" GridPane.columnIndex="1" GridPane.rowIndex="5" >
+              <Button fx:id="Rotate" onAction="#addBinaryGateDialog" userData="Rotate" GridPane.columnIndex="1" GridPane.rowIndex="5">
                   <tooltip>
                       <Tooltip text="Rotate X" />
                   </tooltip>
               </Button>
-              <Button fx:id="Swap" onAction="#addBinaryGateDialog" userData="Swap" GridPane.columnIndex="2" GridPane.rowIndex="5" >
+              <Button fx:id="Swap" onAction="#addBinaryGateDialog" userData="Swap" GridPane.columnIndex="2" GridPane.rowIndex="5">
                   <tooltip>
                       <Tooltip text="Swap" />
                   </tooltip>
               </Button>
 
-              <Label fx:id="TernaryLabel" text="Ternary Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="6" GridPane.halignment="CENTER"/>
-              <Button fx:id="Toffoli" onAction="#addTernaryGateDialog" userData="Toffoli" GridPane.columnIndex="0" GridPane.rowIndex="7" text="T">
+              <Label fx:id="TernaryLabel" text="Ternary Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+              <Button fx:id="Toffoli" onAction="#addTernaryGateDialog" text="T" userData="Toffoli" GridPane.columnIndex="0" GridPane.rowIndex="7">
                   <tooltip>
                       <Tooltip text="Toffoli(CCNOT)" />
                   </tooltip>
               </Button>
 
-              <Label fx:id="VarLabel" text="Variable-qbit Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="8" GridPane.halignment="CENTER"/>
+              <Label fx:id="VarLabel" text="Variable-qbit Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
 
-              <Button fx:id="Grover" onAction="#addVarGateDialog" userData="G" GridPane.columnIndex="0" GridPane.rowIndex="9" >
+              <Button fx:id="Grover" onAction="#addVarGateDialog" userData="G" GridPane.columnIndex="0" GridPane.rowIndex="9">
                   <tooltip>
                       <Tooltip text="Grover Operation" />
                   </tooltip>
               </Button>
-              <Button fx:id="WalshHadamard" onAction="#addVarGateDialog" userData="WH" GridPane.columnIndex="1" GridPane.rowIndex="9" >
+              <Button fx:id="WalshHadamard" onAction="#addVarGateDialog" userData="WH" GridPane.columnIndex="1" GridPane.rowIndex="9">
                   <tooltip>
                       <Tooltip text="Walsh-Hadamard" />
                   </tooltip>
               </Button>
-              <Button fx:id="QFT" onAction="#addVarGateDialog" userData="QFT" GridPane.columnIndex="2" GridPane.rowIndex="9" >
+              <Button fx:id="QFT" onAction="#addVarGateDialog" userData="QFT" GridPane.columnIndex="2" GridPane.rowIndex="9">
                   <tooltip>
                       <Tooltip text="Quantum Furier Transform (QFT)" />
                   </tooltip>
               </Button>
-              <Button fx:id="InvQFT" onAction="#addVarGateDialog" userData="iQFT" GridPane.columnIndex="0" GridPane.rowIndex="10" >
+              <Button fx:id="InvQFT" onAction="#addVarGateDialog" userData="iQFT" GridPane.columnIndex="0" GridPane.rowIndex="10">
                   <tooltip>
                       <Tooltip text="Inverse QFT" />
                   </tooltip>
               </Button>
-              <Button fx:id="General" onAction="#addVarGateDialog" userData="General" GridPane.columnIndex="1" GridPane.rowIndex="10" >
+              <Button fx:id="General" onAction="#addVarGateDialog" userData="General" GridPane.columnIndex="1" GridPane.rowIndex="10">
                   <tooltip>
                       <Tooltip text="General Controlled Operator" />
                   </tooltip>
               </Button>
-              <Button fx:id="FunctionEval" onAction="#addVarGateDialog" userData="Eval" GridPane.columnIndex="2" GridPane.rowIndex="10" >
+              <Button fx:id="FunctionEval" onAction="#addVarGateDialog" userData="Eval" GridPane.columnIndex="2" GridPane.rowIndex="10">
                   <tooltip>
                       <Tooltip text="Function Evaluation" />
                   </tooltip>
               </Button>
-              <Label fx:id="ErrorLabel" text="Error Operators" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="11" GridPane.halignment="CENTER"/>
-              <Button fx:id="Error" onAction="#addErroDialog" userData="err" GridPane.columnIndex="0" GridPane.rowIndex="12" >
+              <Label fx:id="ErrorLabel" text="Error Operators" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+              <Button fx:id="Error" onAction="#addErroDialog" userData="err" GridPane.columnIndex="0" GridPane.rowIndex="12">
                   <tooltip>
                       <Tooltip text="Error" />
                   </tooltip>
               </Button>
 
-              <Label fx:id="MesLabel" text="Measurements" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="13" GridPane.halignment="CENTER"/>
-              <Button fx:id="CompB" onAction="#addMeasureDialog" userData="CompB" GridPane.columnIndex="0" GridPane.rowIndex="14" >
+              <Label fx:id="MesLabel" text="Measurements" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+              <Button fx:id="CompB" onAction="#addMeasureDialog" userData="CompB" GridPane.columnIndex="0" GridPane.rowIndex="14">
                   <tooltip>
                       <Tooltip text="Computational Basis" />
                   </tooltip>
               </Button>
-              <Button fx:id="SignB" onAction="#addMeasureDialog" userData="SignB" GridPane.columnIndex="1" GridPane.rowIndex="14" >
+              <Button fx:id="SignB" onAction="#addMeasureDialog" userData="SignB" GridPane.columnIndex="1" GridPane.rowIndex="14">
                   <tooltip>
                       <Tooltip text="Sign Basis" />
                   </tooltip>
               </Button>
-              <Button fx:id="Trash" onAction="#addMeasureDialog" userData="Trash" GridPane.columnIndex="2" GridPane.rowIndex="14" >
+              <Button fx:id="Trash" onAction="#addMeasureDialog" userData="Trash" GridPane.columnIndex="2" GridPane.rowIndex="14">
                   <tooltip>
                       <Tooltip text="Trash" />
                   </tooltip>

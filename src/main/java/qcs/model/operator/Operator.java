@@ -29,4 +29,10 @@ public abstract class Operator {
     public int getTarget() {
         return target;
     }
+
+    public String getRegisterName() {
+        return register.getName();
+    }
+
+    public int getControl(){ return 0;}
 }

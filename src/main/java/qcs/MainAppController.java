@@ -13,25 +13,19 @@
  ****************************************************/
 package qcs;
 
-import javafx.scene.Group;
 import javafx.scene.Node;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import qcs.model.Circuit;
-import qcs.model.Register;
-import qcs.CanvasManager;
 
 public class MainAppController implements Initializable{
 
@@ -43,6 +37,10 @@ public class MainAppController implements Initializable{
     private QIO qio = new QIO();
     @FXML
     private Pane circuitCanvas;
+    @FXML
+    private Pane xCanvas;
+    @FXML
+    private Pane yCanvas;
     @FXML
     private SplitPane splitPane;
 
@@ -128,10 +126,18 @@ public class MainAppController implements Initializable{
         if (registersInitialized){
 
             /**  erase all previois drawing **/
-            if (circuitCanvas.getChildren().size() != 0) circuitCanvas.getChildren().clear();
+            if (circuitCanvas.getChildren().size() != 0) {
+                circuitCanvas.getChildren().clear();
+                xCanvas.getChildren().clear();
+                yCanvas.getChildren().clear();
+            }
 
-            canvasManager = new CanvasManager(mainApp.getCircuit(), circuitCanvas);
+            canvasManager = new CanvasManager(mainApp.getCircuit(), circuitCanvas, xCanvas, yCanvas);
             canvasManager.drawInitState();
+            canvasManager.drawXGrid(mainApp.getCircuit().getX().getState());
+            if (mainApp.getCircuit().getY() != null) {
+                canvasManager.drawYGrid(mainApp.getCircuit().getY().getState());
+            }
         }
     }
 
@@ -145,9 +151,11 @@ public class MainAppController implements Initializable{
             alert.showAndWait();
         }else {
             boolean OkClicked = mainApp.showAddQubitValuesDialog();
-            canvasManager.changeQubitVals();
-            mainApp.getCircuit().setCurrentStep(0);
-            canvasManager.stepThrough(0);
+            if (OkClicked) {
+                canvasManager.changeQubitVals();
+                mainApp.getCircuit().setCurrentStep(0);
+                canvasManager.stepThrough(0);
+            }
         }
     }
 
@@ -163,12 +171,28 @@ public class MainAppController implements Initializable{
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             boolean OkClicked = mainApp.showUnaryGateDialog(data);
-            canvasManager.drawOperator(mainApp.getCircuit().getNumberOfOperators()-1, mainApp.getCircuit().getLastOperator());
+            if (OkClicked) {
+                canvasManager.drawUnaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+            }
         }
     }
 
     @FXML
-    public void addBinaryGateDialog(ActionEvent actionEvent) {
+    public void addBinaryGateDialog(ActionEvent event) {
+        if (mainApp.getCircuit().getX() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Circuit was not initialized with registers!!!");
+            alert.showAndWait();
+        }else {
+            //pass to function what operator we add
+            Node node = (Node) event.getSource();
+            String data = (String) node.getUserData();
+            boolean OkClicked = mainApp.showBinaryGateDialog(data);
+            if (OkClicked) {
+                canvasManager.drawBinaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+            }
+        }
     }
 
     @FXML
