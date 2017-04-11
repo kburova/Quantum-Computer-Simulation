@@ -149,7 +149,7 @@ public class CanvasManager {
         }
     }
 
-    public void drawUnaryOperator(int index, Operator operator){
+    public void drawUnaryOperator(int index, UnaryOperator operator){
         String name = operator.getName();
         int targetQ = operator.getTarget();
         String register = operator.getRegisterName();
@@ -215,7 +215,7 @@ public class CanvasManager {
         circuitCanvas.getChildren().add(g);
     }
 
-    public void drawBinaryOperator(int index, Operator operator) {
+    public void drawBinaryOperator(int index, BinaryOperator operator) {
         String name = operator.getName();
         int targetQ = operator.getTarget();
         int controlQ = operator.getControl();
@@ -301,11 +301,13 @@ public class CanvasManager {
         circuitCanvas.getChildren().add(g);
     }
 
-    public void drawTernaryOperator(int index, Operator operator) {
+    public void drawTernaryOperator(int index, ToffoliGate operator) {
         String name = operator.getName();
         int targetQ = operator.getTarget();
-        int controlQ = operator.getControl();
+        int controlQ = operator.getControl1();
         int controlQ2 = operator.getControl2();
+
+        System.out.println(targetQ+" "+controlQ+" "+controlQ2);
         String register = operator.getRegisterName();
         if (register.equals("Y")){
             targetQ += xLines;
@@ -353,7 +355,7 @@ public class CanvasManager {
         c2.setFill(Color.PLUM);
         g.getChildren().addAll(connect,connect2,c,c2);
 
-        if (name.equals("ToffoliGate")) {
+     //   if (name.equals("Toffoli")) {
             Circle r = new Circle(startX + 15, gateSize * targetQ + beginLineY, 13);
             r.setFill(Color.PLUM);
             Line h = new Line(startX + 6, gateSize * targetQ + beginLineY, startX + 30 - 6, gateSize * targetQ + beginLineY);
@@ -363,17 +365,114 @@ public class CanvasManager {
             v.setStroke(Color.WHITE);
             v.setStrokeWidth(2);
             g.getChildren().addAll(r, h, v);
+     //   }
+        circuitCanvas.getChildren().add(g);
+    }
+
+    public void drawBigOperator(int index, Operator operator){
+        String tag = "";
+        String name = operator.getName();
+        String register = operator.getRegisterName();
+
+        Group g = new Group();
+        int startX = beginQubitX + index * gateSize;
+        int i;
+
+        /** add index of the operator at the top**/
+        Text ind = new Text(startX, 13 , Integer.toString(index));
+        ind.setWrappingWidth(30);
+        ind.setFill(Color.TEAL);
+        ind.setTextAlignment(TextAlignment.CENTER);
+        g.getChildren().add(ind);
+
+        /** draw chunks of lines **/
+        for (i = 0; i < xLines; i++){
+            Line l = new Line(startX, beginLineY +gateSize*i, startX + gateSize, beginLineY +gateSize*i);
+            g.getChildren().add(l);
         }
+        if (yLines != 0) {
+            Line split = new Line(startX, beginLineY + gateSize * xLines - gateSize / 2, startX + gateSize, beginLineY + gateSize * xLines - gateSize / 2);
+            split.setStroke(Color.TEAL);
+            g.getChildren().add(split);
+            for (i = xLines; i < xLines + yLines; i++) {
+                Line l = new Line(startX, beginLineY + gateSize * i, startX + gateSize, beginLineY + gateSize * i);
+                g.getChildren().add(l);
+            }
+        }
+
+        /** set rectangle of the qubit **/
+        Rectangle r;
+        int height;
+        int textY;
+        if (register.equals("X")) {
+            height = gateSize * xLines - 13;
+            r = new Rectangle(startX , gateSize * 0 + beginLineY - 15, 30, height);
+            textY = beginLineY -8 + height/2 ;
+        }else{
+            height = gateSize * yLines - 13;
+            r = new Rectangle(startX , gateSize * xLines + beginLineY - 15, 30, height);
+            textY = gateSize * xLines -8 + beginLineY + height/2 ;
+        }
+
+        /** set text inside of qubit **/
+        if (name.equals("Grover")){
+            tag = "G";
+            r.setFill(new Color(1, 0.83, 0.5, 1));
+        }else if (name.equals("WH")){
+            tag = "WH";
+            r.setFill(new Color(1, 0.83, 0.5, 1));
+        }else if (name.equals("QFT")){
+            tag = "F";
+            r.setFill(new Color(1, 0.83, 0.5, 1));
+        }else if (name.equals("iQFT")){
+            tag = "1/F";
+            r.setFill(new Color(1, 0.83, 0.5, 1));
+        }else if (name.equals("General")){
+            tag = "C";
+            r.setFill(new Color(1, 0.83, 0.5, 1));
+        }else if (name.equals("Eval")){
+            tag = "f(x)";
+            r.setFill(new Color(1, 0.83, 0.5, 1));
+        }else if (name.equals("CompB")){
+            tag = "CB";
+            r.setFill(Color.DEEPSKYBLUE);
+        }else if (name.equals("SignB")){
+            tag = "SB";
+            r.setFill(Color.DEEPSKYBLUE);
+        }else if (name.equals("Trash")) {
+            tag = "\\_/";
+            r.setFill(Color.DEEPSKYBLUE);
+        }
+
+        Text t = new Text(startX, textY , tag);
+        t.setWrappingWidth(30);
+        t.setTextAlignment(TextAlignment.CENTER);
+        g.getChildren().addAll(r,t);
         circuitCanvas.getChildren().add(g);
     }
 
     public void colorAmplitudes(){
+        double phase;
         Complex[] xAmp = circuit.getX().getAmplitudes();
         for (int i = 0; i < xAmp.length; i++){
+            if (xAmp[i].getReal() == 0){
+                phase = 2*Math.PI;
+                if (xAmp[i].getImaginary() < 0){
+                    phase = Math.PI * 2 - phase;
+                }
+            }else{
+                phase = Math.atan(xAmp[i].getImaginary()/ xAmp[i].getReal());
+                if (xAmp[i].getReal() < 0) {
+                    phase += Math.PI;
+                } else if (xAmp[i].getImaginary() < 0) {
+                    phase += 2* Math.PI;
+                }
+            }
+            phase /= 2 * Math.PI;
             Rectangle r = (Rectangle) xCanvas.getChildren().get(i);
-            //r.setFill();
-//            Complex x = new Complex();
-//            x.
+            r.setFill();
+            Complex x = new Complex();
+            //x.
         }
     }
 

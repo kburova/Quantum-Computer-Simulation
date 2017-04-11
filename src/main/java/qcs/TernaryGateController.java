@@ -56,7 +56,8 @@ public class TernaryGateController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = true;
-            if (id.equals("ToffoliGate")){
+            if (id.equals("Toffoli")){
+
                 circuit.addOperator(new ToffoliGate(targetRegister, targetQubit, controlQubit1, controlQubit2, id));
             }
             dialogStage.close();
@@ -78,11 +79,9 @@ public class TernaryGateController {
         }
 
         String targetVal = target.getText();
-        System.out.println(targetVal);
         String controlVal1 = control1.getText();
-        System.out.println(controlVal1);
         String controlVal2 = control2.getText();
-        System.out.println(controlVal2);
+
 
         try{
             targetQubit = Integer.parseInt(targetVal);
@@ -102,11 +101,7 @@ public class TernaryGateController {
         if (errorMessage.length() == 0){
             return true;
         }else{
-            //alert if information was entered wrong
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(errorMessage);
-            alert.setTitle("Error Dialog");
-            alert.showAndWait();
+            circuit.showError(errorMessage);
             return false;
         }
     }

@@ -26,6 +26,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import qcs.model.Circuit;
+import qcs.model.operator.BinaryOperator;
+import qcs.model.operator.ToffoliGate;
+import qcs.model.operator.UnaryOperator;
 
 public class MainAppController implements Initializable{
 
@@ -146,10 +149,7 @@ public class MainAppController implements Initializable{
     private void handleInitQubitsDialog(){
 
         if (mainApp.getCircuit().getX() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText("Circuit was not initialized with registers!!!");
-            alert.showAndWait();
+            showErrorMessage();
         }else {
             boolean OkClicked = mainApp.showAddQubitValuesDialog();
             if (OkClicked) {
@@ -163,17 +163,14 @@ public class MainAppController implements Initializable{
     @FXML
     private void addUnaryGateDialog(ActionEvent event){
         if (mainApp.getCircuit().getX() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText("Circuit was not initialized with registers!!!");
-            alert.showAndWait();
+            showErrorMessage();
         }else {
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             boolean OkClicked = mainApp.showUnaryGateDialog(data);
             if (OkClicked) {
-                canvasManager.drawUnaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+                canvasManager.drawUnaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (UnaryOperator) mainApp.getCircuit().getLastOperator());
             }
         }
     }
@@ -181,17 +178,14 @@ public class MainAppController implements Initializable{
     @FXML
     public void addBinaryGateDialog(ActionEvent event) {
         if (mainApp.getCircuit().getX() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText("Circuit was not initialized with registers!!!");
-            alert.showAndWait();
+            showErrorMessage();
         }else {
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             boolean OkClicked = mainApp.showBinaryGateDialog(data);
             if (OkClicked) {
-                canvasManager.drawBinaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+                canvasManager.drawBinaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (BinaryOperator) mainApp.getCircuit().getLastOperator());
             }
         }
     }
@@ -199,28 +193,80 @@ public class MainAppController implements Initializable{
     @FXML
     public void addTernaryGateDialog(ActionEvent event) {
         if (mainApp.getCircuit().getX() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText("Circuit was not initialized with registers!!!");
-            alert.showAndWait();
+            showErrorMessage();
         }else {
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             boolean OkClicked = mainApp.showTernaryGateDialog(data);
             if (OkClicked) {
-                canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+                //System.out.println(mainApp.getCircuit().getNumberOfOperators());
+                canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (ToffoliGate) mainApp.getCircuit().getLastOperator());
             }
         }
     }
 
     @FXML
-    public void addVarGateDialog(ActionEvent actionEvent) {
+    public void addVarGateDialog(ActionEvent event) {
+        if (mainApp.getCircuit().getX() == null) {
+            showErrorMessage();
+        }else {
+            //pass to function what operator we add
+            Node node = (Node) event.getSource();
+            String data = (String) node.getUserData();
+            boolean OkClicked = mainApp.showVarGateDialog(data);
+            if (OkClicked) {
+                canvasManager.drawBigOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+            }
+        }
     }
     @FXML
-    public void addErrorDialog(ActionEvent actionEvent) {
+    public void addErrorDialog(ActionEvent event) {
+        if (mainApp.getCircuit().getX() == null) {
+            showErrorMessage();
+        }else {
+            //pass to function what operator we add
+            Node node = (Node) event.getSource();
+            String data = (String) node.getUserData();
+            boolean OkClicked = mainApp.showErrorDialog(data);
+            if (OkClicked) {
+                //canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+            }
+        }
     }
     @FXML
-    public void addMeasureDialog(ActionEvent actionEvent) {
+    public void addMeasurementDialog(ActionEvent event) {
+        if (mainApp.getCircuit().getX() == null) {
+            showErrorMessage();
+        }else {
+            //pass to function what operator we add
+            Node node = (Node) event.getSource();
+            String data = (String) node.getUserData();
+            boolean OkClicked = mainApp.showMeasurementDialog(data);
+            if (OkClicked) {
+                canvasManager.drawBigOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+            }
+        }
+    }
+    @FXML
+    public void addGroverOperatorDialog(ActionEvent event) {
+        if (mainApp.getCircuit().getX() == null) {
+            showErrorMessage();
+        }else {
+            //pass to function what operator we add
+            Node node = (Node) event.getSource();
+            String data = (String) node.getUserData();
+            boolean OkClicked = mainApp.showGroverOperatorDialog(data);
+            if (OkClicked) {
+                canvasManager.drawBigOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+            }
+        }
+    }
+
+    private void showErrorMessage(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Circuit was not initialized with registers!!!");
+        alert.showAndWait();
     }
 }

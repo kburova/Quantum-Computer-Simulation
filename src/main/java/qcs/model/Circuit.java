@@ -12,6 +12,7 @@
  ***************************************************/
 package qcs.model;
 
+import javafx.scene.control.Alert;
 import qcs.model.operator.Operator;
 import qcs.model.Register;
 import java.util.LinkedList;
@@ -82,5 +83,13 @@ public class Circuit {
 
     public void setCurrentStep(int step){
         currentStep = step;
+    }
+
+    public void showError(String errorMessage){
+        //alert if information was entered wrong
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(errorMessage);
+        alert.setTitle("Error Dialog");
+        alert.showAndWait();
     }
 }

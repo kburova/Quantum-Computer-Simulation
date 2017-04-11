@@ -18,15 +18,7 @@ public class VarQbitController {
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int targetQubit, controlQubit;
-
-    @FXML
-    private TextField target;
-
-    @FXML
-    private TextField control;
-
-    @FXML
+        @FXML
     private RadioButton x;
 
     @FXML

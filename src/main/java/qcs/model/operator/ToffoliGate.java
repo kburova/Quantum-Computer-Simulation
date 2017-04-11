@@ -13,6 +13,7 @@ public class ToffoliGate extends Operator{
 
     public ToffoliGate(Register r, int q, int c1, int c2, String n){
         super(r,n);
+        target = q;
         control1 = c1;
         control2 = c2;
     }

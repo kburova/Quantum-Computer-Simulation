@@ -102,11 +102,7 @@ public class InitCircuitDialogController {
         if ( errorMessage.length() == 0 ){
             return true;
         }else{
-            //alert if information was entered wrong
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+            circuit.showError(errorMessage);
 
             return false;
         }

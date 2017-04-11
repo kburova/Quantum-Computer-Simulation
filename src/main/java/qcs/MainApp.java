@@ -211,12 +211,93 @@ public class MainApp extends Application {
         }
     }
 
-    final public Stage getPrimaryStage(){
-        return PrimaryStage;
+    public boolean showVarGateDialog(String id) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/VarQbitDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Add Gate");
+
+            VarQbitController controller = loader.getController();
+            controller.setDialogStage(dialogStage, id);
+            controller.setCircuit(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isAdd();
+
+        }catch(Exception e){
+            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
+            return false;
+        }
     }
+
+    public boolean showErrorDialog(String data) {
+        circuit.showError("What this should do?");
+        return true;
+    }
+
+    public boolean showMeasurementDialog(String id) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/MeasurementGateDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Measure");
+
+            MeasurementGateController controller = loader.getController();
+            controller.setDialogStage(dialogStage, id);
+            controller.setCircuit(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isAdd();
+
+        }catch(Exception e){
+            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean showGroverOperatorDialog(String id) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/GroverDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Grover Gate");
+
+            GroverGateController controller = loader.getController();
+            controller.setDialogStage(dialogStage, id);
+            controller.setCircuit(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isAdd();
+
+        }catch(Exception e){
+            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     final public Circuit getCircuit() { return circuit; }
 
     public static void main(String[] args) {
         launch(args);
     }
+
 }

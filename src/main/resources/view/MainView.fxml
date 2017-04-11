@@ -176,7 +176,7 @@
 
               <Label fx:id="VarLabel" text="Variable-qbit Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
 
-              <Button fx:id="Grover" onAction="#addVarGateDialog" userData="G" GridPane.columnIndex="0" GridPane.rowIndex="9">
+              <Button fx:id="Grover" onAction="#addGroverOperatorDialog" userData="Grover" GridPane.columnIndex="0" GridPane.rowIndex="9">
                   <tooltip>
                       <Tooltip text="Grover Operation" />
                   </tooltip>
@@ -214,17 +214,17 @@
               </Button>
 
               <Label fx:id="MesLabel" text="Measurements" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
-              <Button fx:id="CompB" onAction="#addMeasureDialog" userData="CompB" GridPane.columnIndex="0" GridPane.rowIndex="14">
+              <Button fx:id="CompB" onAction="#addMeasurementDialog" userData="CompB" GridPane.columnIndex="0" GridPane.rowIndex="14">
                   <tooltip>
                       <Tooltip text="Computational Basis" />
                   </tooltip>
               </Button>
-              <Button fx:id="SignB" onAction="#addMeasureDialog" userData="SignB" GridPane.columnIndex="1" GridPane.rowIndex="14">
+              <Button fx:id="SignB" onAction="#addMeasurementDialog" userData="SignB" GridPane.columnIndex="1" GridPane.rowIndex="14">
                   <tooltip>
                       <Tooltip text="Sign Basis" />
                   </tooltip>
               </Button>
-              <Button fx:id="Trash" onAction="#addMeasureDialog" userData="Trash" GridPane.columnIndex="2" GridPane.rowIndex="14">
+              <Button fx:id="Trash" onAction="#addMeasurementDialog" userData="Trash" GridPane.columnIndex="2" GridPane.rowIndex="14">
                   <tooltip>
                       <Tooltip text="Trash" />
                   </tooltip>

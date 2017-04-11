@@ -99,11 +99,7 @@ public class UnaryGateController {
         if (errorMessage.length() == 0){
             return true;
         }else{
-            //alert if information was entered wrong
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(errorMessage);
-            alert.setTitle("Error Dialog");
-            alert.showAndWait();
+            circuit.showError(errorMessage);
             return false;
         }
     }

@@ -20,6 +20,8 @@ public class VarQbitOperator extends Operator{
 
         }else if(name.equals("General")){
 
+        }else  if (name.equals("Eval")){
+
         }
     }
 }
