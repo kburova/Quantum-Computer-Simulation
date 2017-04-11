@@ -21,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import qcs.controller.*;
 import qcs.model.Circuit;
 
 

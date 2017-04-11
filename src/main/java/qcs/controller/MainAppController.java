@@ -1,5 +1,5 @@
 /**************************************************
- Controller.java
+ controller.java
 
  This file is a control part of the MVC model.
  It has all the methods to manipulate model
@@ -11,7 +11,7 @@
 
  Date: 02/12/2017
  ****************************************************/
-package qcs;
+package qcs.controller;
 
 import javafx.scene.Node;
 import java.net.URL;
@@ -25,6 +25,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
+import qcs.CanvasManager;
+import qcs.MainApp;
+import qcs.QIO;
 import qcs.model.Circuit;
 import qcs.model.operator.BinaryOperator;
 import qcs.model.operator.ToffoliGate;

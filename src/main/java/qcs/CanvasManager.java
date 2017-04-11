@@ -452,28 +452,28 @@ public class CanvasManager {
     }
 
     public void colorAmplitudes(){
-        double phase;
-        Complex[] xAmp = circuit.getX().getAmplitudes();
-        for (int i = 0; i < xAmp.length; i++){
-            if (xAmp[i].getReal() == 0){
-                phase = 2*Math.PI;
-                if (xAmp[i].getImaginary() < 0){
-                    phase = Math.PI * 2 - phase;
-                }
-            }else{
-                phase = Math.atan(xAmp[i].getImaginary()/ xAmp[i].getReal());
-                if (xAmp[i].getReal() < 0) {
-                    phase += Math.PI;
-                } else if (xAmp[i].getImaginary() < 0) {
-                    phase += 2* Math.PI;
-                }
-            }
-            phase /= 2 * Math.PI;
-            Rectangle r = (Rectangle) xCanvas.getChildren().get(i);
-            r.setFill();
-            Complex x = new Complex();
-            //x.
-        }
+//        double phase;
+//        Complex[] xAmp = circuit.getX().getAmplitudes();
+//        for (int i = 0; i < xAmp.length; i++){
+//            if (xAmp[i].getReal() == 0){
+//                phase = 2*Math.PI;
+//                if (xAmp[i].getImaginary() < 0){
+//                    phase = Math.PI * 2 - phase;
+//                }
+//            }else{
+//                phase = Math.atan(xAmp[i].getImaginary()/ xAmp[i].getReal());
+//                if (xAmp[i].getReal() < 0) {
+//                    phase += Math.PI;
+//                } else if (xAmp[i].getImaginary() < 0) {
+//                    phase += 2* Math.PI;
+//                }
+//            }
+//            phase /= 2 * Math.PI;
+//            Rectangle r = (Rectangle) xCanvas.getChildren().get(i);
+//            r.setFill();
+//            Complex x = new Complex();
+//            //x.
+//        }
     }
 
 }

@@ -1,24 +1,39 @@
-package qcs;
+/**************************************************
+ UnaryGateController
+
+ This file controls the output from dialog window
+ that adds Unary gates
+
+ Created by: Ksenia Burova
+ Parker Diamond
+ Nick Kelley
+ Chris Martin
+
+ Date: 03/22/2017
+ ****************************************************/
+
+package qcs.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
-import qcs.model.operator.VarQbitOperator;
+import qcs.model.operator.*;
 
-/**
- * Created by apple on 4/10/17.
- */
-public class VarQbitController {
+public class UnaryGateController {
+
     private Stage dialogStage;
     private  boolean addClicked = false;
     private Circuit circuit;
     String id;
     Register targetRegister;
-        @FXML
+    int qubit;
+
+    @FXML
+    private TextField target;
+
+    @FXML
     private RadioButton x;
 
     @FXML
@@ -46,7 +61,7 @@ public class VarQbitController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = true;
-            circuit.addOperator(new VarQbitOperator(targetRegister, id));
+            circuit.addOperator(new UnaryOperator(targetRegister,qubit, id));
             dialogStage.close();
         }
     }
@@ -57,11 +72,33 @@ public class VarQbitController {
     }
 
     private boolean isInputValid(){
+        String errorMessage = "";
+
         if ( x.isSelected() )
             targetRegister = circuit.getX();
         else if (y.isSelected()){
             targetRegister = circuit.getY();
         }
-        return true;
+
+        String value = target.getText();
+        System.out.println(value);
+
+        try{
+            qubit = Integer.parseInt(value);
+        }
+        catch(Exception e){
+            errorMessage = "Enter an Integer value ";
+        }
+
+        if (qubit < 0 || qubit >= targetRegister.getNumberOfQubits()){
+            errorMessage = "Enter valid qubit index";
+        }
+
+        if (errorMessage.length() == 0){
+            return true;
+        }else{
+            circuit.showError(errorMessage);
+            return false;
+        }
     }
 }

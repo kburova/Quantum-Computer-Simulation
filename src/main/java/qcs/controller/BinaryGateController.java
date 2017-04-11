@@ -1,30 +1,30 @@
-package qcs;
+package qcs.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
-import qcs.model.operator.Measurement;
+import qcs.model.operator.*;
 
 /**
- * Created by kseniaburova on 4/10/17.
+ * Created by kseniaburova on 4/9/17.
  */
-public class MeasurementGateController {
+public class BinaryGateController {
 
     private Stage dialogStage;
     private  boolean addClicked = false;
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int qubitNum;
-    boolean All;
+    int targetQubit, controlQubit;
 
     @FXML
-    private TextField qubitVal;
+    private TextField target;
+
+    @FXML
+    private TextField control;
 
     @FXML
     private RadioButton x;
@@ -32,18 +32,14 @@ public class MeasurementGateController {
     @FXML
     private RadioButton y;
 
-    @FXML
-    private RadioButton qubit;
-
-    @FXML
-    private RadioButton all;
-
     //bind stage with controller
     public void setDialogStage(Stage dialogStage, String id){
         this.dialogStage = dialogStage;
         this.dialogStage.setResizable(false);
         this.id = id;
     }
+
+    //set registers here???
 
     public boolean isAdd(){
         return addClicked;
@@ -58,11 +54,7 @@ public class MeasurementGateController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = true;
-            if (All){
-                circuit.addOperator(new Measurement(targetRegister, id));
-            }else{
-                circuit.addOperator(new Measurement(targetRegister, id, qubitNum));
-            }
+            circuit.addOperator(new BinaryOperator(targetRegister, targetQubit, controlQubit, id));
             dialogStage.close();
         }
     }
@@ -73,28 +65,29 @@ public class MeasurementGateController {
     }
 
     private boolean isInputValid(){
-        String value;
         String errorMessage = "";
+
         if ( x.isSelected() )
             targetRegister = circuit.getX();
         else if (y.isSelected()){
             targetRegister = circuit.getY();
         }
 
-        if (all.isSelected()){
-            All = true;
-        }else{
-            All = false;
-            value = qubitVal.getText();
-            try{
-                qubitNum = Integer.parseInt(value);
-            }
-            catch(Exception e){
-                errorMessage = "Enter an Integer value ";
-            }
-            if (qubitNum < 0 || qubitNum > targetRegister.getNumberOfQubits() ){
-                errorMessage = "Enter valid qubit number";
-            }
+        String targetVal = target.getText();
+        System.out.println(targetVal);
+        String controlVal = control.getText();
+        System.out.println(controlVal);
+
+        try{
+            targetQubit = Integer.parseInt(targetVal);
+            controlQubit = Integer.parseInt(controlVal);
+        }
+        catch(Exception e){
+            errorMessage = "Enter an Integer value ";
+        }
+
+        if (targetQubit < 0 || controlQubit < 0 || targetQubit >= targetRegister.getNumberOfQubits() || controlQubit >= targetRegister.getNumberOfQubits()){
+            errorMessage = "Enter valid qubit index";
         }
         if (errorMessage.length() == 0){
             return true;
@@ -102,13 +95,5 @@ public class MeasurementGateController {
             circuit.showError(errorMessage);
             return false;
         }
-    }
-
-    public void ifOneSelected(ActionEvent event) {
-        if (qubit.isSelected()) qubitVal.setDisable(false);
-    }
-
-    public void ifAllSelected(ActionEvent event) {
-        if (all.isSelected()) qubitVal.setDisable(true);
     }
 }

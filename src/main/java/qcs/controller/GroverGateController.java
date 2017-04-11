@@ -1,39 +1,26 @@
-/**************************************************
- UnaryGateController
-
- This file controls the output from dialog window
- that adds Unary gates
-
- Created by: Ksenia Burova
- Parker Diamond
- Nick Kelley
- Chris Martin
-
- Date: 03/22/2017
- ****************************************************/
-
-package qcs;
+package qcs.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.text.TextAlignment;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
-import qcs.model.operator.*;
+import qcs.model.operator.GroverOperator;
 
-public class UnaryGateController {
-
+/**
+ * Created by apple on 4/10/17.
+ */
+public class GroverGateController {
     private Stage dialogStage;
     private  boolean addClicked = false;
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int qubit;
+    int svalue;
 
     @FXML
-    private TextField target;
+    private TextField searchValue;
 
     @FXML
     private RadioButton x;
@@ -48,8 +35,6 @@ public class UnaryGateController {
         this.id = id;
     }
 
-    //set registers here???
-
     public boolean isAdd(){
         return addClicked;
     }
@@ -63,7 +48,7 @@ public class UnaryGateController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = true;
-            circuit.addOperator(new UnaryOperator(targetRegister,qubit, id));
+            circuit.addOperator(new GroverOperator(targetRegister,svalue, id));
             dialogStage.close();
         }
     }
@@ -75,25 +60,23 @@ public class UnaryGateController {
 
     private boolean isInputValid(){
         String errorMessage = "";
-
         if ( x.isSelected() )
             targetRegister = circuit.getX();
         else if (y.isSelected()){
             targetRegister = circuit.getY();
         }
-
-        String value = target.getText();
+        String value = searchValue.getText();
         System.out.println(value);
 
         try{
-            qubit = Integer.parseInt(value);
+            svalue = Integer.parseInt(value);
         }
         catch(Exception e){
             errorMessage = "Enter an Integer value ";
         }
 
-        if (qubit < 0 || qubit >= targetRegister.getNumberOfQubits()){
-            errorMessage = "Enter valid qubit index";
+        if (svalue < 0 || svalue > (Math.pow(2,targetRegister.getNumberOfQubits())-1) ){
+            errorMessage = "Enter valid state number, 0 trough (2^n - 1)";
         }
 
         if (errorMessage.length() == 0){
