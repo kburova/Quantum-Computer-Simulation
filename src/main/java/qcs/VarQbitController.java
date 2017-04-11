@@ -4,17 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
-import qcs.model.operator.*;
+import qcs.model.operator.VarQbitOperator;
 
 /**
- * Created by kseniaburova on 4/9/17.
+ * Created by apple on 4/10/17.
  */
-public class BinaryGateController {
-
+public class VarQbitController {
     private Stage dialogStage;
     private  boolean addClicked = false;
     private Circuit circuit;
@@ -56,7 +54,7 @@ public class BinaryGateController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = true;
-            circuit.addOperator(new BinaryOperator(targetRegister, targetQubit, controlQubit, id));
+            circuit.addOperator(new VarQbitOperator(targetRegister, id));
             dialogStage.close();
         }
     }
@@ -67,39 +65,11 @@ public class BinaryGateController {
     }
 
     private boolean isInputValid(){
-        String errorMessage = "";
-
         if ( x.isSelected() )
             targetRegister = circuit.getX();
         else if (y.isSelected()){
             targetRegister = circuit.getY();
         }
-
-        String targetVal = target.getText();
-        System.out.println(targetVal);
-        String controlVal = control.getText();
-        System.out.println(controlVal);
-
-        try{
-            targetQubit = Integer.parseInt(targetVal);
-            controlQubit = Integer.parseInt(controlVal);
-        }
-        catch(Exception e){
-            errorMessage = "Enter an Integer value ";
-        }
-
-        if (targetQubit < 0 || controlQubit < 0 || targetQubit >= targetRegister.getNumberOfQubits() || controlQubit >= targetRegister.getNumberOfQubits()){
-            errorMessage = "Enter valid qubit index";
-        }
-        if (errorMessage.length() == 0){
-            return true;
-        }else{
-            //alert if information was entered wrong
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(errorMessage);
-            alert.setTitle("Error Dialog");
-            alert.showAndWait();
-            return false;
-        }
+        return true;
     }
 }

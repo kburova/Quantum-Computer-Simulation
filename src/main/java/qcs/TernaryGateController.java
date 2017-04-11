@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
-import qcs.model.operator.Toffoli;
+import qcs.model.operator.ToffoliGate;
 
 /**
  * Created by kseniaburova on 4/10/17.
@@ -56,8 +56,8 @@ public class TernaryGateController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = true;
-            if (id.equals("Toffoli")){
-                circuit.addOperator(new Toffoli(targetRegister, targetQubit, controlQubit1, controlQubit2, id));
+            if (id.equals("ToffoliGate")){
+                circuit.addOperator(new ToffoliGate(targetRegister, targetQubit, controlQubit1, controlQubit2, id));
             }
             dialogStage.close();
         }

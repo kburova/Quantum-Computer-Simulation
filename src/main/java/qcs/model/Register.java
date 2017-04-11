@@ -206,4 +206,8 @@ public class Register {
     public int getState() {
         return initialState;
     }
+
+    public Complex[] getAmplitudes(){
+        return amplitudes;
+    }
 }

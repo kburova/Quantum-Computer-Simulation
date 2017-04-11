@@ -11,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import org.apache.commons.math3.complex.Complex;
 import qcs.model.Circuit;
 import qcs.model.operator.*;
 
@@ -352,7 +353,7 @@ public class CanvasManager {
         c2.setFill(Color.PLUM);
         g.getChildren().addAll(connect,connect2,c,c2);
 
-        if (name.equals("Toffoli")) {
+        if (name.equals("ToffoliGate")) {
             Circle r = new Circle(startX + 15, gateSize * targetQ + beginLineY, 13);
             r.setFill(Color.PLUM);
             Line h = new Line(startX + 6, gateSize * targetQ + beginLineY, startX + 30 - 6, gateSize * targetQ + beginLineY);
@@ -363,7 +364,17 @@ public class CanvasManager {
             v.setStrokeWidth(2);
             g.getChildren().addAll(r, h, v);
         }
-
         circuitCanvas.getChildren().add(g);
     }
+
+    public void colorAmplitudes(){
+        Complex[] xAmp = circuit.getX().getAmplitudes();
+        for (int i = 0; i < xAmp.length; i++){
+            Rectangle r = (Rectangle) xCanvas.getChildren().get(i);
+            //r.setFill();
+//            Complex x = new Complex();
+//            x.
+        }
+    }
+
 }

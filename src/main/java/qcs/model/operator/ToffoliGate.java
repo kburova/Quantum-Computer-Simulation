@@ -5,22 +5,25 @@ import qcs.model.Register;
 /**
  * Created by kseniaburova on 4/10/17.
  */
-public class Toffoli extends Operator{
+public class ToffoliGate extends Operator{
 
+    int target;
     int control1;
     int control2;
 
-    public Toffoli(Register r, int q, int c1, int c2, String n){
-        super(r,q,n);
+    public ToffoliGate(Register r, int q, int c1, int c2, String n){
+        super(r,n);
         control1 = c1;
         control2 = c2;
     }
 
     public void doOperation(){
-
     }
 
-    public int getControl(){
+    public int getTarget(){
+        return target;
+    }
+    public int getControl1(){
         return control1;
     }
     public int getControl2(){

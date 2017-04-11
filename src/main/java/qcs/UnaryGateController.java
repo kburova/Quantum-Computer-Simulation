@@ -63,25 +63,7 @@ public class UnaryGateController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = true;
-            if (id.equals("X")){
-                circuit.addOperator(new PauliXGate(targetRegister,qubit, id));
-            }else if (id.equals("Y")){
-                circuit.addOperator(new PauliYGate(targetRegister,qubit, id));
-            }else  if (id.equals("Z")){
-                circuit.addOperator(new PauliZGate(targetRegister,qubit, id));
-            }else if (id.equals("SqRoot")){
-                circuit.addOperator(new SqRootOfNOTGate( targetRegister,qubit, id));
-            }else if (id.equals("Hadamard")){
-                circuit.addOperator(new HadamardGate( targetRegister,qubit, id));
-            }else if (id.equals("Identity")){
-                circuit.addOperator(new IdentityGate(targetRegister,qubit, id));
-            }else if (id.equals("Inverse")){
-                circuit.addOperator(new InversePhaseGate(targetRegister,qubit, id));
-            }else if (id.equals("Phase")){
-                circuit.addOperator(new PhaseGate(targetRegister,qubit, id));
-            }else if (id.equals("Shift")) {
-                circuit.addOperator(new PhaseShiftGate(targetRegister, qubit, id));
-            }
+            circuit.addOperator(new UnaryOperator(targetRegister,qubit, id));
             dialogStage.close();
         }
     }
