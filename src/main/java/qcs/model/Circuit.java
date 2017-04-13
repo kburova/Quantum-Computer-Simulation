@@ -39,6 +39,12 @@ public class Circuit {
         operators = new LinkedList<>();
     }
 
+    public void reInitializeRegisterQubits(){
+        currentStep = 0;
+        x.reinitializeState();
+        y.reinitializeState();
+    }
+
     final public Register getX(){ return x; }
 
     final public Register getY(){ return y; }
@@ -83,6 +89,12 @@ public class Circuit {
 
     public void setCurrentStep(int step){
         currentStep = step;
+    }
+    public void incrementStep(){
+        currentStep++;
+    }
+    public void decrementStep(){
+        currentStep--;
     }
 
     public void showError(String errorMessage){

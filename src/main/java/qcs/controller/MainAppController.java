@@ -38,6 +38,7 @@ public class MainAppController implements Initializable{
     //reference to main application
     private MainApp mainApp;
     private CanvasManager canvasManager;
+    private Circuit circuit;
 
     //reference used by save / load to remember where to save to
     private IOmanager IOmanager = new IOmanager();
@@ -47,8 +48,16 @@ public class MainAppController implements Initializable{
     private Pane xCanvas;
     @FXML
     private Pane yCanvas;
-    @FXML
-    private SplitPane splitPane;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
+
+    public void setMainApp(MainApp mainApp){
+        this.mainApp = mainApp;
+        circuit = mainApp.getCircuit();
+        canvasManager = new CanvasManager(circuit, circuitCanvas, xCanvas, yCanvas);
+    }
 
     @FXML
     private void open() {
@@ -58,7 +67,7 @@ public class MainAppController implements Initializable{
     @FXML
     private void save_as() {
         //when there is a dialogStage for the visualization to be loaded
-        //from (first q function) expects an arraylist
+        //from (first q function) expects an ArrayList
         IOmanager.save_as(new Stage(), new ArrayList<>());
     }
 
@@ -67,101 +76,95 @@ public class MainAppController implements Initializable{
         IOmanager.save(new ArrayList<>());
     }
 
+    /** Do 1 step forward in a circuit:
+     * check if circuit was initialized and if there are any operators left to execute,
+     * do the operation and increment step, then redraw 'step' line and recolor states
+     * **/
     @FXML
     private void stepForward() {
-        Circuit c = mainApp.getCircuit();
-        /** check if circuit was initialized **/
-        if (c.getX() != null) {
-            int step = c.getCurrentStep();
-            if (step < c.getNumberOfOperators()) {
-                /** execution of the function here **/
-                mainApp.getCircuit().getOperator(step).doOperation();
-                mainApp.getCircuit().setCurrentStep(++step);
-                canvasManager.stepThrough(step);
+        if (circuit.getX() != null) {
+            int step = circuit.getCurrentStep();
+            if (step < circuit.getNumberOfOperators()) {
+                circuit.getOperator(step).doOperation();
+                circuit.incrementStep();
+                canvasManager.stepThrough(++step);
             }
         }
     }
 
+    /** Do 1 step backwards in a circuit:
+     * check if circuit was initialized and if we are not at the very beginning,
+     * decrement step, then do previous operation to negate last result,
+     * then redraw 'step' line and recolor states
+     * **/
     @FXML
     private void stepBack() {
-        Circuit c = mainApp.getCircuit();
-        /** check if circuit was initialized **/
-        if (c.getX() != null) {
-            int step = c.getCurrentStep();
+        if (circuit.getX() != null) {
+            int step = circuit.getCurrentStep();
             if (step > 0) {
-                //TODO: add execution of the function here
-                mainApp.getCircuit().setCurrentStep(--step);
+                circuit.decrementStep();
+                circuit.getOperator(--step).doOperation();
                 canvasManager.stepThrough(step);
             }
         }
     }
 
+    /** Restart execution of a circuit:
+     * reinitialize amplitudes to initial state and
+     * redraw 'step'
+     **/
     @FXML
     private void restart() {
-        Circuit c = mainApp.getCircuit();
-        /** check if circuit was initialized **/
-        if (c.getX() != null) {
-            //TODO: erase all values and restart
-            mainApp.getCircuit().setCurrentStep(0);
-            canvasManager.stepThrough(0);
+        if (circuit.getX() != null) {
+            int step = circuit.getCurrentStep();
+            if (step != 0) {
+                circuit.reInitializeRegisterQubits();
+                canvasManager.stepThrough(0);
+            }
         }
     }
 
+    /** Run through all the gates that are left at once:
+     * do operations starting with current step all the way to the end,
+     * move 'step' line to the end and recolor amplitudes**/
     @FXML
     private void runAll() {
-        Circuit c = mainApp.getCircuit();
-        /** check if circuit was initialized **/
-        if (c.getX() != null) {
-            //TODO: add execution of the function here
-            mainApp.getCircuit().setCurrentStep(c.getNumberOfOperators());
-            canvasManager.stepThrough(c.getNumberOfOperators());
+        if (circuit.getX() != null) {
+            int step = circuit.getCurrentStep();
+            int numOfSteps = circuit.getNumberOfOperators();
+            if (step != numOfSteps) {
+                for ( int i = step ; i < numOfSteps; i++) {
+                    circuit.getOperator(step).doOperation();
+                }
+                circuit.setCurrentStep(numOfSteps);
+                canvasManager.stepThrough(numOfSteps);
+            }
         }
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
-
-    public void setMainApp(MainApp mainApp){
-        this.mainApp = mainApp;
-    }
+    /** All functions below are in charge of dialog windows that read in users data like
+     * target, control qubits or register ro operate on
+     */
 
     @FXML
     private void handleInitCircuitDialog() {
         boolean registersInitialized = mainApp.showAddRegistersDialog();
         if (registersInitialized){
-
-            /**  erase all previois drawing **/
-            if (circuitCanvas.getChildren().size() != 0) {
-                circuitCanvas.getChildren().clear();
-                xCanvas.getChildren().clear();
-                if (yCanvas.getChildren().size() != 0)
-                    yCanvas.getChildren().clear();
-            }
-
-            canvasManager = new CanvasManager(mainApp.getCircuit(), circuitCanvas, xCanvas, yCanvas);
+            canvasManager.resetCanvasManager();
             canvasManager.drawInitState();
-            canvasManager.drawXGrid(mainApp.getCircuit().getX().getState());
-            if (mainApp.getCircuit().getY().getNumberOfQubits() != 0) {
-                canvasManager.drawYGrid(mainApp.getCircuit().getY().getState());
-            }
         }
     }
 
     @FXML
     private void handleInitQubitsDialog(){
-
         if (mainApp.getCircuit().getX() == null) {
             showErrorMessage();
         }else {
+            // change amplitudes and current step inside of handleOk() in controller class for initQubits
+            // then redraw initial state after OK is hit
             boolean OkClicked = mainApp.showAddQubitValuesDialog();
             if (OkClicked) {
-                mainApp.getCircuit().getX().reinitializeQubits();
-                mainApp.getCircuit().getY().reinitializeQubits();
                 canvasManager.changeQubitVals();
-                mainApp.getCircuit().setCurrentStep(0);
-                canvasManager.stepThrough(0);
             }
         }
     }

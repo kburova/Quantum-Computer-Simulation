@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import org.apache.commons.math3.complex.Complex;
 import qcs.model.Circuit;
+import qcs.model.Register;
 import qcs.model.operator.*;
 
 import javax.swing.*;
@@ -45,52 +46,72 @@ public class CanvasManager {
     public CanvasManager(Circuit circuit, Pane canvas, Pane xCanvas, Pane yCanvas){
         this.circuit = circuit;
         circuitCanvas = canvas;
-        xLines = circuit.getX().getNumberOfQubits();
+        //xLines = circuit.getX().getNumberOfQubits();
         this.xCanvas = xCanvas;
-        yLines = circuit.getY().getNumberOfQubits();
+        //yLines = circuit.getY().getNumberOfQubits();
         this.yCanvas = yCanvas;
     }
+    public void resetCanvasManager(){
 
+        /**  erase all previous drawing **/
+        if (circuitCanvas.getChildren().size() != 0) {
+            circuitCanvas.getChildren().clear();
+            xCanvas.getChildren().clear();
+            if (yCanvas.getChildren().size() != 0)
+                yCanvas.getChildren().clear();
+        }
+        xLines = circuit.getX().getNumberOfQubits();
+        yLines = circuit.getY().getNumberOfQubits();
+    }
+
+    /** function that draws indexes for qubits, and their values as well as 'step through' line **/
     public void drawInitState(){
+        int qubitValue;
         Line step = new Line (beginLineX + 10, 25, beginLineX + 10, 15 + gateSize * (xLines+yLines) );
         step.setStroke(Color.SLATEBLUE);
         Group g = new Group();
         int i;
         for (i = 0; i < xLines; i++){
+            qubitValue = circuit.getX().getQubit(i);
             //draw indexes
             Text index = new Text(padding/2, gateSize*i + topPadding, Integer.toString(i));
             index.setFont(new Font(14));
             index.setFill(Color.TEAL);
 
-            Text qubitVal = new Text(padding/2 + 20, gateSize*i + topPadding, " |0>");
+            Text qubitVal = new Text(padding/2 + 20, gateSize*i + topPadding, " |"+qubitValue+">");
             qubitVal.setFont(new Font(14));
 
             Line l = new Line(beginLineX, beginLineY +gateSize*i, beginLineX + 20, beginLineY +gateSize*i);
             g.getChildren().addAll(index,qubitVal,l);
         }
+        drawXGrid(circuit.getX().getState());
         if (yLines != 0) {
             Line split = new Line(padding / 2, beginLineY + gateSize * xLines - gateSize / 2, beginLineX + 20, beginLineY + gateSize * xLines - gateSize / 2);
             split.setStroke(Color.TEAL);
 
             for (i = xLines; i < xLines + yLines; i++) {
+                qubitValue = circuit.getY().getQubit(i - xLines);
                 //draw indexes
                 Text index = new Text(padding / 2, gateSize * i + topPadding, Integer.toString(i - xLines));
                 index.setFont(new Font(14));
                 index.setFill(Color.TEAL);
 
-                Text qubitVal = new Text(padding / 2 + 20, gateSize * i + topPadding, " |0>");
+                Text qubitVal = new Text(padding / 2 + 20, gateSize * i + topPadding, " |"+qubitValue+">");
                 qubitVal.setFont(new Font(14));
 
                 Line l = new Line(beginLineX, beginLineY + gateSize * i, beginLineX + 20, beginLineY + gateSize * i);
                 g.getChildren().addAll(index, qubitVal, l);
             }
             g.getChildren().add(split);
+            drawYGrid(circuit.getY().getState());
         }
         circuitCanvas.getChildren().addAll(step, g);
     }
 
+    /** Change initial state of registers without changing the whole circuit picture **/
     public void changeQubitVals(){
         int qubitValue;
+
         /** get first group that is initial state **/
         Group g = (Group) circuitCanvas.getChildren().get(1);
         for (int i = 0; i < xLines; i++){
@@ -98,22 +119,29 @@ public class CanvasManager {
             Text t = (Text) g.getChildren().get(i*3 + 1);
             t.setText("|"+qubitValue+">");
         }
-        reInitGrid(xCanvas, circuit.getX().getState());
         if (yLines != 0) {
             for (int i = xLines; i < xLines + yLines; i++) {
                 qubitValue = circuit.getY().getQubit(i - xLines);
                 Text t = (Text) g.getChildren().get(i * 3 + 1);
                 t.setText("|" + qubitValue + ">");
             }
-            reInitGrid(yCanvas, circuit.getY().getState());
+
         }
+        /** since initial state was changed, we move to the beginning of the circuit **/
+        stepThrough(0);
     }
+
+    /** moves 'step' line to its state and updates colors of states **/
     public void stepThrough(int step){
         int start = beginQubitX - 5;
         Line l  = (Line) circuitCanvas.getChildren().get(0);
         l.setStartX(start + step*gateSize);
         l.setEndX(start + step*gateSize);
-        colorAmplitudes();
+
+        /** recolor amplitudes **/
+        colorAmplitudes(xCanvas, circuit.getX());
+        if (yLines !=0 )
+            colorAmplitudes(yCanvas, circuit.getY());
     }
 
     public void drawXGrid(int stateX){
@@ -124,9 +152,9 @@ public class CanvasManager {
             drawGrid(yCanvas,yLines,stateY);
     }
 
+    /** draw the grid of squares for single register **/
     private void drawGrid(Pane canvas, int qubits, int initState){
         int numberOfQubits = (int) Math.pow(2, qubits);
-
         for (int i = 0; i <numberOfQubits; i++){
             Rectangle r = new Rectangle( (i%gridSplit+1)*gap + i%gridSplit*qubitSize, (gap + qubitSize) * (i/gridSplit + 1), qubitSize, qubitSize );
             r.setStroke(Color.GREY);
@@ -139,18 +167,6 @@ public class CanvasManager {
             Tooltip.install(r,t);
             canvas.getChildren().add(r);
         }
-    }
-
-    private void reInitGrid(Pane canvas, int newState){
-
-//        for (int i = 0; i < canvas.getChildren().size(); i++){
-//            Rectangle r = (Rectangle)canvas.getChildren().get(i);
-//            if (i == newState)
-//                r.setFill(Color.RED);
-//            else
-//                r.setFill(defaultColor);
-//        }
-        //colorAmplitudes();
     }
 
     public void drawUnaryOperator(int index, UnaryOperator operator){
@@ -455,30 +471,32 @@ public class CanvasManager {
         circuitCanvas.getChildren().add(g);
     }
 
-    public void colorAmplitudes() {
+    /** Color amplitutes using HSB (hue, saturation, brigthness) format. Hue is and angle of the z=a+ib,
+     *  and brightness is z abs length. Saturation is always 1 **/
+    public void colorAmplitudes(Pane canvas, Register r) {
         double hue, saturation = 1 , brightness;
 
-        Complex[] xAmp = circuit.getX().getAmplitudes();
-        for (int i = 0; i < xAmp.length; i++) {
-            System.out.println(xAmp[i].getReal()+" "+xAmp[i].getImaginary());
-            if (xAmp[i].getReal() == 0) {
+        Complex[] amp = r.getAmplitudes();
+        for (int i = 0; i < amp.length; i++) {
+            System.out.println(amp[i].getReal()+" "+amp[i].getImaginary());
+            if (amp[i].getReal() == 0) {
                 hue = Math.PI / 2;
-                if (xAmp[i].getImaginary() < 0) {
+                if (amp[i].getImaginary() < 0) {
                     hue = 1.5 * Math.PI;
                 }
             } else {
-                hue = Math.atan(xAmp[i].getImaginary() / xAmp[i].getReal());
-                if (xAmp[i].getReal() < 0) {
+                hue = Math.atan(amp[i].getImaginary() / amp[i].getReal());
+                if (amp[i].getReal() < 0) {
                     hue += Math.PI;
-                } else if (xAmp[i].getImaginary() < 0) {
+                } else if (amp[i].getImaginary() < 0) {
                     hue += 2 * Math.PI;
                 }
             }
             /** calcualate percentage of the angle, so we have have a scale form 0-1 instead of 0 - 2*Pi (0-360)**/
-            brightness = Math.pow(xAmp[i].abs(), 0.25);
-            Rectangle r = (Rectangle) xCanvas.getChildren().get(i);
+            brightness = Math.pow(amp[i].abs(), 0.25);
+            Rectangle rec = (Rectangle) canvas.getChildren().get(i);
            // System.out.println("HS: "+hue+ " "+brightness);
-            r.setFill(Color.hsb(Math.toDegrees(hue), saturation, brightness));
+            rec.setFill(Color.hsb(Math.toDegrees(hue), saturation, brightness));
         }
     }
 

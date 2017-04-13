@@ -28,11 +28,12 @@ public class Register {
         numberOfQubits = numOfQubits;
         numberOfBases = (int) Math.pow(2.0, (double) numOfQubits);
         amplitudes = new Complex[numberOfBases];
-        reinitializeQubits();
+        reinitializeState();
         //set 0s to red color here
     }
 
-    public void reinitializeQubits(){
+    /** brings register to inital state **/
+    public void reinitializeState(){
         for (int i = 0; i < numberOfBases; i++) {
             if (i == initialState) amplitudes[initialState] = new Complex(1, 0);
             else amplitudes[i] = new Complex(0, 0);

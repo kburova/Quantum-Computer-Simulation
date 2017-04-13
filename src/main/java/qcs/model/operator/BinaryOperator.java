@@ -21,10 +21,9 @@ public class BinaryOperator extends Operator {
             register.Swap(target,control);
         }else if (name.equals("Rotate")){
             //register.Rotate();
-        }else if (name.equals("CCNOT")){
+        }else if (name.equals("CNOT")){
             register.CNOT(control,target);
         }
-
     }
 
     public int getTarget(){

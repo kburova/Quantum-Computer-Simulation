@@ -32,7 +32,7 @@ public class UnaryOperator extends Operator{
         }else if (name.equals("Phase")){
             register.Phase(target, Math.PI/8);
         }else if (name.equals("Shift")) {
-
+            register.T(target);
         }
     }
     public int getTarget(){

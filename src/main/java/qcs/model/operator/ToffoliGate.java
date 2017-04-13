@@ -19,6 +19,7 @@ public class ToffoliGate extends Operator{
     }
 
     public void doOperation(){
+        register.CCNOT(control1,control2,target);
     }
 
     public int getTarget(){
