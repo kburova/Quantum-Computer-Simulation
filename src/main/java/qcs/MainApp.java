@@ -35,6 +35,10 @@ public class MainApp extends Application {
     //create new circuit
     public MainApp() { circuit = new Circuit(); }
 
+    public MainApp(Circuit circuit) {
+        this.circuit = circuit;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
