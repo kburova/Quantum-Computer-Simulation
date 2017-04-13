@@ -33,6 +33,11 @@ public class Register {
         //set 0s to red color here
     }
 
+    public Complex[] getAmplitudes()
+    {
+      return amplitudes;
+    }
+
     public Complex getQbitValue(int qbit)
     {
         return amplitudes[qbit];
@@ -88,18 +93,11 @@ public class Register {
 
     public void Not(int targetQubit)
     {
-        amplitudes = Not_Qubit(amplitudes, numberOfBases, targetQubit);
-    }
-
-    private Complex[] Not_Qubit(Complex[] amplitudes, int numberOfBases
-      , int targetQubit)
-    {
         for (int i = 0; i < numberOfBases; i++)
             amplitudes = notHelpful(amplitudes, targetQubit, i);
-
-        return amplitudes;
     }
 
+    //not entirely sure what this subroutine should be called, seemed punny at the time
     private Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
     {
         if((i & (1<<targetQubit)) == 0)
