@@ -4,6 +4,10 @@ import org.apache.commons.math3.complex.Complex;
 
 /**
  * Created by nick on 4/8/17.
+ * It is my intention that this is a function module full of useful math ops
+ * That being said there should be no class level state unless it is declared
+ * final.
+ * As it grows we can break it down into further modules.
  */
 public class QuantumMathUtil {
   public Complex[] not(Complex[] amplitudes, int numberOfBases, int targetQubit)
@@ -43,6 +47,11 @@ public class QuantumMathUtil {
 
       return rootsOfUnity;
     }
+  }
+
+  public boolean complex_match(Complex a, Complex b)
+  {
+    return a.getReal() == b.getReal() && a.getImaginary() == b.getImaginary();
   }
 
   public Complex[][] outerProduct(Complex[][] u, Complex[][] v)
