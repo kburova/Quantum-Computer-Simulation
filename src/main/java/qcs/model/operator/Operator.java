@@ -10,16 +10,21 @@ import qcs.model.Register;
 public abstract class Operator {
 
     Register register;
-    int target;
     String name;
 
-    public Operator (Register r, int q, String n){
+    public Operator (Register r, String n){
         register = r;
-        target = q;
         name = n;
     }
 
     //operation specific to each gate/measurement
     public abstract void doOperation();
+    public String getName() {
+        return name;
+    }
 
+    public String getRegisterName() {
+        return register.getName();
+    }
+    public Register getRegister() {return register; }
 }

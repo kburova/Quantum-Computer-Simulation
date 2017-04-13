@@ -203,4 +203,11 @@ public class Register {
         amplitudes[initialState] = new Complex(1,0); //???
     }
 
+    public int getState() {
+        return initialState;
+    }
+
+    public Complex[] getAmplitudes(){
+        return amplitudes;
+    }
 }

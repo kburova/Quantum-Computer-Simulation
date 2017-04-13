@@ -11,12 +11,9 @@
 
  Date: 03/18/2017
  ****************************************************/
-package qcs;
+package qcs.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
-import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import qcs.model.Circuit;
@@ -102,11 +99,7 @@ public class InitCircuitDialogController {
         if ( errorMessage.length() == 0 ){
             return true;
         }else{
-            //alert if information was entered wrong
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setContentText(errorMessage);
-            alert.showAndWait();
+            circuit.showError(errorMessage);
 
             return false;
         }
