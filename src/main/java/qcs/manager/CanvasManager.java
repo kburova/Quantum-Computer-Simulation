@@ -477,7 +477,7 @@ public class CanvasManager {
             /** calcualate percentage of the angle, so we have have a scale form 0-1 instead of 0 - 2*Pi (0-360)**/
             brightness = Math.pow(xAmp[i].abs(), 0.25);
             Rectangle r = (Rectangle) xCanvas.getChildren().get(i);
-            System.out.println("HS: "+hue+ " "+brightness);
+           // System.out.println("HS: "+hue+ " "+brightness);
             r.setFill(Color.hsb(Math.toDegrees(hue), saturation, brightness));
         }
     }
