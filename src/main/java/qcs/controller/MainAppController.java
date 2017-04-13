@@ -53,8 +53,7 @@ public class MainAppController implements Initializable{
     @FXML
     private void open() {
         Circuit circuit = new IOmanager().load(new Stage());
-
-        // Use this circuit to create updated UI
+        mainApp.setCircuit(circuit);
     }
 
     @FXML

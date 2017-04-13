@@ -35,10 +35,6 @@ public class MainApp extends Application {
     //create new circuit
     public MainApp() { circuit = new Circuit(); }
 
-    public MainApp(Circuit circuit) {
-        this.circuit = circuit;
-    }
-
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -300,6 +296,10 @@ public class MainApp extends Application {
     }
 
     final public Circuit getCircuit() { return circuit; }
+
+    final public void setCircuit(Circuit circuit) {
+        // Implement here
+    }
 
     public static void main(String[] args) {
         launch(args);
