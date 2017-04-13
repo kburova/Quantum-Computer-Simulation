@@ -28,11 +28,16 @@ public class Register {
         numberOfQubits = numOfQubits;
         numberOfBases = (int) Math.pow(2.0, (double) numOfQubits);
         amplitudes = new Complex[numberOfBases];
-
-        for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
+        reinitializeQubits();
         //set 0s to red color here
     }
 
+    public void reinitializeQubits(){
+        for (int i = 0; i < numberOfBases; i++) {
+            if (i == initialState) amplitudes[initialState] = new Complex(1, 0);
+            else amplitudes[i] = new Complex(0, 0);
+        }
+    }
     public void Hadamard(int targetQubit)
     {
         Complex alpha, beta;

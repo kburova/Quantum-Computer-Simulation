@@ -74,7 +74,8 @@ public class MainAppController implements Initializable{
         if (c.getX() != null) {
             int step = c.getCurrentStep();
             if (step < c.getNumberOfOperators()) {
-                //TODO: add execution of the function here
+                /** execution of the function here **/
+                mainApp.getCircuit().getOperator(step).doOperation();
                 mainApp.getCircuit().setCurrentStep(++step);
                 canvasManager.stepThrough(step);
             }
@@ -156,6 +157,8 @@ public class MainAppController implements Initializable{
         }else {
             boolean OkClicked = mainApp.showAddQubitValuesDialog();
             if (OkClicked) {
+                mainApp.getCircuit().getX().reinitializeQubits();
+                mainApp.getCircuit().getY().reinitializeQubits();
                 canvasManager.changeQubitVals();
                 mainApp.getCircuit().setCurrentStep(0);
                 canvasManager.stepThrough(0);

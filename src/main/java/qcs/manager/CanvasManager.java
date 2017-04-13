@@ -2,6 +2,7 @@ package qcs.manager;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -33,10 +34,11 @@ public class CanvasManager {
     private int beginLineX = 55;
     private int beginLineY = 36;
     /** elements for qubit canvases **/
-    private int gridSplit = 32;
-    private int qubitSize = 20;
+    private int gridSplit = 64;
+    private int qubitSize = 12;
     private int gap = 5;
     Color defaultColor = Color.BLACK;
+    Color yellow = new Color(1, 0.83, 0.5, 1);
 
     private int beginQubitX = beginLineX + 20;
 
@@ -111,6 +113,7 @@ public class CanvasManager {
         Line l  = (Line) circuitCanvas.getChildren().get(0);
         l.setStartX(start + step*gateSize);
         l.setEndX(start + step*gateSize);
+        colorAmplitudes();
     }
 
     public void drawXGrid(int stateX){
@@ -132,7 +135,7 @@ public class CanvasManager {
                 r.setFill(Color.RED);
             String binaryVal = String.format("%"+qubits+"s", Integer.toBinaryString(i)).replace(' ','0');
 
-            Tooltip t  = new Tooltip("|"+binaryVal + ">");
+            Tooltip t  = new Tooltip("|"+i+"> = |"+binaryVal + ">");
             Tooltip.install(r,t);
             canvas.getChildren().add(r);
         }
@@ -140,13 +143,14 @@ public class CanvasManager {
 
     private void reInitGrid(Pane canvas, int newState){
 
-        for (int i = 0; i < canvas.getChildren().size(); i++){
-            Rectangle r = (Rectangle)canvas.getChildren().get(i);
-            if (i == newState)
-                r.setFill(Color.RED);
-            else
-                r.setFill(defaultColor);
-        }
+//        for (int i = 0; i < canvas.getChildren().size(); i++){
+//            Rectangle r = (Rectangle)canvas.getChildren().get(i);
+//            if (i == newState)
+//                r.setFill(Color.RED);
+//            else
+//                r.setFill(defaultColor);
+//        }
+        //colorAmplitudes();
     }
 
     public void drawUnaryOperator(int index, UnaryOperator operator){
@@ -307,7 +311,7 @@ public class CanvasManager {
         int controlQ = operator.getControl1();
         int controlQ2 = operator.getControl2();
 
-        System.out.println(targetQ+" "+controlQ+" "+controlQ2);
+//        System.out.println(targetQ+" "+controlQ+" "+controlQ2);
         String register = operator.getRegisterName();
         if (register.equals("Y")){
             targetQ += xLines;
@@ -417,22 +421,22 @@ public class CanvasManager {
         /** set text inside of qubit **/
         if (name.equals("Grover")){
             tag = "G";
-            r.setFill(new Color(1, 0.83, 0.5, 1));
+            r.setFill(yellow);
         }else if (name.equals("WH")){
             tag = "WH";
-            r.setFill(new Color(1, 0.83, 0.5, 1));
+            r.setFill(yellow);
         }else if (name.equals("QFT")){
             tag = "F";
-            r.setFill(new Color(1, 0.83, 0.5, 1));
+            r.setFill(yellow);
         }else if (name.equals("iQFT")){
             tag = "1/F";
-            r.setFill(new Color(1, 0.83, 0.5, 1));
+            r.setFill(yellow);
         }else if (name.equals("General")){
             tag = "C";
-            r.setFill(new Color(1, 0.83, 0.5, 1));
+            r.setFill(yellow);
         }else if (name.equals("Eval")){
             tag = "f(x)";
-            r.setFill(new Color(1, 0.83, 0.5, 1));
+            r.setFill(yellow);
         }else if (name.equals("CompB")){
             tag = "CB";
             r.setFill(Color.DEEPSKYBLUE);
@@ -451,29 +455,31 @@ public class CanvasManager {
         circuitCanvas.getChildren().add(g);
     }
 
-    public void colorAmplitudes(){
-//        double phase;
-//        Complex[] xAmp = circuit.getX().getAmplitudes();
-//        for (int i = 0; i < xAmp.length; i++){
-//            if (xAmp[i].getReal() == 0){
-//                phase = 2*Math.PI;
-//                if (xAmp[i].getImaginary() < 0){
-//                    phase = Math.PI * 2 - phase;
-//                }
-//            }else{
-//                phase = Math.atan(xAmp[i].getImaginary()/ xAmp[i].getReal());
-//                if (xAmp[i].getReal() < 0) {
-//                    phase += Math.PI;
-//                } else if (xAmp[i].getImaginary() < 0) {
-//                    phase += 2* Math.PI;
-//                }
-//            }
-//            phase /= 2 * Math.PI;
-//            Rectangle r = (Rectangle) xCanvas.getChildren().get(i);
-//            r.setFill();
-//            Complex x = new Complex();
-//            //x.
-//        }
+    public void colorAmplitudes() {
+        double hue, saturation = 1 , brightness;
+
+        Complex[] xAmp = circuit.getX().getAmplitudes();
+        for (int i = 0; i < xAmp.length; i++) {
+            System.out.println(xAmp[i].getReal()+" "+xAmp[i].getImaginary());
+            if (xAmp[i].getReal() == 0) {
+                hue = Math.PI / 2;
+                if (xAmp[i].getImaginary() < 0) {
+                    hue = 1.5 * Math.PI;
+                }
+            } else {
+                hue = Math.atan(xAmp[i].getImaginary() / xAmp[i].getReal());
+                if (xAmp[i].getReal() < 0) {
+                    hue += Math.PI;
+                } else if (xAmp[i].getImaginary() < 0) {
+                    hue += 2 * Math.PI;
+                }
+            }
+            /** calcualate percentage of the angle, so we have have a scale form 0-1 instead of 0 - 2*Pi (0-360)**/
+            brightness = Math.pow(xAmp[i].abs(), 0.25);
+            Rectangle r = (Rectangle) xCanvas.getChildren().get(i);
+           // System.out.println("HS: "+hue+ " "+brightness);
+            r.setFill(Color.hsb(Math.toDegrees(hue), saturation, brightness));
+        }
     }
 
 }
