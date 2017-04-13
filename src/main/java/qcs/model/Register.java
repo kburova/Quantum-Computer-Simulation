@@ -175,7 +175,20 @@ public class Register {
     }
 
     //Ternary Operators
+    public void CCNOT(int controlQubit1, int controlQubit2, int targetQubit)
+    {
+        Complex swapVar;
 
+        for(int i=0;i<numberOfBases;i++)
+        {
+            if((i & (1<<controlQubit1)) != 0 && (i & (1<<controlQubit2)) != 0 && (i & (1<<targetQubit)) != 0)
+            {
+                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
+                amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
+            }
+        }
+    }
 
     final public String getName(){
         return name;
