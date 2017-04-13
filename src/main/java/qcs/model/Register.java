@@ -21,6 +21,7 @@ public class Register {
     private String name;
     private int initialState;
     private Complex[] amplitudes;
+    private final QuantumMathUtil util = new QuantumMathUtil();
 
     public Register (String n, int numOfQubits){
         initialState = 0;
@@ -93,21 +94,7 @@ public class Register {
 
     public void Not(int targetQubit)
     {
-        for (int i = 0; i < numberOfBases; i++)
-            amplitudes = notHelpful(amplitudes, targetQubit, i);
-    }
-
-    //not entirely sure what this subroutine should be called, seemed punny at the time
-    private Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
-    {
-        if((i & (1<<targetQubit)) == 0)
-        {
-            Complex swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-            amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
-            amplitudes[i^(1<<targetQubit)] = swapVar;
-        }
-
-        return amplitudes;
+      amplitudes = util.not(amplitudes, numberOfBases, targetQubit);
     }
 
     // Binary Operators
@@ -119,7 +106,7 @@ public class Register {
         {
             if((i & (1<<controlQubit)) != 0)
             {
-              amplitudes = notHelpful(amplitudes, targetQubit, i);
+              amplitudes = util.notHelpful(amplitudes, targetQubit, i);
             }
         }
     }

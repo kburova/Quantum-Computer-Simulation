@@ -6,6 +6,26 @@ import org.apache.commons.math3.complex.Complex;
  * Created by nick on 4/8/17.
  */
 public class QuantumMathUtil {
+  public Complex[] not(Complex[] amplitudes, int numberOfBases, int targetQubit)
+  {
+    for (int i = 0; i < numberOfBases; i++)
+      amplitudes = notHelpful(amplitudes, targetQubit, i);
+    return amplitudes;
+  }
+
+  //not entirely sure what this subroutine should be called, seemed punny at the time
+  public Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
+  {
+    if((i & (1<<targetQubit)) == 0)
+    {
+      Complex swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+      amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
+      amplitudes[i^(1<<targetQubit)] = swapVar;
+    }
+
+    return amplitudes;
+  }
+
   public Complex[] rootOfUnity(Integer n)
   {
     if(n < 1) return new Complex[0];
