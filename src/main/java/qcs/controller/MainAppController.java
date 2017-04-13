@@ -25,9 +25,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import qcs.CanvasManager;
+import qcs.manager.CanvasManager;
 import qcs.MainApp;
-import qcs.QIO;
+import qcs.manager.IOmanager;
 import qcs.model.Circuit;
 import qcs.model.operator.BinaryOperator;
 import qcs.model.operator.ToffoliGate;
@@ -40,7 +40,7 @@ public class MainAppController implements Initializable{
     private CanvasManager canvasManager;
 
     //reference used by save / load to remember where to save to
-    private QIO qio = new QIO();
+    private IOmanager IOmanager = new IOmanager();
     @FXML
     private Pane circuitCanvas;
     @FXML
@@ -52,19 +52,19 @@ public class MainAppController implements Initializable{
 
     @FXML
     private void open() {
-        new QIO().load(new Stage());
+        new IOmanager().load(new Stage());
     }
 
     @FXML
     private void save_as() {
         //when there is a dialogStage for the visualization to be loaded
         //from (first q function) expects an arraylist
-        qio.save_as(new Stage(), new ArrayList<>());
+        IOmanager.save_as(new Stage(), new ArrayList<>());
     }
 
     @FXML
     private void save() {
-        qio.save(new ArrayList<>());
+        IOmanager.save(new ArrayList<>());
     }
 
     @FXML

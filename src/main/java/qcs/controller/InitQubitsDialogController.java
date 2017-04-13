@@ -39,7 +39,7 @@ public class InitQubitsDialogController implements Initializable{
     Circuit circuit;
     Stage dialogStage;
 
-    InitQubitsDialogController (Circuit c){
+    public InitQubitsDialogController (Circuit c){
         circuit = c;
     }
 

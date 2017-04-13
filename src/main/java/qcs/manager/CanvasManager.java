@@ -1,4 +1,4 @@
-package qcs;
+package qcs.manager;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
