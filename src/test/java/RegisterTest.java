@@ -8,42 +8,6 @@ import qcs.model.Register;
 import static org.junit.Assert.*;
 
 public class RegisterTest {
-
-  @Test
-  public void Not_Is_Unitary_With_Self()
-  {
-    //arrange
-    Register register = new Register("", 1);
-
-    //act
-    Complex original = register.getQbitValue(0);
-
-    register.Not(0);
-    register.Not(0);
-
-    Complex not_not_original = register.getQbitValue(0);
-
-    //assert
-    assertTrue(original.getReal() == not_not_original.getReal()
-      && original.getImaginary() == not_not_original.getImaginary());
-  }
-
-  @Test
-  public void Not_Something_Is_Something_Else()
-  {
-    //arrange
-    Register register = new Register("", 1);
-
-    //act
-    Complex expected = new Complex(0);
-    register.Not(0);
-    Complex not_one = register.getQbitValue(0);
-
-    //assert
-    assertTrue(expected.getReal() != not_one.getReal()
-      || expected.getImaginary() != not_one.getImaginary());
-  }
-
   @Test
   public void CNot_One_Control_Set_Unitary_With_Self()
   {
