@@ -9,25 +9,6 @@ import static org.junit.Assert.*;
 
 public class RegisterTest {
   @Test
-  public void Hadamard_Unitary_With_Self()
-  {
-    //arrange
-    Register register = new Register("", 1);
-
-    //act
-    Complex before = register.getQbitValue(0);
-
-    register.Hadamard(0);
-    register.Hadamard(0);
-
-    Complex after = register.getQbitValue(0);
-
-    //assert
-    assertTrue(before.getReal() == after.getReal()
-      && before.getImaginary() == after.getImaginary());
-  }
-
-  @Test
   public void Identity_Unitary_With_Self()
   {
     //arrange

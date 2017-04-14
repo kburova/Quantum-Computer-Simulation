@@ -128,4 +128,63 @@ public class QuantumMathUtilTest {
     //assert
     assertTrue(util.complex_vector_match(input, output));
   }
+
+  @Test
+  public void hadamard_is_unitary_with_self()
+  {
+    //arrange
+    //|0>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(1);
+    input[1] = new Complex(0);
+
+    //act
+    Complex[] intermediate = util.hadamard(input,2,0);
+    Complex[] output = util.hadamard(intermediate,2,0);
+
+    //assert
+    assertTrue(util.complex_vector_match(input, output));
+  }
+
+  @Test
+  public void hadamard_on_single_qubit_zero()
+  {
+    //|0> -> (1/(sqrt(2))*(|0> + |1>)
+    //arrange
+    //|0>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(1);
+    input[1] = new Complex(0);
+
+    //act
+    Complex[] output = util.hadamard(input,2,0);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(1/Math.sqrt(2));
+    expected[1] = new Complex(1/Math.sqrt(2));
+
+    //assert
+    assertTrue(util.complex_vector_match(expected, output));
+  }
+
+  @Test
+  public void hadamard_on_single_qubit_one()
+  {
+    //|1> -> (1/(sqrt(2))*(|0> - |1>)
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+
+    //act
+    Complex[] output = util.hadamard(input,2,0);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(1/Math.sqrt(2));
+    expected[1] = new Complex(-1/Math.sqrt(2));
+
+    //assert
+    assertTrue(util.complex_vector_match(expected, output));
+  }
 }

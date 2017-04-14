@@ -44,23 +44,9 @@ public class Register {
         return amplitudes[qbit];
     }
 
-    public Complex[] Hadamard(int targetQubit)
+    public void Hadamard(int targetQubit)
     {
-        Complex alpha, beta;
-
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if( (i & (1<<targetQubit)) == 0)
-            {
-                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
-
-                amplitudes[i] = alpha.add(beta).divide(Math.sqrt(2.0));
-                amplitudes[i^(1<<targetQubit)] = alpha.subtract(beta).divide(Math.sqrt(2.0));
-            }
-        }
-
-        return amplitudes;
+      amplitudes = util.hadamard(amplitudes, numberOfBases, targetQubit);
     }
 
     public void Identity()

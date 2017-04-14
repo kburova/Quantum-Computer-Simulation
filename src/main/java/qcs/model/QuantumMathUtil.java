@@ -34,6 +34,26 @@ public class QuantumMathUtil {
     return amplitudes;
   }
 
+  public Complex[] hadamard(Complex[] amplitudes, int numberOfBases
+    , int targetQubit)
+  {
+    Complex alpha, beta;
+
+    for (int i = 0; i < numberOfBases; i++)
+    {
+      if( (i & (1<<targetQubit)) == 0)
+      {
+        alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+        beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+        amplitudes[i] = alpha.add(beta).divide(Math.sqrt(2.0));
+        amplitudes[i^(1<<targetQubit)] = alpha.subtract(beta).divide(Math.sqrt(2.0));
+      }
+    }
+
+    return amplitudes;
+  }
+
   //not entirely sure what this subroutine should be called, seemed punny at the time
   private Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
   {
