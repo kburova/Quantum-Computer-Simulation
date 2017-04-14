@@ -12,14 +12,12 @@
  Date: 03/22/2017
  ****************************************************/
 
-package qcs;
+package qcs.controller;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -41,7 +39,7 @@ public class InitQubitsDialogController implements Initializable{
     Circuit circuit;
     Stage dialogStage;
 
-    InitQubitsDialogController (Circuit c){
+    public InitQubitsDialogController (Circuit c){
         circuit = c;
     }
 

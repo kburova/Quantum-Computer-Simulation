@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="131.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.UnaryGateController">
+<AnchorPane prefHeight="171.0" prefWidth="163.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.TernaryGateController">
     <children>
         <GridPane prefHeight="71.0" prefWidth="125.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <columnConstraints>
@@ -22,16 +22,22 @@
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints />
             </rowConstraints>
             <children>
-                <RadioButton fx:id = "x" mnemonicParsing="false" selected="true" text="Register X" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+                <RadioButton mnemonicParsing="false" selected="true" text="Register X" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" fx:id="x">
                     <toggleGroup>
                         <ToggleGroup fx:id="group1" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton fx:id = "y" mnemonicParsing="false" text="Register Y" toggleGroup="$group1" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                <RadioButton fx:id="y" mnemonicParsing="false" text="Register Y" toggleGroup="$group1" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                 <Label text="Target Qubit: " GridPane.columnIndex="0" GridPane.rowIndex="2"> </Label>
-                <TextField fx:id = "target" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="target" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Control Qubit: " GridPane.columnIndex="0" GridPane.rowIndex="3"> </Label>
+                <TextField fx:id="control1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Control Qubit: " GridPane.columnIndex="0" GridPane.rowIndex="4"> </Label>
+                <TextField fx:id="control2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </children>
         </GridPane>
         <HBox alignment="CENTER" minWidth="-1.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">

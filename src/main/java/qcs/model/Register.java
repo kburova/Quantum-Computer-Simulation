@@ -29,14 +29,15 @@ public class Register {
         numberOfQubits = numOfQubits;
         numberOfBases = (int) Math.pow(2.0, (double) numOfQubits);
         amplitudes = new Complex[numberOfBases];
-
-        for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
+        reinitializeQubits();
         //set 0s to red color here
     }
 
-    public Complex[] getAmplitudes()
-    {
-      return amplitudes;
+    public void reinitializeQubits(){
+        for (int i = 0; i < numberOfBases; i++) {
+            if (i == initialState) amplitudes[initialState] = new Complex(1, 0);
+            else amplitudes[i] = new Complex(0, 0);
+        }
     }
 
     public void Hadamard(int targetQubit)
@@ -91,9 +92,13 @@ public class Register {
         amplitudes = util.z(amplitudes,numberOfBases,targetQubit);
     }
 
-    public void Rotate()
+    public void ConditionalRotate(int controlQubit, int targetQubit, double phase)
     {
-        //Need to ask Dr. Maclennan about this one
+        for (int i = 0; i < numberOfBases; i++)
+        {
+            if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) != 0)
+                amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+        }
     }
 
     public void Swap(int qubit1, int qubit2)
@@ -102,7 +107,53 @@ public class Register {
     }
 
     //Ternary Operators
+    public void CCNOT(int controlQubit1, int controlQubit2, int targetQubit)
+    {
+        Complex swapVar;
 
+        for(int i=0;i<numberOfBases;i++)
+        {
+            if((i & (1<<controlQubit1)) != 0 && (i & (1<<controlQubit2)) != 0 && (i & (1<<targetQubit)) != 0)
+            {
+                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
+                amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
+            }
+        }
+    }
+
+    //Variable Operators
+
+    public void Grover()
+    {
+
+    }
+
+    public void WalshHadamard()
+    {
+
+    }
+
+    public void QFT()
+    {
+        //This implmentation just works on all qubits -- will need to modify to make it work
+        //on ranges.
+        Complex omega;
+        Complex[] resultant;
+
+        omega = new Complex(0, 2.0*Math.PI/(1.0*numberOfQubits));
+        resultant = new Complex[numberOfBases];
+
+        for(int i=0;i<numberOfBases;i++)
+        {
+            resultant[i] = Complex.ZERO;
+            for(int j=0;j<numberOfBases;j++)
+                resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
+            resultant[i] = resultant[i].divide(Math.sqrt(numberOfBases));
+        }
+
+        amplitudes = resultant;
+    }
 
     final public String getName(){
         return name;
@@ -130,4 +181,11 @@ public class Register {
         amplitudes[initialState] = new Complex(1,0); //???
     }
 
+    public int getState() {
+        return initialState;
+    }
+
+    public Complex[] getAmplitudes(){
+        return amplitudes;
+    }
 }

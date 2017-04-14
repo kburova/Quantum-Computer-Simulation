@@ -1,4 +1,4 @@
-package qcs;
+package qcs.manager;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  * All use JavaFX for native OS integration (excluding mobile OS)
  * Conversion from json to java classes and opposite direction done with gson library
  */
-public class QIO {
+public class IOmanager {
     private File last_file_saved = null;
 
     public void save(List<Class<?>> quantum_fun_stuff) {

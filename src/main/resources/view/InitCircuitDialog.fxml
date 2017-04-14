@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<AnchorPane prefHeight="121.0" prefWidth="171.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.InitCircuitDialogController">
+<AnchorPane prefHeight="121.0" prefWidth="171.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.InitCircuitDialogController">
             <children>
                 <GridPane prefHeight="71.0" prefWidth="151.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="10.0">
                     <children>

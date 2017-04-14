@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="131.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.UnaryGateController">
+<AnchorPane prefHeight="131.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.GroverGateController">
     <children>
         <GridPane prefHeight="71.0" prefWidth="125.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" prefWidth="98.0" />
-                <ColumnConstraints hgrow="SOMETIMES" prefWidth="25" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="65" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints vgrow="SOMETIMES" />
@@ -24,14 +24,14 @@
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <RadioButton fx:id = "x" mnemonicParsing="false" selected="true" text="Register X" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+                <RadioButton mnemonicParsing="false" selected="true" text="Register X" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" fx:id="x">
                     <toggleGroup>
                         <ToggleGroup fx:id="group1" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton fx:id = "y" mnemonicParsing="false" text="Register Y" toggleGroup="$group1" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                <Label text="Target Qubit: " GridPane.columnIndex="0" GridPane.rowIndex="2"> </Label>
-                <TextField fx:id = "target" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <RadioButton fx:id="y" mnemonicParsing="false" text="Register Y" toggleGroup="$group1" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                <Label text="Search Value: " GridPane.columnIndex="0" GridPane.rowIndex="2"> </Label>
+                <TextField fx:id="searchValue" prefHeight="26.0" prefWidth="37.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
         </GridPane>
         <HBox alignment="CENTER" minWidth="-1.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
