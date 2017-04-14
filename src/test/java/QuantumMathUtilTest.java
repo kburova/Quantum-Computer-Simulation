@@ -32,6 +32,7 @@ public class QuantumMathUtilTest {
     assertArrayEquals(result, expected);
   }
 
+  //|0> -> |1> -> |0>
   @Test
   public void not_is_unitary_with_self()
   {
@@ -45,8 +46,7 @@ public class QuantumMathUtilTest {
     Complex[] output = util.not(not, 2, 0);
 
     //assert
-    assertTrue(util.complex_match(input[0], output[0])
-      && util.complex_match(input[1], output[1]));
+    assertTrue(util.complex_vector_match(input,output));
   }
 
   @Test
@@ -66,7 +66,66 @@ public class QuantumMathUtilTest {
 
 
     //assert
-    assertTrue(util.complex_match(expected[0], actual[0])
-      && util.complex_match(expected[1], actual[1]));
+    assertTrue(util.complex_vector_match(actual,expected));
+  }
+
+  //|10> -> |11> -> |10>
+  @Test
+  public void cnot_control_set_unitary_with_self()
+  {
+    //|10>
+    Complex[] input = new Complex[4];
+    input[0] = new Complex(0);
+    input[1] = new Complex(0);
+    input[2] = new Complex(1);
+    input[3] = new Complex(0);
+
+    //|11>
+    Complex[] cnot = util.cnot(input, 4, 0, 0);
+
+    //|10>
+    Complex[] output = util.cnot(cnot, 4, 0, 0);
+
+    //assert
+    assertTrue(util.complex_vector_match(input,output));
+  }
+
+  @Test
+  public void cnot_control_set_one_to_zero()
+  {
+    //|11>
+    Complex[] input = new Complex[4];
+    input[0] = new Complex(0);
+    input[1] = new Complex(0);
+    input[2] = new Complex(0);
+    input[3] = new Complex(1);
+
+    //|10>
+    Complex[] output = util.cnot(input, 4, 0, 1);
+
+    //|10>
+    Complex[] expected = new Complex[4];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(0);
+    expected[2] = new Complex(1);
+    expected[3] = new Complex(0);
+
+    //assert
+    assertTrue(util.complex_vector_match(expected, output));
+  }
+
+  @Test
+  public void cnot_does_nothing_when_control_bit_not_set()
+  {
+    //|0>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(1);
+    input[1] = new Complex(0);
+
+    //|0>
+    Complex[] output = util.cnot(input, 2, 0, 0);
+
+    //assert
+    assertTrue(util.complex_vector_match(input, output));
   }
 }

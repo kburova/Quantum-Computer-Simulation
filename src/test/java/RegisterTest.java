@@ -9,68 +9,6 @@ import static org.junit.Assert.*;
 
 public class RegisterTest {
   @Test
-  public void CNot_One_Control_Set_Unitary_With_Self()
-  {
-    //arrange
-    Register register = new Register("", 2);
-
-
-    //act
-    //set control bit
-    register.Not(0);
-
-    Complex original = register.getQbitValue(1);
-
-    register.CNOT(0,1);
-    register.CNOT(0,1);
-
-    Complex not_not_original = register.getQbitValue(1);
-
-    //assert
-    assertTrue(original.getReal() == not_not_original.getReal()
-      && original.getImaginary() == not_not_original.getImaginary());
-  }
-
-  @Test
-  public void CNot_One_Control_Set_Is_Zero()
-  {
-    //arrange
-    Register register = new Register("", 2);
-
-    //act
-    //set control bit
-    register.Not(0);
-
-    Complex expected = new Complex(0);
-
-    register.CNOT(0,1);
-
-    Complex not_one = register.getQbitValue(1);
-
-    //assert
-    assertTrue(expected.getReal() == not_one.getReal()
-      && expected.getImaginary() == not_one.getImaginary());
-  }
-
-  @Test
-  public void CNot_Control_Not_Set_Yield_No_Change()
-  {
-    //arrange
-    Register register = new Register("", 2);
-
-    //act
-    Complex before = register.getQbitValue(1);
-
-    register.CNOT(0,1);
-
-    Complex after = register.getQbitValue(1);
-
-    //assert
-    assertTrue(before.getReal() == after.getReal()
-      && before.getImaginary() == after.getImaginary());
-  }
-
-  @Test
   public void Hadamard_Unitary_With_Self()
   {
     //arrange
