@@ -128,8 +128,8 @@ public class Register {
                 alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
                 beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
 
-                amplitudes[i] = beta.multiply(Complex.I);
-                amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate());
+                amplitudes[i] = beta.multiply(Complex.I.negate());
+                amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I);
             }
         }
     }
@@ -150,7 +150,7 @@ public class Register {
 
         for(int i=0;i<numberOfBases;i++)
         {
-            if((i & (1<<controlQubit)) != 0 && (i & (1<<targetQubit)) != 0)
+            if((i & (1<<controlQubit)) != 0 && (i & (1<<targetQubit)) == 0)
             {
                 swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
                 amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
