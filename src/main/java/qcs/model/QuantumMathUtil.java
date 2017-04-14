@@ -226,5 +226,4 @@ public class QuantumMathUtil {
     }
     return mResult;
   }
-
 }
