@@ -15,6 +15,9 @@ package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+
 public class Register {
 
     private int numberOfQubits, numberOfBases;
@@ -130,9 +133,31 @@ public class Register {
 
     }
 
-    public void WalshHadamard()
+    public void WalshHadamard(ArrayList<Integer> targetQubits)
     {
+        Complex alpha, beta;
+        int targetQubit;
 
+        for(int i=numberOfQubits-1;i>=0;i--)
+        {
+            targetQubit = targetQubits.indexOf(i);
+
+            if(targetQubit != -1)
+            {
+                targetQubit = 1<<targetQubit;
+                for (int j = 0; j < numberOfBases; j++)
+                {
+                    if ((j & targetQubit) == 0)
+                    {
+                        alpha = new Complex(amplitudes[j].getReal(), amplitudes[j].getImaginary());
+                        beta = new Complex(amplitudes[j ^ targetQubit].getReal(), amplitudes[j ^ targetQubit].getImaginary());
+
+                        amplitudes[j] = alpha.add(beta).divide(Math.sqrt(2.0));
+                        amplitudes[j ^ targetQubit] = alpha.subtract(beta).divide(Math.sqrt(2.0));
+                    }
+                }
+            }
+        }
     }
 
     public void QFT()
@@ -154,6 +179,42 @@ public class Register {
         }
 
         amplitudes = resultant;
+    }
+
+    public void Measurement(ArrayList<Integer> targetQubits)
+    {
+        int targetQubit;
+        double sum;
+        SecureRandom RNG = new SecureRandom();
+
+        for(int i=0;i<targetQubits.size();i++)
+        {
+            sum = 0.0;
+            targetQubit = 1<<targetQubits.get(i);
+
+            for(int j=0;j<numberOfBases;j++)
+            {
+                if((j & targetQubit) != 0)
+                    sum += amplitudes[j].abs()*amplitudes[j].abs();
+            }
+
+            if(RNG.nextDouble() <= sum)
+            {
+                for(int j =0;j<numberOfBases;j++)
+                {
+                    if((j & targetQubit) == 0) amplitudes[j] = Complex.ZERO;
+                    else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+                }
+            }
+            else
+            {
+                for(int j =0;j<numberOfBases;j++)
+                {
+                    if((j & targetQubit) != 0) amplitudes[j] = Complex.ZERO;
+                    else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+                }
+            }
+        }
     }
 
     final public String getName(){
