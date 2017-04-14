@@ -311,4 +311,49 @@ public class QuantumMathUtilTest {
     //assert
     assertTrue(util.complex_vector_match(expected,output));
   }
+
+  @Test
+  public void pauli_z_qubit_one_too_minus_one()
+  {
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+
+    //act
+    Complex[] output = util.z(input,2,0);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(-1);
+
+    //assert
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
+  public void swap_swaps()
+  {
+    //arrange
+    //|10>
+    Complex[] input = new Complex[4];
+    input[0] = new Complex(0);
+    input[1] = new Complex(0);
+    input[2] = new Complex(1);
+    input[3] = new Complex(0);
+
+    //act
+    Complex[] output = util.swap(input,4,0,1);
+
+    //|01>
+    Complex[] expected = new Complex[4];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(1);
+    expected[2] = new Complex(0);
+    expected[3] = new Complex(0);
+
+    //assert
+    assertTrue(util.complex_vector_match(expected,output));
+  }
 }

@@ -39,11 +39,6 @@ public class Register {
       return amplitudes;
     }
 
-    public Complex getQbitValue(int qbit)
-    {
-        return amplitudes[qbit];
-    }
-
     public void Hadamard(int targetQubit)
     {
       amplitudes = util.hadamard(amplitudes, numberOfBases, targetQubit);
@@ -93,11 +88,7 @@ public class Register {
 
     public void Z(int targetQubit)
     {
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if((i & (1<<targetQubit)) != 0 )
-                amplitudes[i] = amplitudes[i].negate();
-        }
+        amplitudes = util.z(amplitudes,numberOfBases,targetQubit);
     }
 
     public void Rotate()
@@ -107,17 +98,7 @@ public class Register {
 
     public void Swap(int qubit1, int qubit2)
     {
-        Complex swapVar;
-
-        for(int i=0;i<numberOfBases;i++)
-        {
-            if( ((i & (1<<qubit1))) != 0 && ((i & (1<<qubit2))) == 0)
-            {
-                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                amplitudes[i] = amplitudes[i^(1<<qubit1)^(1<<qubit2)].multiply(1);
-                amplitudes[i^(1<<qubit1)^(1<<qubit2)] = swapVar.multiply(1);
-            }
-        }
+      amplitudes = util.swap(amplitudes,numberOfBases,qubit1,qubit2);
     }
 
     //Ternary Operators

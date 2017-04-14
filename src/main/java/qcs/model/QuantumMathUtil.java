@@ -34,6 +34,37 @@ public class QuantumMathUtil {
     return amplitudes;
   }
 
+  public Complex[] squareRootNot(Complex[] amplitudes, int numberOfBases, int targetQubit)
+  {
+    Complex alpha, beta;
+
+    for(int i=0;i<numberOfBases;i++)
+    {
+      if( (i & (1<<targetQubit)) == 0)
+      {
+        alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+        beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+        amplitudes[i] = alpha.add(beta).add(alpha.multiply(Complex.I)).subtract(beta.multiply(Complex.I)).multiply(.5);
+        amplitudes[i^(1<<targetQubit)] = alpha.add(beta).add(beta.multiply(Complex.I)).subtract(alpha.multiply(Complex.I)).multiply(.5);
+      }
+
+    }
+    return amplitudes;
+  }
+
+  private Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
+  {
+    if((i & (1<<targetQubit)) == 0)
+    {
+      Complex swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+      amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
+      amplitudes[i^(1<<targetQubit)] = swapVar;
+    }
+
+    return amplitudes;
+  }
+
   public Complex[] hadamard(Complex[] amplitudes, int numberOfBases
     , int targetQubit)
   {
@@ -72,25 +103,6 @@ public class QuantumMathUtil {
     return amplitudes;
   }
 
-  public Complex[] squareRootNot(Complex[] amplitudes, int numberOfBases, int targetQubit)
-  {
-    Complex alpha, beta;
-
-    for(int i=0;i<numberOfBases;i++)
-    {
-      if( (i & (1<<targetQubit)) == 0)
-      {
-        alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-        beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
-
-        amplitudes[i] = alpha.add(beta).add(alpha.multiply(Complex.I)).subtract(beta.multiply(Complex.I)).multiply(.5);
-        amplitudes[i^(1<<targetQubit)] = alpha.add(beta).add(beta.multiply(Complex.I)).subtract(alpha.multiply(Complex.I)).multiply(.5);
-      }
-
-    }
-    return amplitudes;
-  }
-
   public Complex[] y(Complex[] amplitudes, int numberOfBases, int targetQubit)
   {
     Complex alpha, beta;
@@ -109,16 +121,30 @@ public class QuantumMathUtil {
     return amplitudes;
   }
 
-  //not entirely sure what this subroutine should be called, seemed punny at the time
-  private Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
+  public Complex[] z(Complex[] amplitudes, int numberOfBases, int targetQubit)
   {
-    if((i & (1<<targetQubit)) == 0)
-    {
-      Complex swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-      amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
-      amplitudes[i^(1<<targetQubit)] = swapVar;
-    }
+    for (int i = 0; i < numberOfBases; i++)
+      if((i & (1<<targetQubit)) != 0 )
+        amplitudes[i] = amplitudes[i].negate();
+    return amplitudes;
+  }
 
+  //to avoid confusion use this index guide for qubits
+  //qubit |000>
+  //index  210
+  public Complex[] swap(Complex[] amplitudes, int numberOfBases, int to, int from)
+  {
+    Complex swapVar;
+
+    for(int i=0;i<numberOfBases;i++)
+    {
+      if( ((i & (1<<to))) != 0 && ((i & (1<<from))) == 0)
+      {
+        swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+        amplitudes[i] = amplitudes[i^(1<<to)^(1<<from)].multiply(1);
+        amplitudes[i^(1<<to)^(1<<from)] = swapVar.multiply(1);
+      }
+    }
     return amplitudes;
   }
 
