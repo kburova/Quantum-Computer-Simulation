@@ -85,6 +85,7 @@ public class Register {
     public void Y(int targetQubit)
     {
       amplitudes = util.y(amplitudes,numberOfBases,targetQubit);
+
     }
 
     public void Z(int targetQubit)
