@@ -278,18 +278,35 @@ public class QuantumMathUtilTest {
     //arrange
     //|1>
     Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+
+    //act
+    Complex[] output = util.y(input,2,0);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0,-1);
+    expected[1] = new Complex(0);
+
+    //assert
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
+  public void pauli_y_qubit_zero_returns_imaginary_one()
+  {
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
     input[0] = new Complex(1);
     input[1] = new Complex(0);
 
     //act
     Complex[] output = util.y(input,2,0);
+
     Complex[] expected = new Complex[2];
-    expected[0] = new Complex(0,-1);
-    expected[1] = new Complex(0);
-    for (int i = 0; i < expected.length; i++) {
-      System.out.print(output[i]);
-      System.out.println();
-    }
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(0,1);
 
     //assert
     assertTrue(util.complex_vector_match(expected,output));
