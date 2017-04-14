@@ -102,8 +102,8 @@ public class QuantumMathUtil {
         alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
         beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
 
-        amplitudes[i] = beta.multiply(Complex.I);
-        amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate());
+        amplitudes[i] = beta.multiply(Complex.I.negate());
+        amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I);
       }
     }
     return amplitudes;
