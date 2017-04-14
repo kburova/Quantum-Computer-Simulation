@@ -100,15 +100,7 @@ public class Register {
     // Binary Operators
     public void CNOT(int controlQubit, int targetQubit)
     {
-        Complex swapVar;
-
-        for(int i=0;i<numberOfBases;i++)
-        {
-            if((i & (1<<controlQubit)) != 0)
-            {
-              amplitudes = util.notHelpful(amplitudes, targetQubit, i);
-            }
-        }
+        amplitudes = util.cnot(amplitudes,numberOfBases,targetQubit,controlQubit);
     }
 
     public void SquareRootNot(int targetQubit)

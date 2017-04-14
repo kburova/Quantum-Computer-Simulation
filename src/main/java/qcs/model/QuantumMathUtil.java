@@ -17,8 +17,25 @@ public class QuantumMathUtil {
     return amplitudes;
   }
 
+  //to avoid confusion use this index guide for qubits
+  //qubit |000>
+  //index  210
+  public Complex[] cnot(Complex[] amplitudes, int numberOfBases, int targetQubit
+    , int controlQubit)
+  {
+    for(int i=0;i<numberOfBases;i++)
+    {
+      if((i & (1<<controlQubit)) != 0)
+      {
+        amplitudes = notHelpful(amplitudes, targetQubit, i);
+      }
+    }
+
+    return amplitudes;
+  }
+
   //not entirely sure what this subroutine should be called, seemed punny at the time
-  public Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
+  private Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
   {
     if((i & (1<<targetQubit)) == 0)
     {
@@ -49,9 +66,21 @@ public class QuantumMathUtil {
     }
   }
 
+  public boolean complex_vector_match(Complex[] a, Complex[] b)
+  {
+    if(a.length != b.length) return false;
+    else
+      for (int i = 0; i < a.length; i++)
+        if(!complex_match(a[i], b[i])) return false;
+    return true;
+  }
+
   public boolean complex_match(Complex a, Complex b)
   {
-    return a.getReal() == b.getReal() && a.getImaginary() == b.getImaginary();
+    System.out.println(a.getReal() == b.getReal());
+    System.out.println(a.getImaginary() == b.getImaginary());
+    return a.getReal() == b.getReal()
+      && a.getImaginary() == b.getImaginary();
   }
 
   public Complex[][] outerProduct(Complex[][] u, Complex[][] v)
