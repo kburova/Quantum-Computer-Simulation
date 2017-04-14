@@ -187,4 +187,111 @@ public class QuantumMathUtilTest {
     //assert
     assertTrue(util.complex_vector_match(expected, output));
   }
+
+  @Test
+  public void phase_unitary_with_self_if_two_pi_shift()
+  {
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+
+    //act
+    Complex[] output = util.phase(input,2,0,2*Math.PI);
+
+    //assert
+    assertTrue(util.complex_vector_match(input, output));
+  }
+
+  @Test
+  public void phase_cyclical_on_two_pi_period()
+  {
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+
+    //act
+    Complex[] output = util.phase(input,2,0,4*Math.PI);
+
+    //assert
+    assertTrue(util.complex_vector_match(input, output));
+  }
+
+  @Test
+  public void phase_unitary_with_inverse_phase()
+  {
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+
+    //act
+    Complex[] intermediate = util.phase(input,2,0,Math.PI/4);
+    Complex[] output = util.inversePhase(intermediate,2,0,Math.PI/4);
+
+    //assert
+    assertTrue(util.complex_vector_match(input, output));
+  }
+
+  @Test
+  public void square_root_squared_is_not()
+  {
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+
+    //act
+    Complex[] square_root_not = util.squareRootNot(input,2,0);
+    Complex[] expected_not = util.squareRootNot(square_root_not,2,0);
+    Complex[] not = util.not(input,2,0);
+
+    //assert
+    assertTrue(util.complex_vector_match(expected_not,not));
+  }
+
+  @Test
+  public void pauli_y_unitary_with_self()
+  {
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+
+    //act
+    Complex[] intermediate = util.y(input,2,0);
+    Complex[] output = util.y(input,2,0);
+
+    //assert
+    assertTrue(util.complex_vector_match(input,output));
+  }
+
+  @Test
+  public void pauli_y_qubit_one_returns_imaginary_minus_zero()
+  {
+    //arrange
+    //|1>
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(1);
+    input[1] = new Complex(0);
+
+    //act
+    Complex[] output = util.y(input,2,0);
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0,-1);
+    expected[1] = new Complex(0);
+    for (int i = 0; i < expected.length; i++) {
+      System.out.print(output[i]);
+      System.out.println();
+    }
+
+    //assert
+    assertTrue(util.complex_vector_match(expected,output));
+  }
 }

@@ -54,6 +54,61 @@ public class QuantumMathUtil {
     return amplitudes;
   }
 
+  public Complex[] phase(Complex[] amplitudes, int numberOfBases, int targetQubit
+    , double phase)
+  {
+    for (int i = 0; i < numberOfBases; i++)
+      if( (i & (1<<targetQubit)) != 0)
+        amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+    return amplitudes;
+  }
+
+  public Complex[] inversePhase(Complex[] amplitudes, int numberOfBases, int targetQubit
+  , double phase)
+  {
+    for (int i = 0; i < numberOfBases; i++)
+      if( (i & (1<<targetQubit)) != 0)
+        amplitudes[i] = amplitudes[i].divide(Complex.I.multiply(phase).exp());
+    return amplitudes;
+  }
+
+  public Complex[] squareRootNot(Complex[] amplitudes, int numberOfBases, int targetQubit)
+  {
+    Complex alpha, beta;
+
+    for(int i=0;i<numberOfBases;i++)
+    {
+      if( (i & (1<<targetQubit)) == 0)
+      {
+        alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+        beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+        amplitudes[i] = alpha.add(beta).add(alpha.multiply(Complex.I)).subtract(beta.multiply(Complex.I)).multiply(.5);
+        amplitudes[i^(1<<targetQubit)] = alpha.add(beta).add(beta.multiply(Complex.I)).subtract(alpha.multiply(Complex.I)).multiply(.5);
+      }
+
+    }
+    return amplitudes;
+  }
+
+  public Complex[] y(Complex[] amplitudes, int numberOfBases, int targetQubit)
+  {
+    Complex alpha, beta;
+
+    for (int i = 0; i < numberOfBases; i++)
+    {
+      if( (i & (1<<targetQubit)) == 0)
+      {
+        alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+        beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
+
+        amplitudes[i] = beta.multiply(Complex.I);
+        amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate());
+      }
+    }
+    return amplitudes;
+  }
+
   //not entirely sure what this subroutine should be called, seemed punny at the time
   private Complex[] notHelpful(Complex[] amplitudes, int targetQubit, int i)
   {
@@ -97,8 +152,6 @@ public class QuantumMathUtil {
 
   public boolean complex_match(Complex a, Complex b)
   {
-    System.out.println(a.getReal() == b.getReal());
-    System.out.println(a.getImaginary() == b.getImaginary());
     return a.getReal() == b.getReal()
       && a.getImaginary() == b.getImaginary();
   }
