@@ -39,30 +39,25 @@ public class Circuit {
         operators = new LinkedList<>();
     }
 
+    public void reInitializeRegisterQubits(){
+        currentStep = 0;
+        x.reinitializeState();
+        y.reinitializeState();
+    }
+
     final public Register getX(){ return x; }
 
     final public Register getY(){ return y; }
 
 
     //add gate/measurement
-    public void addOperator( Operator operator ){
-        operators.add(operator);
-    }
-
-    //remove gate/measurement
-    public void removeOperator(Operator operator) {
-
-        //TODO: recalculate after deletion if nessacary, or restart circuit
-        if ( operators.remove(operator) ) {
-        } else{
-            //operator wasn't found - error
+    public void addOperator( Operator operator, int step ){
+        if (step == operators.size()) {
+            operators.add(operator);
         }
-    }
-
-    //TODO: think if possible, to be able to delete from the middle
-    //select gate/measurement
-    public void selectOperator(){
-
+        else {
+            operators.add(step, operator);
+        }
     }
 
     final public int getNumberOfOperators(){
@@ -84,6 +79,12 @@ public class Circuit {
     public void setCurrentStep(int step){
         currentStep = step;
     }
+    public void incrementStep(){
+        currentStep++;
+    }
+    public void decrementStep(){
+        currentStep--;
+    }
 
     public void showError(String errorMessage){
         //alert if information was entered wrong
@@ -91,5 +92,9 @@ public class Circuit {
         alert.setContentText(errorMessage);
         alert.setTitle("Error Dialog");
         alert.showAndWait();
+    }
+
+    public void deleteOperator(int index) {
+        operators.remove(index);
     }
 }

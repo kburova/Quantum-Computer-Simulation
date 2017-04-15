@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
@@ -15,11 +16,11 @@ import qcs.model.operator.Measurement;
 public class MeasurementGateController {
 
     private Stage dialogStage;
-    private  boolean addClicked = false;
+    private  int addClicked = -1;
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int qubitNum;
+    int qubitNum, operationStep, from, to;
     boolean All;
 
     @FXML
@@ -37,6 +38,9 @@ public class MeasurementGateController {
     @FXML
     private RadioButton all;
 
+    @FXML
+    private TextField step;
+
     //bind stage with controller
     public void setDialogStage(Stage dialogStage, String id){
         this.dialogStage = dialogStage;
@@ -44,23 +48,27 @@ public class MeasurementGateController {
         this.id = id;
     }
 
-    public boolean isAdd(){
+    public int isAdd(){
         return addClicked;
     }
 
     public void setCircuit(Circuit circuit){
         this.circuit = circuit;
+        step.setText( Integer.toString(circuit.getNumberOfOperators()) );
+        if (circuit.getY().getNumberOfQubits() == 0){
+            y.setDisable(true);
+        }
     }
 
     @FXML
     private void handleAdd(){
         if ( isInputValid() ){
             System.out.println(id);
-            addClicked = true;
+            addClicked = operationStep;
             if (All){
-                circuit.addOperator(new Measurement(targetRegister, id));
+                circuit.addOperator( new Measurement(targetRegister, id, 0, targetRegister.getNumberOfQubits()-1), operationStep );
             }else{
-                circuit.addOperator(new Measurement(targetRegister, id, qubitNum));
+                circuit.addOperator( new Measurement(targetRegister, id, qubitNum, qubitNum), operationStep );
             }
             dialogStage.close();
         }
@@ -72,7 +80,6 @@ public class MeasurementGateController {
     }
 
     private boolean isInputValid(){
-        String value;
         String errorMessage = "";
         if ( x.isSelected() )
             targetRegister = circuit.getX();
@@ -84,17 +91,27 @@ public class MeasurementGateController {
             All = true;
         }else{
             All = false;
-            value = qubitVal.getText();
             try{
-                qubitNum = Integer.parseInt(value);
-            }
+                qubitNum = Integer.parseInt(qubitVal.getText());
+                            }
             catch(Exception e){
-                errorMessage = "Enter an Integer value ";
+                errorMessage = "Enter Integer values";
             }
             if (qubitNum < 0 || qubitNum > targetRegister.getNumberOfQubits() ){
                 errorMessage = "Enter valid qubit number";
             }
         }
+
+        try{
+            operationStep = Integer.parseInt(step.getText());
+        }
+        catch(Exception e){
+            errorMessage = "Enter Integer values";
+        }
+        if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){
+            errorMessage = "Enter valid index for gate step, should be between 0 and "+ circuit.getNumberOfOperators();
+        }
+
         if (errorMessage.length() == 0){
             return true;
         }else{

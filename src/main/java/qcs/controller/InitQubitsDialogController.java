@@ -138,6 +138,8 @@ public class InitQubitsDialogController implements Initializable{
     /** Close dialog when click OK in dialog window **/
     @FXML
     public boolean handleOk(){
+        /** after qubit values are set, reinitialize register amplitudes **/
+        circuit.reInitializeRegisterQubits();
         dialogStage.close();
         return true;
     }

@@ -24,11 +24,11 @@ import qcs.model.operator.*;
 public class UnaryGateController {
 
     private Stage dialogStage;
-    private  boolean addClicked = false;
+    private  int addClicked = -1;
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int qubit;
+    int qubit,operationStep;
 
     @FXML
     private TextField target;
@@ -39,6 +39,9 @@ public class UnaryGateController {
     @FXML
     private RadioButton y;
 
+    @FXML
+    private TextField step;
+
     //bind stage with controller
     public void setDialogStage(Stage dialogStage, String id){
         this.dialogStage = dialogStage;
@@ -46,22 +49,24 @@ public class UnaryGateController {
         this.id = id;
     }
 
-    //set registers here???
-
-    public boolean isAdd(){
+    public int isAdd(){
         return addClicked;
     }
 
     public void setCircuit(Circuit circuit){
         this.circuit = circuit;
+        step.setText( Integer.toString(circuit.getNumberOfOperators()) );
+        if (circuit.getY().getNumberOfQubits() == 0){
+            y.setDisable(true);
+        }
     }
 
     @FXML
     private void handleAdd(){
         if ( isInputValid() ){
             System.out.println(id);
-            addClicked = true;
-            circuit.addOperator(new UnaryOperator(targetRegister,qubit, id));
+            addClicked = operationStep;
+            circuit.addOperator(new UnaryOperator(targetRegister,qubit, id), operationStep);
             dialogStage.close();
         }
     }
@@ -80,18 +85,20 @@ public class UnaryGateController {
             targetRegister = circuit.getY();
         }
 
-        String value = target.getText();
-        System.out.println(value);
-
         try{
-            qubit = Integer.parseInt(value);
+            qubit = Integer.parseInt(target.getText());
+            operationStep = Integer.parseInt(step.getText());
         }
         catch(Exception e){
-            errorMessage = "Enter an Integer value ";
+            errorMessage = "Enter Integer values ";
         }
 
         if (qubit < 0 || qubit >= targetRegister.getNumberOfQubits()){
             errorMessage = "Enter valid qubit index";
+        }
+
+        if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){
+            errorMessage = "Enter valid index for gate step, should be between 0 and "+ circuit.getNumberOfOperators();
         }
 
         if (errorMessage.length() == 0){

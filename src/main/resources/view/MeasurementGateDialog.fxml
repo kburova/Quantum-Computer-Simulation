@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -11,9 +12,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="195.0" prefWidth="172.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.MeasurementGateController">
+<AnchorPane prefHeight="213.0" prefWidth="173.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.MeasurementGateController">
     <children>
-        <GridPane prefHeight="120.0" prefWidth="125.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <GridPane prefHeight="160.0" prefWidth="125.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="109.0" minWidth="97.0" prefWidth="97.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="55.0" minWidth="43.0" prefWidth="55.0" />
@@ -21,9 +22,11 @@
             <rowConstraints>
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="8.0" minHeight="4.0" prefHeight="8.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="27.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <RadioButton mnemonicParsing="false" selected="true" text="Register X" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" fx:id="x">
@@ -33,14 +36,19 @@
                 </RadioButton>
                 <RadioButton fx:id="y" mnemonicParsing="false" text="Register Y" toggleGroup="$group1" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                <Separator GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-
-                <RadioButton fx:id="all" mnemonicParsing="false" selected="true" text="All" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" onAction="#ifAllSelected">
+                <RadioButton fx:id="all" mnemonicParsing="false" onAction="#ifAllSelected" selected="true" text="All" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <toggleGroup>
                         <ToggleGroup fx:id="group2" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton fx:id="qubit" mnemonicParsing="false" text="Qubit" toggleGroup="$group2" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" onAction="#ifOneSelected"/>
-                <TextField fx:id="qubitVal" prefHeight="26.0" prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="4" disable="true"/>
+
+                <RadioButton fx:id="qubit" mnemonicParsing="false" onAction="#ifOneSelected" text="Qubit" toggleGroup="$group2" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                <TextField fx:id="qubitVal" disable="true" prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Separator GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+                <Label text="Gate position:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <TextField fx:id="step"  prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
             </children>
         </GridPane>
         <HBox alignment="CENTER" minWidth="-1.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">

@@ -11,6 +11,7 @@ public abstract class Operator {
 
     Register register;
     String name;
+    String type;
 
     public Operator (Register r, String n){
         register = r;
@@ -19,6 +20,8 @@ public abstract class Operator {
 
     //operation specific to each gate/measurement
     public abstract void doOperation();
+    public abstract void undoOperation();
+
     public String getName() {
         return name;
     }
@@ -27,4 +30,8 @@ public abstract class Operator {
         return register.getName();
     }
     public Register getRegister() {return register; }
+
+    public String getType() {
+        return type;
+    }
 }

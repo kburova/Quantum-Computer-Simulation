@@ -71,7 +71,7 @@
                     <Tooltip text="Set Qubits" />
                 </tooltip>
             </Button>
-            <Button fx:id="remove">
+            <Button fx:id="remove" onAction="#handleRemoveGateDialog">
                 <tooltip>
                     <Tooltip text="Remove Gate" />
                 </tooltip>
