@@ -1,5 +1,6 @@
 package qcs.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -17,7 +18,11 @@ public class VarQbitController {
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int operationStep;
+    int qubitNum, operationStep, from, to;
+    boolean All;
+
+    @FXML
+    private TextField qubitVal;
 
     @FXML
     private RadioButton x;
@@ -27,6 +32,12 @@ public class VarQbitController {
 
     @FXML
     private TextField step;
+
+    @FXML
+    private RadioButton qubit;
+
+    @FXML
+    private RadioButton all;
 
     //bind stage with controller
     public void setDialogStage(Stage dialogStage, String id){
@@ -54,7 +65,11 @@ public class VarQbitController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = operationStep;
-            circuit.addOperator(new VarQbitOperator(targetRegister, id), operationStep);
+            if (All){
+                circuit.addOperator( new VarQbitOperator(targetRegister, id, 0, targetRegister.getNumberOfQubits() -1), operationStep );
+            }else{
+                circuit.addOperator( new VarQbitOperator(targetRegister, id, qubitNum, qubitNum), operationStep );
+            }
             dialogStage.close();
         }
     }
@@ -71,20 +86,43 @@ public class VarQbitController {
         else if (y.isSelected()){
             targetRegister = circuit.getY();
         }
+
+        if (all.isSelected()){
+            All = true;
+        }else{
+            All = false;
+            try{
+                qubitNum = Integer.parseInt(qubitVal.getText());
+            }
+            catch(Exception e){
+                errorMessage = "Enter Integer values";
+            }
+            if (qubitNum < 0 || qubitNum > targetRegister.getNumberOfQubits() ){
+                errorMessage = "Enter valid qubit number";
+            }
+        }
         try{
-           operationStep = Integer.parseInt(step.getText());
+            operationStep = Integer.parseInt(step.getText());
         }
         catch(Exception e){
-            errorMessage = "Enter an Integer values";
+            errorMessage = "Enter Integer values";
         }
         if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){
             errorMessage = "Enter valid index for gate step, should be between 0 and "+ circuit.getNumberOfOperators();
         }
         if (errorMessage.length() == 0){
             return true;
-        }else {
+        }else{
             circuit.showError(errorMessage);
             return false;
         }
+    }
+
+    public void ifOneSelected(ActionEvent event) {
+        if (qubit.isSelected()) qubitVal.setDisable(false);
+    }
+
+    public void ifAllSelected(ActionEvent event) {
+        if (all.isSelected()) qubitVal.setDisable(true);
     }
 }

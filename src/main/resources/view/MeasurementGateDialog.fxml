@@ -41,6 +41,7 @@
                         <ToggleGroup fx:id="group2" />
                     </toggleGroup>
                 </RadioButton>
+
                 <RadioButton fx:id="qubit" mnemonicParsing="false" onAction="#ifOneSelected" text="Qubit" toggleGroup="$group2" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                 <TextField fx:id="qubitVal" disable="true" prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 

@@ -6,37 +6,23 @@ import qcs.model.Register;
  * Created by apple on 4/10/17.
  */
 public class Measurement extends Operator {
-    private int qubit;
-    private boolean all;
+    private int from, to;
 
-    public Measurement(Register r, String name, int qubit){
+    public Measurement(Register r, String name, int from, int to){
         super(r,name);
-        this.qubit = qubit;
-        all = false;
         type = "Measurement";
+        this.from = from;
+        this.to = to;
     }
-    public Measurement(Register r, String name){
-        super(r,name);
-        all = true;
-    }
+
     @Override
     public void doOperation() {
-        if (all){
-            if (name.equals("CompB")){
+        if (name.equals("CompB")){
 
-            }else if (name.equals("SignB")){
+        }else if (name.equals("SignB")){
 
-            }else if (name.equals("Trash")){
+        }else if (name.equals("Trash")){
 
-            }
-        }else{
-            if (name.equals("CompB")){
-
-            }else if (name.equals("SignB")){
-
-            }else if (name.equals("Trash")){
-
-            }
         }
     }
 
@@ -44,10 +30,10 @@ public class Measurement extends Operator {
     public void undoOperation() {
     }
 
-    public int getQubit(){
-        return qubit;
+    public int getFrom(){
+        return from;
     }
-    public boolean isAll(){
-        return all;
+    public  int getTo(){
+        return to;
     }
 }

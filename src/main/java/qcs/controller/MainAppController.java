@@ -29,6 +29,7 @@ import qcs.MainApp;
 import qcs.manager.IOmanager;
 import qcs.model.Circuit;
 import qcs.model.operator.BinaryOperator;
+import qcs.model.operator.GroverOperator;
 import qcs.model.operator.ToffoliGate;
 import qcs.model.operator.UnaryOperator;
 
@@ -287,8 +288,10 @@ public class MainAppController implements Initializable{
                 canvasManager.drawUnaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (UnaryOperator) mainApp.getCircuit().getLastOperator());
             }else if (type.equals("Binary")){
                 canvasManager.drawBinaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (BinaryOperator) mainApp.getCircuit().getLastOperator());
-            }else if (type.equals("Ternary") ){
+            }else if (type.equals("Ternary") ) {
                 canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (ToffoliGate) mainApp.getCircuit().getLastOperator());
+            }else if (type.equals("Grover")){
+                canvasManager.drawGroverOperator(mainApp.getCircuit().getNumberOfOperators() - 1,  (GroverOperator) mainApp.getCircuit().getLastOperator());
             }else {
                 canvasManager.drawBigOperator(circuit.getNumberOfOperators() - 1, circuit.getLastOperator());
             }

@@ -389,14 +389,14 @@ public class CanvasManager {
         circuitCanvas.getChildren().add(g);
     }
 
-    public void drawBigOperator(int index, Operator operator){
-        String tag = "";
-        String name = operator.getName();
+    /** draw Grover large gate **/
+    public void drawGroverOperator(int index, GroverOperator operator){
         String register = operator.getRegisterName();
-
         Group g = new Group();
         int startX = beginQubitX + index * gateSize;
-        int i;
+        int i, height, textY;
+        Rectangle r;
+        Text t;
 
         /** add index of the operator at the top**/
         Text ind = new Text(startX, 13 , Integer.toString(index));
@@ -404,7 +404,6 @@ public class CanvasManager {
         ind.setFill(Color.TEAL);
         ind.setTextAlignment(TextAlignment.CENTER);
         g.getChildren().add(ind);
-
         /** draw chunks of lines **/
         for (i = 0; i < xLines; i++){
             Line l = new Line(startX, beginLineY +gateSize*i, startX + gateSize, beginLineY +gateSize*i);
@@ -419,52 +418,101 @@ public class CanvasManager {
                 g.getChildren().add(l);
             }
         }
+        /** set rectangle of the qubit **/
+
+        if (register.equals("X")) {
+            height = gateSize * xLines - 10;
+        }else{
+            height = gateSize * yLines - 10;
+        }
+        r = new Rectangle(startX , gateSize * xLines + beginLineY - 15, 30, height);
+        textY = gateSize * xLines -8 + beginLineY + height/2 ;
+        r.setFill(yellow);
+        t = new Text(startX, textY , "G");
+
+
+        t.setWrappingWidth(30);
+        t.setTextAlignment(TextAlignment.CENTER);
+        g.getChildren().addAll(r,t);
+        circuitCanvas.getChildren().add(g);
+    }
+
+
+    public void drawBigOperator(int index, Operator operator){
+        int from,to;
+        String tag = "";
+        String name = operator.getName();
+        String register = operator.getRegisterName();
+        Rectangle r;
+        Text t;
+        Color color;
+        int textY,height;
+        int startX = beginQubitX + index * gateSize;
+        Group g = new Group();
+
+        /** set text inside of qubit , determine color, and from-to qubits**/
+        if (operator.getType().equals("VarQbit")) {
+            VarQbitOperator tmp = (VarQbitOperator) operator;
+            from = tmp.getFrom();
+            to = tmp.getTo();
+            color = yellow;
+            if (name.equals("WH")) {
+                tag = "WH";
+            } else if (name.equals("QFT")) {
+                tag = "F";
+            } else if (name.equals("iQFT")) {
+                tag = "1/F";
+            } else if (name.equals("General")) {
+                tag = "U";
+            } else if (name.equals("Eval")) {
+                tag = "f(x)";
+            }
+        }else {
+            Measurement tmp = (Measurement) operator;
+            from = tmp.getFrom();
+            to = tmp.getTo();
+            color = Color.DEEPSKYBLUE;
+            if (name.equals("CompB")){
+                tag = "CB";
+            }else if (name.equals("SignB")){
+                tag = "SB";
+            }else if (name.equals("Trash")) {
+                tag = "\\_/";
+            }
+        }
+
+        height = gateSize * (to - from + 1) - 10;
+        if (register.equals("Y")){
+            from += xLines;
+        }
+
+        /** add index of the operator at the top**/
+        Text ind = new Text(startX, 13 , Integer.toString(index));
+        ind.setWrappingWidth(30);
+        ind.setFill(Color.TEAL);
+        ind.setTextAlignment(TextAlignment.CENTER);
+        g.getChildren().add(ind);
+
+        /** draw chunks of lines **/
+        for (int i = 0; i < xLines; i++){
+            Line l = new Line(startX, beginLineY +gateSize*i, startX + gateSize, beginLineY +gateSize*i);
+            g.getChildren().add(l);
+        }
+        if (yLines != 0) {
+            Line split = new Line(startX, beginLineY + gateSize * xLines - gateSize / 2, startX + gateSize, beginLineY + gateSize * xLines - gateSize / 2);
+            split.setStroke(Color.TEAL);
+            g.getChildren().add(split);
+            for (int i = xLines; i < xLines + yLines; i++) {
+                Line l = new Line(startX, beginLineY + gateSize * i, startX + gateSize, beginLineY + gateSize * i);
+                g.getChildren().add(l);
+            }
+        }
 
         /** set rectangle of the qubit **/
-        Rectangle r;
-        int height;
-        int textY;
-        if (register.equals("X")) {
-            height = gateSize * xLines - 13;
-            r = new Rectangle(startX , gateSize * 0 + beginLineY - 15, 30, height);
-            textY = beginLineY -8 + height/2 ;
-        }else{
-            height = gateSize * yLines - 13;
-            r = new Rectangle(startX , gateSize * xLines + beginLineY - 15, 30, height);
-            textY = gateSize * xLines -8 + beginLineY + height/2 ;
-        }
-
-        /** set text inside of qubit **/
-        if (name.equals("Grover")){
-            tag = "G";
-            r.setFill(yellow);
-        }else if (name.equals("WH")){
-            tag = "WH";
-            r.setFill(yellow);
-        }else if (name.equals("QFT")){
-            tag = "F";
-            r.setFill(yellow);
-        }else if (name.equals("iQFT")){
-            tag = "1/F";
-            r.setFill(yellow);
-        }else if (name.equals("General")){
-            tag = "C";
-            r.setFill(yellow);
-        }else if (name.equals("Eval")){
-            tag = "f(x)";
-            r.setFill(yellow);
-        }else if (name.equals("CompB")){
-            tag = "CB";
-            r.setFill(Color.DEEPSKYBLUE);
-        }else if (name.equals("SignB")){
-            tag = "SB";
-            r.setFill(Color.DEEPSKYBLUE);
-        }else if (name.equals("Trash")) {
-            tag = "\\_/";
-            r.setFill(Color.DEEPSKYBLUE);
-        }
-
-        Text t = new Text(startX, textY , tag);
+        r = new Rectangle(startX , gateSize*from + beginLineY - 15, 30, height);
+        r.setFill(color);
+        textY = gateSize*( from + (to - from)/2 ) + topPadding;
+        t = new Text(startX, textY ,tag);
         t.setWrappingWidth(30);
         t.setTextAlignment(TextAlignment.CENTER);
         g.getChildren().addAll(r,t);

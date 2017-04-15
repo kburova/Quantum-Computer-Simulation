@@ -6,9 +6,14 @@ import qcs.model.Register;
  * Created by apple on 4/10/17.
  */
 public class VarQbitOperator extends Operator{
-    public VarQbitOperator(Register r, String name){
+
+    int from, to;
+
+    public VarQbitOperator(Register r, String name, int from, int to){
         super(r,name);
         type = "VarQbit";
+        this.from = from;
+        this.to = to;
     }
 
     @Override
@@ -39,5 +44,12 @@ public class VarQbitOperator extends Operator{
         }else  if (name.equals("Eval")){
 
         }
+    }
+
+    public int getFrom(){
+        return from;
+    }
+    public  int getTo(){
+        return to;
     }
 }

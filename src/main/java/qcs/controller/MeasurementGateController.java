@@ -20,7 +20,7 @@ public class MeasurementGateController {
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int qubitNum, operationStep;
+    int qubitNum, operationStep, from, to;
     boolean All;
 
     @FXML
@@ -66,9 +66,9 @@ public class MeasurementGateController {
             System.out.println(id);
             addClicked = operationStep;
             if (All){
-                circuit.addOperator(new Measurement(targetRegister, id), operationStep);
+                circuit.addOperator( new Measurement(targetRegister, id, 0, targetRegister.getNumberOfQubits()-1), operationStep );
             }else{
-                circuit.addOperator(new Measurement(targetRegister, id, qubitNum), operationStep);
+                circuit.addOperator( new Measurement(targetRegister, id, qubitNum, qubitNum), operationStep );
             }
             dialogStage.close();
         }
@@ -93,18 +93,25 @@ public class MeasurementGateController {
             All = false;
             try{
                 qubitNum = Integer.parseInt(qubitVal.getText());
-                operationStep = Integer.parseInt(step.getText());
-            }
+                            }
             catch(Exception e){
-                errorMessage = "Enter an Integer values";
+                errorMessage = "Enter Integer values";
             }
             if (qubitNum < 0 || qubitNum > targetRegister.getNumberOfQubits() ){
                 errorMessage = "Enter valid qubit number";
             }
-            if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){
-                errorMessage = "Enter valid index for gate step, should be between 0 and "+ circuit.getNumberOfOperators();
-            }
         }
+
+        try{
+            operationStep = Integer.parseInt(step.getText());
+        }
+        catch(Exception e){
+            errorMessage = "Enter Integer values";
+        }
+        if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){
+            errorMessage = "Enter valid index for gate step, should be between 0 and "+ circuit.getNumberOfOperators();
+        }
+
         if (errorMessage.length() == 0){
             return true;
         }else{

@@ -113,7 +113,12 @@
 
 /** Variable Gates **/
 
-#Grover, #WalshHadamard, #QFT, #InvQFT, #General, #FunctionEval{
+#Grover, #WalshHadamard, #QFT, #InvQFT, #General{
+    -fx-background-color: #ffd480;
+}
+
+#FunctionEval{
+    -fx-background-image: url('../images/transform-icons/VarQbit/FunctionEval.png');
     -fx-background-color: #ffd480;
 }
 
@@ -121,8 +126,18 @@
     -fx-background-color: #ff4d4d;
 }
 
-#CompB, #SignB, #Trash {
+#CompB{
+    -fx-background-image: url('../images/transform-icons/Measurement/Measurement.png');
+    -fx-background-color: dodgerblue;
+}
+#SignB {
+    -fx-background-image: url('../images/transform-icons/Measurement/Measurement.png');
     -fx-background-color: deepskyblue;
+}
+
+#Trash {
+    -fx-background-image: url('../images/transform-icons/Measurement/Trash.png');
+    -fx-background-color: lightskyblue;
 }
 #toolBar {
 
