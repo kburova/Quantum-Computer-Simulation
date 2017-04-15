@@ -15,12 +15,16 @@ package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+
 public class Register {
 
     private int numberOfQubits, numberOfBases;
     private String name;
     private int initialState;
     private Complex[] amplitudes;
+    private final QuantumMathUtil util = new QuantumMathUtil();
 
     public Register (String n, int numOfQubits){
         initialState = 0;
@@ -39,21 +43,10 @@ public class Register {
             else amplitudes[i] = new Complex(0, 0);
         }
     }
+
     public void Hadamard(int targetQubit)
     {
-        Complex alpha, beta;
-
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if( (i & (1<<targetQubit)) == 0)
-            {
-                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
-
-                amplitudes[i] = alpha.add(beta).divide(Math.sqrt(2.0));
-                amplitudes[i^(1<<targetQubit)] = alpha.subtract(beta).divide(Math.sqrt(2.0));
-            }
-        }
+      amplitudes = util.hadamard(amplitudes, numberOfBases, targetQubit);
     }
 
     public void Identity()
@@ -63,20 +56,12 @@ public class Register {
 
     public void Phase(int targetQubit, double phase)
     {
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if( (i & (1<<targetQubit)) != 0)
-                amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
-        }
+      amplitudes = util.phase(amplitudes, numberOfBases, targetQubit, phase);
     }
 
     public void InversePhase(int targetQubit, double phase)
     {
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if( (i & (1<<targetQubit)) != 0)
-                amplitudes[i] = amplitudes[i].divide(Complex.I.multiply(phase).exp());
-        }
+      amplitudes = util.inversePhase(amplitudes, numberOfBases, targetQubit, phase);
     }
 
     public void T(int targetQubit)
@@ -91,77 +76,29 @@ public class Register {
 
     public void Not(int targetQubit)
     {
-        Complex swapVar;
-
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if((i & (1<<targetQubit)) == 0)
-            {
-                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
-                amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
-            }
-        }
-    }
-
-    public void SquareRootNot(int targetQubit)
-    {
-        Complex alpha, beta;
-
-        for(int i=0;i<numberOfBases;i++)
-        {
-            if( (i & (1<<targetQubit)) == 0)
-            {
-                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
-
-                amplitudes[i] = alpha.add(beta).add(alpha.multiply(Complex.I)).subtract(beta.multiply(Complex.I)).multiply(.5);
-                amplitudes[i^(1<<targetQubit)] = alpha.add(beta).add(beta.multiply(Complex.I)).subtract(alpha.multiply(Complex.I)).multiply(.5);
-            }
-
-        }
-    }
-
-    public void Y(int targetQubit)
-    {
-        Complex alpha, beta;
-
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if( (i & (1<<targetQubit)) == 0)
-            {
-                alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
-
-                amplitudes[i] = beta.multiply(Complex.I);
-                amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate());
-            }
-        }
-    }
-
-    public void Z(int targetQubit)
-    {
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if((i & (1<<targetQubit)) != 0 )
-                amplitudes[i] = amplitudes[i].negate();
-        }
+      amplitudes = util.not(amplitudes, numberOfBases, targetQubit);
     }
 
     // Binary Operators
     public void CNOT(int controlQubit, int targetQubit)
     {
-        Complex swapVar;
+        amplitudes = util.cnot(amplitudes,numberOfBases,targetQubit,controlQubit);
+    }
 
-        for(int i=0;i<numberOfBases;i++)
-        {
-            if((i & (1<<controlQubit)) != 0 && (i & (1<<targetQubit)) != 0)
-            {
-                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
-                amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
-            }
-        }
+    public void SquareRootNot(int targetQubit)
+    {
+      amplitudes = util.squareRootNot(amplitudes,numberOfBases,targetQubit);
+    }
+
+    public void Y(int targetQubit)
+    {
+      amplitudes = util.y(amplitudes,numberOfBases,targetQubit);
+
+    }
+
+    public void Z(int targetQubit)
+    {
+        amplitudes = util.z(amplitudes,numberOfBases,targetQubit);
     }
 
     public void ConditionalRotate(int controlQubit, int targetQubit, double phase)
@@ -175,17 +112,7 @@ public class Register {
 
     public void Swap(int qubit1, int qubit2)
     {
-        Complex swapVar;
-
-        for(int i=0;i<numberOfBases;i++)
-        {
-            if( ((i & (1<<qubit1))) != 0 && ((i & (1<<qubit2))) == 0)
-            {
-                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                amplitudes[i] = amplitudes[i^(1<<qubit1)^(1<<qubit2)].multiply(1);
-                amplitudes[i^(1<<qubit1)^(1<<qubit2)] = swapVar.multiply(1);
-            }
-        }
+      amplitudes = util.swap(amplitudes,numberOfBases,qubit1,qubit2);
     }
 
     //Ternary Operators
@@ -211,9 +138,31 @@ public class Register {
 
     }
 
-    public void WalshHadamard()
+    public void WalshHadamard(ArrayList<Integer> targetQubits)
     {
+        Complex alpha, beta;
+        int targetQubit;
 
+        for(int i=numberOfQubits-1;i>=0;i--)
+        {
+            targetQubit = targetQubits.indexOf(i);
+
+            if(targetQubit != -1)
+            {
+                targetQubit = 1<<targetQubit;
+                for (int j = 0; j < numberOfBases; j++)
+                {
+                    if ((j & targetQubit) == 0)
+                    {
+                        alpha = new Complex(amplitudes[j].getReal(), amplitudes[j].getImaginary());
+                        beta = new Complex(amplitudes[j ^ targetQubit].getReal(), amplitudes[j ^ targetQubit].getImaginary());
+
+                        amplitudes[j] = alpha.add(beta).divide(Math.sqrt(2.0));
+                        amplitudes[j ^ targetQubit] = alpha.subtract(beta).divide(Math.sqrt(2.0));
+                    }
+                }
+            }
+        }
     }
 
     public void QFT()
@@ -235,6 +184,42 @@ public class Register {
         }
 
         amplitudes = resultant;
+    }
+
+    public void Measurement(ArrayList<Integer> targetQubits)
+    {
+        int targetQubit;
+        double sum;
+        SecureRandom RNG = new SecureRandom();
+
+        for(int i=0;i<targetQubits.size();i++)
+        {
+            sum = 0.0;
+            targetQubit = 1<<targetQubits.get(i);
+
+            for(int j=0;j<numberOfBases;j++)
+            {
+                if((j & targetQubit) != 0)
+                    sum += amplitudes[j].abs()*amplitudes[j].abs();
+            }
+
+            if(RNG.nextDouble() <= sum)
+            {
+                for(int j =0;j<numberOfBases;j++)
+                {
+                    if((j & targetQubit) == 0) amplitudes[j] = Complex.ZERO;
+                    else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+                }
+            }
+            else
+            {
+                for(int j =0;j<numberOfBases;j++)
+                {
+                    if((j & targetQubit) != 0) amplitudes[j] = Complex.ZERO;
+                    else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+                }
+            }
+        }
     }
 
     final public String getName(){
