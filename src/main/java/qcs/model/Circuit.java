@@ -51,24 +51,13 @@ public class Circuit {
 
 
     //add gate/measurement
-    public void addOperator( Operator operator ){
-        operators.add(operator);
-    }
-
-    //remove gate/measurement
-    public void removeOperator(Operator operator) {
-
-        //TODO: recalculate after deletion if nessacary, or restart circuit
-        if ( operators.remove(operator) ) {
-        } else{
-            //operator wasn't found - error
+    public void addOperator( Operator operator, int step ){
+        if (step == operators.size()) {
+            operators.add(operator);
         }
-    }
-
-    //TODO: think if possible, to be able to delete from the middle
-    //select gate/measurement
-    public void selectOperator(){
-
+        else {
+            operators.add(step, operator);
+        }
     }
 
     final public int getNumberOfOperators(){
@@ -103,5 +92,9 @@ public class Circuit {
         alert.setContentText(errorMessage);
         alert.setTitle("Error Dialog");
         alert.showAndWait();
+    }
+
+    public void deleteOperator(int index) {
+        operators.remove(index);
     }
 }

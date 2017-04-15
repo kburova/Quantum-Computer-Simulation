@@ -21,7 +21,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -57,6 +56,13 @@ public class MainAppController implements Initializable{
         this.mainApp = mainApp;
         circuit = mainApp.getCircuit();
         canvasManager = new CanvasManager(circuit, circuitCanvas, xCanvas, yCanvas);
+    }
+
+    private void showErrorMessage(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error Dialog");
+        alert.setContentText("Circuit was not initialized with registers!!!");
+        alert.showAndWait();
     }
 
     @FXML
@@ -103,7 +109,7 @@ public class MainAppController implements Initializable{
             int step = circuit.getCurrentStep();
             if (step > 0) {
                 circuit.decrementStep();
-                circuit.getOperator(--step).doOperation();
+                circuit.getOperator(--step).undoOperation();
                 canvasManager.stepThrough(step);
             }
         }
@@ -177,10 +183,8 @@ public class MainAppController implements Initializable{
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
-            boolean OkClicked = mainApp.showUnaryGateDialog(data);
-            if (OkClicked) {
-                canvasManager.drawUnaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (UnaryOperator) mainApp.getCircuit().getLastOperator());
-            }
+            int OkClicked = mainApp.showUnaryGateDialog(data);
+            addAndDraw(OkClicked, "Unary");
         }
     }
 
@@ -192,10 +196,8 @@ public class MainAppController implements Initializable{
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
-            boolean OkClicked = mainApp.showBinaryGateDialog(data);
-            if (OkClicked) {
-                canvasManager.drawBinaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (BinaryOperator) mainApp.getCircuit().getLastOperator());
-            }
+            int OkClicked = mainApp.showBinaryGateDialog(data);
+            addAndDraw(OkClicked, "Binary");
         }
     }
 
@@ -207,11 +209,8 @@ public class MainAppController implements Initializable{
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
-            boolean OkClicked = mainApp.showTernaryGateDialog(data);
-            if (OkClicked) {
-                //System.out.println(mainApp.getCircuit().getNumberOfOperators());
-                canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (ToffoliGate) mainApp.getCircuit().getLastOperator());
-            }
+            int OkClicked = mainApp.showTernaryGateDialog(data);
+            addAndDraw(OkClicked, "Ternary");
         }
     }
 
@@ -223,10 +222,8 @@ public class MainAppController implements Initializable{
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
-            boolean OkClicked = mainApp.showVarGateDialog(data);
-            if (OkClicked) {
-                canvasManager.drawBigOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
-            }
+            int OkClicked = mainApp.showVarGateDialog(data);
+            addAndDraw(OkClicked, "VarQbit");
         }
     }
     @FXML
@@ -251,10 +248,8 @@ public class MainAppController implements Initializable{
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
-            boolean OkClicked = mainApp.showMeasurementDialog(data);
-            if (OkClicked) {
-                canvasManager.drawBigOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
-            }
+            int OkClicked = mainApp.showMeasurementDialog(data);
+            addAndDraw(OkClicked, "Measurement");
         }
     }
     @FXML
@@ -265,17 +260,42 @@ public class MainAppController implements Initializable{
             //pass to function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
-            boolean OkClicked = mainApp.showGroverOperatorDialog(data);
-            if (OkClicked) {
-                canvasManager.drawBigOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
-            }
+            int OkClicked = mainApp.showGroverOperatorDialog(data);
+            addAndDraw(OkClicked, "Grover");
         }
     }
 
-    private void showErrorMessage(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error Dialog");
-        alert.setContentText("Circuit was not initialized with registers!!!");
-        alert.showAndWait();
+    @FXML
+    public void handleRemoveGateDialog(ActionEvent event) {
+        if (mainApp.getCircuit().getX() == null) {
+            showErrorMessage();
+        }else {
+               boolean OkDelete = mainApp.showRemoveGateDialog();
+            if (OkDelete) {
+                circuit.reInitializeRegisterQubits();
+                circuitCanvas.getChildren().remove( 2, circuitCanvas.getChildren().size());
+                canvasManager.redrawOperatorsOnly(0);
+            }
+        }
+
+    }
+
+    /** Helper function to avoid code duplication **/
+    private void addAndDraw(int OkClicked, String type){
+        if ((OkClicked == circuit.getNumberOfOperators() - 1)  && (OkClicked != -1)) {
+            if (type.equals("Unary")) {
+                canvasManager.drawUnaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (UnaryOperator) mainApp.getCircuit().getLastOperator());
+            }else if (type.equals("Binary")){
+                canvasManager.drawBinaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (BinaryOperator) mainApp.getCircuit().getLastOperator());
+            }else if (type.equals("Ternary") ){
+                canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (ToffoliGate) mainApp.getCircuit().getLastOperator());
+            }else {
+                canvasManager.drawBigOperator(circuit.getNumberOfOperators() - 1, circuit.getLastOperator());
+            }
+        }else if (OkClicked != -1){
+            circuit.reInitializeRegisterQubits();
+            circuitCanvas.getChildren().remove( OkClicked + 2, circuitCanvas.getChildren().size());
+            canvasManager.redrawOperatorsOnly(OkClicked);
+        }
     }
 }

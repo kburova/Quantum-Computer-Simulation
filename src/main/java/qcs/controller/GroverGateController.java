@@ -13,11 +13,11 @@ import qcs.model.operator.GroverOperator;
  */
 public class GroverGateController {
     private Stage dialogStage;
-    private  boolean addClicked = false;
+    private  int addClicked = -1;
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int svalue;
+    int svalue, operationStep;
 
     @FXML
     private TextField searchValue;
@@ -28,6 +28,9 @@ public class GroverGateController {
     @FXML
     private RadioButton y;
 
+    @FXML
+    private TextField step;
+
     //bind stage with controller
     public void setDialogStage(Stage dialogStage, String id){
         this.dialogStage = dialogStage;
@@ -35,20 +38,24 @@ public class GroverGateController {
         this.id = id;
     }
 
-    public boolean isAdd(){
+    public int isAdd(){
         return addClicked;
     }
 
     public void setCircuit(Circuit circuit){
         this.circuit = circuit;
+        step.setText( Integer.toString(circuit.getNumberOfOperators()) );
+        if (circuit.getY().getNumberOfQubits() == 0){
+            y.setDisable(true);
+        }
     }
 
     @FXML
     private void handleAdd(){
         if ( isInputValid() ){
             System.out.println(id);
-            addClicked = true;
-            circuit.addOperator(new GroverOperator(targetRegister,svalue, id));
+            addClicked = operationStep;
+            circuit.addOperator(new GroverOperator(targetRegister,svalue, id), operationStep);
             dialogStage.close();
         }
     }
@@ -65,18 +72,20 @@ public class GroverGateController {
         else if (y.isSelected()){
             targetRegister = circuit.getY();
         }
-        String value = searchValue.getText();
-        System.out.println(value);
-
         try{
-            svalue = Integer.parseInt(value);
+            svalue = Integer.parseInt(searchValue.getText());
+            operationStep = Integer.parseInt(step.getText());
         }
         catch(Exception e){
-            errorMessage = "Enter an Integer value ";
+            errorMessage = "Enter Integer values ";
         }
 
         if (svalue < 0 || svalue > (Math.pow(2,targetRegister.getNumberOfQubits())-1) ){
             errorMessage = "Enter valid state number, 0 trough (2^n - 1)";
+        }
+
+        if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){
+            errorMessage = "Enter valid index for gate step, should be between 0 and "+ circuit.getNumberOfOperators();
         }
 
         if (errorMessage.length() == 0){

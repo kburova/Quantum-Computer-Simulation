@@ -108,7 +108,6 @@ public class MainApp extends Application {
          We call constructor first, because we need to pass circuit data to it before
          controller initializes fxml(we need data to initialize number of TextFields)***/
     public boolean showAddQubitValuesDialog(){
-
         try{
             FXMLLoader loader = new FXMLLoader();
             InitQubitsDialogController controller = new InitQubitsDialogController(circuit);
@@ -135,7 +134,7 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showUnaryGateDialog(String id){
+    public int showUnaryGateDialog(String id){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/UnaryGateDialog.fxml"));
@@ -155,13 +154,12 @@ public class MainApp extends Application {
             return controller.isAdd();
 
         }catch(Exception e){
-            // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
-            return false;
+            return -1;
         }
     }
 
-    public boolean showBinaryGateDialog(String id){
+    public int showBinaryGateDialog(String id){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/BinaryGateDialog.fxml"));
@@ -181,12 +179,11 @@ public class MainApp extends Application {
             return controller.isAdd();
 
         }catch(Exception e){
-            // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
-            return false;
+            return -1;
         }
     }
-    public boolean showTernaryGateDialog(String id){
+    public int showTernaryGateDialog(String id){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/TernaryGateDialog.fxml"));
@@ -206,13 +203,12 @@ public class MainApp extends Application {
             return controller.isAdd();
 
         }catch(Exception e){
-            // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
-            return false;
+            return -1;
         }
     }
 
-    public boolean showVarGateDialog(String id) {
+    public int showVarGateDialog(String id) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/VarQbitDialog.fxml"));
@@ -232,9 +228,8 @@ public class MainApp extends Application {
             return controller.isAdd();
 
         }catch(Exception e){
-            // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
-            return false;
+            return -1;
         }
     }
 
@@ -243,7 +238,7 @@ public class MainApp extends Application {
         return true;
     }
 
-    public boolean showMeasurementDialog(String id) {
+    public int showMeasurementDialog(String id) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/MeasurementGateDialog.fxml"));
@@ -263,13 +258,12 @@ public class MainApp extends Application {
             return controller.isAdd();
 
         }catch(Exception e){
-            // Exception gets thrown if the fxml file could not be loaded
             e.printStackTrace();
-            return false;
+            return -1;
         }
     }
 
-    public boolean showGroverOperatorDialog(String id) {
+    public int showGroverOperatorDialog(String id) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/GroverDialog.fxml"));
@@ -289,7 +283,31 @@ public class MainApp extends Application {
             return controller.isAdd();
 
         }catch(Exception e){
-            // Exception gets thrown if the fxml file could not be loaded
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public boolean showRemoveGateDialog(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/RemoveGateDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Remove Operator");
+
+            RemoveGateController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCircuit(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isDelete();
+
+        }catch(Exception e){
             e.printStackTrace();
             return false;
         }

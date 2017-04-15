@@ -13,6 +13,7 @@ public class Measurement extends Operator {
         super(r,name);
         this.qubit = qubit;
         all = false;
+        type = "Measurement";
     }
     public Measurement(Register r, String name){
         super(r,name);
@@ -37,6 +38,10 @@ public class Measurement extends Operator {
 
             }
         }
+    }
+
+    @Override
+    public void undoOperation() {
     }
 
     public int getQubit(){

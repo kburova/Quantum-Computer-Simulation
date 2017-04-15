@@ -500,4 +500,35 @@ public class CanvasManager {
         }
     }
 
+    /** redraw all the elements of circuitCanvas **/
+    public void redrawOperatorsOnly( int from ) {
+        for(int i = from; i < circuit.getNumberOfOperators(); i++){
+            Operator o = circuit.getOperator(i);
+            String s = o.getType();
+            switch (s)
+            {
+                case "Unary":
+                    drawUnaryOperator(i, (UnaryOperator)o);
+                    break;
+                case "Binary":
+                    drawBinaryOperator(i, (BinaryOperator)o );
+                    break;
+                case "Ternary":
+                    drawTernaryOperator(i, (ToffoliGate)o);
+                    break;
+                case "Grover":
+                case "Measurement":
+                case "VarQbit":
+                    drawBigOperator(i, o);
+                    break;
+                default:
+                    break;
+            }
+        }
+        stepThrough(0);
+        colorAmplitudes(xCanvas,circuit.getX());
+        if (yLines != 0){
+            colorAmplitudes(yCanvas, circuit.getY());
+        }
+    }
 }

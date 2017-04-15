@@ -85,6 +85,10 @@ public class Register {
         Phase(targetQubit, Math.PI/4.0);
     }
 
+    public void inverseT(int targetQubit){
+        InversePhase(targetQubit, Math.PI/4.0);
+    }
+
     public void Not(int targetQubit)
     {
         Complex swapVar;
