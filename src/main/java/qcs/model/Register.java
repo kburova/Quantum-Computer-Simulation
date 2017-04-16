@@ -103,10 +103,21 @@ public class Register {
 
     public void ConditionalRotate(int controlQubit, int targetQubit, double phase)
     {
+        Complex alpha, beta;
+
         for (int i = 0; i < numberOfBases; i++)
         {
-            if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) != 0)
-                amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+            if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) == 0)
+            {
+                alpha = amplitudes[i].multiply(1);
+                beta = amplitudes[i^(1<<targetQubit)].multiply(1);
+
+                amplitudes[i] = alpha.multiply(Math.cos(phase));
+                amplitudes[i] = amplitudes[i].subtract(beta.multiply(Complex.I).multiply(Math.sin(phase)));
+
+                amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate()).multiply(Math.sin(phase));
+                amplitudes[i^(1<<targetQubit)] = amplitudes[i^(1<<targetQubit)].add(beta.multiply(Math.cos(phase)));
+            }
         }
     }
 
