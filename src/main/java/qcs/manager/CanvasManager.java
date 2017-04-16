@@ -4,8 +4,11 @@ import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -216,7 +219,7 @@ public class CanvasManager {
         }else if (name.equals("Hadamard")){
             tag = "H";
         }else if (name.equals("Identity")){
-            tag = "I";
+            tag = "Id";
         }else if (name.equals("Inverse")){
             tag = "S†";
         }else if (name.equals("Phase")){
@@ -440,13 +443,13 @@ public class CanvasManager {
 
     public void drawBigOperator(int index, Operator operator){
         int from,to;
-        String tag = "";
+        Image img = null;
         String name = operator.getName();
         String register = operator.getRegisterName();
         Rectangle r;
         Text t;
         Color color;
-        int textY,height;
+        double picY,height;
         int startX = beginQubitX + index * gateSize;
         Group g = new Group();
 
@@ -457,15 +460,15 @@ public class CanvasManager {
             to = tmp.getTo();
             color = yellow;
             if (name.equals("WH")) {
-                tag = "WH";
+                img = new Image("images/transform-icons/VarQbit/WH.png");
             } else if (name.equals("QFT")) {
-                tag = "F";
+                img = new Image("images/transform-icons/VarQbit/QFT.png");
             } else if (name.equals("iQFT")) {
-                tag = "1/F";
+                img = new Image("images/transform-icons/VarQbit/iQFT.png");
             } else if (name.equals("General")) {
-                tag = "U";
+                img = new Image("images/transform-icons/VarQbit/GeneralControl.png");
             } else if (name.equals("Eval")) {
-                tag = "f(x)";
+                img = new Image("images/transform-icons/VarQbit/FunctionEval.png");
             }
         }else {
             Measurement tmp = (Measurement) operator;
@@ -473,11 +476,12 @@ public class CanvasManager {
             to = tmp.getTo();
             color = Color.DEEPSKYBLUE;
             if (name.equals("CompB")){
-                tag = "CB";
+                img = new Image("images/transform-icons/Measurement/MeasurementC.png");
             }else if (name.equals("SignB")){
-                tag = "SB";
+                img = new Image("images/transform-icons/Measurement/MeasurementS.png");
             }else if (name.equals("Trash")) {
-                tag = "\\_/";
+                color = Color.LIGHTSKYBLUE;
+                img = new Image("images/transform-icons/Measurement/Trash.png");
             }
         }
 
@@ -511,11 +515,12 @@ public class CanvasManager {
         /** set rectangle of the qubit **/
         r = new Rectangle(startX , gateSize*from + beginLineY - 15, 30, height);
         r.setFill(color);
-        textY = gateSize*( from + (to - from)/2 ) + topPadding;
-        t = new Text(startX, textY ,tag);
-        t.setWrappingWidth(30);
-        t.setTextAlignment(TextAlignment.CENTER);
-        g.getChildren().addAll(r,t);
+
+        picY = gateSize*( from + (to - from)/2.0 ) + beginLineY - 15;
+        Rectangle sign = new Rectangle( startX, picY, 30, 30);
+        sign.setFill(new ImagePattern(img));
+
+        g.getChildren().addAll(r, sign);
         circuitCanvas.getChildren().add(g);
     }
 

@@ -2,7 +2,7 @@
  controller.java
 
  This file is a control part of the MVC model.
- It has all the methods to manipulate model
+ It has all the methods To manipulate model
 
  Created by: Ksenia Burova
              Parker Diamond
@@ -28,19 +28,16 @@ import qcs.manager.CanvasManager;
 import qcs.MainApp;
 import qcs.manager.IOmanager;
 import qcs.model.Circuit;
-import qcs.model.operator.BinaryOperator;
-import qcs.model.operator.GroverOperator;
-import qcs.model.operator.ToffoliGate;
-import qcs.model.operator.UnaryOperator;
+import qcs.model.operator.*;
 
 public class MainAppController implements Initializable{
 
-    //reference to main application
+    //reference To main application
     private MainApp mainApp;
     private CanvasManager canvasManager;
     private Circuit circuit;
 
-    //reference used by save / load to remember where to save to
+    //reference used by save / load To remember where To save To
     private IOmanager IOmanager = new IOmanager();
     @FXML
     private Pane circuitCanvas;
@@ -73,8 +70,8 @@ public class MainAppController implements Initializable{
 
     @FXML
     private void save_as() {
-        //when there is a dialogStage for the visualization to be loaded
-        //from (first q function) expects an ArrayList
+        //when there is a dialogStage for the visualization To be loaded
+        //From (first q function) expects an ArrayList
         IOmanager.save_as(new Stage(), new ArrayList<>());
     }
 
@@ -84,7 +81,7 @@ public class MainAppController implements Initializable{
     }
 
     /** Do 1 step forward in a circuit:
-     * check if circuit was initialized and if there are any operators left to execute,
+     * check if circuit was initialized and if there are any operators left To execute,
      * do the operation and increment step, then redraw 'step' line and recolor states
      * **/
     @FXML
@@ -101,7 +98,7 @@ public class MainAppController implements Initializable{
 
     /** Do 1 step backwards in a circuit:
      * check if circuit was initialized and if we are not at the very beginning,
-     * decrement step, then do previous operation to negate last result,
+     * decrement step, then do previous operation To negate last result,
      * then redraw 'step' line and recolor states
      * **/
     @FXML
@@ -109,15 +106,21 @@ public class MainAppController implements Initializable{
         if (circuit.getX() != null) {
             int step = circuit.getCurrentStep();
             if (step > 0) {
-                circuit.decrementStep();
-                circuit.getOperator(--step).undoOperation();
-                canvasManager.stepThrough(step);
+                Operator o = circuit.getOperator(--step);
+
+                if (o.getType().equals("Measurement")){
+                    circuit.showError("Can't reverse measurement!!!");
+                }else {
+                    circuit.decrementStep();
+                    o.undoOperation();
+                    canvasManager.stepThrough(step);
+                }
             }
         }
     }
 
     /** Restart execution of a circuit:
-     * reinitialize amplitudes to initial state and
+     * reinitialize amplitudes To initial state and
      * redraw 'step'
      **/
     @FXML
@@ -132,8 +135,8 @@ public class MainAppController implements Initializable{
     }
 
     /** Run through all the gates that are left at once:
-     * do operations starting with current step all the way to the end,
-     * move 'step' line to the end and recolor amplitudes**/
+     * do operations starting with current step all the way To the end,
+     * move 'step' line To the end and recolor amplitudes**/
     @FXML
     private void runAll() {
         if (circuit.getX() != null) {
@@ -181,7 +184,7 @@ public class MainAppController implements Initializable{
         if (mainApp.getCircuit().getX() == null) {
             showErrorMessage();
         }else {
-            //pass to function what operator we add
+            //pass To function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             int OkClicked = mainApp.showUnaryGateDialog(data);
@@ -194,10 +197,23 @@ public class MainAppController implements Initializable{
         if (mainApp.getCircuit().getX() == null) {
             showErrorMessage();
         }else {
-            //pass to function what operator we add
+            //pass To function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             int OkClicked = mainApp.showBinaryGateDialog(data);
+            addAndDraw(OkClicked, "Binary");
+        }
+    }
+
+    @FXML
+    public void addRotateGateDialog(ActionEvent event) {
+        if (mainApp.getCircuit().getX() == null) {
+            showErrorMessage();
+        }else {
+            //pass To function what operator we add
+            Node node = (Node) event.getSource();
+            String data = (String) node.getUserData();
+            int OkClicked = mainApp.showRotateGateDialog(data);
             addAndDraw(OkClicked, "Binary");
         }
     }
@@ -207,7 +223,7 @@ public class MainAppController implements Initializable{
         if (mainApp.getCircuit().getX() == null) {
             showErrorMessage();
         }else {
-            //pass to function what operator we add
+            //pass To function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             int OkClicked = mainApp.showTernaryGateDialog(data);
@@ -220,7 +236,7 @@ public class MainAppController implements Initializable{
         if (mainApp.getCircuit().getX() == null) {
             showErrorMessage();
         }else {
-            //pass to function what operator we add
+            //pass To function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             int OkClicked = mainApp.showVarGateDialog(data);
@@ -232,7 +248,7 @@ public class MainAppController implements Initializable{
         if (mainApp.getCircuit().getX() == null) {
             showErrorMessage();
         }else {
-            //pass to function what operator we add
+            //pass To function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             boolean OkClicked = mainApp.showErrorDialog(data);
@@ -246,7 +262,7 @@ public class MainAppController implements Initializable{
         if (mainApp.getCircuit().getX() == null) {
             showErrorMessage();
         }else {
-            //pass to function what operator we add
+            //pass To function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             int OkClicked = mainApp.showMeasurementDialog(data);
@@ -258,7 +274,7 @@ public class MainAppController implements Initializable{
         if (mainApp.getCircuit().getX() == null) {
             showErrorMessage();
         }else {
-            //pass to function what operator we add
+            //pass To function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
             int OkClicked = mainApp.showGroverOperatorDialog(data);
@@ -281,7 +297,7 @@ public class MainAppController implements Initializable{
 
     }
 
-    /** Helper function to avoid code duplication **/
+    /** Helper function To avoid code duplication **/
     private void addAndDraw(int OkClicked, String type){
         if ((OkClicked == circuit.getNumberOfOperators() - 1)  && (OkClicked != -1)) {
             if (type.equals("Unary")) {

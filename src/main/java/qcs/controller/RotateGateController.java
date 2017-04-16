@@ -1,25 +1,31 @@
 package qcs.controller;
 
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
-import qcs.model.operator.*;
+import qcs.model.operator.BinaryOperator;
+import qcs.model.operator.RotateGate;
+
+import java.util.Observable;
 
 /**
- * Created by kseniaburova on 4/9/17.
+ * Created by kseniaburova on 4/15/17.
  */
-public class BinaryGateController {
-
+public class RotateGateController {
     private Stage dialogStage;
     private  int addClicked = -1;
     private Circuit circuit;
-    String id;
+    String id, phaseValue;
     Register targetRegister;
     int targetQubit, controlQubit, operationStep;
-
+    double Phase;
     @FXML
     private TextField target;
 
@@ -34,6 +40,9 @@ public class BinaryGateController {
 
     @FXML
     private TextField step;
+
+    @FXML
+    private ChoiceBox phase;
 
     //bind stage with controller
     public void setDialogStage(Stage dialogStage, String id){
@@ -61,7 +70,7 @@ public class BinaryGateController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = operationStep;
-            circuit.addOperator(new BinaryOperator(targetRegister, targetQubit, controlQubit, id), operationStep);
+            circuit.addOperator(new RotateGate(targetRegister, targetQubit, controlQubit, Phase, id), operationStep);
             dialogStage.close();
         }
     }
@@ -95,6 +104,27 @@ public class BinaryGateController {
 
         if (targetQubit < 0 || controlQubit < 0 || targetQubit >= targetRegister.getNumberOfQubits() || controlQubit >= targetRegister.getNumberOfQubits()){
             errorMessage = "Enter valid qubit index";
+        }
+
+        phaseValue = String.valueOf(phase.getValue());
+        System.out.println(phaseValue);
+
+        if (phaseValue.equals("π")){
+            Phase = Math.PI;
+        }else if (phaseValue.equals("π/2")){
+            Phase = Math.PI / 2;
+        }else if (phaseValue.equals("π/3")){
+            Phase = Math.PI / 3;
+        }else if (phaseValue.equals("π/4")){
+            Phase = Math.PI / 4;
+        }else if (phaseValue.equals("π/5")){
+            Phase = Math.PI / 5;
+        }else if (phaseValue.equals("π/6")){
+            Phase = Math.PI / 6;
+        }else if (phaseValue.equals("π/7")){
+            Phase = Math.PI / 7;
+        }else if (phaseValue.equals("π/8")){
+            Phase = Math.PI / 8;
         }
 
         if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){

@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import qcs.model.Circuit;
 import qcs.model.Register;
 import qcs.model.operator.Measurement;
+import qcs.model.operator.VarQbitOperator;
 
 /**
  * Created by kseniaburova on 4/10/17.
@@ -20,11 +21,15 @@ public class MeasurementGateController {
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int qubitNum, operationStep, from, to;
-    boolean All;
+    int qubitNum, operationStep, From, To;
 
     @FXML
     private TextField qubitVal;
+
+    @FXML
+    private TextField from;
+    @FXML
+    private TextField to;
 
     @FXML
     private RadioButton x;
@@ -33,13 +38,16 @@ public class MeasurementGateController {
     private RadioButton y;
 
     @FXML
+    private TextField step;
+
+    @FXML
     private RadioButton qubit;
 
     @FXML
     private RadioButton all;
 
     @FXML
-    private TextField step;
+    private RadioButton range;
 
     //bind stage with controller
     public void setDialogStage(Stage dialogStage, String id){
@@ -47,6 +55,8 @@ public class MeasurementGateController {
         this.dialogStage.setResizable(false);
         this.id = id;
     }
+
+    //set registers here???
 
     public int isAdd(){
         return addClicked;
@@ -65,11 +75,7 @@ public class MeasurementGateController {
         if ( isInputValid() ){
             System.out.println(id);
             addClicked = operationStep;
-            if (All){
-                circuit.addOperator( new Measurement(targetRegister, id, 0, targetRegister.getNumberOfQubits()-1), operationStep );
-            }else{
-                circuit.addOperator( new Measurement(targetRegister, id, qubitNum, qubitNum), operationStep );
-            }
+            circuit.addOperator( new Measurement(targetRegister, id, From, To), operationStep );
             dialogStage.close();
         }
     }
@@ -88,20 +94,32 @@ public class MeasurementGateController {
         }
 
         if (all.isSelected()){
-            All = true;
-        }else{
-            All = false;
+            From = 0;
+            To = targetRegister.getNumberOfQubits()-1;
+        }else if(qubit.isSelected()){
             try{
                 qubitNum = Integer.parseInt(qubitVal.getText());
-                            }
+            }
             catch(Exception e){
                 errorMessage = "Enter Integer values";
             }
             if (qubitNum < 0 || qubitNum > targetRegister.getNumberOfQubits() ){
                 errorMessage = "Enter valid qubit number";
+            }else{
+                From = To = qubitNum;
+            }
+        }else if (range.isSelected()) {
+            try{
+                From = Integer.parseInt(from.getText());
+                To = Integer.parseInt(to.getText());
+            }
+            catch(Exception e){
+                errorMessage = "Enter Integer values";
+            }
+            if ( From < 0 || To >= targetRegister.getNumberOfQubits() || From > To ) {
+                errorMessage = "Enter valid qubit range";
             }
         }
-
         try{
             operationStep = Integer.parseInt(step.getText());
         }
@@ -111,7 +129,6 @@ public class MeasurementGateController {
         if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){
             errorMessage = "Enter valid index for gate step, should be between 0 and "+ circuit.getNumberOfOperators();
         }
-
         if (errorMessage.length() == 0){
             return true;
         }else{
@@ -121,10 +138,26 @@ public class MeasurementGateController {
     }
 
     public void ifOneSelected(ActionEvent event) {
-        if (qubit.isSelected()) qubitVal.setDisable(false);
+        if (qubit.isSelected()) {
+            from.setDisable(true);
+            to.setDisable(true);
+            qubitVal.setDisable(false);
+        }
     }
 
     public void ifAllSelected(ActionEvent event) {
-        if (all.isSelected()) qubitVal.setDisable(true);
+        if (all.isSelected()) {
+            from.setDisable(true);
+            to.setDisable(true);
+            qubitVal.setDisable(true);
+        }
+    }
+
+    public void ifRangeSelected(ActionEvent event) {
+        if (range.isSelected()){
+            from.setDisable(false);
+            to.setDisable(false);
+            qubitVal.setDisable(true);
+        }
     }
 }

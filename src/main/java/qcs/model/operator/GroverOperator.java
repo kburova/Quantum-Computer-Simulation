@@ -16,12 +16,12 @@ public class GroverOperator extends Operator {
 
     @Override
     public void doOperation() {
-        //Grover
+        register.Grover();
     }
 
     @Override
     public void undoOperation() {
-        //inverse Grover
+        doOperation();
     }
 
     public  int getSearchValue(){

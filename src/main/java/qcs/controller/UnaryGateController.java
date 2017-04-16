@@ -1,7 +1,7 @@
 /**************************************************
  UnaryGateController
 
- This file controls the output from dialog window
+ This file controls the output From dialog window
  that adds Unary gates
 
  Created by: Ksenia Burova
