@@ -144,7 +144,7 @@ public class MainAppController implements Initializable{
             int numOfSteps = circuit.getNumberOfOperators();
             if (step != numOfSteps) {
                 for ( int i = step ; i < numOfSteps; i++) {
-                    circuit.getOperator(step).doOperation();
+                    circuit.getOperator(i).doOperation();
                 }
                 circuit.setCurrentStep(numOfSteps);
                 canvasManager.stepThrough(numOfSteps);
