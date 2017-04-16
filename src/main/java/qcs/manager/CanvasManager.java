@@ -533,7 +533,7 @@ public class CanvasManager {
 
         Complex[] amp = r.getAmplitudes();
         for (int i = 0; i < amp.length; i++) {
-            System.out.println(amp[i].getReal()+" "+amp[i].getImaginary());
+            //System.out.println(amp[i].getReal()+" "+amp[i].getImaginary());
             if (amp[i].getReal() == 0) {
                 hue = Math.PI / 2;
                 if (amp[i].getImaginary() < 0) {
