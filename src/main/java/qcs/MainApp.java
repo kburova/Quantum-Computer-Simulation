@@ -183,6 +183,31 @@ public class MainApp extends Application {
             return -1;
         }
     }
+
+    public int showRotateGateDialog(String id) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/RotateGateDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Add Gate");
+
+            RotateGateController controller = loader.getController();
+            controller.setDialogStage(dialogStage, id);
+            controller.setCircuit(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isAdd();
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
     public int showTernaryGateDialog(String id){
         try {
             FXMLLoader loader = new FXMLLoader();
