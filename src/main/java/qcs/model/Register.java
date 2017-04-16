@@ -172,7 +172,7 @@ public class Register {
         Complex omega;
         Complex[] resultant;
 
-        omega = new Complex(0, 2.0*Math.PI/(1.0*numberOfQubits));
+        omega = new Complex(0, 2.0*Math.PI/(1.0*numberOfBases));
         resultant = new Complex[numberOfBases];
 
         for(int i=0;i<numberOfBases;i++)
