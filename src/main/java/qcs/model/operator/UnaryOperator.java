@@ -29,9 +29,9 @@ public class UnaryOperator extends Operator{
         }else if (name.equals("Identity")){
             register.Identity();
         }else if (name.equals("Inverse")){
-            register.InversePhase(target, Math.PI/8);
+            register.InversePhase(target, Math.PI/2);
         }else if (name.equals("Phase")){
-            register.Phase(target, Math.PI/8);
+            register.Phase(target, Math.PI/2);
         }else if (name.equals("Shift")) {
             register.T(target);
         }
@@ -53,9 +53,9 @@ public class UnaryOperator extends Operator{
         }else if (name.equals("Identity")){
             register.Identity();
         }else if (name.equals("Inverse")){
-            register.Phase(target, Math.PI/8);
+            register.Phase(target, -Math.PI/2);
         }else if (name.equals("Phase")){
-            register.InversePhase(target, Math.PI/8);
+            register.InversePhase(target, -Math.PI/2);
         }else if (name.equals("Shift")) {
            register.inverseT(target);
         }

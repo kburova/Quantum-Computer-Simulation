@@ -1,14 +1,8 @@
 package qcs.controller;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
-import qcs.model.Register;
-import qcs.model.operator.VarQbitOperator;
 
 /**
  * Created by kseniaburova on 4/13/17.
@@ -28,13 +22,13 @@ public class RemoveGateController {
         this.dialogStage.setResizable(false);
     }
 
-
     public boolean isDelete(){
         return deleteClicked;
     }
 
     public void setCircuit(Circuit circuit){
         this.circuit = circuit;
+        operator.setText( String.valueOf(circuit.getNumberOfOperators()-1) );
     }
 
     @FXML

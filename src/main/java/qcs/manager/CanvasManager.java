@@ -283,14 +283,16 @@ public class CanvasManager {
 
         if (name.equals("Swap")) {
             tag = "X";
-            Text tt = new Text(startX, gateSize*targetQ + topPadding ,tag);
+            Text tt = new Text(startX, gateSize*targetQ + topPadding +3 ,tag);
             tt.setWrappingWidth(30);
             tt.setTextAlignment(TextAlignment.CENTER);
             tt.setFill(Color.LIGHTSALMON);
-            Text tc = new Text(startX, gateSize*controlQ + topPadding ,tag);
+            tt.setFont(new Font(20));
+            Text tc = new Text(startX, gateSize*controlQ + topPadding +3,tag);
             tc.setWrappingWidth(30);
             tc.setTextAlignment(TextAlignment.CENTER);
             tc.setFill(Color.LIGHTSALMON);
+            tc.setFont(new Font(20));
             g.getChildren().addAll(tt,tc);
         }else{
             /** set circle/square **/

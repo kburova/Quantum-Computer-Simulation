@@ -242,12 +242,6 @@ public class Register {
         }
     }
 
-    //update amplitudes according to newState
-    public void updateNewState(){
-        for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
-        amplitudes[initialState] = new Complex(1,0); //???
-    }
-
     public int getState() {
         return initialState;
     }
