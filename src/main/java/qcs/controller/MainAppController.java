@@ -65,7 +65,13 @@ public class MainAppController implements Initializable{
 
     @FXML
     private void open() {
-        new IOmanager().load(new Stage());
+        //circuit =
+                //new IOmanager().load(new Stage());
+        mainApp.setCircuit(circuit);
+        circuit.reInitializeRegisterQubits(); // maybe
+        canvasManager.resetCanvasManager();
+        canvasManager.drawInitState();
+        canvasManager.redrawOperatorsOnly(0);
     }
 
     @FXML

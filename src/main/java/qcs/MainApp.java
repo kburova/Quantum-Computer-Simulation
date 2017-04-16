@@ -339,6 +339,9 @@ public class MainApp extends Application {
     }
 
     final public Circuit getCircuit() { return circuit; }
+    final public void setCircuit (Circuit circuit) {
+        this.circuit = circuit;
+    }
 
     public static void main(String[] args) {
         launch(args);
