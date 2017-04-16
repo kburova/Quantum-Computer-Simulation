@@ -21,7 +21,7 @@
             </rowConstraints>
             <children>
                 <Label text=" Operation  step to delete:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField fx:id="operator" text="0"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="operator" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
             </children>
         </GridPane>

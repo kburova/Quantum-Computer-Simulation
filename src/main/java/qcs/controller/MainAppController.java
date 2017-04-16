@@ -126,11 +126,11 @@ public class MainAppController implements Initializable{
     @FXML
     private void restart() {
         if (circuit.getX() != null) {
-            int step = circuit.getCurrentStep();
-            if (step != 0) {
-                circuit.reInitializeRegisterQubits();
-                canvasManager.stepThrough(0);
-            }
+          //  int step = circuit.getCurrentStep();
+            // if (step != 0) {
+            circuit.reInitializeRegisterQubits();
+            canvasManager.stepThrough(0);
+        //}
         }
     }
 
