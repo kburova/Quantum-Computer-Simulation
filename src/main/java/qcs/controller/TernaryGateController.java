@@ -13,11 +13,11 @@ import qcs.model.operator.ToffoliGate;
  */
 public class TernaryGateController {
     private Stage dialogStage;
-    private  boolean addClicked = false;
+    private  int addClicked = -1;
     private Circuit circuit;
     String id;
     Register targetRegister;
-    int targetQubit, controlQubit1, controlQubit2;
+    int targetQubit, controlQubit1, controlQubit2, operationStep;
 
     @FXML
     private TextField target;
@@ -33,6 +33,9 @@ public class TernaryGateController {
     @FXML
     private RadioButton y;
 
+    @FXML
+    private TextField step;
+
     //bind stage with controller
     public void setDialogStage(Stage dialogStage, String id){
         this.dialogStage = dialogStage;
@@ -40,24 +43,26 @@ public class TernaryGateController {
         this.id = id;
     }
 
-    //set registers here???
-
-    public boolean isAdd(){
+    public int isAdd(){
         return addClicked;
     }
 
     public void setCircuit(Circuit circuit){
         this.circuit = circuit;
+        step.setText( Integer.toString(circuit.getNumberOfOperators()) );
+        if (circuit.getY().getNumberOfQubits() == 0){
+            y.setDisable(true);
+        }
     }
 
     @FXML
     private void handleAdd(){
         if ( isInputValid() ){
             System.out.println(id);
-            addClicked = true;
+            addClicked = operationStep;
             if (id.equals("Toffoli")){
 
-                circuit.addOperator(new ToffoliGate(targetRegister, targetQubit, controlQubit1, controlQubit2, id));
+                circuit.addOperator(new ToffoliGate(targetRegister, targetQubit, controlQubit1, controlQubit2, id), operationStep);
             }
             dialogStage.close();
         }
@@ -77,18 +82,14 @@ public class TernaryGateController {
             targetRegister = circuit.getY();
         }
 
-        String targetVal = target.getText();
-        String controlVal1 = control1.getText();
-        String controlVal2 = control2.getText();
-
-
         try{
-            targetQubit = Integer.parseInt(targetVal);
-            controlQubit1 = Integer.parseInt(controlVal1);
-            controlQubit2 = Integer.parseInt(controlVal2);
+            targetQubit = Integer.parseInt(target.getText());
+            controlQubit1 = Integer.parseInt(control1.getText());
+            controlQubit2 = Integer.parseInt(control2.getText());
+            operationStep = Integer.parseInt(step.getText());
         }
         catch(Exception e){
-            errorMessage = "Enter an Integer value ";
+            errorMessage = "Enter Integer values";
         }
 
         if (targetQubit < 0 || controlQubit1 < 0 || controlQubit2 < 0 ||
@@ -97,6 +98,16 @@ public class TernaryGateController {
                 controlQubit2 >= targetRegister.getNumberOfQubits()){
             errorMessage = "Enter valid qubit index";
         }
+        if ( (targetQubit == controlQubit1) ||
+                (targetQubit == controlQubit2) ||
+                (controlQubit1 == controlQubit2) ){
+            errorMessage = "Control and target qubits must have different values";
+        }
+
+        if (operationStep < 0 || operationStep > circuit.getNumberOfOperators()){
+            errorMessage = "Enter valid index for gate step, should be between 0 and " + circuit.getNumberOfOperators();
+        }
+
         if (errorMessage.length() == 0){
             return true;
         }else{

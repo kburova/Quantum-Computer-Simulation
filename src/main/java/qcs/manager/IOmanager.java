@@ -97,7 +97,7 @@ public class IOmanager {
         String json_string = file_read(file);
 
         //keep for debugging purposes remove once viz is done
-        System.out.print(json_string);
+        //System.out.print(json_string);
 
         //anticipate this chunk of code causing errors, I suspect
         //it will produce a list of strings rather than a list of quantum classes as expected

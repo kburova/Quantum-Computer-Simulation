@@ -71,7 +71,7 @@
                     <Tooltip text="Set Qubits" />
                 </tooltip>
             </Button>
-            <Button fx:id="remove">
+            <Button fx:id="remove" onAction="#handleRemoveGateDialog">
                 <tooltip>
                     <Tooltip text="Remove Gate" />
                 </tooltip>
@@ -156,7 +156,7 @@
                       <Tooltip text="CNOT" />
                   </tooltip>
               </Button>
-              <Button fx:id="Rotate" onAction="#addBinaryGateDialog" userData="Rotate" GridPane.columnIndex="1" GridPane.rowIndex="5">
+              <Button fx:id="Rotate" onAction="#addRotateGateDialog" userData="Rotate" GridPane.columnIndex="1" GridPane.rowIndex="5">
                   <tooltip>
                       <Tooltip text="Rotate X" />
                   </tooltip>
@@ -168,7 +168,7 @@
               </Button>
 
               <Label fx:id="TernaryLabel" text="Ternary Gates" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-              <Button fx:id="Toffoli" onAction="#addTernaryGateDialog" text="T" userData="Toffoli" GridPane.columnIndex="0" GridPane.rowIndex="7">
+              <Button fx:id="Toffoli" onAction="#addTernaryGateDialog"  userData="Toffoli" GridPane.columnIndex="0" GridPane.rowIndex="7">
                   <tooltip>
                       <Tooltip text="Toffoli(CCNOT)" />
                   </tooltip>

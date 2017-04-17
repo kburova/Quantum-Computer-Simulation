@@ -16,9 +16,16 @@ public class ToffoliGate extends Operator{
         target = q;
         control1 = c1;
         control2 = c2;
+        type = "Ternary";
     }
 
     public void doOperation(){
+        register.CCNOT(control1,control2,target);
+    }
+
+    @Override
+    public void undoOperation() {
+        doOperation();
     }
 
     public int getTarget(){

@@ -80,7 +80,7 @@
 }
 #Identity{
     -fx-background-color: darkseagreen;
-    -fx-background-image: url('../images/transform-icons/unary-operators/Identity.png');
+    -fx-background-image: url('../images/transform-icons/unary-operators/Identity@2x.png');
 }
 #Inverse{
     -fx-background-color: darkseagreen;
@@ -97,32 +97,67 @@
 }
 /* Binary Buttons*/
 #Swap{
+    -fx-background-image: url('../images/transform-icons/binary-operators/Swap.png');
     -fx-background-color: lightsalmon;
 }
 #CNOT{
+    -fx-background-image: url('../images/transform-icons/binary-operators/CNOT.png');
     -fx-background-color: lightsalmon;
 }
 #Rotate{
+    -fx-background-image: url('../images/transform-icons/binary-operators/Rotatex.png');
     -fx-background-color: lightsalmon;
 }
 /* Ternary */
 
 #Toffoli{
+    -fx-background-image: url('../images/transform-icons/Toffoli.png');
     -fx-background-color: plum;
 }
 
 /** Variable Gates **/
-
-#Grover, #WalshHadamard, #QFT, #InvQFT, #General, #FunctionEval{
+#Grover{
+    -fx-background-image: url('../images/transform-icons/VarQbit/Grover.png');
+    -fx-background-color: #ffd480;
+}
+#WalshHadamard{
+    -fx-background-image: url('../images/transform-icons/VarQbit/WH.png');
+    -fx-background-color: #ffd480;
+}
+#QFT{
+    -fx-background-image: url('../images/transform-icons/VarQbit/QFT.png');
+      -fx-background-color: #ffd480;
+}
+#InvQFT{
+    -fx-background-image: url('../images/transform-icons/VarQbit/iQFT.png');
+      -fx-background-color: #ffd480;
+  }
+#General{
+    -fx-background-image: url('../images/transform-icons/VarQbit/GeneralControl.png');
+      -fx-background-color: #ffd480;
+  }
+#FunctionEval{
+    -fx-background-image: url('../images/transform-icons/VarQbit/FunctionEval.png');
     -fx-background-color: #ffd480;
 }
 
 #Error{
+    -fx-background-image: url('../images/transform-icons/Error/UnitaryMatrix.png');
     -fx-background-color: #ff4d4d;
 }
 
-#CompB, #SignB, #Trash {
+#CompB{
+    -fx-background-image: url('../images/transform-icons/Measurement/MeasurementC.png');
     -fx-background-color: deepskyblue;
+}
+#SignB {
+    -fx-background-image: url('../images/transform-icons/Measurement/MeasurementS.png');
+    -fx-background-color: deepskyblue;
+}
+
+#Trash {
+    -fx-background-image: url('../images/transform-icons/Measurement/Trash.png');
+    -fx-background-color: lightskyblue;
 }
 #toolBar {
 

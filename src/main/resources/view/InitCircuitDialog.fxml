@@ -17,8 +17,8 @@
                         <Label prefHeight="16.0" text="Enter number of qubits" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
                         <Label prefHeight="16.0" text="Register X:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                         <Label prefHeight="16.0" text="Register Y:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <TextField fx:id="registerX" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="registerY" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="registerX" GridPane.columnIndex="1" GridPane.rowIndex="1" text="3" />
+                        <TextField fx:id="registerY" GridPane.columnIndex="1" GridPane.rowIndex="2" text="3"/>
                     </children>
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.0" minWidth="-Infinity" prefWidth="106.0" />
