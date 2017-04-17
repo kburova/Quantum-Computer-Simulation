@@ -197,7 +197,7 @@ public class Register {
         amplitudes = resultant;
     }
 
-    public void Measurement(ArrayList<Integer> targetQubits)
+    public void MeasureComputation(ArrayList<Integer> targetQubits)
     {
         int targetQubit;
         double sum;
@@ -228,6 +228,42 @@ public class Register {
                 {
                     if((j & targetQubit) != 0) amplitudes[j] = Complex.ZERO;
                     else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+                }
+            }
+        }
+    }
+
+    public void MeasureSign(ArrayList<Integer> targetQubits)
+    {
+        //Tentative Sign Basis Measurement -- Need to check with Dr. Maclennan about correctness
+        for(int i=0; i<targetQubits.size();i++) Hadamard(targetQubits.get(i));
+        MeasureComputation(targetQubits);
+        for(int i=0; i<targetQubits.size();i++) Hadamard(targetQubits.get(i));
+    }
+
+    public void Trash(ArrayList<Integer> targetQubits)
+    {
+        //Perform a measurement, but do not update the qubit states
+        MeasureComputation(targetQubits);
+    }
+
+    public void Error(ArrayList<Integer> targetQubits)
+    {
+        int targetQubit;
+        Complex alpha, beta;
+        SecureRandom RNG;
+
+        RNG = new SecureRandom();
+
+        for(int i=0;i<targetQubits.size();i++)
+        {
+            targetQubit = 1<<targetQubits.get(i);
+
+            for(int j=0;j<numberOfBases;j++)
+            {
+                if( (j & targetQubit) == 0 )
+                {
+
                 }
             }
         }
