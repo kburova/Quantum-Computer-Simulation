@@ -176,6 +176,34 @@ public class Register {
         }
     }
 
+    public void QFT_Experimental(ArrayList<Integer> targetQubits)
+    {
+        Complex omega;
+        Complex[] resultant;
+        int nonTargetBases;
+
+        omega = new Complex(0, 2.0*Math.PI/(1.0*Math.pow(2.0, targetQubits.size())));
+        resultant = new Complex[numberOfBases];
+
+        nonTargetBases = 0;
+        for(int i=0; i < numberOfQubits; i++)
+            if(!targetQubits.contains(i)) nonTargetBases = nonTargetBases | (1<<i);
+        System.out.println(nonTargetBases);
+
+        for(int i=0; i<numberOfBases; i++)
+        {
+            resultant[i]=Complex.ZERO;
+            for(int j=0; j<numberOfBases; j++)
+            {
+                if(((i & nonTargetBases) ^ (j & nonTargetBases)) == 0)
+                    resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
+            }
+            resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
+        }
+
+        amplitudes = resultant;
+    }
+
     public void QFT()
     {
         //This implmentation just works on all qubits -- will need to modify to make it work
