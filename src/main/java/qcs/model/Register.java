@@ -98,11 +98,8 @@ public class Register {
 
     public void ConditionalRotate(int controlQubit, int targetQubit, double phase)
     {
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) != 0)
-                amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
-        }
+      amplitudes = util.conditionalRotate(amplitudes, numberOfBases, targetQubit
+        , controlQubit, phase);
     }
 
     public void Swap(int qubit1, int qubit2)
@@ -160,25 +157,12 @@ public class Register {
         }
     }
 
-    public void QFT()
+    public void QFT(Integer firstQubitIndex, Integer qubitCount)
     {
-        //This implmentation just works on all qubits -- will need to modify to make it work
-        //on ranges.
-        Complex omega;
-        Complex[] resultant;
-
-        omega = new Complex(0, 2.0*Math.PI/(1.0*numberOfQubits));
-        resultant = new Complex[numberOfBases];
-
-        for(int i=0;i<numberOfBases;i++)
-        {
-            resultant[i] = Complex.ZERO;
-            for(int j=0;j<numberOfBases;j++)
-                resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
-            resultant[i] = resultant[i].divide(Math.sqrt(numberOfBases));
-        }
-
-        amplitudes = resultant;
+      if(qubitCount != numberOfQubits)
+        amplitudes = util.qftSubset(amplitudes, numberOfBases, firstQubitIndex, qubitCount);
+      else
+        amplitudes = util.qftAllQubits(amplitudes,numberOfBases, numberOfQubits);
     }
 
     public void Measurement(ArrayList<Integer> targetQubits)
