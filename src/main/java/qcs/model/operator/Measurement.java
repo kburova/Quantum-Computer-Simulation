@@ -24,7 +24,7 @@ public class Measurement extends Operator {
     @Override
     public void doOperation() {
         if (name.equals("CompB")){
-            register.Measurement(qubits);
+            register.MeasureComputation(qubits);
         }else if (name.equals("SignB")){
 
         }else if (name.equals("Trash")){
