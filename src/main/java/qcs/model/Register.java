@@ -278,10 +278,11 @@ public class Register {
     public void Error(ArrayList<Integer> targetQubits)
     {
         int targetQubit;
-        Complex alpha, beta;
+        Complex[][] errorMatrix;
         SecureRandom RNG;
 
         RNG = new SecureRandom();
+        errorMatrix = new Complex[2][2];
 
         for(int i=0;i<targetQubits.size();i++)
         {
