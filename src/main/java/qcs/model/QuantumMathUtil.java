@@ -8,6 +8,11 @@ import org.apache.commons.math3.complex.Complex;
  * That being said there should be no class level state unless it is declared
  * final.
  * As it grows we can break it down into further modules.
+ *
+ * Functions Created and Implemented by Parker Diamond (jparkerdiamond@gmail.com):
+ *  UNARY OPERATORS: not, squareRootNot, hadamard, phase, inversePhase, y, z
+ *  BINARY OPERATORS: cnot, swap
+ *
  */
 public class QuantumMathUtil {
   public Complex[] not(Complex[] amplitudes, int numberOfBases, int targetQubit)
