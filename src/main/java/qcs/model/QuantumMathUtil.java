@@ -10,6 +10,79 @@ import org.apache.commons.math3.complex.Complex;
  * As it grows we can break it down into further modules.
  */
 public class QuantumMathUtil {
+  public Complex[] qftAllQubits(Complex[] amplitudes, int numberOfBases, int numberOfQubits)
+  {
+
+    //This implmentation just works on all qubits -- will need to modify to make it work
+    //on ranges.
+    Complex omega;
+    Complex[] resultant;
+
+    omega = new Complex(0, 2.0*Math.PI/(1.0*numberOfQubits));
+    resultant = new Complex[numberOfBases];
+
+    for(int i=0;i<numberOfBases;i++)
+    {
+      resultant[i] = Complex.ZERO;
+      for(int j=0;j<numberOfBases;j++)
+        resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
+      resultant[i] = resultant[i].divide(Math.sqrt(numberOfBases));
+    }
+
+    return resultant;
+  }
+
+  public Complex[] qftSubset(Complex[] amplitudes, int numberOfBases, int firstQubitIndex, int qubitCount)
+  {
+    amplitudes = qftSubroutine(amplitudes, numberOfBases, firstQubitIndex, qubitCount);
+
+    for(int i = 0; i < qubitCount / 2; i++)
+    {
+      int to = i;
+      int from = qubitCount - 1 - i;
+      amplitudes = swap(amplitudes,numberOfBases,to,from);
+    }
+
+    return amplitudes;
+  }
+
+  private Complex[] qftSubroutine(Complex[] amplitudes, int numberOfBases, int firstQubitIndex, int qubitCount)
+  {
+    if(qubitCount == 1)
+    {
+      return hadamard(amplitudes,numberOfBases,firstQubitIndex);
+    }
+    else
+    {
+      amplitudes = qftSubset(amplitudes, numberOfBases, firstQubitIndex, qubitCount - 1);
+      int lastIndex = qubitCount - 1;
+      for(int i = 0; i < lastIndex; i++)
+      {
+        double phase = Math.PI / Math.pow(2,lastIndex - i);
+        amplitudes = conditionalRotate(amplitudes,numberOfBases,i,lastIndex,phase);
+      }
+      return hadamard(amplitudes,numberOfBases,lastIndex);
+    }
+  }
+
+  public Complex[] conditionalRotate(Complex[] amplitudes, int numberOfBases
+    , int targetQubit, int controlQubit, double phase)
+  {
+    for (int i = 0; i < numberOfBases; i++)
+      if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) != 0)
+        amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+    return amplitudes;
+  }
+
+  public Complex[] phase(Complex[] amplitudes, int numberOfBases, int targetQubit
+    , double phase)
+  {
+    for (int i = 0; i < numberOfBases; i++)
+      if((i & (1<<targetQubit)) != 0)
+        amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+    return amplitudes;
+  }
+
   public Complex[] not(Complex[] amplitudes, int numberOfBases, int targetQubit)
   {
     for (int i = 0; i < numberOfBases; i++)
@@ -82,15 +155,6 @@ public class QuantumMathUtil {
       }
     }
 
-    return amplitudes;
-  }
-
-  public Complex[] phase(Complex[] amplitudes, int numberOfBases, int targetQubit
-    , double phase)
-  {
-    for (int i = 0; i < numberOfBases; i++)
-      if( (i & (1<<targetQubit)) != 0)
-        amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
     return amplitudes;
   }
 
