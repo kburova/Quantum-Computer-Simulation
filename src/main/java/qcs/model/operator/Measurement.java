@@ -2,47 +2,44 @@ package qcs.model.operator;
 
 import qcs.model.Register;
 
+import java.util.ArrayList;
+
 /**
  * Created by apple on 4/10/17.
  */
 public class Measurement extends Operator {
-    private int qubit;
-    private boolean all;
+    private int from, to;
+    private ArrayList<Integer> qubits = new ArrayList<>();
 
-    public Measurement(Register r, String name, int qubit){
+    public Measurement(Register r, String name, int from, int to){
         super(r,name);
-        this.qubit = qubit;
-        all = false;
-    }
-    public Measurement(Register r, String name){
-        super(r,name);
-        all = true;
-    }
-    @Override
-    public void doOperation() {
-        if (all){
-            if (name.equals("CompB")){
-
-            }else if (name.equals("SignB")){
-
-            }else if (name.equals("Trash")){
-
-            }
-        }else{
-            if (name.equals("CompB")){
-
-            }else if (name.equals("SignB")){
-
-            }else if (name.equals("Trash")){
-
-            }
+        type = "Measurement";
+        this.from = from;
+        this.to = to;
+        for (int i = from; i <= to; i++){
+            qubits.add(i-from, i);
         }
     }
 
-    public int getQubit(){
-        return qubit;
+    @Override
+    public void doOperation() {
+        if (name.equals("CompB")){
+            register.MeasureComputation(qubits);
+        }else if (name.equals("SignB")){
+
+        }else if (name.equals("Trash")){
+
+        }
     }
-    public boolean isAll(){
-        return all;
+
+    @Override
+    public void undoOperation() {
+    }
+
+    public int getFrom(){
+        return from;
+    }
+    public  int getTo(){
+        return to;
     }
 }

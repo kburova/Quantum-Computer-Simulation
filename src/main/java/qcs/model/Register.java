@@ -32,11 +32,12 @@ public class Register {
         numberOfQubits = numOfQubits;
         numberOfBases = (int) Math.pow(2.0, (double) numOfQubits);
         amplitudes = new Complex[numberOfBases];
-        reinitializeQubits();
+        reinitializeState();
         //set 0s to red color here
     }
 
-    public void reinitializeQubits(){
+    /** brings register to inital state **/
+    public void reinitializeState(){
         for (int i = 0; i < numberOfBases; i++) {
             if (i == initialState) amplitudes[initialState] = new Complex(1, 0);
             else amplitudes[i] = new Complex(0, 0);
@@ -67,6 +68,10 @@ public class Register {
     {
         //Phase shit by Pi/4.
         Phase(targetQubit, Math.PI/4.0);
+    }
+
+    public void inverseT(int targetQubit){
+        InversePhase(targetQubit, Math.PI/4.0);
     }
 
     public void Not(int targetQubit)
@@ -126,17 +131,81 @@ public class Register {
       amplitudes = util.walshHadamard(amplitudes,numberOfBases,numberOfQubits,targetQubits);
     }
 
-    public void QFT(Integer firstQubitIndex, Integer qubitCount)
-    {
-      if(qubitCount != numberOfQubits)
-        amplitudes = util.qftSubset(amplitudes, numberOfBases, firstQubitIndex, qubitCount);
-      else
-        amplitudes = util.qftAllQubits(amplitudes,numberOfBases, numberOfQubits);
+    public void QFT(Integer firstQubitIndex, Integer qubitCount) {
+        if (qubitCount != numberOfQubits)
+            amplitudes = util.qftSubset(amplitudes, numberOfBases, firstQubitIndex, qubitCount);
+        else
+            amplitudes = util.qftAllQubits(amplitudes, numberOfBases, numberOfQubits);
     }
 
-    public void Measurement(ArrayList<Integer> targetQubits)
+    public void QFT_Experimental(ArrayList<Integer> targetQubits)
+    {
+        Complex omega;
+        Complex[] resultant;
+        int nonTargetBases;
+
+        omega = new Complex(0, 2.0*Math.PI/(1.0*Math.pow(2.0, targetQubits.size())));
+        resultant = new Complex[numberOfBases];
+
+        nonTargetBases = 0;
+        for(int i=0; i < numberOfQubits; i++)
+            if(!targetQubits.contains(i)) nonTargetBases = nonTargetBases | (1<<i);
+        System.out.println(nonTargetBases);
+
+        for(int i=0; i<numberOfBases; i++)
+        {
+            resultant[i]=Complex.ZERO;
+            for(int j=0; j<numberOfBases; j++)
+            {
+                if(((i & nonTargetBases) ^ (j & nonTargetBases)) == 0)
+                    resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
+            }
+            resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
+        }
+
+        amplitudes = resultant;
+    }
+
+    public void MeasureComputation(ArrayList<Integer> targetQubits)
     {
       amplitudes = util.measurement(amplitudes,numberOfBases,targetQubits,new SecureRandom());
+    }
+
+    public void MeasureSign(ArrayList<Integer> targetQubits)
+    {
+        //Tentative Sign Basis Measurement -- Need to check with Dr. Maclennan about correctness
+        for(int i=0; i<targetQubits.size();i++) Hadamard(targetQubits.get(i));
+        MeasureComputation(targetQubits);
+        for(int i=0; i<targetQubits.size();i++) Hadamard(targetQubits.get(i));
+    }
+
+    public void Trash(ArrayList<Integer> targetQubits)
+    {
+        //Perform a measurement, but do not update the qubit states
+        MeasureComputation(targetQubits);
+    }
+
+    public void Error(ArrayList<Integer> targetQubits)
+    {
+        int targetQubit;
+        Complex[][] errorMatrix;
+        SecureRandom RNG;
+
+        RNG = new SecureRandom();
+        errorMatrix = new Complex[2][2];
+
+        for(int i=0;i<targetQubits.size();i++)
+        {
+            targetQubit = 1<<targetQubits.get(i);
+
+            for(int j=0;j<numberOfBases;j++)
+            {
+                if( (j & targetQubit) == 0 )
+                {
+
+                }
+            }
+        }
     }
 
     final public String getName(){
@@ -158,12 +227,6 @@ public class Register {
         }else{
             initialState &= ~(1 << index);
         }
-    }
-
-    //update amplitudes according to newState
-    public void updateNewState(){
-        for (int i = 0; i < numberOfBases; i++) amplitudes[i] = new Complex(0,0);
-        amplitudes[initialState] = new Complex(1,0); //???
     }
 
     public int getState() {

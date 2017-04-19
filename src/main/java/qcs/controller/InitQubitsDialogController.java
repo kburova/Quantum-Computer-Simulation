@@ -1,7 +1,7 @@
 /**************************************************
  InitQubitsDialogController.java
 
- This file controls the output from dialog window
+ This file controls the output From dialog window
  that initializes qubits
 
  Created by: Ksenia Burova
@@ -105,7 +105,7 @@ public class InitQubitsDialogController implements Initializable{
                 }
             }
         }
-        /** need max number of qubits to decide on width **/
+        /** need max number of qubits To decide on width **/
         maxCols = (xCols > yCols) ? xCols : yCols;
 
         /** set indexes for qubits that are displayed at the top of input fields **/
@@ -138,6 +138,8 @@ public class InitQubitsDialogController implements Initializable{
     /** Close dialog when click OK in dialog window **/
     @FXML
     public boolean handleOk(){
+        /** after qubit values are set, reinitialize register amplitudes **/
+        circuit.reInitializeRegisterQubits();
         dialogStage.close();
         return true;
     }

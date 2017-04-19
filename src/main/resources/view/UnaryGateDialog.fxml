@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,27 +12,33 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="131.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.UnaryGateController">
+<AnchorPane prefHeight="184.0" prefWidth="165.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.UnaryGateController">
     <children>
-        <GridPane prefHeight="71.0" prefWidth="125.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <GridPane prefHeight="121.0" prefWidth="130.0" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" prefWidth="98.0" />
-                <ColumnConstraints hgrow="SOMETIMES" prefWidth="25" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.0" minWidth="100.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="40.0" prefWidth="45.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints />
+            <RowConstraints />
             </rowConstraints>
             <children>
-                <RadioButton fx:id = "x" mnemonicParsing="false" selected="true" text="Register X" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+                <RadioButton mnemonicParsing="false" selected="true" text="Register X" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" fx:id="x">
                     <toggleGroup>
                         <ToggleGroup fx:id="group1" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton fx:id = "y" mnemonicParsing="false" text="Register Y" toggleGroup="$group1" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                <RadioButton fx:id="y" mnemonicParsing="false" text="Register Y" toggleGroup="$group1" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                 <Label text="Target Qubit: " GridPane.columnIndex="0" GridPane.rowIndex="2"> </Label>
-                <TextField fx:id = "target" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="target" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Separator GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                <Label text="Gate position:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="step" prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </children>
         </GridPane>
         <HBox alignment="CENTER" minWidth="-1.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">

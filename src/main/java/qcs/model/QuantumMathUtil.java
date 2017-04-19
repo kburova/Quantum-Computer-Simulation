@@ -1,6 +1,12 @@
 package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.complex.ComplexField;
+import org.apache.commons.math3.linear.Array2DRowFieldMatrix;
+import org.apache.commons.math3.linear.FieldMatrix;
+import org.apache.commons.math3.linear.FieldVector;
+
+import java.security.SecureRandom;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -11,6 +17,11 @@ import java.util.ArrayList;
  * That being said there should be no class level state unless it is declared
  * final.
  * As it grows we can break it down into further modules.
+ *
+ * Functions Created and Implemented by Parker Diamond (jparkerdiamond@gmail.com):
+ *  UNARY OPERATORS: not, squareRootNot, hadamard, phase, inversePhase, y, z
+ *  BINARY OPERATORS: cnot, swap
+ *
  */
 public class QuantumMathUtil {
   public Complex[] qftAllQubits(Complex[] amplitudes, int numberOfBases, int numberOfQubits)
@@ -71,9 +82,22 @@ public class QuantumMathUtil {
   public Complex[] conditionalRotate(Complex[] amplitudes, int numberOfBases
     , int targetQubit, int controlQubit, double phase)
   {
+    Complex alpha, beta;
+
     for (int i = 0; i < numberOfBases; i++)
-      if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) != 0)
-        amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+    {
+      if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) == 0)
+      {
+        alpha = amplitudes[i].multiply(1);
+        beta = amplitudes[i^(1<<targetQubit)].multiply(1);
+
+        amplitudes[i] = alpha.multiply(Math.cos(phase));
+        amplitudes[i] = amplitudes[i].subtract(beta.multiply(Complex.I).multiply(Math.sin(phase)));
+
+        amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate()).multiply(Math.sin(phase));
+        amplitudes[i^(1<<targetQubit)] = amplitudes[i^(1<<targetQubit)].add(beta.multiply(Math.cos(phase)));
+      }
+    }
     return amplitudes;
   }
 
@@ -377,5 +401,34 @@ public class QuantumMathUtil {
       }
     }
     return mResult;
+  }
+
+  public Complex[][] generateRandom2DUnitary(SecureRandom RNG)
+  {
+    Array2DRowFieldMatrix<Complex> vectors;
+    FieldVector<Complex> u, v, projection;
+
+    //Generate a Random Complex Lower Triangular Matrix
+    vectors = new Array2DRowFieldMatrix<Complex>(new Complex[2][2]);
+    vectors.setEntry(0,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
+    vectors.setEntry(1,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
+    vectors.setEntry(0,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
+    vectors.setEntry(1,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
+
+    //Takes the column vectors and calculate the projection of v onto u
+    u = vectors.getColumnVector(0);
+    v = vectors.getColumnVector(1);
+    projection = v.projection(u);
+
+    //Subtract the projection to make v orthogonal to u and make the matrix symmetric
+    v = v.subtract(projection);
+
+    u.mapDivideToSelf(u.dotProduct(u).sqrt());
+    v.mapDivideToSelf(v.dotProduct(v).sqrt());
+
+    vectors.setColumnVector(0, u);
+    vectors.setColumnVector(1, v);
+
+    return vectors.getData();
   }
 }
