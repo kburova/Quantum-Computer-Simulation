@@ -54,7 +54,9 @@ public class CanvasManager {
         //yLines = circuit.getY().getNumberOfQubits();
         this.yCanvas = yCanvas;
     }
-    public void resetCanvasManager(){
+
+    public void resetCanvasManager(Circuit circuit){
+        this.circuit = circuit;
 
         /**  erase all previous drawing **/
         if (circuitCanvas.getChildren().size() != 0) {
@@ -63,8 +65,12 @@ public class CanvasManager {
             if (yCanvas.getChildren().size() != 0)
                 yCanvas.getChildren().clear();
         }
-        xLines = circuit.getX().getNumberOfQubits();
-        yLines = circuit.getY().getNumberOfQubits();
+
+        Register x = circuit.getX();
+        Register y = circuit.getY();
+
+        xLines = circuit.getX() != null ? x.getNumberOfQubits() : 0;
+        yLines = circuit.getY() != null ? y.getNumberOfQubits() : 0;
     }
 
     /** function that draws indexes for qubits, and their values as well as 'step through' line **/

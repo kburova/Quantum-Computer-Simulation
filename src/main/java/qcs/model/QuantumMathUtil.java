@@ -1,6 +1,12 @@
 package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.complex.ComplexField;
+import org.apache.commons.math3.linear.Array2DRowFieldMatrix;
+import org.apache.commons.math3.linear.FieldMatrix;
+import org.apache.commons.math3.linear.FieldVector;
+
+import java.security.SecureRandom;
 
 /**
  * Created by nick on 4/8/17.
@@ -8,6 +14,11 @@ import org.apache.commons.math3.complex.Complex;
  * That being said there should be no class level state unless it is declared
  * final.
  * As it grows we can break it down into further modules.
+ *
+ * Functions Created and Implemented by Parker Diamond (jparkerdiamond@gmail.com):
+ *  UNARY OPERATORS: not, squareRootNot, hadamard, phase, inversePhase, y, z
+ *  BINARY OPERATORS: cnot, swap
+ *
  */
 public class QuantumMathUtil {
   public Complex[] not(Complex[] amplitudes, int numberOfBases, int targetQubit)
@@ -225,5 +236,34 @@ public class QuantumMathUtil {
       }
     }
     return mResult;
+  }
+
+  public Complex[][] generateRandom2DUnitary(SecureRandom RNG)
+  {
+    Array2DRowFieldMatrix<Complex> vectors;
+    FieldVector<Complex> u, v, projection;
+
+    //Generate a Random Complex Lower Triangular Matrix
+    vectors = new Array2DRowFieldMatrix<Complex>(new Complex[2][2]);
+    vectors.setEntry(0,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
+    vectors.setEntry(1,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
+    vectors.setEntry(0,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
+    vectors.setEntry(1,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
+
+    //Takes the column vectors and calculate the projection of v onto u
+    u = vectors.getColumnVector(0);
+    v = vectors.getColumnVector(1);
+    projection = v.projection(u);
+
+    //Subtract the projection to make v orthogonal to u and make the matrix symmetric
+    v = v.subtract(projection);
+
+    u.mapDivideToSelf(u.dotProduct(u).sqrt());
+    v.mapDivideToSelf(v.dotProduct(v).sqrt());
+
+    vectors.setColumnVector(0, u);
+    vectors.setColumnVector(1, v);
+
+    return vectors.getData();
   }
 }

@@ -65,25 +65,25 @@ public class MainAppController implements Initializable{
 
     @FXML
     private void open() {
-        //circuit =
-                //new IOmanager().load(new Stage());
+        Circuit circuit = new IOmanager().load(new Stage());
+
         mainApp.setCircuit(circuit);
         circuit.reInitializeRegisterQubits(); // maybe
-        canvasManager.resetCanvasManager();
+        canvasManager.resetCanvasManager(circuit);
         canvasManager.drawInitState();
         canvasManager.redrawOperatorsOnly(0);
     }
 
     @FXML
     private void save_as() {
-        //when there is a dialogStage for the visualization To be loaded
-        //From (first q function) expects an ArrayList
-        IOmanager.save_as(new Stage(), new ArrayList<>());
+        //when there is a dialogStage for the visualization to be loaded
+        //from (first q function) expects an arraylist
+        IOmanager.save_as(new Stage(), mainApp.getCircuit());
     }
 
     @FXML
     private void save() {
-        IOmanager.save(new ArrayList<>());
+        IOmanager.save(mainApp.getCircuit());
     }
 
     /** Do 1 step forward in a circuit:
@@ -166,7 +166,7 @@ public class MainAppController implements Initializable{
     private void handleInitCircuitDialog() {
         boolean registersInitialized = mainApp.showAddRegistersDialog();
         if (registersInitialized){
-            canvasManager.resetCanvasManager();
+            canvasManager.resetCanvasManager(mainApp.getCircuit());
             canvasManager.drawInitState();
         }
     }

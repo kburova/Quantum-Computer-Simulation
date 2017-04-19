@@ -1,5 +1,6 @@
 package qcs.manager;
 
+import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -7,9 +8,11 @@ import java.io.File;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import qcs.model.Circuit;
 
 /**
  * Created by nick on 2/24/17.
@@ -23,32 +26,38 @@ import javafx.stage.Stage;
 public class IOmanager {
     private File last_file_saved = null;
 
-    public void save(List<Class<?>> quantum_fun_stuff) {
+    public void save(Circuit circuit) {
         if(last_file_saved != null)
-            save(last_file_saved, quantum_fun_stuff);
+            writeToFile(last_file_saved, circuit);
         else
-            save_as(new Stage(), quantum_fun_stuff);
+            save_as(new Stage(), circuit);
     }
 
-    public void save(File file, List<Class<?>> quantum_fun_stuff) {
-        try {
-            String content = new Gson()
-                    .toJson(quantum_fun_stuff);
-            new PrintWriter(file)
-                    .print(content);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void save_as(final Stage mainStage, List<Class<?>> quantum_fun_stuff) {
+    public void save_as(final Stage mainStage, Circuit circuit) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save As");
         File file = fileChooser.showSaveDialog(mainStage);
         last_file_saved = file;
-        save(file, quantum_fun_stuff);
+        writeToFile(file, circuit);
+    }
+
+    public void writeToFile(File file, Circuit circuit) {
+        try {
+            String content = new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create()
+                    .toJson(circuit);
+
+            PrintWriter out = new PrintWriter(file);
+            out.print(content);
+            out.close();
+
+            System.out.println(content);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
     }
 
     public String file_read(File file) {
@@ -74,7 +83,7 @@ public class IOmanager {
         return json_builder.toString();
     }
 
-    public String load(final Stage mainStage) {
+    public Circuit load(final Stage mainStage) {
         //javaFX to choose file natively
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load Circuit");
@@ -93,6 +102,6 @@ public class IOmanager {
         //anticipate this chunk of code causing errors, I suspect
         //it will produce a list of strings rather than a list of quantum classes as expected
         //this code is going to be the source of numerous bugs must be tested and validated
-        return new Gson().fromJson(json_string, new TypeToken<List<?>>(){}.getType());
+        return new Gson().fromJson(json_string, Circuit.class);
     }
 }

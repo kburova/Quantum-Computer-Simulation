@@ -176,6 +176,34 @@ public class Register {
         }
     }
 
+    public void QFT_Experimental(ArrayList<Integer> targetQubits)
+    {
+        Complex omega;
+        Complex[] resultant;
+        int nonTargetBases;
+
+        omega = new Complex(0, 2.0*Math.PI/(1.0*Math.pow(2.0, targetQubits.size())));
+        resultant = new Complex[numberOfBases];
+
+        nonTargetBases = 0;
+        for(int i=0; i < numberOfQubits; i++)
+            if(!targetQubits.contains(i)) nonTargetBases = nonTargetBases | (1<<i);
+        System.out.println(nonTargetBases);
+
+        for(int i=0; i<numberOfBases; i++)
+        {
+            resultant[i]=Complex.ZERO;
+            for(int j=0; j<numberOfBases; j++)
+            {
+                if(((i & nonTargetBases) ^ (j & nonTargetBases)) == 0)
+                    resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
+            }
+            resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
+        }
+
+        amplitudes = resultant;
+    }
+
     public void QFT()
     {
         //This implmentation just works on all qubits -- will need to modify to make it work
@@ -197,7 +225,7 @@ public class Register {
         amplitudes = resultant;
     }
 
-    public void Measurement(ArrayList<Integer> targetQubits)
+    public void MeasureComputation(ArrayList<Integer> targetQubits)
     {
         int targetQubit;
         double sum;
@@ -228,6 +256,43 @@ public class Register {
                 {
                     if((j & targetQubit) != 0) amplitudes[j] = Complex.ZERO;
                     else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+                }
+            }
+        }
+    }
+
+    public void MeasureSign(ArrayList<Integer> targetQubits)
+    {
+        //Tentative Sign Basis Measurement -- Need to check with Dr. Maclennan about correctness
+        for(int i=0; i<targetQubits.size();i++) Hadamard(targetQubits.get(i));
+        MeasureComputation(targetQubits);
+        for(int i=0; i<targetQubits.size();i++) Hadamard(targetQubits.get(i));
+    }
+
+    public void Trash(ArrayList<Integer> targetQubits)
+    {
+        //Perform a measurement, but do not update the qubit states
+        MeasureComputation(targetQubits);
+    }
+
+    public void Error(ArrayList<Integer> targetQubits)
+    {
+        int targetQubit;
+        Complex[][] errorMatrix;
+        SecureRandom RNG;
+
+        RNG = new SecureRandom();
+        errorMatrix = new Complex[2][2];
+
+        for(int i=0;i<targetQubits.size();i++)
+        {
+            targetQubit = 1<<targetQubits.get(i);
+
+            for(int j=0;j<numberOfBases;j++)
+            {
+                if( (j & targetQubit) == 0 )
+                {
+
                 }
             }
         }
