@@ -247,7 +247,7 @@ public class QuantumMathUtil {
     vectors = new Array2DRowFieldMatrix<Complex>(new Complex[2][2]);
     vectors.setEntry(0,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
     vectors.setEntry(1,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
-    vectors.setEntry(0,1, Complex.ZERO);
+    vectors.setEntry(0,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
     vectors.setEntry(1,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
 
     //Takes the column vectors and calculate the projection of v onto u
@@ -257,10 +257,9 @@ public class QuantumMathUtil {
 
     //Subtract the projection to make v orthogonal to u and make the matrix symmetric
     v = v.subtract(projection);
-    v.setEntry(0, u.getEntry(1));
 
-    u.mapDivide(u.dotProduct(u).sqrt());
-    v.mapDivide(v.dotProduct(v).sqrt());
+    u.mapDivideToSelf(u.dotProduct(u).sqrt());
+    v.mapDivideToSelf(v.dotProduct(v).sqrt());
 
     vectors.setColumnVector(0, u);
     vectors.setColumnVector(1, v);
