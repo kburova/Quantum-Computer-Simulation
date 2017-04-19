@@ -2,6 +2,9 @@ package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+
 /**
  * Created by nick on 4/8/17.
  * It is my intention that this is a function module full of useful math ops
@@ -107,6 +110,23 @@ public class QuantumMathUtil {
     return amplitudes;
   }
 
+  public Complex[] ccnot(Complex[] amplitudes, int numberOfBases
+    , int targetQubit, int controlQubit1, int controlQubit2)
+  {
+    Complex swapVar;
+
+    for(int i=0;i<numberOfBases;i++)
+    {
+      if((i & (1<<controlQubit1)) != 0 && (i & (1<<controlQubit2)) != 0 && (i & (1<<targetQubit)) != 0)
+      {
+        swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+        amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
+        amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
+      }
+    }
+    return amplitudes;
+  }
+
   public Complex[] squareRootNot(Complex[] amplitudes, int numberOfBases, int targetQubit)
   {
     Complex alpha, beta;
@@ -133,6 +153,71 @@ public class QuantumMathUtil {
       Complex swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
       amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
       amplitudes[i^(1<<targetQubit)] = swapVar;
+    }
+
+    return amplitudes;
+  }
+
+  public Complex[] walshHadamard(Complex[] amplitudes, int numberOfBases, int numberOfQubits, ArrayList<Integer> targetQubits)
+  {
+    Complex alpha, beta;
+    int targetQubit;
+
+    for(int i=numberOfQubits-1;i>=0;i--)
+    {
+      targetQubit = targetQubits.indexOf(i);
+
+      if(targetQubit != -1)
+      {
+        targetQubit = 1<<targetQubit;
+        for (int j = 0; j < numberOfBases; j++)
+        {
+          if ((j & targetQubit) == 0)
+          {
+            alpha = new Complex(amplitudes[j].getReal(), amplitudes[j].getImaginary());
+            beta = new Complex(amplitudes[j ^ targetQubit].getReal(), amplitudes[j ^ targetQubit].getImaginary());
+
+            amplitudes[j] = alpha.add(beta).divide(Math.sqrt(2.0));
+            amplitudes[j ^ targetQubit] = alpha.subtract(beta).divide(Math.sqrt(2.0));
+          }
+        }
+      }
+    }
+    return amplitudes;
+  }
+
+  public Complex[] measurement(Complex[] amplitudes, int numberOfBases, ArrayList<Integer> targetQubits, SecureRandom RNG)
+  {
+    int targetQubit;
+    double sum;
+
+    for(int i=0;i<targetQubits.size();i++)
+    {
+      sum = 0.0;
+      targetQubit = 1<<targetQubits.get(i);
+
+      for(int j=0;j<numberOfBases;j++)
+      {
+        if((j & targetQubit) != 0)
+          sum += amplitudes[j].abs()*amplitudes[j].abs();
+      }
+
+      if(RNG.nextDouble() <= sum)
+      {
+        for(int j =0;j<numberOfBases;j++)
+        {
+          if((j & targetQubit) == 0) amplitudes[j] = Complex.ZERO;
+          else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+        }
+      }
+      else
+      {
+        for(int j =0;j<numberOfBases;j++)
+        {
+          if((j & targetQubit) != 0) amplitudes[j] = Complex.ZERO;
+          else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+        }
+      }
     }
 
     return amplitudes;

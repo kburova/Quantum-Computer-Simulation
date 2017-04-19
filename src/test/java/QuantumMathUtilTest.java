@@ -11,6 +11,89 @@ public class QuantumMathUtilTest {
   private final QuantumMathUtil util = new QuantumMathUtil();
 
   @Test
+  public void qft_all_one_qubit_is_hadamard()
+  {
+    Complex[] input1 = new Complex[2];
+    input1[0] = new Complex(0);
+    input1[1] = new Complex(1);
+
+    Complex[] input2 = new Complex[2];
+    input2[0] = new Complex(0);
+    input2[1] = new Complex(1);
+
+    Complex[] output = util.qftAllQubits(input1,2,1);
+    Complex[] expected = util.hadamard(input2,2,0);
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
+  public void qft_subset_one_qubit_is_hadamard()
+  {
+    Complex[] input1 = new Complex[2];
+    input1[0] = new Complex(0);
+    input1[1] = new Complex(1);
+
+    Complex[] input2 = new Complex[2];
+    input2[0] = new Complex(0);
+    input2[1] = new Complex(1);
+
+    Complex[] output = util.qftSubset(input1,2,0,1);
+    Complex[] expected = util.hadamard(input2,2,0);
+
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
+  public void qft_all_two_qubits()
+  {
+    Complex[] input = new Complex[4];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+    input[2] = new Complex(0);
+    input[3] = new Complex(0);
+
+    Complex[] expected = new Complex[4];
+    expected[0] = new Complex(1.0/2.0);
+    expected[1] = new Complex(0,1.0/2.0);
+    expected[2] = new Complex(-1.0/2.0);
+    expected[3] = new Complex(0,-1.0/2.0);
+
+    Complex[] output = util.qftAllQubits(input, 4, 2);
+
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
+  public void qft_subset_two_qubits()
+  {
+    Complex[] input = new Complex[4];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+    input[2] = new Complex(0);
+    input[3] = new Complex(0);
+
+    Complex[] expected = new Complex[4];
+    expected[0] = new Complex(1.0/2.0);
+    expected[1] = new Complex(0,1.0/2.0);
+    expected[2] = new Complex(-1.0/2.0);
+    expected[3] = new Complex(0,-1.0/2.0);
+
+    Complex[] output = util.qftSubset(input, 4, 0,2);
+
+    /*System.out.println(output[0]);
+    System.out.println(output[1]);
+    System.out.println(output[2]);
+    System.out.println(output[3]);
+
+    System.out.println(expected[0]);
+    System.out.println(expected[1]);
+    System.out.println(expected[2]);
+    System.out.println(expected[3]);
+*/
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
   public void testRootOfUnityZeroInput()
   {
     //act
@@ -235,6 +318,28 @@ public class QuantumMathUtilTest {
 
     //assert
     assertTrue(util.complex_vector_match(input, output));
+  }
+
+  @Test
+  public void phase_by_pi_div_2()
+  {
+    //arrange
+    Complex[] input = new Complex[2];
+    input[0] = new Complex(0);
+    input[1] = new Complex(2);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(0,1);
+
+    //act
+    Complex[] output = util.phase(input,2,0,Math.PI/2);
+
+    System.out.println(output[0]);
+    System.out.println(output[1]);
+
+    //assert
+    assertTrue(util.complex_vector_match(expected, output));
   }
 
   @Test
