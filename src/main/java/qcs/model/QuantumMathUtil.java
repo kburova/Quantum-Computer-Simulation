@@ -81,8 +81,10 @@ public class QuantumMathUtil {
     , double phase)
   {
     for (int i = 0; i < numberOfBases; i++)
-      if((i & (1<<targetQubit)) != 0)
+    {
+      if ((i & (1 << targetQubit)) != 0)
         amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+    }
     return amplitudes;
   }
 
@@ -100,12 +102,8 @@ public class QuantumMathUtil {
     , int controlQubit)
   {
     for(int i=0;i<numberOfBases;i++)
-    {
       if((i & (1<<controlQubit)) != 0)
-      {
         amplitudes = notHelpful(amplitudes, targetQubit, i);
-      }
-    }
 
     return amplitudes;
   }
@@ -202,12 +200,15 @@ public class QuantumMathUtil {
           sum += amplitudes[j].abs()*amplitudes[j].abs();
       }
 
+      System.out.println(sum);
+
       if(RNG.nextDouble() <= sum)
       {
         for(int j =0;j<numberOfBases;j++)
         {
           if((j & targetQubit) == 0) amplitudes[j] = Complex.ZERO;
-          else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+          else if (sum != 0)amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+          else;
         }
       }
       else
@@ -215,7 +216,8 @@ public class QuantumMathUtil {
         for(int j =0;j<numberOfBases;j++)
         {
           if((j & targetQubit) != 0) amplitudes[j] = Complex.ZERO;
-          else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+          else if(sum != 0) amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+          else;
         }
       }
     }
@@ -325,10 +327,11 @@ public class QuantumMathUtil {
     return true;
   }
 
+  //checks to 4 places
   public boolean complex_match(Complex a, Complex b)
   {
-    return a.getReal() == b.getReal()
-      && a.getImaginary() == b.getImaginary();
+    return Math.abs(a.getReal() - b.getReal()) < 1e-4
+      && Math.abs(a.getImaginary() - b.getImaginary()) < 1e-4;
   }
 
   public Complex[][] outerProduct(Complex[][] u, Complex[][] v)
