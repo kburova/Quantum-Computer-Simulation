@@ -61,8 +61,23 @@ public class QuantumMathUtil {
   }
 
   public Complex[] qftExperimental(Complex[] amplitudes, int numberOfBases
-    , ArrayList<Integer> targetQubits, int numberOfQubits)
+    , ArrayList<Integer> unshiftedTargetQubits, int numberOfQubits)
   {
+    ArrayList<Integer> targetQubits;
+    if(unshiftedTargetQubits.get(0) == 0) targetQubits = unshiftedTargetQubits;
+    else
+    {
+      targetQubits = new ArrayList<>();
+      for(int i = 0; i < unshiftedTargetQubits.size(); i++)
+        targetQubits.add(i);
+      int difference = unshiftedTargetQubits.get(0);
+      for (int i = 0; i < difference; i++) {
+        for (int j = 0; j < numberOfQubits - 1; j++) {
+          amplitudes = swap(amplitudes,numberOfBases,j,j + 1);
+        }
+      }
+    }
+
     Complex omega;
     Complex[] resultant;
     int nonTargetBases;
@@ -72,7 +87,7 @@ public class QuantumMathUtil {
 
     nonTargetBases = 0;
     for(int i=0; i < numberOfQubits; i++)
-      if(!targetQubits.contains(i)) nonTargetBases = nonTargetBases | (1<<i);
+      if(!targetQubits.contains(i)) nonTargetBases |= (1<<i);
     System.out.println(nonTargetBases);
 
     for(int i=0; i<numberOfBases; i++)
@@ -87,6 +102,17 @@ public class QuantumMathUtil {
       }
 
       resultant[i] = resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
+    }
+
+    if(unshiftedTargetQubits.get(0) == 0) return resultant;
+    else
+    {
+      int difference = unshiftedTargetQubits.get(0);
+      for (int i = 0; i < difference; i++) {
+        for (int j = numberOfQubits - 1; j > 0; j--) {
+          resultant = swap(resultant,numberOfBases,j,j - 1);
+        }
+      }
     }
 
     return resultant;
