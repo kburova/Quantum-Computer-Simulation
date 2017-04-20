@@ -25,7 +25,7 @@ public class VarQbitOperator extends Operator{
     @Override
     public void doOperation() {
         if (name.equals("QFT")){
-            //register.QFT();
+            register.QFT(qubits);
         }else if(name.equals("iQFT")){
 
         }else if(name.equals("WH")){
