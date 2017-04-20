@@ -103,22 +103,8 @@ public class Register {
 
     public void ConditionalRotate(int controlQubit, int targetQubit, double phase)
     {
-        Complex alpha, beta;
-
-        for (int i = 0; i < numberOfBases; i++)
-        {
-            if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) == 0)
-            {
-                alpha = amplitudes[i].multiply(1);
-                beta = amplitudes[i^(1<<targetQubit)].multiply(1);
-
-                amplitudes[i] = alpha.multiply(Math.cos(phase));
-                amplitudes[i] = amplitudes[i].subtract(beta.multiply(Complex.I).multiply(Math.sin(phase)));
-
-                amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate()).multiply(Math.sin(phase));
-                amplitudes[i^(1<<targetQubit)] = amplitudes[i^(1<<targetQubit)].add(beta.multiply(Math.cos(phase)));
-            }
-        }
+      amplitudes = util.conditionalRotate(amplitudes, numberOfBases, targetQubit
+        , controlQubit, phase);
     }
 
     public void Swap(int qubit1, int qubit2)
@@ -129,17 +115,8 @@ public class Register {
     //Ternary Operators
     public void CCNOT(int controlQubit1, int controlQubit2, int targetQubit)
     {
-        Complex swapVar;
-
-        for(int i=0;i<numberOfBases;i++)
-        {
-            if((i & (1<<controlQubit1)) != 0 && (i & (1<<controlQubit2)) != 0 && (i & (1<<targetQubit)) != 0)
-            {
-                swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
-                amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
-                amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
-            }
-        }
+      amplitudes = util.ccnot(amplitudes,numberOfBases,targetQubit,controlQubit1
+        ,controlQubit2);
     }
 
     //Variable Operators
@@ -149,116 +126,24 @@ public class Register {
 
     }
 
+    /*public void QuantumOracle()
+    {
+
+    }*/
+
     public void WalshHadamard(ArrayList<Integer> targetQubits)
     {
-        Complex alpha, beta;
-        int targetQubit;
-
-        for(int i=numberOfQubits-1;i>=0;i--)
-        {
-            targetQubit = targetQubits.indexOf(i);
-
-            if(targetQubit != -1)
-            {
-                targetQubit = 1<<targetQubit;
-                for (int j = 0; j < numberOfBases; j++)
-                {
-                    if ((j & targetQubit) == 0)
-                    {
-                        alpha = new Complex(amplitudes[j].getReal(), amplitudes[j].getImaginary());
-                        beta = new Complex(amplitudes[j ^ targetQubit].getReal(), amplitudes[j ^ targetQubit].getImaginary());
-
-                        amplitudes[j] = alpha.add(beta).divide(Math.sqrt(2.0));
-                        amplitudes[j ^ targetQubit] = alpha.subtract(beta).divide(Math.sqrt(2.0));
-                    }
-                }
-            }
-        }
+      amplitudes = util.walshHadamard(amplitudes,numberOfBases,numberOfQubits,targetQubits);
     }
 
-    public void QFT_Experimental(ArrayList<Integer> targetQubits)
+    public void QFT(ArrayList<Integer> targetQubits)
     {
-        Complex omega;
-        Complex[] resultant;
-        int nonTargetBases;
-
-        omega = new Complex(0, 2.0*Math.PI/(1.0*Math.pow(2.0, targetQubits.size())));
-        resultant = new Complex[numberOfBases];
-
-        nonTargetBases = 0;
-        for(int i=0; i < numberOfQubits; i++)
-            if(!targetQubits.contains(i)) nonTargetBases = nonTargetBases | (1<<i);
-        System.out.println(nonTargetBases);
-
-        for(int i=0; i<numberOfBases; i++)
-        {
-            resultant[i]=Complex.ZERO;
-            for(int j=0; j<numberOfBases; j++)
-            {
-                if(((i & nonTargetBases) ^ (j & nonTargetBases)) == 0)
-                    resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
-            }
-            resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
-        }
-
-        amplitudes = resultant;
-    }
-
-    public void QFT()
-    {
-        //This implmentation just works on all qubits -- will need to modify to make it work
-        //on ranges.
-        Complex omega;
-        Complex[] resultant;
-
-        omega = new Complex(0, 2.0*Math.PI/(1.0*numberOfBases));
-        resultant = new Complex[numberOfBases];
-
-        for(int i=0;i<numberOfBases;i++)
-        {
-            resultant[i] = Complex.ZERO;
-            for(int j=0;j<numberOfBases;j++)
-                resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
-            resultant[i] = resultant[i].divide(Math.sqrt(numberOfBases));
-        }
-
-        amplitudes = resultant;
+      amplitudes = util.qft(amplitudes,numberOfBases,targetQubits,numberOfQubits);
     }
 
     public void MeasureComputation(ArrayList<Integer> targetQubits)
     {
-        int targetQubit;
-        double sum;
-        SecureRandom RNG = new SecureRandom();
-
-        for(int i=0;i<targetQubits.size();i++)
-        {
-            sum = 0.0;
-            targetQubit = 1<<targetQubits.get(i);
-
-            for(int j=0;j<numberOfBases;j++)
-            {
-                if((j & targetQubit) != 0)
-                    sum += amplitudes[j].abs()*amplitudes[j].abs();
-            }
-
-            if(RNG.nextDouble() <= sum)
-            {
-                for(int j =0;j<numberOfBases;j++)
-                {
-                    if((j & targetQubit) == 0) amplitudes[j] = Complex.ZERO;
-                    else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
-                }
-            }
-            else
-            {
-                for(int j =0;j<numberOfBases;j++)
-                {
-                    if((j & targetQubit) != 0) amplitudes[j] = Complex.ZERO;
-                    else amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
-                }
-            }
-        }
+      amplitudes = util.measurement(amplitudes,numberOfBases,targetQubits,new SecureRandom());
     }
 
     public void MeasureSign(ArrayList<Integer> targetQubits)
@@ -310,6 +195,7 @@ public class Register {
         if ( (initialState & (1 << index)) == 0 ) return 0;
         else return 1;
     }
+
     public void setQubit(int index, int value){
         if (value == 1){
             initialState |= (1 << index);
