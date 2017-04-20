@@ -74,6 +74,12 @@ public class QuantumMathUtilTest {
     input[2] = new Complex(0);
     input[3] = new Complex(0);
 
+    Complex[] input1 = new Complex[4];
+    input1[0] = new Complex(0);
+    input1[1] = new Complex(1);
+    input1[2] = new Complex(0);
+    input1[3] = new Complex(0);
+
     Complex[] hadamard_zero = util.hadamard(input, 4, 0);
     Complex[] expected = util.hadamard(hadamard_zero, 4, 1);
 
@@ -84,14 +90,14 @@ public class QuantumMathUtilTest {
     ArrayList target2 = new ArrayList<Integer>();
     target2.add(1);
 
-    Complex[] qft_zero = util.qftExperimental(input, 4, target2, 2);
+    Complex[] qft_zero = util.qftExperimental(input1, 4, target2, 2);
     Complex[] output = util.qftExperimental(qft_zero, 4, target1, 2);
 
     System.out.println(expected[0]);
     System.out.println(expected[1]);
     System.out.println(expected[2]);
     System.out.println(expected[3]);
-
+System.out.println("bla");
     System.out.println(output[0]);
     System.out.println(output[1]);
     System.out.println(output[2]);
