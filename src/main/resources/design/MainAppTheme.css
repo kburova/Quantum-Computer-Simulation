@@ -40,7 +40,10 @@
     -fx-background-image: url('../images/back.png');
 }
 #repeat {
-    -fx-background-image: url('../images/complete.png');
+    -fx-background-image: url('../images/repeatMode.png');
+}
+#restart {
+    -fx-background-image: url('../images/restart.png');
 }
 #run {
     -fx-background-image: url('../images/play.png');
