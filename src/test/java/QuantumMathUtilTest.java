@@ -113,6 +113,51 @@ public class QuantumMathUtilTest {
   }
 
   @Test
+  public void qft_experimental_check_to_ensure_works_if_target_bit_is_two_away_from_start()
+  {
+    Complex[] input = new Complex[8];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+    input[2] = new Complex(0);
+    input[3] = new Complex(0);
+    input[4] = new Complex(0);
+    input[5] = new Complex(0);
+    input[6] = new Complex(0);
+    input[7] = new Complex(0);
+
+    Complex[] input1 = new Complex[8];
+    input1[0] = new Complex(0);
+    input1[1] = new Complex(1);
+    input1[2] = new Complex(0);
+    input1[3] = new Complex(0);
+    input1[4] = new Complex(0);
+    input1[5] = new Complex(0);
+    input1[6] = new Complex(0);
+    input1[7] = new Complex(0);
+
+
+    Complex[] expected = util.hadamard(input,8,2);
+
+
+    ArrayList target = new ArrayList<Integer>();
+    target.add(2);
+
+    Complex[] output = util.qftExperimental(input1, 8, target, 3);
+
+    System.out.println(expected[0]);
+    System.out.println(expected[1]);
+    System.out.println(expected[2]);
+    System.out.println(expected[3]);
+    System.out.println("bla");
+    System.out.println(output[0]);
+    System.out.println(output[1]);
+    System.out.println(output[2]);
+    System.out.println(output[3]);
+
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
   public void qft_experimental_two_qubits_two_one_qubit_qfts()
   {
     Complex[] input = new Complex[4];
