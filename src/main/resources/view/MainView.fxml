@@ -18,11 +18,6 @@
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.MainAppController">
     <top>
         <ToolBar fx:id="toolBar">
-            <Button fx:id="new">
-                <tooltip>
-                    <Tooltip text="New file" />
-                </tooltip>
-            </Button>
 
             <Button fx:id="save" onAction="#save">
                 <tooltip>
@@ -40,9 +35,14 @@
                 </tooltip>
             </Button>
             <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
-            <Button fx:id="repeat" onAction="#restart">
+            <Button fx:id="repeat" onAction="#repeat">
                 <tooltip>
-                    <Tooltip text="Repeat" />
+                    <Tooltip text="Repeat Mode" />
+                </tooltip>
+            </Button>
+            <Button fx:id="restart" onAction="#restart">
+                <tooltip>
+                    <Tooltip text="Restart" />
                 </tooltip>
             </Button>
             <Button fx:id="back" onAction="#stepBack">
@@ -50,14 +50,14 @@
                     <Tooltip text="Step Back" />
                 </tooltip>
             </Button>
-            <Button fx:id="run" onAction="#runAll">
-                <tooltip>
-                    <Tooltip text="Complete Run" />
-                </tooltip>
-            </Button>
             <Button fx:id="next" onAction="#stepForward">
                 <tooltip>
                     <Tooltip text="Step Forward" />
+                </tooltip>
+            </Button>
+            <Button fx:id="run" onAction="#runAll">
+                <tooltip>
+                    <Tooltip text="Complete Run" />
                 </tooltip>
             </Button>
             <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />

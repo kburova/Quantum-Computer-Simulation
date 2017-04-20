@@ -323,4 +323,7 @@ public class MainAppController implements Initializable{
             canvasManager.redrawOperatorsOnly(OkClicked);
         }
     }
+    @FXML
+    public void repeat(ActionEvent actionEvent) {
+    }
 }
