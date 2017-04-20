@@ -82,11 +82,11 @@ public class QuantumMathUtil {
       {
         if(((i & nonTargetBases) ^ (j & nonTargetBases)) == 0)
         {
-          resultant[i].add(amplitudes[j].multiply(omega.multiply(i * j).exp()));
+          resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i * j).exp()));
         }
       }
 
-      resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
+      resultant[i] = resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
     }
 
     return resultant;
