@@ -31,6 +31,32 @@ public class QuantumMathUtilTest {
   }
 
   @Test
+  public void qft_experimental_one_qubit_is_hadamard()
+  {
+    Complex[] input1 = new Complex[2];
+    input1[0] = new Complex(0);
+    input1[1] = new Complex(1);
+
+    Complex[] input2 = new Complex[2];
+    input2[0] = new Complex(0);
+    input2[1] = new Complex(1);
+
+    ArrayList target = new ArrayList<Integer>();
+    target.add(0);
+
+    Complex[] output = util.qftExperimental(input1,2,target,1);
+    Complex[] expected = util.hadamard(input2,2,0);
+
+
+    System.out.println(output[0]);
+    System.out.println(output[1]);
+    System.out.println(expected[0]);
+    System.out.println(expected[1]);
+
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
   public void qft_subset_one_qubit_is_hadamard()
   {
     Complex[] input1 = new Complex[2];
@@ -63,10 +89,7 @@ public class QuantumMathUtilTest {
     expected[3] = new Complex(0,-1.0/2.0);
 
     Complex[] output = util.qftAllQubits(input, 4, 2);
-System.out.println(output[0]);
-System.out.println(output[1]);
-System.out.println(output[2]);
-System.out.println(output[3]);
+
     assertTrue(util.complex_vector_match(expected,output));
   }
 
