@@ -15,7 +15,7 @@ public class QuantumMathUtilTest {
   private final QuantumMathUtil util = new QuantumMathUtil();
 
   @Test
-  public void qft_experimental_one_qubit_is_hadamard()
+  public void qft_one_qubit()
   {
     Complex[] input1 = new Complex[2];
     input1[0] = new Complex(0);
@@ -28,20 +28,14 @@ public class QuantumMathUtilTest {
     ArrayList target = new ArrayList<Integer>();
     target.add(0);
 
-    Complex[] output = util.qftExperimental(input1,2,target,1);
+    Complex[] output = util.qft(input1,2,target,1);
     Complex[] expected = util.hadamard(input2,2,0);
-
-
-    System.out.println(output[0]);
-    System.out.println(output[1]);
-    System.out.println(expected[0]);
-    System.out.println(expected[1]);
 
     assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
-  public void qft_experimental_two_qubits()
+  public void qft_two_qubits()
   {
     Complex[] input = new Complex[4];
     input[0] = new Complex(0);
@@ -60,23 +54,13 @@ public class QuantumMathUtilTest {
     target.add(0);
     target.add(1);
 
-    Complex[] output = util.qftExperimental(input, 4, target, 2);
-
-    System.out.println(expected[0]);
-    System.out.println(expected[1]);
-    System.out.println(expected[2]);
-    System.out.println(expected[3]);
-    System.out.println("bla");
-    System.out.println(output[0]);
-    System.out.println(output[1]);
-    System.out.println(output[2]);
-    System.out.println(output[3]);
+    Complex[] output = util.qft(input, 4, target, 2);
 
     assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
-  public void qft_experimental_two_qubits_qft_on_one_qubit_is_hadamard_on_one_qubit()
+  public void qft_single_qubit_works_with_one_qubit_offset()
   {
     Complex[] input = new Complex[4];
     input[0] = new Complex(0);
@@ -97,23 +81,13 @@ public class QuantumMathUtilTest {
     ArrayList target = new ArrayList<Integer>();
     target.add(1);
 
-    Complex[] output = util.qftExperimental(input1, 4, target, 2);
-
-    System.out.println(expected[0]);
-    System.out.println(expected[1]);
-    System.out.println(expected[2]);
-    System.out.println(expected[3]);
-    System.out.println("bla");
-    System.out.println(output[0]);
-    System.out.println(output[1]);
-    System.out.println(output[2]);
-    System.out.println(output[3]);
+    Complex[] output = util.qft(input1, 4, target, 2);
 
     assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
-  public void qft_experimental_check_to_ensure_works_if_target_bit_is_two_away_from_start()
+  public void qft_single_qubit_works_with_two_offset()
   {
     Complex[] input = new Complex[8];
     input[0] = new Complex(0);
@@ -142,23 +116,54 @@ public class QuantumMathUtilTest {
     ArrayList target = new ArrayList<Integer>();
     target.add(2);
 
-    Complex[] output = util.qftExperimental(input1, 8, target, 3);
-
-    System.out.println(expected[0]);
-    System.out.println(expected[1]);
-    System.out.println(expected[2]);
-    System.out.println(expected[3]);
-    System.out.println("bla");
-    System.out.println(output[0]);
-    System.out.println(output[1]);
-    System.out.println(output[2]);
-    System.out.println(output[3]);
+    Complex[] output = util.qft(input1, 8, target, 3);
 
     assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
-  public void qft_experimental_two_qubits_two_one_qubit_qfts()
+  public void qft_double_qft_works_with_one_offset()
+  {
+    Complex[] input = new Complex[8];
+    input[0] = new Complex(0);
+    input[1] = new Complex(0);
+    input[2] = new Complex(1);
+    input[3] = new Complex(0);
+    input[4] = new Complex(0);
+    input[5] = new Complex(0);
+    input[6] = new Complex(0);
+    input[7] = new Complex(0);
+
+    Complex[] input1 = new Complex[8];
+    input1[0] = new Complex(0);
+    input1[1] = new Complex(0);
+    input1[2] = new Complex(0);
+    input1[3] = new Complex(0);
+    input1[4] = new Complex(1);
+    input1[5] = new Complex(0);
+    input1[6] = new Complex(0);
+    input1[7] = new Complex(0);
+
+
+    ArrayList etarget = new ArrayList<Integer>();
+    etarget.add(0);
+    etarget.add(1);
+    Complex[] expected = util.qft(input, 8, etarget, 3);
+    expected = util.swap(expected,8,1,2);
+    expected = util.swap(expected,8,1,0);
+
+
+    ArrayList target = new ArrayList<Integer>();
+    target.add(1);
+    target.add(2);
+
+    Complex[] output = util.qft(input1, 8, target, 3);
+
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
+  public void qft_single_qubit_on_different_bits_of_same_system_do_not_interfere_with_eachother()
   {
     Complex[] input = new Complex[4];
     input[0] = new Complex(0);
@@ -173,12 +178,6 @@ public class QuantumMathUtilTest {
     input1[3] = new Complex(0);
 
     Complex[] hadamard_zero = util.hadamard(input, 4, 1);
-
-    System.out.println(hadamard_zero[0]);
-    System.out.println(hadamard_zero[1]);
-    System.out.println(hadamard_zero[2]);
-    System.out.println(hadamard_zero[3]);
-
     Complex[] expected = util.hadamard(hadamard_zero, 4, 0);
 
 
@@ -188,30 +187,14 @@ public class QuantumMathUtilTest {
     ArrayList target2 = new ArrayList<Integer>();
     target2.add(1);
 
-    Complex[] qft_zero = util.qftExperimental(input1, 4, target2, 2);
-
-    System.out.println(qft_zero[0]);
-    System.out.println(qft_zero[1]);
-    System.out.println(qft_zero[2]);
-    System.out.println(qft_zero[3]);
-
-    Complex[] output = util.qftExperimental(qft_zero, 4, target1, 2);
-
-    System.out.println(expected[0]);
-    System.out.println(expected[1]);
-    System.out.println(expected[2]);
-    System.out.println(expected[3]);
-System.out.println("bla");
-    System.out.println(output[0]);
-    System.out.println(output[1]);
-    System.out.println(output[2]);
-    System.out.println(output[3]);
+    Complex[] qft_zero = util.qft(input1, 4, target2, 2);
+    Complex[] output = util.qft(qft_zero, 4, target1, 2);
 
     assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
-  public void qft_experimental_two_qubits_order_of_qubit_operations_does_not_affect_outcome()
+  public void qft_a_multiplied_by_qft_b_equal_qft_b_multiplied_by_qft_a()
   {
     Complex[] input = new Complex[4];
     input[0] = new Complex(0);
@@ -233,21 +216,11 @@ System.out.println("bla");
     target2.add(1);
 
 
-    Complex[] qft_zero_1 = util.qftExperimental(input, 4, target2, 2);
-    Complex[] expected = util.qftExperimental(qft_zero_1, 4, target1, 2);
+    Complex[] qft_zero_1 = util.qft(input, 4, target2, 2);
+    Complex[] expected = util.qft(qft_zero_1, 4, target1, 2);
 
-    Complex[] qft_zero = util.qftExperimental(input1, 4, target1, 2);
-    Complex[] output = util.qftExperimental(qft_zero, 4, target2, 2);
-
-    System.out.println(expected[0]);
-    System.out.println(expected[1]);
-    System.out.println(expected[2]);
-    System.out.println(expected[3]);
-    System.out.println("bla");
-    System.out.println(output[0]);
-    System.out.println(output[1]);
-    System.out.println(output[2]);
-    System.out.println(output[3]);
+    Complex[] qft_zero = util.qft(input1, 4, target1, 2);
+    Complex[] output = util.qft(qft_zero, 4, target2, 2);
 
     assertTrue(util.complex_vector_match(expected,output));
   }

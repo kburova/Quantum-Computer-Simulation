@@ -126,21 +126,19 @@ public class Register {
 
     }
 
+    /*public void QuantumOracle()
+    {
+
+    }*/
+
     public void WalshHadamard(ArrayList<Integer> targetQubits)
     {
       amplitudes = util.walshHadamard(amplitudes,numberOfBases,numberOfQubits,targetQubits);
     }
 
-    public void QFT(Integer firstQubitIndex, Integer qubitCount) {
-        if (qubitCount != numberOfQubits)
-            amplitudes = util.qftSubset(amplitudes, numberOfBases, firstQubitIndex, qubitCount);
-        else
-            amplitudes = util.qftAllQubits(amplitudes, numberOfBases, numberOfQubits);
-    }
-
-    public void QFT_Experimental(ArrayList<Integer> targetQubits)
+    public void QFT(ArrayList<Integer> targetQubits)
     {
-      amplitudes = util.qftExperimental(amplitudes,numberOfBases,targetQubits,numberOfQubits);
+      amplitudes = util.qft(amplitudes,numberOfBases,targetQubits,numberOfQubits);
     }
 
     public void MeasureComputation(ArrayList<Integer> targetQubits)

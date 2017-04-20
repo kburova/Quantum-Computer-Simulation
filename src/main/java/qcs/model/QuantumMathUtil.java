@@ -24,43 +24,7 @@ import java.util.ArrayList;
  *
  */
 public class QuantumMathUtil {
-  public Complex[] qftAllQubits(Complex[] amplitudes, int numberOfBases, int numberOfQubits)
-  {
-
-    //This implmentation just works on all qubits -- will need to modify to make it work
-    //on ranges.
-    Complex omega;
-    Complex[] resultant;
-
-    omega = new Complex(0, 2.0*Math.PI/(1.0*numberOfQubits));
-    resultant = new Complex[numberOfBases];
-
-    for(int i=0;i<numberOfBases;i++)
-    {
-      resultant[i] = Complex.ZERO;
-      for(int j=0;j<numberOfBases;j++)
-        resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i*j).exp()));
-      resultant[i] = resultant[i].divide(Math.sqrt(numberOfBases));
-    }
-
-    return resultant;
-  }
-
-  public Complex[] qftSubset(Complex[] amplitudes, int numberOfBases, int firstQubitIndex, int qubitCount)
-  {
-    amplitudes = qftSubroutine(amplitudes, numberOfBases, firstQubitIndex, qubitCount);
-
-    for(int i = 0; i < qubitCount / 2; i++)
-    {
-      int to = i;
-      int from = qubitCount - 1 - i;
-      amplitudes = swap(amplitudes,numberOfBases,to,from);
-    }
-
-    return amplitudes;
-  }
-
-  public Complex[] qftExperimental(Complex[] amplitudes, int numberOfBases
+  public Complex[] qft(Complex[] amplitudes, int numberOfBases
     , ArrayList<Integer> unshiftedTargetQubits, int numberOfQubits)
   {
     ArrayList<Integer> targetQubits;
@@ -116,25 +80,6 @@ public class QuantumMathUtil {
     }
 
     return resultant;
-  }
-
-  private Complex[] qftSubroutine(Complex[] amplitudes, int numberOfBases, int firstQubitIndex, int qubitCount)
-  {
-    if(qubitCount == 1)
-    {
-      return hadamard(amplitudes,numberOfBases,firstQubitIndex);
-    }
-    else
-    {
-      amplitudes = qftSubset(amplitudes, numberOfBases, firstQubitIndex, qubitCount - 1);
-      int lastIndex = qubitCount - 1;
-      for(int i = 0; i < lastIndex; i++)
-      {
-        double phase = Math.PI / Math.pow(2,lastIndex - i);
-        amplitudes = conditionalRotate(amplitudes,numberOfBases,i,lastIndex,phase);
-      }
-      return hadamard(amplitudes,numberOfBases,lastIndex);
-    }
   }
 
   public Complex[] conditionalRotate(Complex[] amplitudes, int numberOfBases
