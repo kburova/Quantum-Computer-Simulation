@@ -62,6 +62,53 @@ public class QuantumMathUtilTest {
 
     Complex[] output = util.qftExperimental(input, 4, target, 2);
 
+    System.out.println(expected[0]);
+    System.out.println(expected[1]);
+    System.out.println(expected[2]);
+    System.out.println(expected[3]);
+    System.out.println("bla");
+    System.out.println(output[0]);
+    System.out.println(output[1]);
+    System.out.println(output[2]);
+    System.out.println(output[3]);
+
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
+  public void qft_experimental_two_qubits_qft_on_one_qubit_is_hadamard_on_one_qubit()
+  {
+    Complex[] input = new Complex[4];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+    input[2] = new Complex(0);
+    input[3] = new Complex(0);
+
+    Complex[] input1 = new Complex[4];
+    input1[0] = new Complex(0);
+    input1[1] = new Complex(1);
+    input1[2] = new Complex(0);
+    input1[3] = new Complex(0);
+
+
+    Complex[] expected = util.hadamard(input, 4, 1);
+
+
+    ArrayList target = new ArrayList<Integer>();
+    target.add(1);
+
+    Complex[] output = util.qftExperimental(input1, 4, target, 2);
+
+    System.out.println(expected[0]);
+    System.out.println(expected[1]);
+    System.out.println(expected[2]);
+    System.out.println(expected[3]);
+    System.out.println("bla");
+    System.out.println(output[0]);
+    System.out.println(output[1]);
+    System.out.println(output[2]);
+    System.out.println(output[3]);
+
     assertTrue(util.complex_vector_match(expected,output));
   }
 
@@ -80,8 +127,14 @@ public class QuantumMathUtilTest {
     input1[2] = new Complex(0);
     input1[3] = new Complex(0);
 
-    Complex[] hadamard_zero = util.hadamard(input, 4, 0);
-    Complex[] expected = util.hadamard(hadamard_zero, 4, 1);
+    Complex[] hadamard_zero = util.hadamard(input, 4, 1);
+
+    System.out.println(hadamard_zero[0]);
+    System.out.println(hadamard_zero[1]);
+    System.out.println(hadamard_zero[2]);
+    System.out.println(hadamard_zero[3]);
+
+    Complex[] expected = util.hadamard(hadamard_zero, 4, 0);
 
 
     ArrayList target1 = new ArrayList<Integer>();
@@ -91,6 +144,12 @@ public class QuantumMathUtilTest {
     target2.add(1);
 
     Complex[] qft_zero = util.qftExperimental(input1, 4, target2, 2);
+
+    System.out.println(qft_zero[0]);
+    System.out.println(qft_zero[1]);
+    System.out.println(qft_zero[2]);
+    System.out.println(qft_zero[3]);
+
     Complex[] output = util.qftExperimental(qft_zero, 4, target1, 2);
 
     System.out.println(expected[0]);
@@ -98,6 +157,48 @@ public class QuantumMathUtilTest {
     System.out.println(expected[2]);
     System.out.println(expected[3]);
 System.out.println("bla");
+    System.out.println(output[0]);
+    System.out.println(output[1]);
+    System.out.println(output[2]);
+    System.out.println(output[3]);
+
+    assertTrue(util.complex_vector_match(expected,output));
+  }
+
+  @Test
+  public void qft_experimental_two_qubits_order_of_qubit_operations_does_not_affect_outcome()
+  {
+    Complex[] input = new Complex[4];
+    input[0] = new Complex(0);
+    input[1] = new Complex(1);
+    input[2] = new Complex(0);
+    input[3] = new Complex(0);
+
+    Complex[] input1 = new Complex[4];
+    input1[0] = new Complex(0);
+    input1[1] = new Complex(1);
+    input1[2] = new Complex(0);
+    input1[3] = new Complex(0);
+
+
+    ArrayList target1 = new ArrayList<Integer>();
+    target1.add(0);
+
+    ArrayList target2 = new ArrayList<Integer>();
+    target2.add(1);
+
+
+    Complex[] qft_zero_1 = util.qftExperimental(input, 4, target2, 2);
+    Complex[] expected = util.qftExperimental(qft_zero_1, 4, target1, 2);
+
+    Complex[] qft_zero = util.qftExperimental(input1, 4, target1, 2);
+    Complex[] output = util.qftExperimental(qft_zero, 4, target2, 2);
+
+    System.out.println(expected[0]);
+    System.out.println(expected[1]);
+    System.out.println(expected[2]);
+    System.out.println(expected[3]);
+    System.out.println("bla");
     System.out.println(output[0]);
     System.out.println(output[1]);
     System.out.println(output[2]);
@@ -191,12 +292,16 @@ System.out.println("bla");
     input[0] = new Complex(1);
     input[1] = new Complex(0);
 
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(1);
+    expected[1] = new Complex(0);
+
     //act
     Complex[] not = util.not(input, 2, 0);
     Complex[] output = util.not(not, 2, 0);
 
     //assert
-    assertTrue(util.complex_vector_match(input,output));
+    assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
@@ -229,11 +334,17 @@ System.out.println("bla");
     input[2] = new Complex(1);
     input[3] = new Complex(0);
 
+    Complex[] expected = new Complex[4];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(0);
+    expected[2] = new Complex(1);
+    expected[3] = new Complex(0);
+
     //|10>
     Complex[] output = util.conditionalRotate(input, 4, 0, 1, Math.PI*2);
 
     //assert
-    assertTrue(util.complex_vector_match(input,output));
+    assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
@@ -246,11 +357,17 @@ System.out.println("bla");
     input[2] = new Complex(1);
     input[3] = new Complex(0);
 
+    Complex[] expected = new Complex[4];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(0);
+    expected[2] = new Complex(1);
+    expected[3] = new Complex(0);
+
     //|10>
     Complex[] output = util.conditionalRotate(input, 4, 1, 0, Math.PI/2);
 
     //assert
-    assertTrue(util.complex_vector_match(input,output));
+    assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
@@ -281,6 +398,12 @@ System.out.println("bla");
     input[2] = new Complex(1);
     input[3] = new Complex(0);
 
+    Complex[] expected = new Complex[4];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(0);
+    expected[2] = new Complex(1);
+    expected[3] = new Complex(0);
+
     //|11>
     Complex[] cnot = util.cnot(input, 4, 0, 0);
 
@@ -288,7 +411,7 @@ System.out.println("bla");
     Complex[] output = util.cnot(cnot, 4, 0, 0);
 
     //assert
-    assertTrue(util.complex_vector_match(input,output));
+    assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
@@ -323,11 +446,15 @@ System.out.println("bla");
     input[0] = new Complex(1);
     input[1] = new Complex(0);
 
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(1);
+    expected[1] = new Complex(0);
+
     //|0>
     Complex[] output = util.cnot(input, 2, 0, 0);
 
     //assert
-    assertTrue(util.complex_vector_match(input, output));
+    assertTrue(util.complex_vector_match(expected, output));
   }
 
   @Test
@@ -345,6 +472,16 @@ System.out.println("bla");
     input[6] = new Complex(1);
     input[7] = new Complex(0);
 
+    Complex[] expected = new Complex[8];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(0);
+    expected[2] = new Complex(0);
+    expected[3] = new Complex(0);
+    expected[4] = new Complex(0);
+    expected[5] = new Complex(0);
+    expected[6] = new Complex(1);
+    expected[7] = new Complex(0);
+
     //|111>
     Complex[] ccnot = util.ccnot(input,8,0,1,2);
 
@@ -352,7 +489,7 @@ System.out.println("bla");
     Complex[] output = util.ccnot(ccnot,8,0,1,2);
 
     //assert
-    assertTrue(util.complex_vector_match(input,output));
+    assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
@@ -398,6 +535,12 @@ System.out.println("bla");
     input[2] = new Complex(1);
     input[3] = new Complex(0);
 
+    Complex[] expected = new Complex[4];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(0);
+    expected[2] = new Complex(1);
+    expected[3] = new Complex(0);
+
     ArrayList targets = new ArrayList<Integer>();
     targets.add(0);
     targets.add(1);
@@ -407,7 +550,7 @@ System.out.println("bla");
     Complex[] output = util.walshHadamard(intermediate,4,2,targets);
 
     //assert
-    assertTrue(util.complex_vector_match(input, output));
+    assertTrue(util.complex_vector_match(expected, output));
   }
 
   @Test
@@ -448,18 +591,21 @@ System.out.println("bla");
   @Test
   public void hadamard_is_unitary_with_self()
   {
-    //arrange
     //|0>
     Complex[] input = new Complex[2];
     input[0] = new Complex(1);
     input[1] = new Complex(0);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(1);
+    expected[1] = new Complex(0);
 
     //act
     Complex[] intermediate = util.hadamard(input,2,0);
     Complex[] output = util.hadamard(intermediate,2,0);
 
     //assert
-    assertTrue(util.complex_vector_match(input, output));
+    assertTrue(util.complex_vector_match(expected, output));
   }
 
   @Test
@@ -513,44 +659,54 @@ System.out.println("bla");
     input[0] = new Complex(0);
     input[1] = new Complex(1);
 
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(1);
+
     //act
     Complex[] output = util.phase(input,2,0,2*Math.PI);
 
     //assert
-    assertTrue(util.complex_vector_match(input, output));
+    assertTrue(util.complex_vector_match(expected, output));
   }
 
   @Test
   public void phase_cyclical_on_two_pi_period()
   {
-    //arrange
     //|1>
     Complex[] input = new Complex[2];
     input[0] = new Complex(0);
     input[1] = new Complex(1);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(1);
 
     //act
     Complex[] output = util.phase(input,2,0,4*Math.PI);
 
     //assert
-    assertTrue(util.complex_vector_match(input, output));
+    assertTrue(util.complex_vector_match(expected, output));
   }
 
   @Test
   public void phase_unitary_with_inverse_phase()
   {
-    //arrange
     //|1>
     Complex[] input = new Complex[2];
     input[0] = new Complex(0);
     input[1] = new Complex(1);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(1);
 
     //act
     Complex[] intermediate = util.phase(input,2,0,Math.PI/4);
     Complex[] output = util.inversePhase(intermediate,2,0,Math.PI/4);
 
     //assert
-    assertTrue(util.complex_vector_match(input, output));
+    assertTrue(util.complex_vector_match(expected, output));
   }
 
   @Test
@@ -579,6 +735,10 @@ System.out.println("bla");
     Complex[] input = new Complex[2];
     input[0] = new Complex(0);
     input[1] = new Complex(1);
+
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(1);
 
     //act
     Complex[] square_root_not = util.squareRootNot(input,2,0);
@@ -623,12 +783,16 @@ System.out.println("bla");
     input[0] = new Complex(0);
     input[1] = new Complex(1);
 
+    Complex[] expected = new Complex[2];
+    expected[0] = new Complex(0);
+    expected[1] = new Complex(1);
+
     //act
     Complex[] intermediate = util.y(input,2,0);
-    Complex[] output = util.y(input,2,0);
+    Complex[] output = util.y(intermediate,2,0);
 
     //assert
-    assertTrue(util.complex_vector_match(input,output));
+    assertTrue(util.complex_vector_match(expected,output));
   }
 
   @Test
