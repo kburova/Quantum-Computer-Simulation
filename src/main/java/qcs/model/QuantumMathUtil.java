@@ -52,7 +52,6 @@ public class QuantumMathUtil {
     nonTargetBases = 0;
     for(int i=0; i < numberOfQubits; i++)
       if(!targetQubits.contains(i)) nonTargetBases |= (1<<i);
-    System.out.println(nonTargetBases);
 
     for(int i=0; i<numberOfBases; i++)
     {
@@ -226,8 +225,6 @@ public class QuantumMathUtil {
         if((j & targetQubit) != 0)
           sum += amplitudes[j].abs()*amplitudes[j].abs();
       }
-
-      System.out.println(sum);
 
       if(RNG.nextDouble() <= sum)
       {
