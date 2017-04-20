@@ -8,6 +8,9 @@ import org.apache.commons.math3.linear.FieldVector;
 
 import java.security.SecureRandom;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+
 /**
  * Created by nick on 4/8/17.
  * It is my intention that this is a function module full of useful math ops
@@ -21,6 +24,96 @@ import java.security.SecureRandom;
  *
  */
 public class QuantumMathUtil {
+  public Complex[] qft(Complex[] amplitudes, int numberOfBases
+    , ArrayList<Integer> unshiftedTargetQubits, int numberOfQubits)
+  {
+    ArrayList<Integer> targetQubits;
+    if(unshiftedTargetQubits.get(0) == 0) targetQubits = unshiftedTargetQubits;
+    else
+    {
+      targetQubits = new ArrayList<>();
+      for(int i = 0; i < unshiftedTargetQubits.size(); i++)
+        targetQubits.add(i);
+      int difference = unshiftedTargetQubits.get(0);
+      for (int i = 0; i < difference; i++) {
+        for (int j = 0; j < numberOfQubits - 1; j++) {
+          amplitudes = swap(amplitudes,numberOfBases,j,j + 1);
+        }
+      }
+    }
+
+    Complex omega;
+    Complex[] resultant;
+    int nonTargetBases;
+
+    omega = new Complex(0, 2.0*Math.PI/(1.0*Math.pow(2.0, targetQubits.size())));
+    resultant = new Complex[numberOfBases];
+
+    nonTargetBases = 0;
+    for(int i=0; i < numberOfQubits; i++)
+      if(!targetQubits.contains(i)) nonTargetBases |= (1<<i);
+
+    for(int i=0; i<numberOfBases; i++)
+    {
+      resultant[i]=Complex.ZERO;
+      for(int j=0; j<numberOfBases; j++)
+      {
+        if(((i & nonTargetBases) ^ (j & nonTargetBases)) == 0)
+        {
+          resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i * j).exp()));
+        }
+      }
+
+      resultant[i] = resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
+    }
+
+    if(unshiftedTargetQubits.get(0) == 0) return resultant;
+    else
+    {
+      int difference = unshiftedTargetQubits.get(0);
+      for (int i = 0; i < difference; i++) {
+        for (int j = numberOfQubits - 1; j > 0; j--) {
+          resultant = swap(resultant,numberOfBases,j,j - 1);
+        }
+      }
+    }
+
+    return resultant;
+  }
+
+  public Complex[] conditionalRotate(Complex[] amplitudes, int numberOfBases
+    , int targetQubit, int controlQubit, double phase)
+  {
+    Complex alpha, beta;
+
+    for (int i = 0; i < numberOfBases; i++)
+    {
+      if((i & 1<<controlQubit) !=0 && (i & (1<<targetQubit)) == 0)
+      {
+        alpha = amplitudes[i].multiply(1);
+        beta = amplitudes[i^(1<<targetQubit)].multiply(1);
+
+        amplitudes[i] = alpha.multiply(Math.cos(phase));
+        amplitudes[i] = amplitudes[i].subtract(beta.multiply(Complex.I).multiply(Math.sin(phase)));
+
+        amplitudes[i^(1<<targetQubit)] = alpha.multiply(Complex.I.negate()).multiply(Math.sin(phase));
+        amplitudes[i^(1<<targetQubit)] = amplitudes[i^(1<<targetQubit)].add(beta.multiply(Math.cos(phase)));
+      }
+    }
+    return amplitudes;
+  }
+
+  public Complex[] phase(Complex[] amplitudes, int numberOfBases, int targetQubit
+    , double phase)
+  {
+    for (int i = 0; i < numberOfBases; i++)
+    {
+      if ((i & (1 << targetQubit)) != 0)
+        amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
+    }
+    return amplitudes;
+  }
+
   public Complex[] not(Complex[] amplitudes, int numberOfBases, int targetQubit)
   {
     for (int i = 0; i < numberOfBases; i++)
@@ -35,13 +128,26 @@ public class QuantumMathUtil {
     , int controlQubit)
   {
     for(int i=0;i<numberOfBases;i++)
-    {
       if((i & (1<<controlQubit)) != 0)
-      {
         amplitudes = notHelpful(amplitudes, targetQubit, i);
+
+    return amplitudes;
+  }
+
+  public Complex[] ccnot(Complex[] amplitudes, int numberOfBases
+    , int targetQubit, int controlQubit1, int controlQubit2)
+  {
+    Complex swapVar;
+
+    for(int i=0;i<numberOfBases;i++)
+    {
+      if((i & (1<<controlQubit1)) != 0 && (i & (1<<controlQubit2)) != 0 && (i & (1<<targetQubit)) != 0)
+      {
+        swapVar = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+        amplitudes[i] = amplitudes[i^(1<<targetQubit)].multiply(1);
+        amplitudes[i^(1<<targetQubit)] = swapVar.multiply(1);
       }
     }
-
     return amplitudes;
   }
 
@@ -76,6 +182,73 @@ public class QuantumMathUtil {
     return amplitudes;
   }
 
+  public Complex[] walshHadamard(Complex[] amplitudes, int numberOfBases, int numberOfQubits, ArrayList<Integer> targetQubits)
+  {
+    Complex alpha, beta;
+    int targetQubit;
+
+    for(int i=numberOfQubits-1;i>=0;i--)
+    {
+      targetQubit = targetQubits.indexOf(i);
+
+      if(targetQubit != -1)
+      {
+        targetQubit = 1<<targetQubit;
+        for (int j = 0; j < numberOfBases; j++)
+        {
+          if ((j & targetQubit) == 0)
+          {
+            alpha = new Complex(amplitudes[j].getReal(), amplitudes[j].getImaginary());
+            beta = new Complex(amplitudes[j ^ targetQubit].getReal(), amplitudes[j ^ targetQubit].getImaginary());
+
+            amplitudes[j] = alpha.add(beta).divide(Math.sqrt(2.0));
+            amplitudes[j ^ targetQubit] = alpha.subtract(beta).divide(Math.sqrt(2.0));
+          }
+        }
+      }
+    }
+    return amplitudes;
+  }
+
+  public Complex[] measurement(Complex[] amplitudes, int numberOfBases, ArrayList<Integer> targetQubits, SecureRandom RNG)
+  {
+    int targetQubit;
+    double sum;
+
+    for(int i=0;i<targetQubits.size();i++)
+    {
+      sum = 0.0;
+      targetQubit = 1<<targetQubits.get(i);
+
+      for(int j=0;j<numberOfBases;j++)
+      {
+        if((j & targetQubit) != 0)
+          sum += amplitudes[j].abs()*amplitudes[j].abs();
+      }
+
+      if(RNG.nextDouble() <= sum)
+      {
+        for(int j =0;j<numberOfBases;j++)
+        {
+          if((j & targetQubit) == 0) amplitudes[j] = Complex.ZERO;
+          else if (sum != 0)amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+          else;
+        }
+      }
+      else
+      {
+        for(int j =0;j<numberOfBases;j++)
+        {
+          if((j & targetQubit) != 0) amplitudes[j] = Complex.ZERO;
+          else if(sum != 0) amplitudes[j] = amplitudes[j].divide(Math.sqrt(sum));
+          else;
+        }
+      }
+    }
+
+    return amplitudes;
+  }
+
   public Complex[] hadamard(Complex[] amplitudes, int numberOfBases
     , int targetQubit)
   {
@@ -93,15 +266,6 @@ public class QuantumMathUtil {
       }
     }
 
-    return amplitudes;
-  }
-
-  public Complex[] phase(Complex[] amplitudes, int numberOfBases, int targetQubit
-    , double phase)
-  {
-    for (int i = 0; i < numberOfBases; i++)
-      if( (i & (1<<targetQubit)) != 0)
-        amplitudes[i] = amplitudes[i].multiply(Complex.I.multiply(phase).exp());
     return amplitudes;
   }
 
@@ -187,10 +351,11 @@ public class QuantumMathUtil {
     return true;
   }
 
+  //checks to 4 places
   public boolean complex_match(Complex a, Complex b)
   {
-    return a.getReal() == b.getReal()
-      && a.getImaginary() == b.getImaginary();
+    return Math.abs(a.getReal() - b.getReal()) < 1e-4
+      && Math.abs(a.getImaginary() - b.getImaginary()) < 1e-4;
   }
 
   public Complex[][] outerProduct(Complex[][] u, Complex[][] v)
