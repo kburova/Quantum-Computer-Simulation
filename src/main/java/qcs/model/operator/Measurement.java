@@ -26,7 +26,7 @@ public class Measurement extends Operator {
         if (name.equals("CompB")){
             register.MeasureComputation(qubits);
         }else if (name.equals("SignB")){
-
+            register.MeasureSign(qubits);
         }else if (name.equals("Trash")){
 
         }

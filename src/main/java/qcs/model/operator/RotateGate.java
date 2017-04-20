@@ -14,7 +14,7 @@ public class RotateGate extends BinaryOperator {
     }
     @Override
     public void doOperation() {
-        System.out.println("Phase: " + phase);
+        //System.out.println("Phase: " + phase);
         register.ConditionalRotate(control, target, phase);
     }
 
