@@ -524,7 +524,7 @@ public class CanvasManager {
         r = new Rectangle(startX , gateSize*from + beginLineY - 15, 30, height);
         r.setFill(color);
 
-        picY = gateSize*( from + (to - from)/2.0 ) + beginLineY - 15;
+        picY = gateSize*from + height/2.0  + beginLineY - 30;
         Rectangle sign = new Rectangle( startX, picY, 30, 30);
         sign.setFill(new ImagePattern(img));
 
