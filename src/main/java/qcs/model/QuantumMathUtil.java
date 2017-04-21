@@ -417,14 +417,14 @@ public class QuantumMathUtil {
     Array2DRowFieldMatrix<Complex> vectors;
     FieldVector<Complex> u1, u2, e1, e2, projection;
 
-    //Generate a Random Complex Lower Triangular Matrix
+    //Generate a Random Complex 2x2 Matrix
     vectors = new Array2DRowFieldMatrix<Complex>(new Complex[2][2]);
     vectors.setEntry(0,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
     vectors.setEntry(1,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
     vectors.setEntry(0,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
     vectors.setEntry(1,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
 
-    //Takes the column vectors and calculate the projection of v onto u
+    //Use Gram-Schmidt to obtain an orthonormal basis
     u1 = vectors.getColumnVector(0);
     e1 = u1.mapDivide(complexInnerProduct(u1,u1).sqrt());
 
