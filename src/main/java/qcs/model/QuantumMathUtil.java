@@ -9,6 +9,7 @@ import org.apache.commons.math3.linear.FieldVector;
 import java.security.SecureRandom;
 
 import java.security.SecureRandom;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Function;
@@ -83,25 +84,47 @@ public class QuantumMathUtil {
     return resultant;
   }
 
-  //somewhere this interface needs to be implimented
-  //the class which implements it needs to prompt user for a java compilable definition for the function
+  //better idea have user write script in favorite scripting language
+  //it needs to accept 2 commandline arguments, amplitudes and qubit
+  //it needs to write to stdout the boolean return value
   public interface BiPredicate<ArrayList, Integer>
   {
     boolean verify(ArrayList amplitudes, Integer qubit);
   }
 
-  public Complex[] oracle(Complex[] amplitudes, int numberOfBases, int qubit, Function func)
+  public Complex[] oracle(Complex[] amplitudes, int numberOfBases, int numberOfQubits, Function func)
   {
     ArrayList predicate_readable = new ArrayList<Complex>(Arrays.asList(amplitudes));
 
-    if(func.verify(predicate_readable, qubit))
+    for (int qubit = 0; qubit < numberOfQubits; qubit++)
     {
-      return not(amplitudes,numberOfBases,qubit);
+      if (func.verify(predicate_readable, qubit))
+        return not(amplitudes, numberOfBases, qubit);
+      else
+        return amplitudes;
     }
-    else
+  }
+
+  public Complex[] grover(Complex[] amplitudes, int numberOfBases, int numberOfQubits, Function func)
+  {
+    //begin by equalizing the superposition states
+    ArrayList<Integer> targetQubits = new ArrayList<>();
+    for (int i = 0; i < numberOfQubits; i++) targetQubits.add(i);
+    amplitudes = walshHadamard(amplitudes,numberOfBases,numberOfQubits,targetQubits);
+
+    int rounds = (int) Math.round(Math.sqrt(numberOfQubits));
+    for(int i = 0; i < rounds; i++)
     {
-      return amplitudes;
+      amplitudes = oracle(amplitudes,numberOfBases, numberOfQubits, func);
+      amplitudes = walshHadamard(amplitudes,numberOfBases,numberOfQubits,targetQubits);
+
+      //may need to actually need to be phase shift by -1
+      for (int j = 0; j < numberOfQubits; j++)
+        amplitudes = conditionalRotate(amplitudes, numberOfBases, j, j, -1);
+      amplitudes = walshHadamard(amplitudes,numberOfBases,numberOfQubits,targetQubits);
     }
+
+    return amplitudes;
   }
 
   public Complex[] conditionalRotate(Complex[] amplitudes, int numberOfBases

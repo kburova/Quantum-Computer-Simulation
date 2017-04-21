@@ -124,7 +124,7 @@ public class Register {
 
     public void Grover()
     {
-
+      amplitudes = util.grover(amplitudes, numberOfBases, numberOfQubits, blackBox)
     }
 
     public void WalshHadamard(ArrayList<Integer> targetQubits)
