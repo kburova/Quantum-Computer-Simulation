@@ -17,6 +17,7 @@ import org.apache.commons.math3.complex.Complex;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class Register {
 
@@ -125,11 +126,6 @@ public class Register {
     {
 
     }
-
-    /*public void QuantumOracle()
-    {
-
-    }*/
 
     public void WalshHadamard(ArrayList<Integer> targetQubits)
     {

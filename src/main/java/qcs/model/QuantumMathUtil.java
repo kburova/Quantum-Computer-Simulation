@@ -10,6 +10,8 @@ import java.security.SecureRandom;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Function;
 
 /**
  * Created by nick on 4/8/17.
@@ -79,6 +81,27 @@ public class QuantumMathUtil {
     }
 
     return resultant;
+  }
+
+  //somewhere this interface needs to be implimented
+  //the class which implements it needs to prompt user for a java compilable definition for the function
+  public interface BiPredicate<ArrayList, Integer>
+  {
+    boolean verify(ArrayList amplitudes, Integer qubit);
+  }
+
+  public Complex[] oracle(Complex[] amplitudes, int numberOfBases, int qubit, Function func)
+  {
+    ArrayList predicate_readable = new ArrayList<Complex>(Arrays.asList(amplitudes));
+
+    if(func.verify(predicate_readable, qubit))
+    {
+      return not(amplitudes,numberOfBases,qubit);
+    }
+    else
+    {
+      return amplitudes;
+    }
   }
 
   public Complex[] conditionalRotate(Complex[] amplitudes, int numberOfBases
