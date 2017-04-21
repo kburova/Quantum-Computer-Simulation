@@ -5,9 +5,6 @@ import org.apache.commons.math3.complex.ComplexField;
 import org.apache.commons.math3.linear.Array2DRowFieldMatrix;
 import org.apache.commons.math3.linear.FieldMatrix;
 import org.apache.commons.math3.linear.FieldVector;
-
-import java.security.SecureRandom;
-
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
@@ -21,7 +18,8 @@ import java.util.ArrayList;
  * Functions Created and Implemented by Parker Diamond (jparkerdiamond@gmail.com):
  *  UNARY OPERATORS: not, squareRootNot, hadamard, phase, inversePhase, y, z
  *  BINARY OPERATORS: cnot, swap
- *
+ *  VARIABLE OPERATORS: measureComputational, measureSign
+ *  MISCELLANEOUS: generateRandom2DUnitary
  */
 public class QuantumMathUtil {
   public Complex[] qft(Complex[] amplitudes, int numberOfBases
@@ -358,6 +356,17 @@ public class QuantumMathUtil {
       && Math.abs(a.getImaginary() - b.getImaginary()) < 1e-4;
   }
 
+  public Complex complexInnerProduct(FieldVector<Complex> a, FieldVector<Complex> b)
+  {
+    FieldVector<Complex> tmp;
+
+    tmp = b.copy();
+    for(int i=0;i<a.getDimension();i++)
+      tmp.setEntry(i, b.getEntry(i).conjugate());
+
+    return a.dotProduct(tmp);
+  }
+
   public Complex[][] outerProduct(Complex[][] u, Complex[][] v)
   {
     return matrixMultiply(u, matrixTranspose(v));
@@ -406,7 +415,7 @@ public class QuantumMathUtil {
   public Complex[][] generateRandom2DUnitary(SecureRandom RNG)
   {
     Array2DRowFieldMatrix<Complex> vectors;
-    FieldVector<Complex> u, v, projection;
+    FieldVector<Complex> u1, u2, e1, e2, projection;
 
     //Generate a Random Complex Lower Triangular Matrix
     vectors = new Array2DRowFieldMatrix<Complex>(new Complex[2][2]);
@@ -416,18 +425,16 @@ public class QuantumMathUtil {
     vectors.setEntry(1,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
 
     //Takes the column vectors and calculate the projection of v onto u
-    u = vectors.getColumnVector(0);
-    v = vectors.getColumnVector(1);
-    projection = v.projection(u);
+    u1 = vectors.getColumnVector(0);
+    e1 = u1.mapDivide(complexInnerProduct(u1,u1).sqrt());
 
-    //Subtract the projection to make v orthogonal to u and make the matrix symmetric
-    v = v.subtract(projection);
+    u2 = vectors.getColumnVector(1);
+    projection = u1.mapMultiply(complexInnerProduct(u2, u1).divide(complexInnerProduct(u1, u1)));
+    u2 = u2.subtract(projection);
+    e2 = u2.mapDivide(complexInnerProduct(u2, u2).sqrt());
 
-    u.mapDivideToSelf(u.dotProduct(u).sqrt());
-    v.mapDivideToSelf(v.dotProduct(v).sqrt());
-
-    vectors.setColumnVector(0, u);
-    vectors.setColumnVector(1, v);
+    vectors.setColumnVector(0, e1);
+    vectors.setColumnVector(1, e2);
 
     return vectors.getData();
   }
