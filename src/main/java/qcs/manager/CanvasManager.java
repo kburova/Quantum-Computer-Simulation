@@ -160,15 +160,21 @@ public class CanvasManager {
     }
 
     public void drawXGrid(int stateX){
-        drawGrid(xCanvas,xLines,stateX);
+        drawGrid(xCanvas,xLines,stateX, "X");
     }
     public void drawYGrid(int stateY) {
         if (yLines != 0)
-            drawGrid(yCanvas,yLines,stateY);
+            drawGrid(yCanvas,yLines,stateY, "Y");
     }
 
     /** draw the grid of squares for single register **/
-    private void drawGrid(Pane canvas, int qubits, int initState){
+    private void drawGrid(Pane canvas, int qubits, int initState, String name){
+        Complex [] Ampl;
+        if (name.equals("X")){
+            Ampl = circuit.getX().getAmplitudes();
+        }else{
+            Ampl = circuit.getY().getAmplitudes();
+        }
         int numberOfQubits = (int) Math.pow(2, qubits);
         for (int i = 0; i <numberOfQubits; i++){
             Rectangle r = new Rectangle( (i%gridSplit+1)*gap + i%gridSplit*qubitSize, (gap + qubitSize) * (i/gridSplit + 1), qubitSize, qubitSize );
@@ -178,8 +184,9 @@ public class CanvasManager {
                 r.setFill(Color.RED);
             String binaryVal = String.format("%"+qubits+"s", Integer.toBinaryString(i)).replace(' ','0');
 
-            Tooltip t  = new Tooltip("|"+i+"> = |"+binaryVal + ">");
+            Tooltip t  = new Tooltip("|"+i+"> = |"+binaryVal + "> = (" + Ampl[i].getImaginary()+" , "+ Ampl[i].getReal()+" )");
             Tooltip.install(r,t);
+
             canvas.getChildren().add(r);
         }
     }
@@ -583,7 +590,7 @@ public class CanvasManager {
 
         /** draw chunks of lines **/
         for (int i = 0; i < xLines; i++){
-            Line l = new Line(startX, beginLineY +gateSize*i, startX + gateSize, beginLineY +gateSize*i);
+            Line l = new Line(startX, beginLineY +gateSize * i, startX + gateSize, beginLineY +gateSize*i);
             g.getChildren().add(l);
         }
         if (yLines != 0) {
@@ -634,6 +641,10 @@ public class CanvasManager {
             Rectangle rec = (Rectangle) canvas.getChildren().get(i);
            // System.out.println("HS: "+hue+ " "+brightness);
             rec.setFill(Color.hsb(Math.toDegrees(hue), saturation, brightness));
+
+            String binaryVal = String.format("%"+r.getNumberOfQubits()+"s", Integer.toBinaryString(i)).replace(' ','0');
+            Tooltip t  = new Tooltip("|"+i+"> = |"+binaryVal + "> = (" + amp[i].getImaginary()+" , "+ amp[i].getReal()+" )");
+            Tooltip.install(rec,t);
         }
     }
 

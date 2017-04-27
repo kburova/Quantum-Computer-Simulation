@@ -62,6 +62,15 @@ public class MainAppController implements Initializable{
         alert.setContentText("Circuit was not initialized with registers!!!");
         alert.showAndWait();
     }
+
+    @FXML
+    private void showHelp(){
+        mainApp.showHelpDialog();
+    }
+    @FXML
+    private void showAbout(){
+        mainApp.showAboutDialog();
+    }
     @FXML
     private void open() {
         Circuit circuit = new IOmanager().load(new Stage());
