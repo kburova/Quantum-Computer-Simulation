@@ -1,14 +1,14 @@
 /****************************************************
- Remove Gate Controller class
+ Go To Controller class
 
- Communicates with Dialog window for 'Remove Gate' and
+ Communicates with Dialog window for 'Go To Step' and
  reflects results back into main app
 
  Created by:
 
  Ksenia Burova
 
- Date: 04/13/2017
+ Date: 04/26/2017
  ***************************************************/
 package qcs.controller;
 import javafx.fxml.FXML;
@@ -16,11 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import qcs.model.Circuit;
 
-public class RemoveGateController {
+public class GoToController {
     private Stage dialogStage;
-    private  boolean deleteClicked = false;
+    private  int deleteClicked = -1;
     private Circuit circuit;
-    int operatorToDelete;
+    int operatorToGoTo;
 
     @FXML
     private TextField operator;
@@ -31,7 +31,7 @@ public class RemoveGateController {
         this.dialogStage.setResizable(false);
     }
 
-    public boolean isDelete(){
+    public int isOk(){
         return deleteClicked;
     }
 
@@ -41,10 +41,9 @@ public class RemoveGateController {
     }
 
     @FXML
-    private void handleDelete(){
+    private void handleOK(){
         if ( isInputValid() ){
-            deleteClicked = true;
-            circuit.deleteOperator(operatorToDelete);
+            deleteClicked = operatorToGoTo;
             dialogStage.close();
         }
     }
@@ -58,12 +57,15 @@ public class RemoveGateController {
 
         String errorMessage = "";
         try{
-            operatorToDelete = Integer.parseInt(operator.getText());
+            operatorToGoTo = Integer.parseInt(operator.getText());
         }catch (Exception e){
             errorMessage = "Enter Integer value";
         }
-        if ( operatorToDelete < 0 || operatorToDelete >= circuit.getNumberOfOperators() ){
+        if ( operatorToGoTo < 0 || operatorToGoTo >= circuit.getNumberOfOperators() ){
             errorMessage = "Invalid operator number";
+        }
+        if ( operatorToGoTo == circuit.getCurrentStep() ){
+            errorMessage = "Can't go to current step";
         }
         if (errorMessage.length() == 0) {
             return true;

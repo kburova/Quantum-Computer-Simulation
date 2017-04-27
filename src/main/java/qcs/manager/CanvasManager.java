@@ -1,3 +1,13 @@
+/****************************************************
+ Canvas Manager
+
+ Contains all the drawing functions
+
+ Written by:
+ Ksenia Burova
+
+ Date: 4/9/17
+ ***************************************************/
 package qcs.manager;
 
 import javafx.scene.Group;
@@ -20,11 +30,6 @@ import qcs.model.Circuit;
 import qcs.model.Register;
 import qcs.model.operator.*;
 
-import javax.swing.*;
-
-/**
- * Created by kseniaburova on 4/9/17.
- */
 public class CanvasManager {
 
     private Circuit circuit;
@@ -42,7 +47,8 @@ public class CanvasManager {
     private int qubitSize = 12;
     private int gap = 5;
     Color defaultColor = Color.BLACK;
-    Color yellow = new Color(1, 0.83, 0.5, 1);
+    Color yellow = new Color(1, 0.80, 0.4, 1);
+//    Color yellow = Color.LIGHTSLATEGRAY;
 
     private int beginQubitX = beginLineX + 20;
 
@@ -400,12 +406,77 @@ public class CanvasManager {
         circuitCanvas.getChildren().add(g);
     }
 
+    public void drawEvalOperator(int index, VarQbitOperator operator) {
+        String register = operator.getRegisterName();
+        Group g = new Group();
+        int startX = beginQubitX + index * gateSize;
+        int i, height, textY, y;
+        Rectangle r;
+        Text t;
+        double picY;
+        Line connect;
+
+        /** add index of the operator at the top**/
+        Text ind = new Text(startX, 13 , Integer.toString(index));
+        ind.setWrappingWidth(30);
+        ind.setFill(Color.TEAL);
+        ind.setTextAlignment(TextAlignment.CENTER);
+        g.getChildren().add(ind);
+        /** draw chunks of lines **/
+        for (i = 0; i < xLines; i++){
+            Line l = new Line(startX, beginLineY +gateSize*i, startX + gateSize, beginLineY +gateSize*i);
+            g.getChildren().add(l);
+        }
+        if (yLines != 0) {
+            Line split = new Line(startX, beginLineY + gateSize * xLines - gateSize / 2, startX + gateSize, beginLineY + gateSize * xLines - gateSize / 2);
+            split.setStroke(Color.TEAL);
+            g.getChildren().add(split);
+            for (i = xLines; i < xLines + yLines; i++) {
+                Line l = new Line(startX, beginLineY + gateSize * i, startX + gateSize, beginLineY + gateSize * i);
+                g.getChildren().add(l);
+            }
+        }
+        /** set rectangle of the qubit **/
+
+        if (register.equals("Y")) {
+            height = gateSize * xLines - 10;
+            y = 0;
+            connect = new Line( startX + 15,  gateSize*(xLines-1) + beginLineY, startX + 15,gateSize*(xLines+yLines -1) + beginLineY );
+            for (int it = xLines; it < xLines + yLines; it++){
+                Circle c = new Circle(startX + 15, gateSize*it + beginLineY , 6);
+                c.setFill(yellow);
+                g.getChildren().add(c);
+            }
+        }else{
+            height = gateSize * yLines - 10;
+            y = gateSize * xLines;
+            connect = new Line( startX + 15,  beginLineY, startX + 15,gateSize*(xLines+1) + beginLineY );
+            for (int it = 0; it < xLines ; it++){
+                Circle c = new Circle(startX + 15, gateSize*it + beginLineY , 6);
+                c.setFill(yellow);
+                g.getChildren().add(c);
+            }
+        }
+        connect.setStroke(yellow);
+        connect.setStrokeWidth(3);
+
+        r = new Rectangle(startX , y + beginLineY - 15, 30, height);
+        r.setFill(yellow);
+
+        picY = y + height/2.0  + beginLineY - 30;
+        Rectangle sign = new Rectangle( startX, picY, 30, 30);
+        sign.setFill(new ImagePattern(new Image("images/transform-icons/VarQbit/FunctionEval.png")));
+
+        g.getChildren().addAll(connect, r,sign);
+        circuitCanvas.getChildren().add(g);
+    }
+
     /** draw Grover large gate **/
     public void drawGroverOperator(int index, GroverOperator operator){
         String register = operator.getRegisterName();
         Group g = new Group();
         int startX = beginQubitX + index * gateSize;
-        int i, height, textY;
+        int i, height, textY, y;
         Rectangle r;
         Text t;
 
@@ -433,11 +504,13 @@ public class CanvasManager {
 
         if (register.equals("X")) {
             height = gateSize * xLines - 10;
+            y = 0;
         }else{
             height = gateSize * yLines - 10;
+            y = gateSize * xLines;
         }
-        r = new Rectangle(startX , gateSize * xLines + beginLineY - 15, 30, height);
-        textY = gateSize * xLines -8 + beginLineY + height/2 ;
+        r = new Rectangle(startX , y + beginLineY - 15, 30, height);
+        textY = y - 8 + beginLineY + height/2 ;
         r.setFill(yellow);
         t = new Text(startX, textY , "G");
 
@@ -477,8 +550,11 @@ public class CanvasManager {
                 img = new Image("images/transform-icons/VarQbit/GeneralControl.png");
             } else if (name.equals("Eval")) {
                 img = new Image("images/transform-icons/VarQbit/FunctionEval.png");
+            }else if (name.equals("err") ){
+                img = new Image("images/transform-icons/Error/UnitaryMatrix.png");
+                color = new Color(1, 0.3, 0.3,1);
             }
-        }else {
+        } else{
             Measurement tmp = (Measurement) operator;
             from = tmp.getFrom();
             to = tmp.getTo();
@@ -578,9 +654,15 @@ public class CanvasManager {
                     drawTernaryOperator(i, (ToffoliGate)o);
                     break;
                 case "Grover":
+                    drawGroverOperator(i, (GroverOperator) o);
+                    break;
                 case "Measurement":
                 case "VarQbit":
-                    drawBigOperator(i, o);
+                    if (o.getName().equals("Eval")){
+                        drawEvalOperator(i, (VarQbitOperator)o);
+                    }else {
+                        drawBigOperator(i, o);
+                    }
                     break;
                 default:
                     break;
@@ -592,4 +674,5 @@ public class CanvasManager {
             colorAmplitudes(yCanvas, circuit.getY());
         }
     }
+
 }

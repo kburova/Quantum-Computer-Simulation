@@ -1,3 +1,15 @@
+/****************************************************
+ Rotate Gate Controller class
+
+ Communicates with Dialog window for 'Add Rotate Gate' and
+ reflects results back into main app
+
+ Created by:
+
+ Ksenia Burova
+
+ Date: 04/15/2017
+ ***************************************************/
 package qcs.controller;
 
 import javafx.collections.ObservableArray;
@@ -12,12 +24,8 @@ import qcs.model.Circuit;
 import qcs.model.Register;
 import qcs.model.operator.BinaryOperator;
 import qcs.model.operator.RotateGate;
-
 import java.util.Observable;
 
-/**
- * Created by kseniaburova on 4/15/17.
- */
 public class RotateGateController {
     private Stage dialogStage;
     private  int addClicked = -1;

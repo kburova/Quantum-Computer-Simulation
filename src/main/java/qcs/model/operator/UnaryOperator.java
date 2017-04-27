@@ -1,6 +1,13 @@
-package qcs.model.operator;
+/****************************************************
+ Unary Operators
 
-import qcs.MainApp;
+ Written by:
+
+ Ksenia Burova
+
+ Date: 03/18/2017
+ ***************************************************/
+package qcs.model.operator;
 import qcs.model.Register;
 
 /**
@@ -53,9 +60,9 @@ public class UnaryOperator extends Operator{
         }else if (name.equals("Identity")){
             register.Identity();
         }else if (name.equals("Inverse")){
-            register.Phase(target, -Math.PI/2);
+            register.Phase(target, Math.PI/2 );
         }else if (name.equals("Phase")){
-            register.InversePhase(target, -Math.PI/2);
+            register.InversePhase(target, Math.PI/2);
         }else if (name.equals("Shift")) {
            register.inverseT(target);
         }

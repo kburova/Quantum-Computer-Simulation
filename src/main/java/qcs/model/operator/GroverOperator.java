@@ -1,10 +1,16 @@
-package qcs.model.operator;
+/****************************************************
+Grover Operator
 
+ Written by:
+
+ Ksenia Burova
+
+ Date: 03/18/2017
+ ***************************************************/
+
+package qcs.model.operator;
 import qcs.model.Register;
 
-/**
- * Created by apple on 4/10/17.
- */
 public class GroverOperator extends Operator {
     int searchValue;
 

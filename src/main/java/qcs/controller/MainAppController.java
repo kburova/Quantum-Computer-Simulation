@@ -1,13 +1,13 @@
 /**************************************************
- controller.java
+ Main App Controller
 
  This file is a control part of the MVC model.
- It has all the methods To manipulate model
+ It has all the methods to manipulate  Main App for
+ GUI side and it reflects changes to the model
 
- Created by: Ksenia Burova
-             Parker Diamond
-             Nick Kelley
-             Chris Martin
+ Created by:
+
+ Ksenia Burova
 
  Date: 02/12/2017
  ****************************************************/
@@ -62,7 +62,6 @@ public class MainAppController implements Initializable{
         alert.setContentText("Circuit was not initialized with registers!!!");
         alert.showAndWait();
     }
-
     @FXML
     private void open() {
         Circuit circuit = new IOmanager().load(new Stage());
@@ -73,17 +72,15 @@ public class MainAppController implements Initializable{
         canvasManager.drawInitState();
         canvasManager.redrawOperatorsOnly(0);
     }
-
     @FXML
     private void save_as() {
         //when there is a dialogStage for the visualization to be loaded
         //from (first q function) expects an arraylist
-        IOmanager.save_as(new Stage(), mainApp.getCircuit());
+        IOmanager.save_as(new Stage(), circuit);
     }
-
     @FXML
     private void save() {
-        IOmanager.save(mainApp.getCircuit());
+        IOmanager.save(circuit);
     }
 
     /** Do 1 step forward in a circuit:
@@ -94,6 +91,7 @@ public class MainAppController implements Initializable{
     private void stepForward() {
         if (circuit.getX() != null) {
             int step = circuit.getCurrentStep();
+            System.out.println(step + " "+ circuit.getNumberOfOperators());
             if (step < circuit.getNumberOfOperators()) {
                 circuit.getOperator(step).doOperation();
                 circuit.incrementStep();
@@ -131,12 +129,9 @@ public class MainAppController implements Initializable{
      **/
     @FXML
     private void restart() {
-        if (circuit.getX() != null) {
-          //  int step = circuit.getCurrentStep();
-            // if (step != 0) {
+        if (circuit.getX() != null ) {
             circuit.reInitializeRegisterQubits();
             canvasManager.stepThrough(0);
-        //}
         }
     }
 
@@ -157,7 +152,23 @@ public class MainAppController implements Initializable{
             }
         }
     }
-
+    /** Go to a specified operator **/
+    @FXML
+    public void handleStepToPosition(ActionEvent event) {
+        if (circuit.getX() != null && circuit.getNumberOfOperators() != 0) {
+            int step = mainApp.showStepToDialog();
+            if ( step != -1 ) {
+                //TODO: make this efficient
+                circuit.reInitializeRegisterQubits();
+                for ( int i = 0 ; i < step; i++) {
+                    circuit.getOperator(i).doOperation();
+                }
+                circuit.setCurrentStep(step);
+                System.out.println(circuit.getCurrentStep());
+                canvasManager.stepThrough(step);
+            }
+        }
+    }
     /** All functions below are in charge of dialog windows that read in users data like
      * target, control qubits or register ro operate on
      */
@@ -166,14 +177,13 @@ public class MainAppController implements Initializable{
     private void handleInitCircuitDialog() {
         boolean registersInitialized = mainApp.showAddRegistersDialog();
         if (registersInitialized){
-            canvasManager.resetCanvasManager(mainApp.getCircuit());
+            canvasManager.resetCanvasManager(circuit);
             canvasManager.drawInitState();
         }
     }
-
     @FXML
     private void handleInitQubitsDialog(){
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
             // change amplitudes and current step inside of handleOk() in controller class for initQubits
@@ -184,10 +194,9 @@ public class MainAppController implements Initializable{
             }
         }
     }
-
     @FXML
     private void addUnaryGateDialog(ActionEvent event){
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
             //pass To function what operator we add
@@ -197,10 +206,9 @@ public class MainAppController implements Initializable{
             addAndDraw(OkClicked, "Unary");
         }
     }
-
     @FXML
     public void addBinaryGateDialog(ActionEvent event) {
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
             //pass To function what operator we add
@@ -210,10 +218,9 @@ public class MainAppController implements Initializable{
             addAndDraw(OkClicked, "Binary");
         }
     }
-
     @FXML
     public void addRotateGateDialog(ActionEvent event) {
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
             //pass To function what operator we add
@@ -223,10 +230,9 @@ public class MainAppController implements Initializable{
             addAndDraw(OkClicked, "Binary");
         }
     }
-
     @FXML
     public void addTernaryGateDialog(ActionEvent event) {
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
             //pass To function what operator we add
@@ -236,36 +242,37 @@ public class MainAppController implements Initializable{
             addAndDraw(OkClicked, "Ternary");
         }
     }
-
     @FXML
     public void addVarGateDialog(ActionEvent event) {
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
             //pass To function what operator we add
             Node node = (Node) event.getSource();
             String data = (String) node.getUserData();
-            int OkClicked = mainApp.showVarGateDialog(data);
-            addAndDraw(OkClicked, "VarQbit");
-        }
-    }
-    @FXML
-    public void addErrorDialog(ActionEvent event) {
-        if (mainApp.getCircuit().getX() == null) {
-            showErrorMessage();
-        }else {
-            //pass To function what operator we add
-            Node node = (Node) event.getSource();
-            String data = (String) node.getUserData();
-            boolean OkClicked = mainApp.showErrorDialog(data);
-            if (OkClicked) {
-                //canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, mainApp.getCircuit().getLastOperator());
+            if ( data.equals("Eval") && circuit.getY().getNumberOfQubits() == 0) {
+                circuit.showError("Register Y is not initialized");
+            }else {
+                int OkClicked = mainApp.showVarGateDialog(data);
+                addAndDraw(OkClicked, data);
             }
         }
     }
     @FXML
+    public void addErrorDialog(ActionEvent event) {
+        if (circuit.getX() == null) {
+            showErrorMessage();
+        }else {
+            //pass To function what operator we add
+            Node node = (Node) event.getSource();
+            String data = (String) node.getUserData();
+            int OkClicked = mainApp.showErrorDialog(data);
+            addAndDraw(OkClicked, "Error");
+        }
+    }
+    @FXML
     public void addMeasurementDialog(ActionEvent event) {
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
             //pass To function what operator we add
@@ -277,7 +284,7 @@ public class MainAppController implements Initializable{
     }
     @FXML
     public void addGroverOperatorDialog(ActionEvent event) {
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
             //pass To function what operator we add
@@ -290,7 +297,7 @@ public class MainAppController implements Initializable{
 
     @FXML
     public void handleRemoveGateDialog(ActionEvent event) {
-        if (mainApp.getCircuit().getX() == null) {
+        if (circuit.getX() == null) {
             showErrorMessage();
         }else {
                boolean OkDelete = mainApp.showRemoveGateDialog();
@@ -302,18 +309,24 @@ public class MainAppController implements Initializable{
         }
 
     }
+    @FXML
+    public void repeat(ActionEvent actionEvent) {
+
+    }
 
     /** Helper function To avoid code duplication **/
     private void addAndDraw(int OkClicked, String type){
         if ((OkClicked == circuit.getNumberOfOperators() - 1)  && (OkClicked != -1)) {
             if (type.equals("Unary")) {
-                canvasManager.drawUnaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (UnaryOperator) mainApp.getCircuit().getLastOperator());
+                canvasManager.drawUnaryOperator(circuit.getNumberOfOperators() - 1, (UnaryOperator) circuit.getLastOperator());
             }else if (type.equals("Binary")){
-                canvasManager.drawBinaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (BinaryOperator) mainApp.getCircuit().getLastOperator());
+                canvasManager.drawBinaryOperator(circuit.getNumberOfOperators() - 1, (BinaryOperator) circuit.getLastOperator());
             }else if (type.equals("Ternary") ) {
-                canvasManager.drawTernaryOperator(mainApp.getCircuit().getNumberOfOperators() - 1, (ToffoliGate) mainApp.getCircuit().getLastOperator());
-            }else if (type.equals("Grover")){
-                canvasManager.drawGroverOperator(mainApp.getCircuit().getNumberOfOperators() - 1,  (GroverOperator) mainApp.getCircuit().getLastOperator());
+                canvasManager.drawTernaryOperator(circuit.getNumberOfOperators() - 1, (ToffoliGate) circuit.getLastOperator());
+            }else if (type.equals("Grover")) {
+                canvasManager.drawGroverOperator(circuit.getNumberOfOperators() - 1, (GroverOperator) circuit.getLastOperator());
+            }else if (type.equals("Eval") ){
+                canvasManager.drawEvalOperator(circuit.getNumberOfOperators() - 1, (VarQbitOperator) circuit.getLastOperator());
             }else {
                 canvasManager.drawBigOperator(circuit.getNumberOfOperators() - 1, circuit.getLastOperator());
             }
@@ -323,7 +336,6 @@ public class MainAppController implements Initializable{
             canvasManager.redrawOperatorsOnly(OkClicked);
         }
     }
-    @FXML
-    public void repeat(ActionEvent actionEvent) {
-    }
+
+
 }

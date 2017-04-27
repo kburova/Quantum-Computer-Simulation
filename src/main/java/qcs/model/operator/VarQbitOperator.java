@@ -1,12 +1,16 @@
+/****************************************************
+ Variable Qubits Operator
+
+ Written by:
+
+ Ksenia Burova
+
+ Date: 03/18/2017
+ ***************************************************/
 package qcs.model.operator;
-
 import qcs.model.Register;
-
 import java.util.ArrayList;
 
-/**
- * Created by apple on 4/10/17.
- */
 public class VarQbitOperator extends Operator{
 
     int from, to;
@@ -34,6 +38,8 @@ public class VarQbitOperator extends Operator{
 
         }else  if (name.equals("Eval")){
 
+        }else if (name.equals("err")){
+            register.Error(qubits);
         }
     }
 

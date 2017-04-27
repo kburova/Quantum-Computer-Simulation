@@ -208,6 +208,7 @@ public class MainApp extends Application {
             return -1;
         }
     }
+
     public int showTernaryGateDialog(String id){
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -258,9 +259,8 @@ public class MainApp extends Application {
         }
     }
 
-    public boolean showErrorDialog(String data) {
-        circuit.showError("What this should do?");
-        return true;
+    public int showErrorDialog(String id) {
+        return showVarGateDialog(id);
     }
 
     public int showMeasurementDialog(String id) {
@@ -335,6 +335,31 @@ public class MainApp extends Application {
         }catch(Exception e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public int showStepToDialog() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/GoToDialog.fxml"));
+            AnchorPane dialog = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(PrimaryStage);
+            dialogStage.setScene(new Scene(dialog));
+            dialogStage.setTitle("Grover Gate");
+
+            GoToController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCircuit(circuit);
+
+            dialogStage.showAndWait();
+
+            return controller.isOk();
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return -1;
         }
     }
 

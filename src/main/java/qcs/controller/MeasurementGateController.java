@@ -1,5 +1,16 @@
-package qcs.controller;
+/****************************************************
+ Measurement Gate Controller class
 
+ Communicates with Dialog window for 'Add Measurement Gate' and
+ reflects results back into main app
+
+ Created by:
+
+ Ksenia Burova
+
+ Date: 04/10/2017
+ ***************************************************/
+package qcs.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
@@ -11,9 +22,6 @@ import qcs.model.Register;
 import qcs.model.operator.Measurement;
 import qcs.model.operator.VarQbitOperator;
 
-/**
- * Created by kseniaburova on 4/10/17.
- */
 public class MeasurementGateController {
 
     private Stage dialogStage;
@@ -55,8 +63,6 @@ public class MeasurementGateController {
         this.dialogStage.setResizable(false);
         this.id = id;
     }
-
-    //set registers here???
 
     public int isAdd(){
         return addClicked;

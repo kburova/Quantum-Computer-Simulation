@@ -1,12 +1,14 @@
 /****************************************************
  Register class
 
- Register may contain up to n qubits
+ Register may contain up to n qubits, registers has a
+ name, initial state and vector of amplitudes.
+
+ All the quantum methods are implemented here as well.
 
  Created by: Ksenia Burova
              Parker Diamond
              Nick Kelley
-             Chris Martin
 
  Date: 03/18/2017
  ***************************************************/
@@ -33,7 +35,6 @@ public class Register {
         numberOfBases = (int) Math.pow(2.0, (double) numOfQubits);
         amplitudes = new Complex[numberOfBases];
         reinitializeState();
-        //set 0s to red color here
     }
 
     /** brings register to inital state **/
@@ -46,7 +47,7 @@ public class Register {
 
     public void Hadamard(int targetQubit)
     {
-      amplitudes = util.hadamard(amplitudes, numberOfBases, targetQubit);
+        amplitudes = util.hadamard(amplitudes, numberOfBases, targetQubit);
     }
 
     public void Identity()
@@ -56,17 +57,16 @@ public class Register {
 
     public void Phase(int targetQubit, double phase)
     {
-      amplitudes = util.phase(amplitudes, numberOfBases, targetQubit, phase);
+        amplitudes = util.phase(amplitudes, numberOfBases, targetQubit, phase);
     }
 
     public void InversePhase(int targetQubit, double phase)
     {
-      amplitudes = util.inversePhase(amplitudes, numberOfBases, targetQubit, phase);
+         amplitudes = util.inversePhase(amplitudes, numberOfBases, targetQubit, phase);
     }
 
     public void T(int targetQubit)
     {
-        //Phase shit by Pi/4.
         Phase(targetQubit, Math.PI/4.0);
     }
 
@@ -79,7 +79,6 @@ public class Register {
       amplitudes = util.not(amplitudes, numberOfBases, targetQubit);
     }
 
-    // Binary Operators
     public void CNOT(int controlQubit, int targetQubit)
     {
         amplitudes = util.cnot(amplitudes,numberOfBases,targetQubit,controlQubit);
@@ -87,13 +86,12 @@ public class Register {
 
     public void SquareRootNot(int targetQubit)
     {
-      amplitudes = util.squareRootNot(amplitudes,numberOfBases,targetQubit);
+        amplitudes = util.squareRootNot(amplitudes,numberOfBases,targetQubit);
     }
 
     public void Y(int targetQubit)
     {
-      amplitudes = util.y(amplitudes,numberOfBases,targetQubit);
-
+        amplitudes = util.y(amplitudes,numberOfBases,targetQubit);
     }
 
     public void Z(int targetQubit)
@@ -310,6 +308,7 @@ public class Register {
         if ( (initialState & (1 << index)) == 0 ) return 0;
         else return 1;
     }
+
     public void setQubit(int index, int value){
         if (value == 1){
             initialState |= (1 << index);

@@ -1,5 +1,16 @@
-package qcs.controller;
+/****************************************************
+ Var Qbit Gate Controller class
 
+ Communicates with Dialog window for 'Add VarQbit Gate' and
+ reflects results back into main app
+
+ Created by:
+
+ Ksenia Burova
+
+ Date: 04/9/2017
+ ***************************************************/
+package qcs.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,9 +25,6 @@ import qcs.model.operator.VarQbitOperator;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by apple on 4/10/17.
- */
 public class VarQbitController {
     private Stage dialogStage;
     private  int addClicked = -1;
