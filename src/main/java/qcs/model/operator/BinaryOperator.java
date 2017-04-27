@@ -1,10 +1,15 @@
-package qcs.model.operator;
+/****************************************************
+ Binary Operator
 
+ Written by:
+
+ Ksenia Burova
+
+ Date: 03/18/2017
+ ***************************************************/
+package qcs.model.operator;
 import qcs.model.Register;
 
-/**
- * Created by apple on 4/10/17.
- */
 public class BinaryOperator extends Operator {
     int target;
     int control;

@@ -1,10 +1,15 @@
-package qcs.model.operator;
+/****************************************************
+ Toffoli Gate
 
+ Written by:
+
+ Ksenia Burova
+
+ Date: 03/18/2017
+ ***************************************************/
+package qcs.model.operator;
 import qcs.model.Register;
 
-/**
- * Created by kseniaburova on 4/10/17.
- */
 public class ToffoliGate extends Operator{
 
     int target;

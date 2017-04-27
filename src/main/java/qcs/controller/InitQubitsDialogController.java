@@ -1,13 +1,12 @@
 /**************************************************
- InitQubitsDialogController.java
+ InitQubitsDialog Controller class
 
- This file controls the output From dialog window
+ Controls the output From dialog window
  that initializes qubits
 
- Created by: Ksenia Burova
-             Parker Diamond
-             Nick Kelley
-             Chris Martin
+ Created by:
+
+ Ksenia Burova
 
  Date: 03/22/2017
  ****************************************************/

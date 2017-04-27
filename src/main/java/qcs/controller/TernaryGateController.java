@@ -1,5 +1,16 @@
-package qcs.controller;
+/****************************************************
+ Ternary Gate Controller class
 
+ Communicates with Dialog window for 'Add Ternary Gate' and
+ reflects results back into main app
+
+ Created by:
+
+ Ksenia Burova
+
+ Date: 04/10/2017
+ ***************************************************/
+package qcs.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -8,9 +19,6 @@ import qcs.model.Circuit;
 import qcs.model.Register;
 import qcs.model.operator.ToffoliGate;
 
-/**
- * Created by kseniaburova on 4/10/17.
- */
 public class TernaryGateController {
     private Stage dialogStage;
     private  int addClicked = -1;

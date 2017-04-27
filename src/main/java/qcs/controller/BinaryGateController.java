@@ -1,3 +1,15 @@
+/****************************************************
+ Binary Gate Controller class
+
+ Communicates with Dialog window for 'Add Binary Gate' and
+ reflects results back into main app
+
+ Created by:
+
+ Ksenia Burova
+
+ Date: 04/9/2017
+ ***************************************************/
 package qcs.controller;
 
 import javafx.fxml.FXML;
@@ -8,9 +20,6 @@ import qcs.model.Circuit;
 import qcs.model.Register;
 import qcs.model.operator.*;
 
-/**
- * Created by kseniaburova on 4/9/17.
- */
 public class BinaryGateController {
 
     private Stage dialogStage;

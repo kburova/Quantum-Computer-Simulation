@@ -3,10 +3,9 @@
 
  Consists of maximum of 2 registers so far, X and/or Y
 
- Created by: Ksenia Burova
-            Parker Diamond
-            Nick Kelley
-            Chris Martin
+ Written by:
+
+ Ksenia Burova
 
  Date: 03/18/2017
  ***************************************************/
@@ -50,7 +49,7 @@ public class Circuit {
     final public Register getY(){ return y; }
 
 
-    //add gate/measurement
+    //add gate/measurement to a list of operators
     public void addOperator( Operator operator, int step ){
         if (step == operators.size()) {
             operators.add(operator);
@@ -86,8 +85,8 @@ public class Circuit {
         currentStep--;
     }
 
+    /**  alert if information was entered wrong **/
     public void showError(String errorMessage){
-        //alert if information was entered wrong
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(errorMessage);
         alert.setTitle("Error Dialog");

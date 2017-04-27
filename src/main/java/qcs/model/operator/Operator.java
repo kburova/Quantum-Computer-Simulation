@@ -1,9 +1,12 @@
-/********************************************
- Operator is an abstract class
+/****************************************************
+ Operator - abstract class
 
- Extending classes are Gate and Measure
+ Written by:
 
- */
+ Ksenia Burova
+
+ Date: 03/18/2017
+ ***************************************************/
 package qcs.model.operator;
 import qcs.model.Register;
 

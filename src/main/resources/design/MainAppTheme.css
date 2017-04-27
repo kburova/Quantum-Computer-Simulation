@@ -36,6 +36,9 @@
 #next {
     -fx-background-image: url('../images/next.png');
 }
+#nextn {
+    -fx-background-image: url('../images/nextn.png');
+}
 #back {
     -fx-background-image: url('../images/back.png');
 }
@@ -121,27 +124,27 @@
 /** Variable Gates **/
 #Grover{
     -fx-background-image: url('../images/transform-icons/VarQbit/Grover.png');
-    -fx-background-color: #ffd480;
+    -fx-background-color: #ffcc66;
 }
 #WalshHadamard{
     -fx-background-image: url('../images/transform-icons/VarQbit/WH.png');
-    -fx-background-color: #ffd480;
+    -fx-background-color: #ffcc66;
 }
 #QFT{
     -fx-background-image: url('../images/transform-icons/VarQbit/QFT.png');
-      -fx-background-color: #ffd480;
+      -fx-background-color: #ffcc66;
 }
 #InvQFT{
     -fx-background-image: url('../images/transform-icons/VarQbit/iQFT.png');
-      -fx-background-color: #ffd480;
+      -fx-background-color: #ffcc66;
   }
 #General{
     -fx-background-image: url('../images/transform-icons/VarQbit/GeneralControl.png');
-      -fx-background-color: #ffd480;
+      -fx-background-color: #ffcc66;
   }
 #FunctionEval{
     -fx-background-image: url('../images/transform-icons/VarQbit/FunctionEval.png');
-    -fx-background-color: #ffd480;
+    -fx-background-color: #ffcc66;
 }
 
 #Error{
