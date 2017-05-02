@@ -1,3 +1,22 @@
+/****************************************************
+ Quantum functions Util
+
+ It is my intention that this is a function module full of useful math ops
+ That being said there should be no class level state unless it is declared
+ final.
+ As it grows we can break it down into further modules.
+ Functions Created and Implemented by Parker Diamond (jparkerdiamond@gmail.com):
+ UNARY OPERATORS: not, squareRootNot, hadamard, phase, inversePhase, y, z
+ BINARY OPERATORS: cnot, swap
+
+
+ Written by:
+
+ Parker Diamond
+ Nick Kelley
+
+ Date: 03/18/2017
+ ***************************************************/
 package qcs.model;
 
 import org.apache.commons.math3.complex.Complex;
@@ -8,19 +27,6 @@ import org.apache.commons.math3.linear.FieldVector;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
-/**
- * Created by nick on 4/8/17.
- * It is my intention that this is a function module full of useful math ops
- * That being said there should be no class level state unless it is declared
- * final.
- * As it grows we can break it down into further modules.
- *
- * Functions Created and Implemented by Parker Diamond (jparkerdiamond@gmail.com):
- *  UNARY OPERATORS: not, squareRootNot, hadamard, phase, inversePhase, y, z
- *  BINARY OPERATORS: cnot, swap
- *  VARIABLE OPERATORS: measureComputational, measureSign
- *  MISCELLANEOUS: generateRandom2DUnitary
- */
 public class QuantumMathUtil {
   public Complex[] qft(Complex[] amplitudes, int numberOfBases
     , ArrayList<Integer> unshiftedTargetQubits, int numberOfQubits)

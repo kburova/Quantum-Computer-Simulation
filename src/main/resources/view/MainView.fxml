@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.MainAppController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.MainAppController">
     <top>
         <ToolBar fx:id="toolBar">
 
@@ -34,7 +34,7 @@
                     <Tooltip text="Screen Shot" />
                 </tooltip>
             </Button>
-            <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
+            <Pane prefWidth="30" HBox.hgrow="SOMETIMES" />
             <Button fx:id="repeat" onAction="#repeat">
                 <tooltip>
                     <Tooltip text="Repeat Mode" />
@@ -60,7 +60,12 @@
                     <Tooltip text="Complete Run" />
                 </tooltip>
             </Button>
-            <Pane prefWidth="60" HBox.hgrow="SOMETIMES" />
+            <Button fx:id="nextn" onAction="#handleStepToPosition">
+                <tooltip>
+                    <Tooltip text="Step To Gate n" />
+                </tooltip>
+            </Button>
+            <Pane prefWidth="30" HBox.hgrow="SOMETIMES" />
             <Button fx:id="registers" onAction="#handleInitCircuitDialog">
                 <tooltip>
                     <Tooltip text="Set Registers" />

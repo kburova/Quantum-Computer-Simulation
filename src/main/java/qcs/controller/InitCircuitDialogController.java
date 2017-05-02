@@ -1,13 +1,12 @@
 /**************************************************
- InitCircuitDialogController.java
+ InitCircuitDialog Controller class
 
- This file controls the output From dialog window
+ Controls the output From dialog window
  that asks for number of qubits for each register
 
- Created by: Ksenia Burova
-             Parker Diamond
-             Nick Kelley
-             Chris Martin
+ Created by:
+
+ Ksenia Burova
 
  Date: 03/18/2017
  ****************************************************/

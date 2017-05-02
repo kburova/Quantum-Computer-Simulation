@@ -33,8 +33,8 @@
                     </toggleGroup>
                 </RadioButton>
                 <RadioButton fx:id="y" mnemonicParsing="false" text="Register Y" toggleGroup="$group1" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                <Label text="Search Value: " GridPane.columnIndex="0" GridPane.rowIndex="2"> </Label>
-                <TextField fx:id="searchValue" prefHeight="26.0" prefWidth="37.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Search Value: " GridPane.columnIndex="0" GridPane.rowIndex="2" > </Label>
+                <TextField fx:id="searchValue" text="0" prefHeight="26.0" prefWidth="37.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                 <Separator GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                 <Label text="Gate position:" GridPane.columnIndex="0" GridPane.rowIndex="4" />

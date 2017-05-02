@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="qcs.controller.MainAppController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="qcs.controller.MainAppController">
 
     <top>
         <HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" BorderPane.alignment="TOP_LEFT">
@@ -16,8 +17,8 @@
                 <menus>
                     <Menu fx:id="info" mnemonicParsing="false" text="Information" >
                        <items>
-                           <MenuItem mnemonicParsing="false" text="About Project" />
-                           <MenuItem mnemonicParsing="false" text="Help with App" />
+                           <MenuItem mnemonicParsing="false" text="About Project" onAction="#showAbout"/>
+                           <MenuItem mnemonicParsing="false" text="Help with App" onAction="#showHelp" />
                        </items>
                     </Menu>
             </menus>

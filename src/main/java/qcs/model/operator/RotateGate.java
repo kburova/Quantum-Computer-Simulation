@@ -1,10 +1,15 @@
-package qcs.model.operator;
+/****************************************************
+ Rotate Operator
 
+ Written by:
+
+ Ksenia Burova
+
+ Date: 03/18/2017
+ ***************************************************/
+package qcs.model.operator;
 import qcs.model.Register;
 
-/**
- * Created by kseniaburova on 4/15/17.
- */
 public class RotateGate extends BinaryOperator {
      double phase;
 
@@ -14,7 +19,7 @@ public class RotateGate extends BinaryOperator {
     }
     @Override
     public void doOperation() {
-        System.out.println("Phase: " + phase);
+        //System.out.println("Phase: " + phase);
         register.ConditionalRotate(control, target, phase);
     }
 

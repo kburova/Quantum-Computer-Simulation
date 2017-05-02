@@ -1,12 +1,16 @@
+/****************************************************
+Measurement Operator
+
+ Written by:
+
+ Ksenia Burova
+
+ Date: 03/18/2017
+ ***************************************************/
 package qcs.model.operator;
-
 import qcs.model.Register;
-
 import java.util.ArrayList;
 
-/**
- * Created by apple on 4/10/17.
- */
 public class Measurement extends Operator {
     private int from, to;
     private ArrayList<Integer> qubits = new ArrayList<>();
@@ -26,9 +30,9 @@ public class Measurement extends Operator {
         if (name.equals("CompB")){
             register.MeasureComputation(qubits);
         }else if (name.equals("SignB")){
-
+            register.MeasureSign(qubits);
         }else if (name.equals("Trash")){
-
+            register.Trash(qubits);
         }
     }
 

@@ -1,16 +1,15 @@
-/**************************************************
- UnaryGateController
+/****************************************************
+ Unary Gate Controller class
 
- This file controls the output From dialog window
- that adds Unary gates
+ Communicates with Dialog window for 'Add Unary Gate' and
+ reflects results back into main app
 
- Created by: Ksenia Burova
- Parker Diamond
- Nick Kelley
- Chris Martin
+ Created by:
+
+ Ksenia Burova
 
  Date: 03/22/2017
- ****************************************************/
+ ***************************************************/
 
 package qcs.controller;
 
