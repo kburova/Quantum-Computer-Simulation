@@ -12,7 +12,7 @@ import qcs.model.Register;
 
 public abstract class Operator {
 
-    Register register;
+    transient Register register;
     String name;
     String type;
 
