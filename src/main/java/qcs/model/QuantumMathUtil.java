@@ -27,7 +27,6 @@ import org.apache.commons.math3.linear.FieldVector;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
-
 public class QuantumMathUtil {
   public Complex[] qft(Complex[] amplitudes, int numberOfBases
     , ArrayList<Integer> unshiftedTargetQubits, int numberOfQubits)
@@ -66,6 +65,63 @@ public class QuantumMathUtil {
         if(((i & nonTargetBases) ^ (j & nonTargetBases)) == 0)
         {
           resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i * j).exp()));
+        }
+      }
+
+      resultant[i] = resultant[i].divide(Math.sqrt(Math.pow(2, targetQubits.size())));
+    }
+
+    if(unshiftedTargetQubits.get(0) == 0) return resultant;
+    else
+    {
+      int difference = unshiftedTargetQubits.get(0);
+      for (int i = 0; i < difference; i++) {
+        for (int j = numberOfQubits - 1; j > 0; j--) {
+          resultant = swap(resultant,numberOfBases,j,j - 1);
+        }
+      }
+    }
+
+    return resultant;
+  }
+
+  public Complex[] qftInverse(Complex[] amplitudes, int numberOfBases
+          , ArrayList<Integer> unshiftedTargetQubits, int numberOfQubits)
+  {
+    ArrayList<Integer> targetQubits;
+    if(unshiftedTargetQubits.get(0) == 0) targetQubits = unshiftedTargetQubits;
+    else
+    {
+      targetQubits = new ArrayList<>();
+      for(int i = 0; i < unshiftedTargetQubits.size(); i++)
+        targetQubits.add(i);
+      int difference = unshiftedTargetQubits.get(0);
+      for (int i = 0; i < difference; i++) {
+        for (int j = 0; j < numberOfQubits - 1; j++) {
+          amplitudes = swap(amplitudes,numberOfBases,j,j + 1);
+        }
+      }
+    }
+
+    Complex omega;
+    Complex[] resultant;
+    int nonTargetBases;
+
+    omega = new Complex(0, 2.0*Math.PI/(1.0*Math.pow(2.0, targetQubits.size())));
+    resultant = new Complex[numberOfBases];
+
+    nonTargetBases = 0;
+    for(int i=0; i < numberOfQubits; i++)
+      if(!targetQubits.contains(i)) nonTargetBases |= (1<<i);
+
+    for(int i=0; i<numberOfBases; i++)
+    {
+      resultant[i]=Complex.ZERO;
+      for(int j=0; j<numberOfBases; j++)
+      {
+        if(((i & nonTargetBases) ^ (j & nonTargetBases)) == 0)
+        {
+          resultant[i] = resultant[i].add(amplitudes[j].multiply(omega.multiply(i * j).exp().conjugate()));
         }
       }
 
@@ -363,6 +419,17 @@ public class QuantumMathUtil {
       && Math.abs(a.getImaginary() - b.getImaginary()) < 1e-4;
   }
 
+  public Complex complexInnerProduct(FieldVector<Complex> a, FieldVector<Complex> b)
+  {
+    FieldVector<Complex> tmp;
+
+    tmp = b.copy();
+    for(int i=0;i<a.getDimension();i++)
+      tmp.setEntry(i, b.getEntry(i).conjugate());
+
+    return a.dotProduct(tmp);
+  }
+
   public Complex[][] outerProduct(Complex[][] u, Complex[][] v)
   {
     return matrixMultiply(u, matrixTranspose(v));
@@ -411,28 +478,26 @@ public class QuantumMathUtil {
   public Complex[][] generateRandom2DUnitary(SecureRandom RNG)
   {
     Array2DRowFieldMatrix<Complex> vectors;
-    FieldVector<Complex> u, v, projection;
+    FieldVector<Complex> u1, u2, e1, e2, projection;
 
-    //Generate a Random Complex Lower Triangular Matrix
+    //Generate a Random Complex 2x2 Matrix
     vectors = new Array2DRowFieldMatrix<Complex>(new Complex[2][2]);
     vectors.setEntry(0,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
     vectors.setEntry(1,0, new Complex(RNG.nextDouble(), RNG.nextDouble()));
     vectors.setEntry(0,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
     vectors.setEntry(1,1, new Complex(RNG.nextDouble(), RNG.nextDouble()));
 
-    //Takes the column vectors and calculate the projection of v onto u
-    u = vectors.getColumnVector(0);
-    v = vectors.getColumnVector(1);
-    projection = v.projection(u);
+    //Use Gram-Schmidt to obtain an orthonormal basis
+    u1 = vectors.getColumnVector(0);
+    e1 = u1.mapDivide(complexInnerProduct(u1,u1).sqrt());
 
-    //Subtract the projection to make v orthogonal to u and make the matrix symmetric
-    v = v.subtract(projection);
+    u2 = vectors.getColumnVector(1);
+    projection = u1.mapMultiply(complexInnerProduct(u2, u1).divide(complexInnerProduct(u1, u1)));
+    u2 = u2.subtract(projection);
+    e2 = u2.mapDivide(complexInnerProduct(u2, u2).sqrt());
 
-    u.mapDivideToSelf(u.dotProduct(u).sqrt());
-    v.mapDivideToSelf(v.dotProduct(v).sqrt());
-
-    vectors.setColumnVector(0, u);
-    vectors.setColumnVector(1, v);
+    vectors.setColumnVector(0, e1);
+    vectors.setColumnVector(1, e2);
 
     return vectors.getData();
   }

@@ -161,21 +161,26 @@ public class Register {
     public void Error(ArrayList<Integer> targetQubits)
     {
         int targetQubit;
+        Complex alpha, beta;
         Complex[][] errorMatrix;
         SecureRandom RNG;
 
         RNG = new SecureRandom();
-        errorMatrix = new Complex[2][2];
 
         for(int i=0;i<targetQubits.size();i++)
         {
             targetQubit = 1<<targetQubits.get(i);
+            errorMatrix = util.generateRandom2DUnitary(RNG);
 
             for(int j=0;j<numberOfBases;j++)
             {
                 if( (j & targetQubit) == 0 )
                 {
+                    alpha = new Complex(amplitudes[i].getReal(), amplitudes[i].getImaginary());
+                    beta = new Complex(amplitudes[i^(1<<targetQubit)].getReal(), amplitudes[i^(1<<targetQubit)].getImaginary());
 
+                    amplitudes[i] = alpha.multiply(errorMatrix[0][0]).add(beta.multiply(errorMatrix[0][1]));
+                    amplitudes[i^(1<<targetQubit)] = alpha.multiply(errorMatrix[1][0]).add(beta.multiply(errorMatrix[1][1]));
                 }
             }
         }
